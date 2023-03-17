@@ -128,33 +128,6 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/database-design/</loc>
-    
-    <lastmod>2023-03-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/database-elementary-sql/</loc>
-    
-    <lastmod>2023-03-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/database-intermediate-sql/</loc>
-    
-    <lastmod>2023-03-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</loc>
     
     <lastmod>2023-03-17</lastmod>
@@ -246,6 +219,33 @@
   
   <url>
     <loc>https://sakurawald.github.io/posts/database-advanced-sql/</loc>
+    
+    <lastmod>2023-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/database-design/</loc>
+    
+    <lastmod>2023-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/database-elementary-sql/</loc>
+    
+    <lastmod>2023-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/database-intermediate-sql/</loc>
     
     <lastmod>2023-03-17</lastmod>
     
