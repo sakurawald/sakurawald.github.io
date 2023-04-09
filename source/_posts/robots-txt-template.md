@@ -38,6 +38,6 @@ Noindex: /
 User-agent: *
 Allow: /
 
-Sitemap: https://sakurawald.com/sitemap.xml
+Sitemap: https://sakurawald.github.io/sitemap.xml
 ```
 
