@@ -29,7 +29,7 @@ tags:
 
 ## Plasma-Canopee
 
-![plasma-canopee](/home/sakurawald/Temp/plasma-canopee.png)
+![plasma-canopee](https://github.com/SakuraWald/sakurawald.github.io/raw/main/images/plasma-canopee.png)
 
 ## Plasma-Altai
 
