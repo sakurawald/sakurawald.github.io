@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 20 Apr 2023 22:32:03 GMT</pubDate>
+    <pubDate>Thu, 20 Apr 2023 22:32:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -267,7 +267,7 @@
           
       <description>&lt;h1 id=&quot;Database-Design&quot;&gt;&lt;a href=&quot;#Database-Design&quot; class=&quot;headerlink&quot; title=&quot;Database Design&quot;&gt;&lt;/a&gt;Database Design&lt;/h1&gt;
 $$
-\boxed{@}
+&#92;boxed{@}
 %</description>
           
         
@@ -322,11 +322,11 @@ $$
           
       <description>
 $$
-\boxed{@}
+&#92;boxed{@}
 
 % Color % 
-\newcommand\c[2]{\textcolor{#1}{#2}} 
-\newcommand\r[1]{\textcolor{red}{#1}}</description>
+&#92;newcommand&#92;c[2]{&#92;textcolor{#1}{#2}} 
+&#92;newcommand&#92;r[1]{&#92;textcolor{red}{#1}}</description>
           
         
       
@@ -446,7 +446,7 @@ sudo snap install --devmode --edge</description>
           
       <description>&lt;h1 id=&quot;Advanced-SQL&quot;&gt;&lt;a href=&quot;#Advanced-SQL&quot; class=&quot;headerlink&quot; title=&quot;Advanced SQL&quot;&gt;&lt;/a&gt;Advanced SQL&lt;/h1&gt;
 $$
-\boxed{@}
+&#92;boxed{@}
 % Color</description>
           
         
@@ -474,7 +474,7 @@ $$
           
       <description>&lt;h1 id=&quot;Intermediate-SQL&quot;&gt;&lt;a href=&quot;#Intermediate-SQL&quot; class=&quot;headerlink&quot; title=&quot;Intermediate SQL&quot;&gt;&lt;/a&gt;Intermediate SQL&lt;/h1&gt;
 $$
-\boxed{@}
+&#92;boxed{@}
 %</description>
           
         
@@ -527,7 +527,7 @@ $$
           
       <description>&lt;h1 id=&quot;Greedy-Problems&quot;&gt;&lt;a href=&quot;#Greedy-Problems&quot; class=&quot;headerlink&quot; title=&quot;Greedy Problems&quot;&gt;&lt;/a&gt;Greedy Problems&lt;/h1&gt;
 $$
-\boxed{@}
+&#92;boxed{@}
 %</description>
           
         
