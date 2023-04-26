@@ -83,6 +83,15 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
+    
+    <lastmod>2023-04-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/migrant-from-wordpress/</loc>
     
     <lastmod>2023-04-26</lastmod>
@@ -119,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
+    <loc>https://sakurawald.github.io/posts/database-relational-query-language/</loc>
     
     <lastmod>2023-04-26</lastmod>
     
@@ -128,7 +137,16 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/database-relational-query-language/</loc>
+    <loc>https://sakurawald.github.io/posts/algorithm-back-tracking-and-iddfs/</loc>
+    
+    <lastmod>2023-04-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/algorithm-circle-permutation/</loc>
     
     <lastmod>2023-04-26</lastmod>
     
@@ -236,25 +254,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/algorithm-circle-permutation/</loc>
-    
-    <lastmod>2023-04-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</loc>
-    
-    <lastmod>2023-04-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/algorithm-back-tracking-and-iddfs/</loc>
     
     <lastmod>2023-04-26</lastmod>
     
@@ -322,6 +322,13 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/algorithm/</loc>
+    <lastmod>2023-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/branch-and-bound/</loc>
     <lastmod>2023-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -553,13 +560,6 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/draw/</loc>
-    <lastmod>2023-04-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/branch-and-bound/</loc>
     <lastmod>2023-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
