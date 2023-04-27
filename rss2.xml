@@ -15,8 +15,35 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 27 Apr 2023 00:23:17 GMT</pubDate>
+    <pubDate>Thu, 27 Apr 2023 00:28:16 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>KDE使用偏好</title>
+      <link>https://sakurawald.github.io/posts/play-on-kde/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-kde/</guid>
+      <pubDate>Wed, 26 Apr 2023 14:05:28 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;KDE使用偏好&quot;&gt;&lt;a href=&quot;#KDE使用偏好&quot; class=&quot;headerlink&quot; title=&quot;KDE使用偏好&quot;&gt;&lt;/a&gt;KDE使用偏好&lt;/h1&gt;&lt;h2 id=&quot;保持桌面的整潔&quot;&gt;&lt;a href=&quot;#保持桌面的整潔&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-kde/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>wallpaper-sharing-1</title>
@@ -599,36 +626,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Branch-Bound] Circle Permutation</title>
-      <link>https://sakurawald.github.io/posts/algorithm-circle-permutation/</link>
-      <guid>https://sakurawald.github.io/posts/algorithm-circle-permutation/</guid>
-      <pubDate>Sun, 17 Apr 2022 03:03:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>
-
-&lt;h1&gt;Circle Permutation&lt;/h1&gt;
-&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/branch-and-bound/">branch_and_bound</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/algorithm-circle-permutation/#disqus_thread</comments>
       
     </item>
     

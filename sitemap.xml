@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
+    
+    <lastmod>2023-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/hello-world/</loc>
     
     <lastmod>2023-04-27</lastmod>
@@ -39,6 +48,15 @@
   
   <url>
     <loc>https://sakurawald.github.io/posts/play-on-google-pixel/</loc>
+    
+    <lastmod>2023-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/play-on-kde/</loc>
     
     <lastmod>2023-04-27</lastmod>
     
@@ -92,6 +110,15 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/posts/database-relational-query-language/</loc>
+    
+    <lastmod>2023-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/</loc>
     
     <lastmod>2023-04-27</lastmod>
@@ -119,16 +146,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
-    
-    <lastmod>2023-04-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/database-relational-query-language/</loc>
+    <loc>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</loc>
     
     <lastmod>2023-04-27</lastmod>
     
@@ -246,15 +264,6 @@
   
   <url>
     <loc>https://sakurawald.github.io/posts/database-intermediate-sql/</loc>
-    
-    <lastmod>2023-04-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</loc>
     
     <lastmod>2023-04-27</lastmod>
     
@@ -441,6 +450,13 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/os/</loc>
+    <lastmod>2023-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/kde/</loc>
     <lastmod>2023-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
