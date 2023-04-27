@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "cd6f868bcd6c45a9",
+        "id": "857146853848931b",
         "type": "tabs",
         "children": [
           {
-            "id": "c701f7a60755fde0",
+            "id": "8a253dcb991326b9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/play-on-kde.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -44,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "s ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -61,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -81,6 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/play-on-kde.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/play-on-kde.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +125,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/play-on-kde.md"
+              }
             }
           }
         ]
@@ -132,20 +141,31 @@
     "hiddenItems": {
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "audio-recorder:Start/stop recording": false,
-      "markdown-importer:Open format converter": false,
-      "publish:Publish changes": false,
-      "random-note:Open random note": false,
-      "zk-prefixer:Create new unique note": false,
-      "workspaces:Manage workspace layouts": false
+      "templates:Insert template": false
     }
   },
-  "active": "c701f7a60755fde0",
+  "active": "8a253dcb991326b9",
   "lastOpenFiles": [
+    "Pasted image 20230427065322.png",
+    "_posts/play-on-google-pixel.md",
+    "_posts/play-on-kde.md",
+    "_posts/database-design.md",
+    "_posts/tool-box.md",
+    "_template/post_template.md",
+    "categories/index.md",
+    "_posts/stl-simple-usage-of-stl.md",
+    "_template",
+    "_posts/database-relational-query-language.md",
+    "_posts/compiler-test.md",
+    "Untitled.canvas",
+    "202304262236.md",
+    "_drafts/computer-organization-representaion-and-computation-integer.md",
+    "2023-04-26.md",
+    "_posts/algorithm-back-tracking-and-iddfs.md",
+    "_posts/algorithm-set-partition-problem.md",
+    "_posts/database-advanced-sql.md",
+    "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
     "_posts/algorithm-circle-permutation.md",
     "_posts/algorithm-oiling-car-and-optimal-merge.md",
     "_posts/algorithm-majority-problem.md"

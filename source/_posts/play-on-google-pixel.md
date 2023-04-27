@@ -37,7 +37,7 @@ fastboot flashing unlock
 
 1. Install `magisk.apk` from https://github.com/topjohnwu/Magisk 
 
-2. Go to https://link.zhihu.com/?target=https%3A//developers.google.com/android/images to download the `relative factory image` file. 
+2. Go to https://developers.google.com/android to download the `relative factory image` file. https://link.zhihu.com/?target=https%3A//developers.google.com/android/images
 
 3. Unzip this `image file` to get `init_boot.img` file.
 
