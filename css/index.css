@@ -2328,26 +2328,20 @@ h1.page-title + .tag-cloud-list {
 #aside-content .card-info #card-info-btn span {
   padding-left: 10px;
 }
-#aside-content .card-info #card-follow-btn,
 #aside-content .card-info #card-search-btn {
   display: inline-block;
-  width: 47%;
+  width: 100%;
   margin-top: 14px;
   background-color: var(--btn-bg);
   color: var(--btn-color);
   text-align: center;
   line-height: 2.4;
 }
-#aside-content .card-info #card-follow-btn:hover,
 #aside-content .card-info #card-search-btn:hover {
   background-color: var(--btn-hover-color);
 }
-#aside-content .card-info #card-follow-btn span,
 #aside-content .card-info #card-search-btn span {
   padding-left: 10px;
-}
-#aside-content .card-info #card-follow-btn {
-  margin-right: 6%;
 }
 #aside-content .item-headline {
   padding-bottom: 6px;
