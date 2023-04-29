@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/play-on-kde.md",
+                "file": "_posts/algorithm-oiling-car-and-optimal-merge.md",
                 "mode": "source",
                 "source": false
               }
@@ -65,8 +65,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/play-on-kde.md",
+                "file": "_posts/algorithm-oiling-car-and-optimal-merge.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/play-on-kde.md",
+                "file": "_posts/algorithm-oiling-car-and-optimal-merge.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/play-on-kde.md"
+                "file": "_posts/algorithm-oiling-car-and-optimal-merge.md"
               }
             }
           }
@@ -147,9 +146,9 @@
   },
   "active": "8a253dcb991326b9",
   "lastOpenFiles": [
+    "_posts/play-on-kde.md",
     "Pasted image 20230427065322.png",
     "_posts/play-on-google-pixel.md",
-    "_posts/play-on-kde.md",
     "_posts/database-design.md",
     "_posts/tool-box.md",
     "_template/post_template.md",

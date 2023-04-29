@@ -19,7 +19,7 @@ tags:
 
 ## 將k-runner作爲調色板
 
-### 作爲"搜索引擎"
+### 作爲 "搜索引擎"
 
 > 如果任何 `文件` 都可以通過 `模糊搜索` 在瞬間取得, 那麼花費時間來精心整理文件, 則是徒勞的.
 
@@ -156,7 +156,7 @@ tags:
 
 ## 取消 `不可信證書`
 
-爲了避免 `MITM attack`, 並不是所有的` `CA證書` 都值得你信任.
+爲了避免 `MITM attack`, 並不是所有的 `CA證書` 都值得你信任.
 
 ![image-20230427080522193](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080522193.png)
 
