@@ -40,6 +40,8 @@ tags:
 > > 對於這種 `高頻度且瑣碎的` 任務, 最好有個 `brain sensor` 或者 `eyes tracker` ...
 >
 > 儘管 `app launcher` 很常見, 但我要說的是, 存在並不一定合理. 移除 `app launcher` 也並不會導致整個系統的崩潰.
+>
+> > 注: 此處並**不**引用黑格爾的原話的翻譯, `合理` 的含義依據現代的通俗解釋, 而非哲學領域的釋義.
 
 相比於 `windows` 上的 `everything` 和 `listray` 來說, 在 `linux` 上則可以選擇 `k-runner` 作爲一種替代.
 
