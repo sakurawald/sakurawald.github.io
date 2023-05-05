@@ -1,5 +1,5 @@
 ---
-title: '[SD] Stable-Diffusion Practice'
+title: 'Play on Stable-Diffusion'
 date: 2023-02-08 08:35:54
 tags:
   - ai
@@ -17,7 +17,7 @@ tags:
   - draw
 ---
 
-# Stable-Diffusion Practice
+# Play on Stable-Diffusion
 
 ## Setup
 
