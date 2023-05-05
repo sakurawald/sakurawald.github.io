@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 03 May 2023 07:56:39 GMT</pubDate>
+    <pubDate>Fri, 05 May 2023 12:33:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -160,39 +160,6 @@
     </item>
     
     <item>
-      <title>[Record] My robots.txt template</title>
-      <link>https://sakurawald.github.io/posts/robots-txt-template/</link>
-      <guid>https://sakurawald.github.io/posts/robots-txt-template/</guid>
-      <pubDate>Thu, 23 Feb 2023 01:37:55 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;My-robots-txt-template&quot;&gt;&lt;a href=&quot;#My-robots-txt-template&quot; class=&quot;headerlink&quot; title=&quot;My robots.txt template&quot;&gt;&lt;/a&gt;My robots.txt</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/information/">information</category>
-      
-      <category domain="https://sakurawald.github.io/tags/search-engine/">search_engine</category>
-      
-      <category domain="https://sakurawald.github.io/tags/crawler/">crawler</category>
-      
-      <category domain="https://sakurawald.github.io/tags/record/">record</category>
-      
-      <category domain="https://sakurawald.github.io/tags/template/">template</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/robots-txt-template/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
       <title>[Note] Android solutions for linux</title>
       <link>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</link>
       <guid>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</guid>
@@ -230,16 +197,16 @@
     </item>
     
     <item>
-      <title>[SD] Stable-Diffusion Practice</title>
-      <link>https://sakurawald.github.io/posts/stable-diffusion-practice/</link>
-      <guid>https://sakurawald.github.io/posts/stable-diffusion-practice/</guid>
+      <title>Play on Stable-Diffusion</title>
+      <link>https://sakurawald.github.io/posts/play-on-stable-diffusion/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-stable-diffusion/</guid>
       <pubDate>Wed, 08 Feb 2023 00:35:54 GMT</pubDate>
       
         
         
           
           
-      <description>&lt;h1 id=&quot;Stable-Diffusion-Practice&quot;&gt;&lt;a href=&quot;#Stable-Diffusion-Practice&quot; class=&quot;headerlink&quot; title=&quot;Stable-Diffusion</description>
+      <description>&lt;h1 id=&quot;Play-on-Stable-Diffusion&quot;&gt;&lt;a href=&quot;#Play-on-Stable-Diffusion&quot; class=&quot;headerlink&quot; title=&quot;Play on Stable-Diffusion&quot;&gt;&lt;/a&gt;Play on</description>
           
         
       
@@ -274,7 +241,7 @@
       <category domain="https://sakurawald.github.io/tags/draw/">draw</category>
       
       
-      <comments>https://sakurawald.github.io/posts/stable-diffusion-practice/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-stable-diffusion/#disqus_thread</comments>
       
     </item>
     
@@ -621,6 +588,36 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>[STL] Simple Use of STL</title>
+      <link>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/</link>
+      <guid>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/</guid>
+      <pubDate>Mon, 18 Apr 2022 14:44:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>
+
+&lt;h1&gt;Code Snippet&lt;/h1&gt;
+&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/stl/">stl</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cpp/">cpp</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/#disqus_thread</comments>
       
     </item>
     
