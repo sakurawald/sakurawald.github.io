@@ -1,5 +1,5 @@
 ---
-title: "[Anbox] Install android-subsystem on Ubuntu 22.04 LTS"
+title: "play on anbox"
 date: 2022-06-09 17:41:00
 tags:
   - linux

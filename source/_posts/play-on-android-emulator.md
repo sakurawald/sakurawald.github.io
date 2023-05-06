@@ -1,5 +1,5 @@
 ---
-title: "[Note] Android solutions for linux"
+title: "play on android emulator"
 date: 2023-02-22 06:38:07
 tags:
   - android

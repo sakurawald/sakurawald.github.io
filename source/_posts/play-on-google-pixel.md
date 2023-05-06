@@ -1,5 +1,5 @@
 ---
-title: "Play on Google Pixel"
+title: "play on google pixel"
 date: 2023-02-27 05:46:02
 tags:
   - pixel

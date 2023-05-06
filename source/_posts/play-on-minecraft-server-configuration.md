@@ -1,5 +1,5 @@
 ---
-title: "Minecraft 性能調優參考"
+title: "play on minecraft server configuration"
 date: 2023-05-01 05:04:88
 tags: 
  - minecraft

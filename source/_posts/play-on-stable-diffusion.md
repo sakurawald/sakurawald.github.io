@@ -1,5 +1,5 @@
 ---
-title: 'Play on Stable-Diffusion'
+title: 'play on stable-diffusion'
 date: 2023-02-08 08:35:54
 tags:
   - ai

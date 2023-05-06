@@ -1,5 +1,5 @@
 ---
-title: "KDE使用偏好"
+title: "play on kde"
 date: 2023-04-26 22:04:88
 tags: 
  - kde

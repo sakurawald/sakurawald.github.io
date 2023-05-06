@@ -1,5 +1,5 @@
 ---
-title: "Vim cheat sheet"
+title: "play on vim"
 date: 2023-02-24 06:10:35
 tags:
   - vim

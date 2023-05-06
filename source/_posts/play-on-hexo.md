@@ -1,5 +1,5 @@
 ---
-title: "[Blog] 从WordPress迁移到Hexo"
+title: "play on hexo"
 date: 2023-01-25 13:11:58
 tags:
   - blog
