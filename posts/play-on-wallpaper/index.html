@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" style="display:none;"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>[Anbox] Install android-subsystem on Ubuntu 22.04 LTS | SakuraWald</title><meta name="author" content="SakuraWald"><meta name="copyright" content="SakuraWald"><meta name="format-detection" content="telephone=no"><meta name="theme-color"><link rel="canonical" href="https://sakurawald.github.io/posts/install-andbox-on-ubuntu-22-04-LTS/index.html"><!-- purify--><script>if (navigator.language === "zh-CN") {
+<!DOCTYPE html><html lang="en" style="display:none;"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>play on wallpaper | SakuraWald</title><meta name="author" content="SakuraWald"><meta name="copyright" content="SakuraWald"><meta name="format-detection" content="telephone=no"><meta name="theme-color"><link rel="canonical" href="https://sakurawald.github.io/posts/play-on-wallpaper/index.html"><!-- purify--><script>if (navigator.language === "zh-CN") {
     window.location.replace("https://www.baidu.com");
 }
 
@@ -41,11 +41,11 @@ gtag('config', 'G-5C7FQ1MX7K');</script><script>const GLOBAL_CONFIG = {
     toc: false,
   }
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '[Anbox] Install android-subsystem on Ubuntu 22.04 LTS',
+  title: 'play on wallpaper',
   isPost: true,
   isHome: false,
   isToc: true,
-  postUpdate: '2023-05-05 20:33:12'
+  postUpdate: '2023-05-06 14:59:57'
 }</script><noscript><style type="text/css">
   #recent-posts time,
   #post-meta time {
@@ -112,72 +112,15 @@ gtag('config', 'G-5C7FQ1MX7K');</script><script>const GLOBAL_CONFIG = {
     detectApple()
     })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
-</head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div class="post" id="body-wrap"><main class="layout" id="content-inner"><div id="post"><article class="github-markdown-body post-content" id="article-container">
-
-<h1>Install and Launch Anbox</h1>
-<pre><code class="language-shell" lang="shell"># Install the anbox
-sudo snap install --devmode --edge anbox
-sudo snap refresh --edge --devmode anbox
-sudo snap info anbox
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Debug mode
-sudo snap set anbox debug.enable=true
-sudo /snap/bin/anbox.collect-bug-info
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Start session-manager (Recommended)
-# Description: https://github.com/Fuseteam/systemd-service-files#anbox-session-manager
-mkdir -p ~/.config/systemd/user
-wget -O ~/.config/systemd/user/anbox-session-manager.service https://raw.githubusercontent.com/Fuseteam/systemd-service-files/main/user/anbox-session-manager.service
-# sudo systemctl --user enable --now anbox-session-manager
-sudo systemctl --machine=teeth@.host --user enable --now anbox-session-manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># A magic way to launch the anbox.appmgr
-# WARNING: do not add 'sudo' for the command, or you will get error messages: [daemon.cpp:61@Run] Failed to connect to DBus
-anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity
-</code></pre>
-<h1>Create Desktop File</h1>
-<pre><code class="language-shell" lang="shell"># anbox-application-manager.desktop
-[Desktop Entry]
-Name=Anbox Application Manager
-Icon=/snap/anbox/213/meta/gui/icon.png
-Exec=sh -c "systemctl --machine=teeth@.host --user enable --now anbox-session-manager; anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity"
-Terminal=false
-Type=Application
-Comment=Anbox Applicatoin Manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Create desktop file
-sudo desktop-file-install '/home/teeth/Desktop/anbox-application-manager.desktop' 
-</code></pre>
-<p>&nbsp;</p>
-<h1>Additional shells for bugs</h1>
-<pre><code class="language-shell" lang="shell"># Switch software-rendering for anbox
-sudo snap set anbox software-rendering.enable=true
-sudo snap restart anbox.container-manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Start session-manager
-# Description: https://docs.anbox.io/userguide/advanced/software_rendering.html
-EGL_PLATFORM=x11 anbox session-manager
-# EGL_PLATFORM=x11 anbox session-manager --software-rendering
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Install google-playstore and arm-applications-support
-# arm-application-support can make you able to install most of the apks that only compile for arm-architecture (not compiled for x86-64 architectur
-# eg. without arm-application-support, you can't install QQ...
-wget https://raw.githubusercontent.com/geeks-r-us/anbox-playstore-installer/master/install-playstore.sh
-chmod +x install-playstore.sh
-sudo bash ./install-playstore.sh
-</code></pre>
-<pre><code class="language-shell" lang="shell"># For binder:false
-# I just found that the we should not to care "binder" in the latest ubuntu (like Ubuntu 22.04 LTS)
-sudo mkdir /dev/binder
-sudo mount -t binder binder /dev/binder
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Solve google-play-store network connectivity problem
-sudo /snap/anbox/current/bin/anbox-bridge.sh start
-</code></pre>
-<p>&nbsp;</p>
-
-
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a><a class="post-meta__tags" href="/tags/linux/">linux</a></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/10484271?v=4" alt="avatar"/></div><div class="author-info__name">SakuraWald</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">46</div></a></div><div><a id="card-search-btn" href="#"><i class="fa fa-search"></i><span>Search</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Install and Launch Anbox</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Create Desktop File</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Additional shells for bugs</span></a></li></ol></div></div></div></div></main></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+</head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div class="post" id="body-wrap"><main class="layout" id="content-inner"><div id="post"><article class="github-markdown-body post-content" id="article-container"><h1 id="Wallpaper-Sharing"><a href="#Wallpaper-Sharing" class="headerlink" title="Wallpaper Sharing"></a>Wallpaper Sharing</h1><h2 id="Plasma-Kay"><a href="#Plasma-Kay" class="headerlink" title="Plasma-Kay"></a>Plasma-Kay</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-kay.png" alt="plasma-kay"></p>
+<h2 id="Plasma-Shell"><a href="#Plasma-Shell" class="headerlink" title="Plasma-Shell"></a>Plasma-Shell</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-shell.jpg" alt="plasma-shell"></p>
+<h2 id="Plasma-Honeywave"><a href="#Plasma-Honeywave" class="headerlink" title="Plasma-Honeywave"></a>Plasma-Honeywave</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-honeywave.jpg" alt="plasma-honeywave"></p>
+<h2 id="Plasma-Cluster"><a href="#Plasma-Cluster" class="headerlink" title="Plasma-Cluster"></a>Plasma-Cluster</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cluster.png" alt="plasma-cluster"></p>
+<h2 id="Plasma-Cascade"><a href="#Plasma-Cascade" class="headerlink" title="Plasma-Cascade"></a>Plasma-Cascade</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cascade.png" alt="plasma-cascade"></p>
+<h2 id="Plasma-Canopee"><a href="#Plasma-Canopee" class="headerlink" title="Plasma-Canopee"></a>Plasma-Canopee</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://github.com/SakuraWald/sakurawald.github.io/raw/main/images/plasma-canopee.png" alt="plasma-canopee"></p>
+<h2 id="Plasma-Altai"><a href="#Plasma-Altai" class="headerlink" title="Plasma-Altai"></a>Plasma-Altai</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-altai.png" alt="plasma-altai"></p>
+<h2 id="Ubuntu-Jellyfish"><a href="#Ubuntu-Jellyfish" class="headerlink" title="Ubuntu-Jellyfish"></a>Ubuntu-Jellyfish</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/ubuntu-jellyfish.jpg" alt="ubuntu-jellyfish"></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/wallpaper/">wallpaper</a></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/10484271?v=4" alt="avatar"/></div><div class="author-info__name">SakuraWald</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">46</div></a></div><div><a id="card-search-btn" href="#"><i class="fa fa-search"></i><span>Search</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Wallpaper-Sharing"><span class="toc-number">1.</span> <span class="toc-text">Wallpaper Sharing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Kay"><span class="toc-number">1.1.</span> <span class="toc-text">Plasma-Kay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Shell"><span class="toc-number">1.2.</span> <span class="toc-text">Plasma-Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Honeywave"><span class="toc-number">1.3.</span> <span class="toc-text">Plasma-Honeywave</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Cluster"><span class="toc-number">1.4.</span> <span class="toc-text">Plasma-Cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Cascade"><span class="toc-number">1.5.</span> <span class="toc-text">Plasma-Cascade</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Canopee"><span class="toc-number">1.6.</span> <span class="toc-text">Plasma-Canopee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plasma-Altai"><span class="toc-number">1.7.</span> <span class="toc-text">Plasma-Altai</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu-Jellyfish"><span class="toc-number">1.8.</span> <span class="toc-text">Ubuntu-Jellyfish</span></a></li></ol></li></ol></div></div></div></div></main></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

@@ -15,13 +15,13 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 05 May 2023 12:33:12 GMT</pubDate>
+    <pubDate>Sat, 06 May 2023 06:59:57 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>Minecraft 性能調優參考</title>
-      <link>https://sakurawald.github.io/posts/a-discussion-about-minecraft-server-configurations/</link>
-      <guid>https://sakurawald.github.io/posts/a-discussion-about-minecraft-server-configurations/</guid>
+      <title>play on minecraft server configuration</title>
+      <link>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</guid>
       <pubDate>Sun, 30 Apr 2023 21:05:28 GMT</pubDate>
       
         
@@ -39,12 +39,12 @@
       <category domain="https://sakurawald.github.io/tags/minecraft/">minecraft</category>
       
       
-      <comments>https://sakurawald.github.io/posts/a-discussion-about-minecraft-server-configurations/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>KDE使用偏好</title>
+      <title>play on kde</title>
       <link>https://sakurawald.github.io/posts/play-on-kde/</link>
       <guid>https://sakurawald.github.io/posts/play-on-kde/</guid>
       <pubDate>Wed, 26 Apr 2023 14:05:28 GMT</pubDate>
@@ -71,9 +71,9 @@
     </item>
     
     <item>
-      <title>wallpaper-sharing-1</title>
-      <link>https://sakurawald.github.io/posts/wallpaper-sharing-1/</link>
-      <guid>https://sakurawald.github.io/posts/wallpaper-sharing-1/</guid>
+      <title>play on wallpaper</title>
+      <link>https://sakurawald.github.io/posts/play-on-wallpaper/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-wallpaper/</guid>
       <pubDate>Sat, 15 Apr 2023 01:51:57 GMT</pubDate>
       
         
@@ -91,12 +91,12 @@
       <category domain="https://sakurawald.github.io/tags/wallpaper/">wallpaper</category>
       
       
-      <comments>https://sakurawald.github.io/posts/wallpaper-sharing-1/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-wallpaper/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>Play on Google Pixel</title>
+      <title>play on google pixel</title>
       <link>https://sakurawald.github.io/posts/play-on-google-pixel/</link>
       <guid>https://sakurawald.github.io/posts/play-on-google-pixel/</guid>
       <pubDate>Sun, 26 Feb 2023 21:46:02 GMT</pubDate>
@@ -131,9 +131,9 @@
     </item>
     
     <item>
-      <title>Vim cheat sheet</title>
-      <link>https://sakurawald.github.io/posts/vim-playground/</link>
-      <guid>https://sakurawald.github.io/posts/vim-playground/</guid>
+      <title>play on vim</title>
+      <link>https://sakurawald.github.io/posts/play-on-vim/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-vim/</guid>
       <pubDate>Thu, 23 Feb 2023 22:10:35 GMT</pubDate>
       
         
@@ -155,14 +155,14 @@
       <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
       
       
-      <comments>https://sakurawald.github.io/posts/vim-playground/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-vim/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>[Note] Android solutions for linux</title>
-      <link>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</link>
-      <guid>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/</guid>
+      <title>play on android emulator</title>
+      <link>https://sakurawald.github.io/posts/play-on-android-emulator/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-android-emulator/</guid>
       <pubDate>Tue, 21 Feb 2023 22:38:07 GMT</pubDate>
       
         
@@ -177,11 +177,11 @@
       
       
       
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
       <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
       <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
-      
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/note/">note</category>
       
@@ -192,12 +192,12 @@
       <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
       
       
-      <comments>https://sakurawald.github.io/posts/Note-Android-emulator-solutions-for-linux/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-android-emulator/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>Play on Stable-Diffusion</title>
+      <title>play on stable-diffusion</title>
       <link>https://sakurawald.github.io/posts/play-on-stable-diffusion/</link>
       <guid>https://sakurawald.github.io/posts/play-on-stable-diffusion/</guid>
       <pubDate>Wed, 08 Feb 2023 00:35:54 GMT</pubDate>
@@ -246,9 +246,9 @@
     </item>
     
     <item>
-      <title>[Blog] 从WordPress迁移到Hexo</title>
-      <link>https://sakurawald.github.io/posts/migrant-from-wordpress/</link>
-      <guid>https://sakurawald.github.io/posts/migrant-from-wordpress/</guid>
+      <title>play on hexo</title>
+      <link>https://sakurawald.github.io/posts/play-on-hexo/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-hexo/</guid>
       <pubDate>Wed, 25 Jan 2023 05:11:58 GMT</pubDate>
       
         
@@ -270,7 +270,7 @@
       <category domain="https://sakurawald.github.io/tags/hexo/">hexo</category>
       
       
-      <comments>https://sakurawald.github.io/posts/migrant-from-wordpress/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-hexo/#disqus_thread</comments>
       
     </item>
     
@@ -303,9 +303,9 @@ $$
     </item>
     
     <item>
-      <title>[Favorite] Tool-box</title>
-      <link>https://sakurawald.github.io/posts/tool-box/</link>
-      <guid>https://sakurawald.github.io/posts/tool-box/</guid>
+      <title>play on bookmarks</title>
+      <link>https://sakurawald.github.io/posts/play-on-bookmarks/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-bookmarks/</guid>
       <pubDate>Sun, 22 Jan 2023 09:37:54 GMT</pubDate>
       
         
@@ -325,14 +325,14 @@ $$
       <category domain="https://sakurawald.github.io/tags/favorite/">favorite</category>
       
       
-      <comments>https://sakurawald.github.io/posts/tool-box/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-bookmarks/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>Compiler Test</title>
-      <link>https://sakurawald.github.io/posts/compiler-test/</link>
-      <guid>https://sakurawald.github.io/posts/compiler-test/</guid>
+      <title>play on hexo-render</title>
+      <link>https://sakurawald.github.io/posts/play-on-hexo-render/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-hexo-render/</guid>
       <pubDate>Sun, 15 Jan 2023 03:00:00 GMT</pubDate>
       
         
@@ -353,14 +353,14 @@ $$
       
       
       
-      <category domain="https://sakurawald.github.io/tags/test/">test</category>
-      
       <category domain="https://sakurawald.github.io/tags/web/">web</category>
       
       <category domain="https://sakurawald.github.io/tags/jsp/">jsp</category>
       
+      <category domain="https://sakurawald.github.io/tags/test/">test</category>
       
-      <comments>https://sakurawald.github.io/posts/compiler-test/#disqus_thread</comments>
+      
+      <comments>https://sakurawald.github.io/posts/play-on-hexo-render/#disqus_thread</comments>
       
     </item>
     
@@ -395,9 +395,9 @@ $$
     </item>
     
     <item>
-      <title>[Anbox] Install android-subsystem on Ubuntu 22.04 LTS</title>
-      <link>https://sakurawald.github.io/posts/install-andbox-on-ubuntu-22-04-LTS/</link>
-      <guid>https://sakurawald.github.io/posts/install-andbox-on-ubuntu-22-04-LTS/</guid>
+      <title>play on anbox</title>
+      <link>https://sakurawald.github.io/posts/play-on-anbox/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-anbox/</guid>
       <pubDate>Thu, 09 Jun 2022 09:41:00 GMT</pubDate>
       
         
@@ -416,12 +416,12 @@ sudo snap install --devmode --edge</description>
       
       
       
-      <category domain="https://sakurawald.github.io/tags/android/">android</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
+      <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
-      <comments>https://sakurawald.github.io/posts/install-andbox-on-ubuntu-22-04-LTS/#disqus_thread</comments>
+      
+      <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
       
     </item>
     
@@ -592,9 +592,9 @@ $$
     </item>
     
     <item>
-      <title>[STL] Simple Use of STL</title>
-      <link>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/</link>
-      <guid>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/</guid>
+      <title>play on stl</title>
+      <link>https://sakurawald.github.io/posts/play-on-stl/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-stl/</guid>
       <pubDate>Mon, 18 Apr 2022 14:44:00 GMT</pubDate>
       
         
@@ -617,7 +617,7 @@ $$
       <category domain="https://sakurawald.github.io/tags/cpp/">cpp</category>
       
       
-      <comments>https://sakurawald.github.io/posts/stl-simple-usage-of-stl/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/play-on-stl/#disqus_thread</comments>
       
     </item>
     
