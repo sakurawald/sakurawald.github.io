@@ -2,7 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sakurawald.github.io/posts/play-on-vim/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/play-on-wallpaper/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/play-on-stl/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/index.html</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/hello-world/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
     
     <lastmod>2023-05-07</lastmod>
     
@@ -74,15 +137,6 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</loc>
     
     <lastmod>2023-05-07</lastmod>
@@ -92,61 +146,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-vim/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/play-on-wallpaper/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/play-on-stl/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/categories/index.html</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/index.html</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
+    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
     
     <lastmod>2023-05-07</lastmod>
     
@@ -337,6 +337,20 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/tags/web/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/jsp/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/tags/linux/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -442,20 +456,6 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/tags/web/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/jsp/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/tags/blog/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -471,6 +471,13 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/kde/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/minecraft/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -555,13 +562,6 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/draw/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/minecraft/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
