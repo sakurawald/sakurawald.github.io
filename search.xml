@@ -9010,6 +9010,886 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
+    <title>play on anbox</title>
+    <url>/./posts/play-on-anbox/</url>
+    <content><![CDATA[
+
+<h1>Install and Launch Anbox</h1>
+<pre><code class="language-shell" lang="shell"># Install the anbox
+sudo snap install --devmode --edge anbox
+sudo snap refresh --edge --devmode anbox
+sudo snap info anbox
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Debug mode
+sudo snap set anbox debug.enable=true
+sudo /snap/bin/anbox.collect-bug-info
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Start session-manager (Recommended)
+# Description: https://github.com/Fuseteam/systemd-service-files#anbox-session-manager
+mkdir -p ~/.config/systemd/user
+wget -O ~/.config/systemd/user/anbox-session-manager.service https://raw.githubusercontent.com/Fuseteam/systemd-service-files/main/user/anbox-session-manager.service
+# sudo systemctl --user enable --now anbox-session-manager
+sudo systemctl --machine=teeth@.host --user enable --now anbox-session-manager
+</code></pre>
+<pre><code class="language-shell" lang="shell"># A magic way to launch the anbox.appmgr
+# WARNING: do not add 'sudo' for the command, or you will get error messages: [daemon.cpp:61@Run] Failed to connect to DBus
+anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity
+</code></pre>
+<h1>Create Desktop File</h1>
+<pre><code class="language-shell" lang="shell"># anbox-application-manager.desktop
+[Desktop Entry]
+Name=Anbox Application Manager
+Icon=/snap/anbox/213/meta/gui/icon.png
+Exec=sh -c "systemctl --machine=teeth@.host --user enable --now anbox-session-manager; anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity"
+Terminal=false
+Type=Application
+Comment=Anbox Applicatoin Manager
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Create desktop file
+sudo desktop-file-install '/home/teeth/Desktop/anbox-application-manager.desktop' 
+</code></pre>
+<p>&nbsp;</p>
+<h1>Additional shells for bugs</h1>
+<pre><code class="language-shell" lang="shell"># Switch software-rendering for anbox
+sudo snap set anbox software-rendering.enable=true
+sudo snap restart anbox.container-manager
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Start session-manager
+# Description: https://docs.anbox.io/userguide/advanced/software_rendering.html
+EGL_PLATFORM=x11 anbox session-manager
+# EGL_PLATFORM=x11 anbox session-manager --software-rendering
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Install google-playstore and arm-applications-support
+# arm-application-support can make you able to install most of the apks that only compile for arm-architecture (not compiled for x86-64 architectur
+# eg. without arm-application-support, you can't install QQ...
+wget https://raw.githubusercontent.com/geeks-r-us/anbox-playstore-installer/master/install-playstore.sh
+chmod +x install-playstore.sh
+sudo bash ./install-playstore.sh
+</code></pre>
+<pre><code class="language-shell" lang="shell"># For binder:false
+# I just found that the we should not to care "binder" in the latest ubuntu (like Ubuntu 22.04 LTS)
+sudo mkdir /dev/binder
+sudo mount -t binder binder /dev/binder
+</code></pre>
+<pre><code class="language-shell" lang="shell"># Solve google-play-store network connectivity problem
+sudo /snap/anbox/current/bin/anbox-bridge.sh start
+</code></pre>
+<p>&nbsp;</p>
+
+
+]]></content>
+      <tags>
+        <tag>linux</tag>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on android emulator</title>
+    <url>/./posts/play-on-android-emulator/</url>
+    <content><![CDATA[<h1 id="Android-solutions-for-linux"><a href="#Android-solutions-for-linux" class="headerlink" title="Android solutions for linux"></a>Android solutions for linux</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>這篇文章主要用於討論幾種在 <code>Linux</code> 上運行 <code>Android</code> 的方案。</p>
+<p>對於 <code>Windows</code> 用戶，可以直接選擇 <code>Windows Subsystem for Android</code> 和 <code>Emulator</code></p>
+<blockquote>
+<p>如果確定使用 <code>Emulator</code>，首選 <code>BlueStack</code>，性能表現較好。</p>
+</blockquote>
+<p>對於 <code>Linux</code> 用戶，情況會比較複雜。針對不同的 <code>kernel</code> ，可以選擇的方案也不同。</p>
+<p>這裡，將只討論 <code>物理機</code> 屬於 <code>x86</code> 架構的情況下，運行 <code>android</code> 系統的可能情況：</p>
+<ul>
+<li><p>第一級別需求：僅支持運行 <code>原生的android x86</code></p>
+</li>
+<li><p>第二級別需求：在前面的基礎上，通過 <code>arm translation layer</code> 支持運行部分 <code>編譯時帶x86選項的arm應用</code></p>
+<blockquote>
+<p><code>android studio</code> 默認會啓用 <code>x86編譯選項</code> ，除非開發者刻意地去關閉這個選項。</p>
+<p>因此，只要達到這一級別，就可以運行 <code>大部分的arm應用</code>。</p>
+</blockquote>
+</li>
+<li><p>第三級別需求：在前面的基礎上，支持運行 <code>編譯時去除x86選項的，僅支持arm架構的arm應用</code></p>
+<blockquote>
+<p>比如：<code>Clash of clans</code> 的安裝包。</p>
+<p>至今尚未發現，基於x86架構的物理機，在Linux系統上成功運行該app</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>就 <code>解決方案</code> 而言，個人更傾向於使用 <code>emulator</code>，儘管會有部分性能損耗，但對於流暢運行一個 android 系統來說，PC的資源是綽綽有餘的。</p>
+<p>使用 <code>emulator</code> 方案可以使得 <code>對物理機造成的污染更小</code>， 以及 <code>更少的依賴問題</code>。</p>
+<p>當然，使用 <code>native container</code> 方案可以獲得最佳的性能。</p>
+<blockquote>
+<p>但是 <code>安裝</code> 比較麻煩，對 <code>host os</code> 和 <code>guest os</code> 有比較嚴格的要求。</p>
+</blockquote>
+<h3 id="Emulator-GenyMotion-QEMU"><a href="#Emulator-GenyMotion-QEMU" class="headerlink" title="Emulator: GenyMotion/QEMU"></a>Emulator: GenyMotion/QEMU</h3><p>相比於 <code>AVD</code> 來說，更加 <code>穩定</code> 的體驗。搭配 <code>houdini</code> 可以達到 <code>第二級別需求</code>。</p>
+<blockquote>
+<p>官方所宣傳的，<code>無法運行arm-v8a應用</code> 的說法是錯誤的。只要安裝了 <code>arm translation layer</code>，即可達到 第二級別需求。</p>
+<p>見：<a href="https://support.genymotion.com/hc/en-us/articles/360010029677-How-to-run-applications-for-arm64-aarch64-armv8-">https://support.genymotion.com/hc/en-us/articles/360010029677-How-to-run-applications-for-arm64-aarch64-armv8-</a></p>
+<blockquote>
+<p>arm translation layers:</p>
+<ul>
+<li><a href="https://github.com/niizam/Genymotion_A11_libhoudini/">https://github.com/niizam/Genymotion_A11_libhoudini/</a></li>
+<li><a href="https://github.com/m9rco/Genymotion_ARM_Translation">https://github.com/m9rco/Genymotion_ARM_Translation</a></li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="Emulator-AVD-QEMU"><a href="#Emulator-AVD-QEMU" class="headerlink" title="Emulator: AVD/QEMU"></a>Emulator: AVD/QEMU</h3><p><code>android studio</code> 自帶了一個 <code>emulator</code>，稱爲 <code>android virtual device</code>。</p>
+<p>可以通過選擇 <code>x86_64 image</code> 來實現 <code>第二級別需求</code>。</p>
+<blockquote>
+<p>在 <code>android 11.0</code> 之後，自帶了 <code>arm translation layer</code>。</p>
+<p>所以我們可以通過 <code>挑選一個好的鏡像</code>，從而跳過 <code>手動安裝translator</code></p>
+<p>見：<a href="https://hatwars.com/now-you-can-run-arm-binaries-in-x86-android-emulators/">https://hatwars.com/now-you-can-run-arm-binaries-in-x86-android-emulators/</a></p>
+<p>對於 <code>x86架構的host os</code>，可能無法正常啓動 <code>arm images</code>：</p>
+<ul>
+<li>高版本的arm image直接拒絕啓動</li>
+<li>低版本的arm image<ul>
+<li>啓動時立即崩潰</li>
+<li>啓動後黑屏</li>
+<li>啓動後卡在logo界面</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Emulator-VMWare-VirtualBox"><a href="#Emulator-VMWare-VirtualBox" class="headerlink" title="Emulator: VMWare/VirtualBox"></a>Emulator: VMWare/VirtualBox</h3><p>最後達成的效果，取決於安裝的 <code>android image</code></p>
+<p>不推薦使用這種方式，運行 <code>性能</code> 會明顯差於 <code>QEMU Emulator</code> </p>
+<h3 id="Emulator-Nested-emulator"><a href="#Emulator-Nested-emulator" class="headerlink" title="Emulator: Nested emulator"></a>Emulator: Nested emulator</h3><p>如果需要達成 <code>第三級別的需求</code>，可以嘗試在 <code>windows (guest os)</code> 上運行 <code>android emulator</code></p>
+<blockquote>
+<p>儘管實際上經過了2層的虛擬化，但是實際的性能並不是想象中的那樣差：</p>
+<p>如果 <code>第一層guest os</code> 的運行性能良好的話，<code>android emulator</code> 的運行效果也將會非常不錯。</p>
+</blockquote>
+<h3 id="Screen-Projection"><a href="#Screen-Projection" class="headerlink" title="Screen Projection"></a>Screen Projection</h3><p>如果僅僅是爲了 <code>方便操控</code>，可以選擇連接 <code>物理Android設備</code>。</p>
+<h3 id="SaaS"><a href="#SaaS" class="headerlink" title="SaaS"></a>SaaS</h3><p>可以選擇 <code>雲Android</code> 服務，但是價格較貴。大部分應用場景下，不推薦。</p>
+<h3 id="Container-Anbox"><a href="#Container-Anbox" class="headerlink" title="Container: Anbox"></a>Container: Anbox</h3><p>如果你是 <code>ubuntu</code> 用戶，可以嘗試一下 <code>anbox</code>。在安裝完 <code>houdini</code> 之後，可以達到 <code>第二級別需求</code>。</p>
+<p><code>anbox</code> 的安裝對於 <code>ubuntu 20.04</code> 和 <code>ubuntu 22.04</code> 的用戶是友好的。</p>
+<p>如果是 <code>archlinux</code>，則不推薦使用 <code>anbox</code>。</p>
+<p>最關鍵的原因是：<code>anbox</code> 所使用的 <code>android image</code> 所用的 <code>kernel</code> 是較舊的。如果 <code>host os</code> 的 <code>kernel</code> 較新，則會導致 <code>anbox</code> 無法正常運行。</p>
+<blockquote>
+<p>如果你堅持在 <code>最新的kernel</code> 上運行 <code>anbox</code>，也是可能的。</p>
+<p>你需要做：</p>
+<ul>
+<li>爲anbox重新編譯一個新的android image</li>
+<li>修改anbox的源碼進行響應的適配</li>
+</ul>
+</blockquote>
+<h3 id="Container-Waydroid"><a href="#Container-Waydroid" class="headerlink" title="Container: Waydroid"></a>Container: Waydroid</h3><p>如果你使用的 <code>DS</code> 是 <code>wayland</code> 的話，可以嘗試該方案。</p>
+<p><code>waydroid</code> 可能看作是 <code>anbox</code> 的後繼者，所使用的鏡像是 <code>版本更高的lineageos</code></p>
+<blockquote>
+<p> 如果是 <code>x11</code> 用戶，也可以通過 <code>x11-wayland翻譯層</code> 來運行 <code>waydroid</code>，但是配置過程會麻煩很多。</p>
+</blockquote>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
+<li>應該首先考慮 <code>emulator</code> 方案，犧牲一點性能來換取 <code>更高的host os兼容度</code> 和 <code>更獨立的環境</code> 是值得的。其次才考慮 <code>native container</code> 方案。</li>
+<li>對於大部分的情況，使用 <code>QEMU</code> + <code>android x86</code> + <code>arm translation layer</code> 即可達成 <code>運行大部分arm-v8a應用</code> 的需求。</li>
+<li>對於極少數只支持 <code>arm-v8a</code> 架構的應用，可以選擇 <code>代價較爲昂貴的nested emulator方案</code> </li>
+</ol>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+        <tag>android</tag>
+        <tag>emulator</tag>
+        <tag>note</tag>
+        <tag>practice</tag>
+        <tag>solution</tag>
+        <tag>virtualize</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on bookmarks</title>
+    <url>/./posts/play-on-bookmarks/</url>
+    <content><![CDATA[<h1 id="Tool-Box"><a href="#Tool-Box" class="headerlink" title="Tool-Box"></a>Tool-Box</h1><h2 id="出版网站"><a href="#出版网站" class="headerlink" title="出版网站"></a>出版网站</h2><ul>
+<li><a href="http://www.hzbook.com/">HzBook</a></li>
+<li><a href="https://www.ituring.com.cn/">ITuring</a></li>
+<li><a href="https://www.phei.com.cn/">Phei</a></li>
+</ul>
+<h2 id="技术网站"><a href="#技术网站" class="headerlink" title="技术网站"></a>技术网站</h2><h3 id="综合网站"><a href="#综合网站" class="headerlink" title="综合网站"></a>综合网站</h3><ul>
+<li><a href="https://www.v2ex.com/">V2EX</a></li>
+<li><a href="https://www.oschina.net/">OSChina</a></li>
+<li><p><a href="https://segmentfault.com/">SegmentFault</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/">CnBlogs</a></p>
+</li>
+<li><a href="https://www.geeksforgeeks.org/">GeeksForGeeks</a></li>
+</ul>
+<h3 id="逆向工程"><a href="#逆向工程" class="headerlink" title="逆向工程"></a>逆向工程</h3><ul>
+<li><a href="https://www.52pojie.cn/">52Pojie</a></li>
+<li><a href="https://bbs.kanxue.com/">Kanxue</a></li>
+<li><a href="https://www.chinapyg.com/">PYG</a></li>
+</ul>
+<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><ul>
+<li><a href="https://codeforces.com/">CodeForces</a></li>
+<li><a href="https://leetcode.com/">LeetCode</a></li>
+<li><a href="https://www.topcoder.com/">TopCoder</a></li>
+<li><a href="https://www.codewars.com/">CodeWars</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>website</tag>
+        <tag>favorite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on google pixel</title>
+    <url>/./posts/play-on-google-pixel/</url>
+    <content><![CDATA[<h1 id="Play-on-Google-Pixel"><a href="#Play-on-Google-Pixel" class="headerlink" title="Play on Google Pixel"></a>Play on Google Pixel</h1><h2 id="Install-magisk"><a href="#Install-magisk" class="headerlink" title="Install magisk"></a>Install magisk</h2><h3 id="Enable-developter-options"><a href="#Enable-developter-options" class="headerlink" title="Enable developter options"></a>Enable developter options</h3><p>We need to tap <code>kernel build version</code> and enable <code>developer options</code>.</p>
+<h3 id="Enable-adb"><a href="#Enable-adb" class="headerlink" title="Enable adb"></a>Enable adb</h3><p>Turn on <code>USB debugging</code></p>
+<h3 id="Unlock-bootloader"><a href="#Unlock-bootloader" class="headerlink" title="Unlock bootloader"></a>Unlock bootloader</h3><blockquote>
+<p>WARNING: IF YOU UNLOCK BOOTLOADER, ALL YOUR DATA WILL BE WIPED.</p>
+</blockquote>
+<p>Inside <code>developer options</code>  , we need to <code>unlock OEM</code> so that we can unlock <code>bootloader</code> after.</p>
+<pre><code class="lang-shell">adb reboot bootloader
+fastboot flashing unlock
+</code></pre>
+<h3 id="Download-the-factory-images"><a href="#Download-the-factory-images" class="headerlink" title="Download the factory images"></a>Download the factory images</h3><ol>
+<li><p>Install <code>magisk.apk</code> from <a href="https://github.com/topjohnwu/Magisk">https://github.com/topjohnwu/Magisk</a> </p>
+</li>
+<li><p>Go to <a href="https://developers.google.com/android">https://developers.google.com/android</a> to download the <code>relative factory image</code> file. <a href="https://link.zhihu.com/?target=https%3A//developers.google.com/android/images">https://link.zhihu.com/?target=https%3A//developers.google.com/android/images</a></p>
+</li>
+<li><p>Unzip this <code>image file</code> to get <code>init_boot.img</code> file.</p>
+</li>
+<li><p>Use <code>adb push ./init_boot.img /storage/emulated/0/Downloads/</code> to send <code>init_boot.img</code> file to your mobile device.</p>
+</li>
+<li><p>Use <code>magisk.apk</code> to patch this <code>init_boot.img</code></p>
+</li>
+<li><p>Use <code>adb pull /storage/emulated/0/Downloads/&#123;the_patched_init_boot.img&#125; ./</code> to get <code>patched init_boot.img</code> from the mobile device.</p>
+</li>
+<li><p>Flash <code>the_patched_init_boot.img</code> file into your mobie device</p>
+<pre><code class="lang-shell">adb reboot bootloader
+fastboot flash init_boot &#123;the_patched_init_boot.img&#125;
+fastboot reboot
+</code></pre>
+</li>
+<li><p>Done.</p>
+</li>
+</ol>
+<h2 id="Install-OTA-Images"><a href="#Install-OTA-Images" class="headerlink" title="Install OTA Images"></a>Install OTA Images</h2><blockquote>
+<p>The key difference between <code>factory image</code> and <code>OTA image</code> is that:</p>
+<p>when you use <code>OTA image</code>, you don’t need to <code>wipe you mobile</code> or <code>unlock the bootloader</code> .</p>
+<p>Please note that: install a OTA may <strong>cover</strong> the <code>rooted boot_init.img</code>.</p>
+<p>So, if you want to install a <code>specific kernel version</code> with <code>root</code> and without <code>wipe your mobile</code>. You should use <code>factory image</code> instead of <code>OTA image</code></p>
+<blockquote>
+<p>If you don’t want to <code>wipe your mobile</code>, just modify <code>flash-all.sh</code> :</p>
+<pre><code class="lang-shell"># fastboot -w update image-cheetah-td1a.220804.009.a2.zip
+fastboot update image-cheetah-td1a.220804.009.a2.zip
+</code></pre>
+</blockquote>
+</blockquote>
+<ol>
+<li>Download the OTA that you want in <a href="https://developers.google.com/android/ota">https://developers.google.com/android/ota</a></li>
+<li>Follow the tutorial.</li>
+</ol>
+<h2 id="Support-32-Bit-Applications"><a href="#Support-32-Bit-Applications" class="headerlink" title="Support 32-Bit Applications"></a>Support 32-Bit Applications</h2><blockquote>
+<p>WARNING: If you want to support 32-bit applications, then you must un-install <code>the installed magisk (if existed)</code> and then use <code>forked-magisk</code> to replace <code>magisk</code>, and do the same as previous.</p>
+</blockquote>
+<p>Although Google Pixel 7 / 7 Pro is the first mobile that <code>only support 64 bit apps</code>, <strong>the fact is that: all the 32-bit libraries are still available, but Google delete tle supported-abi-list on props.</strong></p>
+<p>So, if we modify the props back, then we still can run 32-bit applications perfectly.</p>
+<p>There are 2 forked-magisk can do this, just choose one of them:  </p>
+<ol>
+<li><a href="https://github.com/ThomasKing2014/Pixel7_32bit_helper">https://github.com/ThomasKing2014/Pixel7_32bit_helper</a></li>
+<li><a href="https://github.com/MN312001/Magisk-Delta">https://github.com/MN312001/Magisk-Delta</a></li>
+</ol>
+<h2 id="Enable-VoLTE"><a href="#Enable-VoLTE" class="headerlink" title="Enable VoLTE"></a>Enable VoLTE</h2><p>If your <code>SIM</code> card can use <code>access the Internet</code>, but can’t send/receive any messages. Then you should enable <code>VoLTE</code> to make it work.</p>
+<p>Steps:</p>
+<ol>
+<li>Install <code>Shizuku</code> : <a href="https://github.com/RikkaApps/Shizuku">https://github.com/RikkaApps/Shizuku</a></li>
+<li>Install <code>Pixel-IMS</code>: <a href="https://github.com/kyujin-cho/pixel-volte-patch">https://github.com/kyujin-cho/pixel-volte-patch</a></li>
+<li>Follow the tutorial in <code>Pixel-IMS</code> and you are fine.</li>
+</ol>
+<h2 id="Enable-5G"><a href="#Enable-5G" class="headerlink" title="Enable 5G"></a>Enable 5G</h2><p>Not recommended in PRC. </p>
+<p>Some reviews say the 5G speed depends on which city you are in, and 4G is enough in most cases.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://www.androidgreek.com/now-you-can-use-32-bit-apps-on-your-pixel-7-unofficially/">Now you can use 32-bit apps on your Pixel 7 (unofficially)</a></li>
+<li><a href="https://www.xda-developers.com/how-to-unlock-bootloader-root-magisk-google-pixel-7-pro/">https://www.xda-developers.com/how-to-unlock-bootloader-root-magisk-google-pixel-7-pro/</a></li>
+<li><a href="https://forum.xda-developers.com/t/guide-root-pixel-7-pro-with-magisk-unlock-bootloader-pass-safetynet-more.4505353/">https://forum.xda-developers.com/t/guide-root-pixel-7-pro-with-magisk-unlock-bootloader-pass-safetynet-more.4505353/</a></li>
+<li><a href="https://k.sina.com.cn/article_1914010467_72157b6301901ozz5.html?from=tech">让新手机发挥全部实力，在国内如何「正确」使用 Pixel 7|pixel_新浪新闻</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>android</tag>
+        <tag>pixel</tag>
+        <tag>phone</tag>
+        <tag>root</tag>
+        <tag>magisk</tag>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on hexo-render</title>
+    <url>/./posts/play-on-hexo-render/</url>
+    <content><![CDATA[
+$$
+\boxed{@}
+
+% Color % 
+\newcommand\c[2]{\textcolor{#1}{#2}} 
+\newcommand\r[1]{\textcolor{red}{#1}} 
+\newcommand\g[1]{\textcolor{green}{#1}} 
+\newcommand\b[1]{\textcolor{blue}{#1}} 
+\newcommand\red[1]{\textcolor{red}{#1}} 
+\newcommand\blue[1]{\textcolor{blue}{#1}} 
+\newcommand\green[1]{\textcolor{green}{#1}} 
+\newcommand\black[1]{\textcolor{black}{#1}} 
+\newcommand\white[1]{\textcolor{white}{#1}} 
+\newcommand\cyan[1]{\textcolor{cyan}{#1}} 
+\newcommand\magenta[1]{\textcolor{magenta}{#1}} 
+\newcommand\yellow[1]{\textcolor{yellow}{#1}} 
+\newcommand\orange[1]{\textcolor{orange}{#1}} 
+\newcommand\lime[1]{\textcolor{lime}{#1}} 
+\newcommand\pink[1]{\textcolor{pink}{#1}} 
+\newcommand\darkgray[1]{\textcolor{darkgray}{#1}} 
+\newcommand\gray[1]{\textcolor{gray}{#1}} 
+\newcommand\lightgray[1]{\textcolor{lightgray}{#1}} 
+\newcommand\brown[1]{\textcolor{brown}{#1}} 
+\newcommand\olive[1]{\textcolor{olive}{#1}} 
+\newcommand\purple[1]{\textcolor{purple}{#1}} 
+\newcommand\teal[1]{\textcolor{teal}{#1}} 
+\newcommand\violet[1]{\textcolor{violet}{#1}} 
+\newcommand\hotpink[1]{\textcolor{hotpink}{#1}} 
+\newcommand\blueviolet[1]{\textcolor{blueviolet}{#1}} 
+\newcommand\navyblue[1]{\textcolor{navyblue}{#1}} 
+\newcommand\peach[1]{\textcolor{Peach}{#1}} 
+\newcommand\orangeRed[1]{\textcolor{OrangeRed}{#1}} 
+\newcommand\salmon[1]{\textcolor{Salmon}{#1}} 
+\newcommand\skyblue[1]{\textcolor{SkyBlue}{#1}} 
+\newcommand\springreen[1]{\textcolor{SpringGreen}{#1}} 
+\newcommand\aqua[1]{\textcolor{aqua}{#1}} 
+\newcommand\navy[1]{\textcolor{navy}{#1}} 
+\newcommand\silver[1]{\textcolor{silver}{#1}} 
+\newcommand\fuchsia[1]{\textcolor{fuchsia}{#1}} 
+\newcommand\maroon[1]{\textcolor{maroon}{#1}} 
+\definecolor{luo}{RGB}{102,204,255}
+\definecolor{miku}{RGB}{57,197,187} 
+\newcommand\luo[1]{\textcolor{luo}{#1}} 
+\newcommand\miku[1]{\textcolor{miku}{#1}}
+
+% Typography % 
+\newcommand\a[1]{\begin{aligned}#1\end{aligned}} 
+\newcommand\t[1]{\text{#1}} 
+\newcommand\lb[1]{\left{\begin{aligned} #1 \end{aligned}\right.} 
+\newcommand\rb[1]{\left.\begin{aligned} #1 \end{aligned}\right}} 
+\newcommand\env[2]{\begin{#1}#2\end{#1}}
+
+% Misc % 
+\newcommand\s[1]{{#1}} 
+\newcommand\qed{\quad\square} 
+\newcommand\define{\dot{=}} 
+\newcommand\then{\implies} 
+\newcommand\rounddown[1]{\lfloor{#1}\rfloor} 
+\newcommand\roundup[1]{\lceil{#1}\rceil} 
+\newcommand\graph[4]{#1 = (#2, #3) \quad |#2| = #4} 
+\newcommand\G{G = (V, E) \quad |V| = n} 
+\newcommand\so{\therefore} 
+\newcommand\comment[1]{\quad\text{(#1)}} 
+\newcommand\note[1]{\quad\text{(#1)}} 
+\newcommand\bt[1]{\boxed{\text{#1}}} 
+\newcommand\max[1]{\textbf{ max } {#1} } 
+\newcommand\min[1]{\textbf{ min } {#1} } 
+\newcommand\IF{\textbf{ IF }} 
+\newcommand\if{\textbf{ if }} 
+\newcommand\IS{\textbf{ IS }} 
+\newcommand\is{\textbf{ is }} 
+\newcommand\but{\textbf{ but }} 
+\newcommand\however{\textbf{ however }} 
+\newcommand\AND{\textbf{ AND }} 
+\newcommand\OR{\textbf{ OR }} 
+\newcommand\NOT{\textbf{ NOT }} 
+\newcommand\THEN{\textbf{ THEN }} 
+\newcommand\IN{\textbf{ IN }} 
+\newcommand\NOTIN{\textbf{ NOT-IN }} 
+\newcommand\assume{\textbf{ Assuming that: }} 
+\newcommand\contradictory{\textbf{ Thus lead to contradiction }} 
+\newcommand\proof{\textbf{Proof: }} 
+\newcommand\st{\text{ such that }} 
+\newcommand\hold{\text{ holds }} 
+\newcommand\lhs{\text{ LHS }} 
+\newcommand\rhs{\text{ RHS }} 
+\newcommand\wlg{\text{ Without loss of generality }} 
+\newcommand\nb{\text{ nota bene }} 
+\newcommand\analogously{\text{ analogously }} 
+\newcommand\viceversa{\textbf{ viceversa }} 
+\newcommand\let{\textbf{ let }} 
+\newcommand\as{\textbf{ as }} 
+\newcommand\for{\textbf{ As for }} 
+\newcommand\select{\textbf{ SELECT }} 
+\newcommand\m[1]{\mathit{#1}} 
+\newcommand+[1]{\mathcal{#1}} 
+\newcommand\warnning[1]{\colorbox{Blue}{\textcolor{Yellow}{#1}}} 
+\newcommand\error[1]{\colorbox{Black}{\textcolor{White}{#1}}}
+$$
+
+<hr>
+<p>这是中文<code>and</code>英文</p>
+<p>这是中文 <code>and</code> 英文</p>
+<p>这是 <code>code fence</code></p>
+<blockquote>
+<p><strong>Warning</strong></p>
+<p>This is a warning</p>
+</blockquote>
+<pre><code class="lang-java">Hello World
+</code></pre>
+<pre><code class="lang-mermaid">graph TD;
+      A--&gt;B;
+      A--&gt;C;
+      B--&gt;D;
+      C--&gt;D;
+</code></pre>
+<blockquote>
+<pre><code class="lang-mermaid">graph TD;
+     A--&gt;B;
+     A--&gt;C;
+     B--&gt;D;
+     C--&gt;D;
+</code></pre>
+<pre><code class="lang-java">This is the first line.
+This is the second line.
+This is the thrid line.
+</code></pre>
+<pre><code class="lang-mermaid">classDiagram
+class JspContext &#123;
++getAttribute(String name)
++getAttribute(String name, int scope)
++getAttributeNames()
++findAttribuite(String name)
+&#125;
+
+JspContext &lt;-- PageContext
+class PageContext&#123;
++APPLICATION_SCOPE
++PAGE_SCOPE
++REQUEST_SCOPE
++SESSION_SCOPE
++getRequest()
++getServletConfig()
++getServletContext()
++getSession()
+&#125;
+</code></pre>
+<p>原理：$\lceil x/y \rceil = \lfloor(x\textcolor{blue}{+y-1})/y \rfloor$</p>
+<p>证明</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boxed{\text{采用Biasing修复算术右移默认的向下舍入误差}} \\
+&x \dot{=} qy + r,\quad 0 \le r \lt y \\
+&\implies (x+y-1)/y = q + (r+y-1)/y \\
+&\implies \lfloor (\textcolor{red}{x}+y-1)/y \rfloor = q + \lfloor (\textcolor{red}{r}+y-1)/y\rfloor \\
+&= q + epsilon(r) =
+\begin{cases}
+0,& r = 0 \\
+1 ,& r \gt 0
+\end{cases}
+\end{aligned}</script></blockquote>
+<p>$\lceil x/y \rceil = \lfloor(x\textcolor{blue}{+y-1})/y \rfloor$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+first \\
+second
+\end{aligned}</script><p>Hi, here are some katex/mathjax examples.</p>
+<p>linebreak</p>
+<script type="math/tex; mode=display">
+\a{
+& \boxed{\t{This is a box}} \\
+& \r{\t{This is red}} \\
+& \b{\t{This is blue}}
+}</script><p><img src="https://camo.githubusercontent.com/53d0e59a884a0744867fe672d691af14c3d7ff00dc1db8d2354c0d897307607c/687474703a2f2f7777772e706f6c6f6e656c2e636f6d2f736e61636b6261722f6c6f676f5f6c617267652e706e67" alt="SnackBar"></p>
+]]></content>
+      <tags>
+        <tag>test</tag>
+        <tag>web</tag>
+        <tag>jsp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on hexo</title>
+    <url>/./posts/play-on-hexo/</url>
+    <content><![CDATA[<h1 id="从WordPress到Hexo"><a href="#从WordPress到Hexo" class="headerlink" title="从WordPress到Hexo"></a>从WordPress到Hexo</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在经历过 <code>WordPress</code> 的数次折磨之后，最终决定将 <code>Blog</code> 系统迁移到 <code>Hexo</code>。</p>
+<h2 id="为什么WordPress不适合作为博客系统"><a href="#为什么WordPress不适合作为博客系统" class="headerlink" title="为什么WordPress不适合作为博客系统"></a>为什么WordPress不适合作为博客系统</h2><p>对于Blog搭建而言，是时候该放弃 WordPress 了，至少出于以下这些原因：</p>
+<ul>
+<li><p>WordPress定位早已不属于Blog系统，它更像一个 <code>复杂易用</code> 的全能的建站网站。</p>
+</li>
+<li><p>WordPress过于臃肿。</p>
+<blockquote>
+<p>存在大量的陈年代码，想修改和新增功能必须按照官方那套繁琐的文档进行。</p>
+<p>WordPress有丰富的现成 <code>plugin</code> ，尽管使用门槛很低，但是自定义的门槛较高。</p>
+<p>并且想找到合适的 <code>plugin</code> 并配置到完美工作的状态，也需要耗费不少的时间。 </p>
+<p>一般来说，你很难直接修改WordPress的核心代码（版本更新的时候会覆盖，况且不优雅），只能通过大量的 <code>hook</code> 来完成。</p>
+<p>相比于直接修改原生代码而言，麻烦很多。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/4saLYcGC6A7eNrb.png" alt="image-20230125133135140"></p>
+<blockquote>
+<p>更糟糕的是，WordPress的开发团队<strong>根本不清楚</strong>什么东西应该被加入到核心之中。</p>
+<p>如果你仍然使用 WordPress，请 <code>务必关闭自动更新</code>，否则你不会预料到，你的站点会突然多出什么神奇的东西。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>WordPress的访问速度过慢。</p>
+<blockquote>
+<p>有很大一部分原因是因为它需要使用PHP来进行数据库查询，动态生成网页。</p>
+<p>尽管可以使用OpenLiteSpeed（提供HTTP 3.0 QUIC协议） + CachePlugin（静态资源，数据库缓存） 进行极大地优化，但是仍然略显笨重。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/jgToz6hDynfvV8l.png" alt="image-20230125133354174"></p>
+<p>以下是经过高度优化之后的Google Lighthouse分析。</p>
+<p>尽管如此，在用户的实际体验上，WordPress 仍然会存在 <strong>明显的卡顿感</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/4TQ9guNr1ohRPsv.png" alt="image-20230125133711341"></p>
+</blockquote>
+</li>
+<li><p>WordPress容易收到垃圾回复。</p>
+<blockquote>
+<p>针对 WordPress 站点存在大量的自动爬虫。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/WuQh5fFmOLvrGD9.png" alt="image-20230125133345387"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/JsYa49fvQcCpdSL.png" alt="image-20230125133327838"></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="迁移到新的博客系统"><a href="#迁移到新的博客系统" class="headerlink" title="迁移到新的博客系统"></a>迁移到新的博客系统</h2><p>  对于 <code>博客系统</code> 来说，首要考虑的是 <code>是否能满足写作的纯粹性</code>。</p>
+<p>  它应该至少能提供 <code>较为舒适</code> 的  <code>写作环境</code> 和 <code>阅读环境</code></p>
+<h3 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h3><p>  比如说，我期望使用 <code>Markdown</code> 这门简单但功能完备的标记语言来进行写作  ，并且除了自带的网页编辑器以外，可以选择独立的编辑器。</p>
+<p>  至少要 <code>完美地</code> 支持以下几种 <code>渲染器</code>：</p>
+<ul>
+<li>Markdown</li>
+<li>Highlightjs/Prism</li>
+<li>Mathjax/Katex</li>
+<li>Mermaid</li>
+</ul>
+<blockquote>
+<p>WordPress的 <code>Gutenberg Editor</code> 是很糟糕的，甚至远远差于 <code>Classic Editor</code>。</p>
+<p>它的语言是 <code>Rich Text</code>，或者说，它根本没有一种适合写作的语言。</p>
+<p>当你使用它的时候，你更像是在做 <code>设计 (Design)</code> 工作，而不是单纯的 <code>写作 (Writing)</code> 。</p>
+<p>总之，富文本很难使用，而且难以协调。</p>
+<blockquote>
+<p>当然，WordPress也可以安装第三方的渲染插件，比如 <code>Markdown插件</code>。</p>
+<p>但是我要说的是，直到2023年，WordPress还没有一个 <code>能用的Markdown插件</code>。</p>
+<p>更致命的是，如果你选择在 <code>WordPress的后台页面</code> 通过 <code>Live Preview</code> 来书写 Markdown，那么神奇的事情会发生在 <code>草稿被发布之后</code>：你将看到由于 <code>前后台CSS样式的不一致性</code>，导致 <code>渲染结果</code> 错乱。</p>
+<p>可以说，WordPress从来没有考虑过打造一个更舒适的写作环境。</p>
+<blockquote>
+<p>Hexo在尝试打造一个更舒适的写作环境，但 <code>失败</code> 了。</p>
+<blockquote>
+<p>尽管经过多年的发展，Hexo的 <code>renders</code> 仍然存在一些问题：</p>
+<ul>
+<li><p>因为调用 <code>syntax render</code> 与渲染引擎存在的冲突，无法正确识别 <code>blockquote</code> 中的代码。（你必须手动实现。）</p>
+</li>
+<li><p>因为模板引擎的原因，你甚至会因为一些在文章中输入<code> {# </code>而直接引发整个渲染系统的悄无声息的崩溃。</p>
+<blockquote>
+<p>当你使用 <code>Mathjax</code> 进行书写 <code>macro</code> 的时候，你就可以很自然地发现这个问题。（使用繁琐转义语法可以解决）</p>
+</blockquote>
+</li>
+<li><p>采用 <code>hexo-renderer-marked</code> 导致 <code>mathjax</code> 必须用 <code>\\\\</code> 才能实现换行。</p>
+</li>
+<li><code>extented-tag</code> 使用繁琐，无法保证与本地Markdown编辑器的一致性。</li>
+<li>…</li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>目前为止，我所发现的在WordPress上 <code>完美</code> 实现 <code>Markdown</code> 写作的方式是：自定义CSS + Typora导出为HTML代码进行嵌入</p>
+<p>对于 Hexo 来说，可以自行通过引用 <code>CSS</code> + <code>JS</code> 的方式，来实现自己喜欢的 <code>render</code></p>
+<h3 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h3><p>我更倾向于选择 <code>minimalism theme</code>，前端所展示的界面应当只有 <code>article container</code> 和 <code>comment container</code>。</p>
+<p>此外，再加上 <code>toc</code> 功能和一些必要的 <code>跳转链接</code> 即可。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mCrvBHM68IQGwN1.png" alt="image-20230125141549951"></p>
+<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>评论系统必须基于 <code>Github Issue/Discussion</code>，以便将所有的数据存放在 <code>Github Repository</code> 之中。</p>
+<p>没有任何理由选择 <strong>某些</strong> 要求 <code>实名认证信息</code> 甚至 <code>人脸识别数据</code> 的 评论系统。</p>
+<blockquote>
+<p>在 <code>后互联网时代</code>，<code>每个人</code> 都应该有属于自己的 <code>Github</code> 账号。</p>
+</blockquote>
+<p><code>markdown</code> 和 <code>syntax</code> 的 <code>style</code> 均复刻 <code>github style</code>，实现一致性。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/6kGMenzcrhUBIJx.png" alt="image-20230125141805248"></p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><p>基于 <code>本地搜索</code>，提供按 <code>keyword</code> 查询的能力。</p>
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><p>通过 <code>tag</code> 来分类文章。（<code>category</code> 的功能和 <code>tag</code> 重复了，并且可以被后者所替代。）</p>
+<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/f1u4Ckpw2SrQmPo.png" alt="image-20230125140808447"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eaRkUsD74CMYfHI.png" alt="image-20230125140749365"></p>
+]]></content>
+      <tags>
+        <tag>wordpress</tag>
+        <tag>blog</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on kde</title>
+    <url>/./posts/play-on-kde/</url>
+    <content><![CDATA[<h1 id="KDE使用偏好"><a href="#KDE使用偏好" class="headerlink" title="KDE使用偏好"></a>KDE使用偏好</h1><h2 id="保持桌面的整潔"><a href="#保持桌面的整潔" class="headerlink" title="保持桌面的整潔"></a>保持桌面的整潔</h2><blockquote>
+<p> 比起 <code>模糊搜索</code> 而言, 在 <code>雜亂的桌面</code> 上尋找 <code>某個圖標</code>, 是 <code>低效</code> 且 <code>不優雅</code> 的</p>
+</blockquote>
+<p>良好的 <code>桌面</code> 應當保持 <code>0 圖標</code> , 在桌面上放置一個或多個常用的圖標並不能提高工作效率, 相反地還會影響桌面的美觀. 一個 <code>app launcher</code> 即可取代 <code>所有被放置在桌面上的圖標</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427070040885.png" alt="image-20230427070040885"></p>
+<h2 id="將k-runner作爲調色板"><a href="#將k-runner作爲調色板" class="headerlink" title="將k-runner作爲調色板"></a>將k-runner作爲調色板</h2><h3 id="作爲-“搜索引擎”"><a href="#作爲-“搜索引擎”" class="headerlink" title="作爲 “搜索引擎”"></a>作爲 “搜索引擎”</h3><blockquote>
+<p>如果任何 <code>文件</code> 都可以通過 <code>模糊搜索</code> 在瞬間取得, 那麼花費時間來精心整理文件, 則是徒勞的.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427070530582.png" alt="image-20230427070530582"></p>
+<blockquote>
+<p>請注意, 該圖中的 <code>左上角</code> 並沒有 <code>app launcher</code>. 這是因爲 <code>k-runner</code> 可以完全替代它, 並且做得更好.</p>
+<p><code>app launcher</code> 至少有以下幾個缺點:</p>
+<ol>
+<li>喚起的速度過慢</li>
+<li>索引的速度過慢</li>
+<li>容易因按到 “meta鍵” 而誤觸</li>
+</ol>
+<p>而通過 <code>alt + space</code> 觸發的 <code>k-runner</code> 則沒有這些缺陷.</p>
+<blockquote>
+<p>其實對於 <code>window switcher</code>, 也可以使用 <code>meta + 1/2/../9</code></p>
+<p>對於這種 <code>高頻度且瑣碎的</code> 任務, 最好有個 <code>brain sensor</code> 或者 <code>eyes tracker</code> …</p>
+</blockquote>
+<p>儘管 <code>app launcher</code> 很常見, 但我要說的是, 存在並不一定合理. 移除 <code>app launcher</code> 也並不會導致整個系統的崩潰.</p>
+<blockquote>
+<p>注: 此處並<strong>不</strong>引用黑格爾的原話 <code>“Alles, was ist, ist vernünftig”</code> 的翻譯, 此句的含義依據現代的通俗解釋, 而非哲學領域的釋義.</p>
+</blockquote>
+</blockquote>
+<p>相比於 <code>windows</code> 上的 <code>everything</code> 和 <code>listray</code> 來說, 在 <code>linux</code> 上則可以選擇 <code>k-runner</code> 作爲一種替代.</p>
+<p>這個東西本質上是一個 <code>search engine</code>, 你可以通過配置各種 <code>plugin</code> 來添加一種新的 <code>search source</code> ,</p>
+<p>以便: <code>搜索某個文件</code>, <code>搜索某個當前正運行的window</code>, <code>搜索某個已安裝的application</code>, <code>搜索某個virtual-desktop</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071247858.png" alt="image-20230427071247858"></p>
+<blockquote>
+<p>啓用 <code>fs index</code> 即可讓 <code>k-runner</code> 擁有在 <code>瞬間</code> 完成 <code>搜索某個文件</code> 的能力.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427082130592.png" alt="image-20230427082130592"></p>
+</blockquote>
+<h3 id="作爲”解釋器”"><a href="#作爲”解釋器”" class="headerlink" title="作爲”解釋器”"></a>作爲”解釋器”</h3><p>也可以使用k-runner來執行一些 <code>簡單的命令</code>.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071422368.png" alt="image-20230427071422368"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071442153.png" alt="image-20230427071442153"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071500325.png" alt="image-20230427071500325"></p>
+<h2 id="讓-tray-icons-保持簡潔"><a href="#讓-tray-icons-保持簡潔" class="headerlink" title="讓 tray icons 保持簡潔"></a>讓 <code>tray icons</code> 保持簡潔</h2><p>默認的 <code>tray icons</code> 包含非常多 <code>不常用的tray icon</code>, 所以我們需要根據 <code>自己的使用偏好</code>. </p>
+<p>只將 <code>常用的tray icons</code> 顯示出來.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071719723.png" alt="image-20230427071719723"></p>
+<p>對於某些 <code>重要但不常用的tray icon</code>, 可以設置顯示策略爲 <code>當相關時顯示</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427072548159.png" alt="image-20230427072548159"></p>
+<h2 id="善用-Do-not-disturb-模式"><a href="#善用-Do-not-disturb-模式" class="headerlink" title="善用 Do not disturb 模式"></a>善用 <code>Do not disturb</code> 模式</h2><p>設置 <code>快捷鍵</code> 以便通過 <code>meta + n</code> 來切換 <code>do not disturb mode</code> .</p>
+<p>當需要免打擾環境時, 可以快速切入.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427075918984.png" alt="image-20230427075918984"></p>
+<h2 id="選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色"><a href="#選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色" class="headerlink" title="選擇使用 multi-activity 和 multi-vitrual-desktop 來區分 角色"></a>選擇使用 <code>multi-activity</code> 和 <code>multi-vitrual-desktop</code> 來區分 <code>角色</code></h2><blockquote>
+<p>在某些 <code>工作場景</code> 下, 我們往往需要扮演 <code>多角色</code>.</p>
+<p>比如, 我們可能需要: 同時扮演 <code>前端工程師</code> 和 <code>後端工程師</code>, 同時扮演 <code>軟件開發工程師</code> 和 <code>軟件測試員</code></p>
+<p>此時需要運行 <code>一組不同的application</code>, 如果將 <code>所有的application</code> 都放在 <code>同一個virtual-desktop</code> 或者 <code>同一個activity</code>, 然後通過 <code>alt+tab</code> 來切換的話, 則有以下這些缺點:</p>
+<ol>
+<li>繁瑣, 你無法精準切換你想要的application (如果通過 <code>k-runner</code> 來切斷可能會好些)</li>
+<li>你會因爲切換application而 <code>打亂</code> 窗口之間的 <code>layout</code>. (這可能會迫使你使用鼠標來重新對此進行調整)</li>
+</ol>
+<p>此時, 通過切換 <code>virtual-desktop</code> 或 <code>activity</code> , 就如同 <code>你使用2塊不同的顯示屏</code> 一樣.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427073203338.png" alt="image-20230427073203338"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427073220301.png" alt="image-20230427073220301"></p>
+<p>使用 <code>meta+tab</code> 即可 <code>切換到下一個activity</code>, 這裏建議只設置 <code>2個activity</code>, 避免切換時的繁瑣. </p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427074024802.png" alt="image-20230427074024802"></p>
+<p><code>virtual-desktop</code> 和 <code>activity</code> 是兩種不同 <code>粒度</code> 的用於解決 <code>多角色問題</code> 的解決方案, 可以根據自己的需求選擇.</p>
+<h2 id="設置更動聽的-窗口移動特效"><a href="#設置更動聽的-窗口移動特效" class="headerlink" title="設置更動聽的 窗口移動特效"></a>設置更動聽的 <code>窗口移動特效</code></h2><p>通過啓用 <code>translucency</code> 和 <code>wobbly windows</code>, 使得: </p>
+<ol>
+<li><code>window</code> 在 <code>移動時</code> 自動 <code>透明化</code> , 以便觀察 <code>底部的windows</code></li>
+<li>讓 <code>window</code> 在移動時像 <code>果凍</code> 一樣</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-48.gif" alt="Peek 2023-04-27 07-48"></p>
+<h2 id="設置更方便的-window-actions"><a href="#設置更方便的-window-actions" class="headerlink" title="設置更方便的 window actions"></a>設置更方便的 <code>window actions</code></h2><p>將 <code>meta + 鼠標輸入</code> 設置爲一系列的 <code>window指令</code>, 如:</p>
+<ol>
+<li><code>meta</code> + <code>mouse scroll</code> = 窗口最大化/最小化</li>
+<li><code>meta</code> + <code>mouse left click</code> = 移動窗口 (這樣就可以在 <code>window的內部</code> 直接 <code>發送移動指令</code> , 而不必拖着狹小的 <code>title bar</code>  來<code>發送移動指令</code>)</li>
+<li><code>meta</code> + <code>mouse right click</code> = 調整窗口大小 (如果通過 <code>窗口邊緣</code>來調整大小的話, 則對 <code>鼠標的精準操作</code> 有很高要求. )x</li>
+<li>…</li>
+</ol>
+<p>理論上講, 任何需要 <code>高精準度的鼠標操作</code> 都應該有 <code>替代方案</code>. </p>
+<p>點擊一個 <code>面積更大的區域</code> 總是比 <code>更小的區域</code> 更方便.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-53.gif" alt="Peek 2023-04-27 07-53"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-54.gif" alt="Peek 2023-04-27 07-54"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2008-15.gif" alt="Peek 2023-04-27 08-15"></p>
+<h2 id="使用-window-rule-進行-自動化佈局"><a href="#使用-window-rule-進行-自動化佈局" class="headerlink" title="使用 window rule 進行 自動化佈局"></a>使用 <code>window rule</code> 進行 <code>自動化佈局</code></h2><p>在某些 <code>工作場景</code> 下, 可能需要進行 <code>長時間保持某個窗口佈局方式</code>, 比如: 一邊開啓 <code>IDE</code>, 一邊開啓 <code>browser</code> 查閱文檔. 此時可以通過設置 <code>window rule</code> 來自動完成這種 <code>窗口佈局</code>.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427075705312.png" alt="image-20230427075705312"></p>
+<h2 id="對-input-method-進行微調至合適"><a href="#對-input-method-進行微調至合適" class="headerlink" title="對 input method 進行微調至合適"></a>對 <code>input method</code> 進行微調至合適</h2><p>此處建議使用 <code>開源的input method</code> , 如果你還有點關注 <code>你的privacy</code> 的話.</p>
+<blockquote>
+<p>開源方案建議: <code>rime</code> , <code>fcitx-chinese-addons</code></p>
+</blockquote>
+<p>配置 <code>im group</code> 和 <code>im layout</code> , 以及 <code>切換快捷鍵</code> , 使得 <code>切換im</code> 不會與 <code>某些全屏應用</code> 發生衝突.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080032005.png" alt="image-20230427080032005"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080258247.png" alt="image-20230427080258247"></p>
+<h2 id="取消-不可信證書"><a href="#取消-不可信證書" class="headerlink" title="取消 不可信證書"></a>取消 <code>不可信證書</code></h2><p>爲了避免 <code>MITM attack</code>, 並不是所有的 <code>CA證書</code> 都值得你信任.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080522193.png" alt="image-20230427080522193"></p>
+<h2 id="電源管理"><a href="#電源管理" class="headerlink" title="電源管理"></a>電源管理</h2><p>設置 <code>閒置時</code>  自動熄屏</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427081025652.png" alt="image-20230427081025652"></p>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>啓用 <code>firewall</code> 對 <code>traffic</code> 進行控制.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427081810808.png" alt="image-20230427081810808"></p>
+<h2 id="在設備開機後自動部署工作環境"><a href="#在設備開機後自動部署工作環境" class="headerlink" title="在設備開機後自動部署工作環境"></a>在設備開機後自動部署工作環境</h2><p>如果你經常 <code>關機</code> 的話…</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427082245821.png" alt="image-20230427082245821"></p>
+]]></content>
+      <tags>
+        <tag>os</tag>
+        <tag>kde</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on stable-diffusion</title>
+    <url>/./posts/play-on-stable-diffusion/</url>
+    <content><![CDATA[<h1 id="Play-on-Stable-Diffusion"><a href="#Play-on-Stable-Diffusion" class="headerlink" title="Play on Stable-Diffusion"></a>Play on Stable-Diffusion</h1><h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><blockquote>
+<p>If you just want to use <code>stable-diffusion</code> <strong>online</strong>, you can try apps like: <a href="https://huggingface.co/spaces/stabilityai/stable-diffusion">https://huggingface.co/spaces/stabilityai/stable-diffusion</a></p>
+<p>However, we highly recommend you setup <code>stable-diffusion</code> locally for higher customizability.</p>
+</blockquote>
+<h3 id="Platform"><a href="#Platform" class="headerlink" title="Platform"></a>Platform</h3><h4 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h4><p><code>stable-diffusion webui</code> is a browser interface for <code>stable-diffusion</code>.</p>
+<p>Firstly, use the following commands to install it.</p>
+<pre><code class="lang-shell">git clone git@github.com:AUTOMATIC1111/stable-diffusion-webui.git
+cd stable-diffusion-webui
+bash webui.sh
+</code></pre>
+<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h4><h5 id="Optimise-video-memory-usage"><a href="#Optimise-video-memory-usage" class="headerlink" title="Optimise video memory-usage"></a>Optimise video memory-usage</h5><pre><code class="lang-shell"># webui-user.sh
+export COMMANDLINE_ARGS=&quot;--xformers&quot;
+</code></pre>
+<p>For some GPUs with a high cuda version. (cuda &gt; 11.8), you should <strong>manually</strong> install the <strong>required python dependencies</strong></p>
+<pre><code class="lang-shell">NVIDIA GeForce RTX 3080 Ti with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA GeForce RTX 3080 Ti GPU with PyTorch, please check the instructions at Start Locally | PyTorch 31
+</code></pre>
+<p>See: <a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></p>
+<h5 id="Solve-the-problem-of-generating-a-black-image-empty-image"><a href="#Solve-the-problem-of-generating-a-black-image-empty-image" class="headerlink" title="Solve the problem of generating a black-image/empty-image"></a>Solve the problem of generating a black-image/empty-image</h5><pre><code class="lang-shell"># webui-user.sh
+export COMMANDLINE_ARGS=&quot;--no-half-vae --disable-nan-check&quot;
+</code></pre>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><h4 id="Installation-1"><a href="#Installation-1" class="headerlink" title="Installation"></a>Installation</h4><p>You can download the models from this link: <a href="https://rentry.org/sdmodels">https://rentry.org/sdmodels</a></p>
+<blockquote>
+<p>Q: Should we pay for the latest <code>NovelAI</code> now ?</p>
+<p>A: Maybe not, just wait for it to leak.</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/TSL9TF0.png" alt="image-20230208150000465"></p>
+</blockquote>
+<h4 id="Configuration-1"><a href="#Configuration-1" class="headerlink" title="Configuration"></a>Configuration</h4><p>The <code>stable-diffusion model</code> (sd-model) contains all the data needed to <code>generate an image</code>.</p>
+<p>Beyond that, <code>a specific model</code> might also come with the <code>pre-configuration file</code> , <code>vae.pt file</code> and <code>hyper-network file</code>, which can be used to <code>modify and enhance the style of the final generated image</code></p>
+<p>For example, the architecture may be like: </p>
+<pre><code class="lang-shell">stable-diffusion-webui/
+├─ models/
+│  ├─ Stable-diffusion/
+│  │  ├─ model_name.ckpt
+│  │  ├─ model_name.yaml
+│  ├─ VAE/
+│  │  ├─ model_name.vae.pt
+│  ├─ hypernetworks/
+│  │  ├─ anime.pt
+│  │  ├─ furry.pt
+│  │  ├─ pony.pt
+</code></pre>
+<h2 id="Use-case"><a href="#Use-case" class="headerlink" title="Use-case"></a>Use-case</h2><h3 id="Control-the-weight-of-prompts"><a href="#Control-the-weight-of-prompts" class="headerlink" title="Control the weight of prompts"></a>Control the weight of prompts</h3><p>Use <code>(token)</code> to strength the weight.</p>
+<blockquote>
+<p>For Novel-AI, use <code>&#123;token&#125;</code> instead.</p>
+<p><code>stable-diffusion webui</code> ‘s coefficient differs from <code>novel-ai</code></p>
+</blockquote>
+<p>Use <code>[token]</code> to reduce the weight.</p>
+<h3 id="The-magic-spell-to-control-the-quality-of-generated-image"><a href="#The-magic-spell-to-control-the-quality-of-generated-image" class="headerlink" title="The magic-spell to control the quality of generated-image"></a>The magic-spell to control the quality of generated-image</h3><p>There are some <code>common prompts</code> called <code>magic-spell</code> which can be used to control the <code>quality</code> , <code>style</code> , <code>category</code> and <code>color</code>  of the image.</p>
+<p>For examples:</p>
+<h4 id="Positive-Prompts"><a href="#Positive-Prompts" class="headerlink" title="Positive Prompts"></a>Positive Prompts</h4><pre><code>(masterpiece), (best quality), (masterpiece),(best quality),(official art),(extremely detailed CG unity 8k wallpaper),
+</code></pre><pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring)
+</code></pre><blockquote>
+<p>These websites provide prompt examples:</p>
+<ol>
+<li><a href="https://openart.ai/presets">https://openart.ai/presets</a></li>
+<li><a href="https://prompthero.com/">https://prompthero.com/</a></li>
+<li><a href="https://stablediffusionweb.com/prompts">https://stablediffusionweb.com/prompts</a></li>
+</ol>
+</blockquote>
+<h4 id="Negative-Prompts"><a href="#Negative-Prompts" class="headerlink" title="Negative Prompts"></a>Negative Prompts</h4><p><code>negative prompt</code> is <strong>essential</strong> to get rid of <code>bad products</code></p>
+<pre><code>lowres, bad anatomy, bad hands, text, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, from behind,from side,normal quality, jpeg artifacts, watermark, username, Missing limbs,three arms, bad feet,text font ui,malformed hands,long neck,long body,limb,bad anatomy disfigured malformed mutated,large head,(mutated hands and fingers :1.5).(long body :1.3),(mutation ,poorly drawn :1.2), disfigured, malformed, mutated,multiple breasts,three legs,
+</code></pre><pre><code>(((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis, (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis
+</code></pre><h3 id="Text-to-image"><a href="#Text-to-image" class="headerlink" title="Text-to-image"></a>Text-to-image</h3><p>You can use some ready-made prompts to get started <strong>or</strong> write your prompt from scratch.</p>
+<blockquote>
+<p>Prompt-auxiliary: </p>
+<ol>
+<li><a href="https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion">https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion</a></li>
+<li><a href="https://wolfchen.top/tag/">https://wolfchen.top/tag/</a></li>
+</ol>
+</blockquote>
+<p>Some recommended params:</p>
+<ul>
+<li>Sample method: <code>Euler a</code> or <code>DDIM</code></li>
+<li>Sample steps: about 30 ~ 40 is good</li>
+<li>Width &amp; Height: you can use a small resolution for testing, and then generate a high-resolution image by <code>Hires. fix</code>. (Power of 2 preferred)</li>
+<li>CFG Scale: about 5~7 is good, </li>
+<li>VAE: select <code>auto</code> and keep the same <code>model_name</code> between <code>model_name.ckpt</code> and <code>model_name.vae.pt</code></li>
+<li>hypernetworks: simply add this <code>token</code> into your <code>prompt</code>:  <code>&lt;hypernet:anime:1&gt;</code></li>
+<li>skip-clip: default 1, set to <code>2</code> if you are using <code>novel-diffusion</code></li>
+</ul>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><h5 id="Case-1"><a href="#Case-1" class="headerlink" title="Case 1"></a>Case 1</h5><pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring), 1girl, animal_ears, bell, bracelet, choker, collar, fox_mask, fox_tail, fur_trim, gradient, gradient_background, grey_background, hair_bell, japanese_clothes, jingle_bell, kimono, mask, mask_on_head, mask_removed, multiple_tails, neck_bell, red_eyes, short_hair, solo, tail, tail_bell, tail_ornament, white_hair, wide_sleeves
+</code></pre><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Q283LSb.jpg" alt="image-20230208150646685"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/lijzFhH.jpg" alt="image-20230208150706389"></p>
+<p><img src="https://i.imgur.com/x9rov6R.png" alt="image-20230208150714475"></p>
+<h5 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2"></a>Case 2</h5><pre><code>1girl, :d, animal_ears, architecture, bangs, blue_hair, blush, breasts, building, east_asian_architecture, eyebrows_visible_through_hair, fox_mask, hakama, hakama_skirt, holding, japanese_clothes, kimono, long_hair, long_sleeves, looking_at_viewer, mask, mask_on_head, miko, open_mouth, outdoors, purple_eyes, ribbon-trimmed_sleeves, ribbon_trim, sash, smile, solo, white_kimono, wide_sleeves
+</code></pre><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/vw69NCp.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/nYSG36u.png" alt="image-20230208153950160"></p>
+<h3 id="Image-to-image"><a href="#Image-to-image" class="headerlink" title="Image-to-image"></a>Image-to-image</h3><p>If you want to draw another-image based on original-image, you can use <code>image-to-image</code></p>
+<p><code>tag reverse</code> can help you to analyze the tags from the original-image:</p>
+<blockquote>
+<p>See: <a href="https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/">https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/</a></p>
+</blockquote>
+<pre><code class="lang-shell"># webui-user.sh
+export COMMANDLINE_ARGS=&quot;--deepdanbooru&quot;
+</code></pre>
+<h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h4><h5 id="Case-1-1"><a href="#Case-1-1" class="headerlink" title="Case 1"></a>Case 1</h5><p><strong>parameters</strong></p>
+<pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring), aerial_fireworks, architecture, bow, building, city_lights, cloud, constellation, east_asian_architecture, festival, fire, fireworks, fish, full_moon, galaxy, goldfish, jack-o&#39;-lantern, japanese_clothes, kimono, lantern, long_hair, milky_way, moon, multiple_girls, night, night_sky, paper_lantern, scenery, shooting_star, sitting, sky, smile, snow, snowing, space, star_\(sky\), starry_sky, starry_sky_print, summer_festival, tanabata, tanzaku, telescope, town, yukata
+Negative prompt: (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis, (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis
+Steps: 40, Sampler: Euler a, CFG scale: 6, Seed: [?], Size: 1024x702, Model hash: 8712e20a5d, Model: [anything-diffusion] Anything-V3.0, Denoising strength: 0.75, Mask blur: 4
+</code></pre><p><strong>original-image</strong></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9y5jBfQ.png" alt="original-image"></p>
+<p><strong>generated-image</strong></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/tXKbX94.jpg" alt="image-20230208154144700"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/BZUntu6.jpg" alt="image-20230208144901544"></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://blog.csdn.net/weixin_53065229/article/details/127814292">https://blog.csdn.net/weixin_53065229/article/details/127814292</a></li>
+<li><a href="https://www.bilibili.com/read/cv19113199?from=articleDetail">https://www.bilibili.com/read/cv19113199?from=articleDetail</a></li>
+<li><a href="https://www.bilibili.com/read/cv19060316?from=search">https://www.bilibili.com/read/cv19060316?from=search</a></li>
+<li><a href="https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/">https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>practice</tag>
+        <tag>ai</tag>
+        <tag>gpt</tag>
+        <tag>diffusion</tag>
+        <tag>art</tag>
+        <tag>cg</tag>
+        <tag>novel_ai</tag>
+        <tag>cuda</tag>
+        <tag>nvidia</tag>
+        <tag>python</tag>
+        <tag>computation</tag>
+        <tag>anime</tag>
+        <tag>draw</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on vim</title>
+    <url>/./posts/play-on-vim/</url>
+    <content><![CDATA[<h1 id="Vim-Cheat-Sheet"><a href="#Vim-Cheat-Sheet" class="headerlink" title="Vim Cheat-Sheet"></a>Vim Cheat-Sheet</h1><h2 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230224070054563.png" alt="image-20230224070054563"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230224070257167.png" alt="image-20230224070257167"></p>
+<blockquote>
+<p>They show too many things and too less.</p>
+</blockquote>
+<h2 id="Cheat-sheet"><a href="#Cheat-sheet" class="headerlink" title="Cheat-sheet"></a>Cheat-sheet</h2><p>VIM是一個非常具有 <code>創造性</code> 的 <code>editor</code>，也有很多人認爲，“VIM不僅僅是editor，更是一種pattern，或者thinking”。</p>
+<p>這一點體現在，大部分的主流IDE/Editor其實都有提供 <code>VIM Plugin</code>，使得你可以使用 <code>VIM的方式</code> 進行 <code>文本編輯</code>。</p>
+<blockquote>
+<p>實際上，<code>IDE + VIM</code> 是一個非常恐怖的生產力殺手。</p>
+<p>這裡點名提出，<code>Jetbrains Platform + IdeaVIM</code> 的組合，使得每個人都可以 <code>輕鬆地</code> 創建屬於自己的 <code>monster</code></p>
+<blockquote>
+<p>個人發現，很多人在關於 <code>如何熟練使用Idea</code> 這個話題上，有個非常大的誤解：<strong>如果你想熟練使用Idea，你需要熟練地記憶好Shortcut</strong></p>
+<p>我在這裡直接給出結論：<strong>如果你認爲熟練記憶Idea的那些所謂的人體工程學的Shortcut，足以證明你對Idea這個工具的熟練掌握程度，那麼我可以說，你對Idea，或者說，對Jetbrains Platform是一竅不通的。JP是action-based，而不是shortcut-based。如果只能使用1個Shortcut，那麼我將會選擇Ctrl + Shift + A，並且，在大部分的情況下，僅記憶這個Shortcut就足夠使用了。（搭配IdeaVim的前提下）</strong></p>
+<p>當然，讀者在嘗試完該方案後，也可以自然地得出該結論。</p>
+</blockquote>
+<p>個人暫時沒有在 <code>Editor + VIM</code> 的組合上看到多大的進步，雖然 <code>Visual Studio Code</code> 也有 <code>VIM Plugin</code>，但是 <code>難用</code>。</p>
+<blockquote>
+<p>或者應該說，<code>VSC</code> 的官方沒有多在意這個插件，它與 <code>VSC</code> 的集成度不是很高。</p>
+</blockquote>
+<p>另外，如果一個 <code>editor</code> 僅僅是像其他大多數的 <code>editor</code> 那樣，完成基本的 <code>edit</code> 功能，那麼它其實沒有多大的吸引力。</p>
+<p><code>VSC</code> 的定位比較尷尬，雖然本質上仍然認爲它是一個 <code>editor</code>，但是作爲 <code>基於chromium的內存殺手</code>，它並沒有其他大部分 <code>editor</code> 所具有的 <code>小巧</code> 的優點，也沒有 <code>快速的冷啓動</code> 優勢。</p>
+<p>此外，雖然 <code>VSC</code> 可以 <code>integrate</code> 很多的 <code>extension</code>，但是實際的效果遠遠不如開箱即用的 <code>IDE</code>。</p>
+<blockquote>
+<p>IDE knows what the hell thing happened, while editor knows nothing.</p>
+</blockquote>
+<p>對於使用 <code>VSC</code> 來進行 <code>工程代碼</code> 的情況來說，<code>VSC</code> 更是顯得 <code>尷尬</code>：對這種情況，一般 <code>小巧</code> 和 <code>啓動速度</code> 並不是那麼關鍵。</p>
+</blockquote>
+<p>如你所見，下面放出2張 <code>cheat-sheet</code>，<code>VIM</code> 提供了非常多的 <code>原子操作</code>，使得你可以擁有非常多的 <code>創造性的</code> 操作組合。</p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/vim_cheat_sheet_for_programmers_screen.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iigrixvxp5aYN9ox7Gr1dfI_rhLRotWlLsCafjJqjEQ.png" alt="img"></p>
+]]></content>
+      <tags>
+        <tag>note</tag>
+        <tag>vim</tag>
+        <tag>editor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>play on wallpaper</title>
+    <url>/./posts/play-on-wallpaper/</url>
+    <content><![CDATA[<h1 id="Wallpaper-Sharing"><a href="#Wallpaper-Sharing" class="headerlink" title="Wallpaper Sharing"></a>Wallpaper Sharing</h1><h2 id="Plasma-Kay"><a href="#Plasma-Kay" class="headerlink" title="Plasma-Kay"></a>Plasma-Kay</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-kay.png" alt="plasma-kay"></p>
+<h2 id="Plasma-Shell"><a href="#Plasma-Shell" class="headerlink" title="Plasma-Shell"></a>Plasma-Shell</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-shell.jpg" alt="plasma-shell"></p>
+<h2 id="Plasma-Honeywave"><a href="#Plasma-Honeywave" class="headerlink" title="Plasma-Honeywave"></a>Plasma-Honeywave</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-honeywave.jpg" alt="plasma-honeywave"></p>
+<h2 id="Plasma-Cluster"><a href="#Plasma-Cluster" class="headerlink" title="Plasma-Cluster"></a>Plasma-Cluster</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cluster.png" alt="plasma-cluster"></p>
+<h2 id="Plasma-Cascade"><a href="#Plasma-Cascade" class="headerlink" title="Plasma-Cascade"></a>Plasma-Cascade</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cascade.png" alt="plasma-cascade"></p>
+<h2 id="Plasma-Canopee"><a href="#Plasma-Canopee" class="headerlink" title="Plasma-Canopee"></a>Plasma-Canopee</h2><p><img src="https://github.com/SakuraWald/sakurawald.github.io/raw/main/images/plasma-canopee.png" alt="plasma-canopee"></p>
+<h2 id="Plasma-Altai"><a href="#Plasma-Altai" class="headerlink" title="Plasma-Altai"></a>Plasma-Altai</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-altai.png" alt="plasma-altai"></p>
+<h2 id="Ubuntu-Jellyfish"><a href="#Ubuntu-Jellyfish" class="headerlink" title="Ubuntu-Jellyfish"></a>Ubuntu-Jellyfish</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/ubuntu-jellyfish.jpg" alt="ubuntu-jellyfish"></p>
+]]></content>
+      <tags>
+        <tag>wallpaper</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[JSP] Servlet &amp; JSP Short-Hand</title>
     <url>/./posts/jsp-servlet-jsp-short-hand/</url>
     <content><![CDATA[
@@ -10096,698 +10976,6 @@ public class SimpleTagTest1 extends SimpleTagSupport &#123;
       <tags>
         <tag>web</tag>
         <tag>jsp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on anbox</title>
-    <url>/./posts/play-on-anbox/</url>
-    <content><![CDATA[
-
-<h1>Install and Launch Anbox</h1>
-<pre><code class="language-shell" lang="shell"># Install the anbox
-sudo snap install --devmode --edge anbox
-sudo snap refresh --edge --devmode anbox
-sudo snap info anbox
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Debug mode
-sudo snap set anbox debug.enable=true
-sudo /snap/bin/anbox.collect-bug-info
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Start session-manager (Recommended)
-# Description: https://github.com/Fuseteam/systemd-service-files#anbox-session-manager
-mkdir -p ~/.config/systemd/user
-wget -O ~/.config/systemd/user/anbox-session-manager.service https://raw.githubusercontent.com/Fuseteam/systemd-service-files/main/user/anbox-session-manager.service
-# sudo systemctl --user enable --now anbox-session-manager
-sudo systemctl --machine=teeth@.host --user enable --now anbox-session-manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># A magic way to launch the anbox.appmgr
-# WARNING: do not add 'sudo' for the command, or you will get error messages: [daemon.cpp:61@Run] Failed to connect to DBus
-anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity
-</code></pre>
-<h1>Create Desktop File</h1>
-<pre><code class="language-shell" lang="shell"># anbox-application-manager.desktop
-[Desktop Entry]
-Name=Anbox Application Manager
-Icon=/snap/anbox/213/meta/gui/icon.png
-Exec=sh -c "systemctl --machine=teeth@.host --user enable --now anbox-session-manager; anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity"
-Terminal=false
-Type=Application
-Comment=Anbox Applicatoin Manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Create desktop file
-sudo desktop-file-install '/home/teeth/Desktop/anbox-application-manager.desktop' 
-</code></pre>
-<p>&nbsp;</p>
-<h1>Additional shells for bugs</h1>
-<pre><code class="language-shell" lang="shell"># Switch software-rendering for anbox
-sudo snap set anbox software-rendering.enable=true
-sudo snap restart anbox.container-manager
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Start session-manager
-# Description: https://docs.anbox.io/userguide/advanced/software_rendering.html
-EGL_PLATFORM=x11 anbox session-manager
-# EGL_PLATFORM=x11 anbox session-manager --software-rendering
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Install google-playstore and arm-applications-support
-# arm-application-support can make you able to install most of the apks that only compile for arm-architecture (not compiled for x86-64 architectur
-# eg. without arm-application-support, you can't install QQ...
-wget https://raw.githubusercontent.com/geeks-r-us/anbox-playstore-installer/master/install-playstore.sh
-chmod +x install-playstore.sh
-sudo bash ./install-playstore.sh
-</code></pre>
-<pre><code class="language-shell" lang="shell"># For binder:false
-# I just found that the we should not to care "binder" in the latest ubuntu (like Ubuntu 22.04 LTS)
-sudo mkdir /dev/binder
-sudo mount -t binder binder /dev/binder
-</code></pre>
-<pre><code class="language-shell" lang="shell"># Solve google-play-store network connectivity problem
-sudo /snap/anbox/current/bin/anbox-bridge.sh start
-</code></pre>
-<p>&nbsp;</p>
-
-
-]]></content>
-      <tags>
-        <tag>linux</tag>
-        <tag>android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on android emulator</title>
-    <url>/./posts/play-on-android-emulator/</url>
-    <content><![CDATA[<h1 id="Android-solutions-for-linux"><a href="#Android-solutions-for-linux" class="headerlink" title="Android solutions for linux"></a>Android solutions for linux</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>這篇文章主要用於討論幾種在 <code>Linux</code> 上運行 <code>Android</code> 的方案。</p>
-<p>對於 <code>Windows</code> 用戶，可以直接選擇 <code>Windows Subsystem for Android</code> 和 <code>Emulator</code></p>
-<blockquote>
-<p>如果確定使用 <code>Emulator</code>，首選 <code>BlueStack</code>，性能表現較好。</p>
-</blockquote>
-<p>對於 <code>Linux</code> 用戶，情況會比較複雜。針對不同的 <code>kernel</code> ，可以選擇的方案也不同。</p>
-<p>這裡，將只討論 <code>物理機</code> 屬於 <code>x86</code> 架構的情況下，運行 <code>android</code> 系統的可能情況：</p>
-<ul>
-<li><p>第一級別需求：僅支持運行 <code>原生的android x86</code></p>
-</li>
-<li><p>第二級別需求：在前面的基礎上，通過 <code>arm translation layer</code> 支持運行部分 <code>編譯時帶x86選項的arm應用</code></p>
-<blockquote>
-<p><code>android studio</code> 默認會啓用 <code>x86編譯選項</code> ，除非開發者刻意地去關閉這個選項。</p>
-<p>因此，只要達到這一級別，就可以運行 <code>大部分的arm應用</code>。</p>
-</blockquote>
-</li>
-<li><p>第三級別需求：在前面的基礎上，支持運行 <code>編譯時去除x86選項的，僅支持arm架構的arm應用</code></p>
-<blockquote>
-<p>比如：<code>Clash of clans</code> 的安裝包。</p>
-<p>至今尚未發現，基於x86架構的物理機，在Linux系統上成功運行該app</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>就 <code>解決方案</code> 而言，個人更傾向於使用 <code>emulator</code>，儘管會有部分性能損耗，但對於流暢運行一個 android 系統來說，PC的資源是綽綽有餘的。</p>
-<p>使用 <code>emulator</code> 方案可以使得 <code>對物理機造成的污染更小</code>， 以及 <code>更少的依賴問題</code>。</p>
-<p>當然，使用 <code>native container</code> 方案可以獲得最佳的性能。</p>
-<blockquote>
-<p>但是 <code>安裝</code> 比較麻煩，對 <code>host os</code> 和 <code>guest os</code> 有比較嚴格的要求。</p>
-</blockquote>
-<h3 id="Emulator-GenyMotion-QEMU"><a href="#Emulator-GenyMotion-QEMU" class="headerlink" title="Emulator: GenyMotion/QEMU"></a>Emulator: GenyMotion/QEMU</h3><p>相比於 <code>AVD</code> 來說，更加 <code>穩定</code> 的體驗。搭配 <code>houdini</code> 可以達到 <code>第二級別需求</code>。</p>
-<blockquote>
-<p>官方所宣傳的，<code>無法運行arm-v8a應用</code> 的說法是錯誤的。只要安裝了 <code>arm translation layer</code>，即可達到 第二級別需求。</p>
-<p>見：<a href="https://support.genymotion.com/hc/en-us/articles/360010029677-How-to-run-applications-for-arm64-aarch64-armv8-">https://support.genymotion.com/hc/en-us/articles/360010029677-How-to-run-applications-for-arm64-aarch64-armv8-</a></p>
-<blockquote>
-<p>arm translation layers:</p>
-<ul>
-<li><a href="https://github.com/niizam/Genymotion_A11_libhoudini/">https://github.com/niizam/Genymotion_A11_libhoudini/</a></li>
-<li><a href="https://github.com/m9rco/Genymotion_ARM_Translation">https://github.com/m9rco/Genymotion_ARM_Translation</a></li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="Emulator-AVD-QEMU"><a href="#Emulator-AVD-QEMU" class="headerlink" title="Emulator: AVD/QEMU"></a>Emulator: AVD/QEMU</h3><p><code>android studio</code> 自帶了一個 <code>emulator</code>，稱爲 <code>android virtual device</code>。</p>
-<p>可以通過選擇 <code>x86_64 image</code> 來實現 <code>第二級別需求</code>。</p>
-<blockquote>
-<p>在 <code>android 11.0</code> 之後，自帶了 <code>arm translation layer</code>。</p>
-<p>所以我們可以通過 <code>挑選一個好的鏡像</code>，從而跳過 <code>手動安裝translator</code></p>
-<p>見：<a href="https://hatwars.com/now-you-can-run-arm-binaries-in-x86-android-emulators/">https://hatwars.com/now-you-can-run-arm-binaries-in-x86-android-emulators/</a></p>
-<p>對於 <code>x86架構的host os</code>，可能無法正常啓動 <code>arm images</code>：</p>
-<ul>
-<li>高版本的arm image直接拒絕啓動</li>
-<li>低版本的arm image<ul>
-<li>啓動時立即崩潰</li>
-<li>啓動後黑屏</li>
-<li>啓動後卡在logo界面</li>
-<li>……</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="Emulator-VMWare-VirtualBox"><a href="#Emulator-VMWare-VirtualBox" class="headerlink" title="Emulator: VMWare/VirtualBox"></a>Emulator: VMWare/VirtualBox</h3><p>最後達成的效果，取決於安裝的 <code>android image</code></p>
-<p>不推薦使用這種方式，運行 <code>性能</code> 會明顯差於 <code>QEMU Emulator</code> </p>
-<h3 id="Emulator-Nested-emulator"><a href="#Emulator-Nested-emulator" class="headerlink" title="Emulator: Nested emulator"></a>Emulator: Nested emulator</h3><p>如果需要達成 <code>第三級別的需求</code>，可以嘗試在 <code>windows (guest os)</code> 上運行 <code>android emulator</code></p>
-<blockquote>
-<p>儘管實際上經過了2層的虛擬化，但是實際的性能並不是想象中的那樣差：</p>
-<p>如果 <code>第一層guest os</code> 的運行性能良好的話，<code>android emulator</code> 的運行效果也將會非常不錯。</p>
-</blockquote>
-<h3 id="Screen-Projection"><a href="#Screen-Projection" class="headerlink" title="Screen Projection"></a>Screen Projection</h3><p>如果僅僅是爲了 <code>方便操控</code>，可以選擇連接 <code>物理Android設備</code>。</p>
-<h3 id="SaaS"><a href="#SaaS" class="headerlink" title="SaaS"></a>SaaS</h3><p>可以選擇 <code>雲Android</code> 服務，但是價格較貴。大部分應用場景下，不推薦。</p>
-<h3 id="Container-Anbox"><a href="#Container-Anbox" class="headerlink" title="Container: Anbox"></a>Container: Anbox</h3><p>如果你是 <code>ubuntu</code> 用戶，可以嘗試一下 <code>anbox</code>。在安裝完 <code>houdini</code> 之後，可以達到 <code>第二級別需求</code>。</p>
-<p><code>anbox</code> 的安裝對於 <code>ubuntu 20.04</code> 和 <code>ubuntu 22.04</code> 的用戶是友好的。</p>
-<p>如果是 <code>archlinux</code>，則不推薦使用 <code>anbox</code>。</p>
-<p>最關鍵的原因是：<code>anbox</code> 所使用的 <code>android image</code> 所用的 <code>kernel</code> 是較舊的。如果 <code>host os</code> 的 <code>kernel</code> 較新，則會導致 <code>anbox</code> 無法正常運行。</p>
-<blockquote>
-<p>如果你堅持在 <code>最新的kernel</code> 上運行 <code>anbox</code>，也是可能的。</p>
-<p>你需要做：</p>
-<ul>
-<li>爲anbox重新編譯一個新的android image</li>
-<li>修改anbox的源碼進行響應的適配</li>
-</ul>
-</blockquote>
-<h3 id="Container-Waydroid"><a href="#Container-Waydroid" class="headerlink" title="Container: Waydroid"></a>Container: Waydroid</h3><p>如果你使用的 <code>DS</code> 是 <code>wayland</code> 的話，可以嘗試該方案。</p>
-<p><code>waydroid</code> 可能看作是 <code>anbox</code> 的後繼者，所使用的鏡像是 <code>版本更高的lineageos</code></p>
-<blockquote>
-<p> 如果是 <code>x11</code> 用戶，也可以通過 <code>x11-wayland翻譯層</code> 來運行 <code>waydroid</code>，但是配置過程會麻煩很多。</p>
-</blockquote>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
-<li>應該首先考慮 <code>emulator</code> 方案，犧牲一點性能來換取 <code>更高的host os兼容度</code> 和 <code>更獨立的環境</code> 是值得的。其次才考慮 <code>native container</code> 方案。</li>
-<li>對於大部分的情況，使用 <code>QEMU</code> + <code>android x86</code> + <code>arm translation layer</code> 即可達成 <code>運行大部分arm-v8a應用</code> 的需求。</li>
-<li>對於極少數只支持 <code>arm-v8a</code> 架構的應用，可以選擇 <code>代價較爲昂貴的nested emulator方案</code> </li>
-</ol>
-]]></content>
-      <tags>
-        <tag>linux</tag>
-        <tag>android</tag>
-        <tag>emulator</tag>
-        <tag>note</tag>
-        <tag>practice</tag>
-        <tag>solution</tag>
-        <tag>virtualize</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on bookmarks</title>
-    <url>/./posts/play-on-bookmarks/</url>
-    <content><![CDATA[<h1 id="Tool-Box"><a href="#Tool-Box" class="headerlink" title="Tool-Box"></a>Tool-Box</h1><h2 id="出版网站"><a href="#出版网站" class="headerlink" title="出版网站"></a>出版网站</h2><ul>
-<li><a href="http://www.hzbook.com/">HzBook</a></li>
-<li><a href="https://www.ituring.com.cn/">ITuring</a></li>
-<li><a href="https://www.phei.com.cn/">Phei</a></li>
-</ul>
-<h2 id="技术网站"><a href="#技术网站" class="headerlink" title="技术网站"></a>技术网站</h2><h3 id="综合网站"><a href="#综合网站" class="headerlink" title="综合网站"></a>综合网站</h3><ul>
-<li><a href="https://www.v2ex.com/">V2EX</a></li>
-<li><a href="https://www.oschina.net/">OSChina</a></li>
-<li><p><a href="https://segmentfault.com/">SegmentFault</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/">CnBlogs</a></p>
-</li>
-<li><a href="https://www.geeksforgeeks.org/">GeeksForGeeks</a></li>
-</ul>
-<h3 id="逆向工程"><a href="#逆向工程" class="headerlink" title="逆向工程"></a>逆向工程</h3><ul>
-<li><a href="https://www.52pojie.cn/">52Pojie</a></li>
-<li><a href="https://bbs.kanxue.com/">Kanxue</a></li>
-<li><a href="https://www.chinapyg.com/">PYG</a></li>
-</ul>
-<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><ul>
-<li><a href="https://codeforces.com/">CodeForces</a></li>
-<li><a href="https://leetcode.com/">LeetCode</a></li>
-<li><a href="https://www.topcoder.com/">TopCoder</a></li>
-<li><a href="https://www.codewars.com/">CodeWars</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>website</tag>
-        <tag>favorite</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on google pixel</title>
-    <url>/./posts/play-on-google-pixel/</url>
-    <content><![CDATA[<h1 id="Play-on-Google-Pixel"><a href="#Play-on-Google-Pixel" class="headerlink" title="Play on Google Pixel"></a>Play on Google Pixel</h1><h2 id="Install-magisk"><a href="#Install-magisk" class="headerlink" title="Install magisk"></a>Install magisk</h2><h3 id="Enable-developter-options"><a href="#Enable-developter-options" class="headerlink" title="Enable developter options"></a>Enable developter options</h3><p>We need to tap <code>kernel build version</code> and enable <code>developer options</code>.</p>
-<h3 id="Enable-adb"><a href="#Enable-adb" class="headerlink" title="Enable adb"></a>Enable adb</h3><p>Turn on <code>USB debugging</code></p>
-<h3 id="Unlock-bootloader"><a href="#Unlock-bootloader" class="headerlink" title="Unlock bootloader"></a>Unlock bootloader</h3><blockquote>
-<p>WARNING: IF YOU UNLOCK BOOTLOADER, ALL YOUR DATA WILL BE WIPED.</p>
-</blockquote>
-<p>Inside <code>developer options</code>  , we need to <code>unlock OEM</code> so that we can unlock <code>bootloader</code> after.</p>
-<pre><code class="lang-shell">adb reboot bootloader
-fastboot flashing unlock
-</code></pre>
-<h3 id="Download-the-factory-images"><a href="#Download-the-factory-images" class="headerlink" title="Download the factory images"></a>Download the factory images</h3><ol>
-<li><p>Install <code>magisk.apk</code> from <a href="https://github.com/topjohnwu/Magisk">https://github.com/topjohnwu/Magisk</a> </p>
-</li>
-<li><p>Go to <a href="https://developers.google.com/android">https://developers.google.com/android</a> to download the <code>relative factory image</code> file. <a href="https://link.zhihu.com/?target=https%3A//developers.google.com/android/images">https://link.zhihu.com/?target=https%3A//developers.google.com/android/images</a></p>
-</li>
-<li><p>Unzip this <code>image file</code> to get <code>init_boot.img</code> file.</p>
-</li>
-<li><p>Use <code>adb push ./init_boot.img /storage/emulated/0/Downloads/</code> to send <code>init_boot.img</code> file to your mobile device.</p>
-</li>
-<li><p>Use <code>magisk.apk</code> to patch this <code>init_boot.img</code></p>
-</li>
-<li><p>Use <code>adb pull /storage/emulated/0/Downloads/&#123;the_patched_init_boot.img&#125; ./</code> to get <code>patched init_boot.img</code> from the mobile device.</p>
-</li>
-<li><p>Flash <code>the_patched_init_boot.img</code> file into your mobie device</p>
-<pre><code class="lang-shell">adb reboot bootloader
-fastboot flash init_boot &#123;the_patched_init_boot.img&#125;
-fastboot reboot
-</code></pre>
-</li>
-<li><p>Done.</p>
-</li>
-</ol>
-<h2 id="Install-OTA-Images"><a href="#Install-OTA-Images" class="headerlink" title="Install OTA Images"></a>Install OTA Images</h2><blockquote>
-<p>The key difference between <code>factory image</code> and <code>OTA image</code> is that:</p>
-<p>when you use <code>OTA image</code>, you don’t need to <code>wipe you mobile</code> or <code>unlock the bootloader</code> .</p>
-<p>Please note that: install a OTA may <strong>cover</strong> the <code>rooted boot_init.img</code>.</p>
-<p>So, if you want to install a <code>specific kernel version</code> with <code>root</code> and without <code>wipe your mobile</code>. You should use <code>factory image</code> instead of <code>OTA image</code></p>
-<blockquote>
-<p>If you don’t want to <code>wipe your mobile</code>, just modify <code>flash-all.sh</code> :</p>
-<pre><code class="lang-shell"># fastboot -w update image-cheetah-td1a.220804.009.a2.zip
-fastboot update image-cheetah-td1a.220804.009.a2.zip
-</code></pre>
-</blockquote>
-</blockquote>
-<ol>
-<li>Download the OTA that you want in <a href="https://developers.google.com/android/ota">https://developers.google.com/android/ota</a></li>
-<li>Follow the tutorial.</li>
-</ol>
-<h2 id="Support-32-Bit-Applications"><a href="#Support-32-Bit-Applications" class="headerlink" title="Support 32-Bit Applications"></a>Support 32-Bit Applications</h2><blockquote>
-<p>WARNING: If you want to support 32-bit applications, then you must un-install <code>the installed magisk (if existed)</code> and then use <code>forked-magisk</code> to replace <code>magisk</code>, and do the same as previous.</p>
-</blockquote>
-<p>Although Google Pixel 7 / 7 Pro is the first mobile that <code>only support 64 bit apps</code>, <strong>the fact is that: all the 32-bit libraries are still available, but Google delete tle supported-abi-list on props.</strong></p>
-<p>So, if we modify the props back, then we still can run 32-bit applications perfectly.</p>
-<p>There are 2 forked-magisk can do this, just choose one of them:  </p>
-<ol>
-<li><a href="https://github.com/ThomasKing2014/Pixel7_32bit_helper">https://github.com/ThomasKing2014/Pixel7_32bit_helper</a></li>
-<li><a href="https://github.com/MN312001/Magisk-Delta">https://github.com/MN312001/Magisk-Delta</a></li>
-</ol>
-<h2 id="Enable-VoLTE"><a href="#Enable-VoLTE" class="headerlink" title="Enable VoLTE"></a>Enable VoLTE</h2><p>If your <code>SIM</code> card can use <code>access the Internet</code>, but can’t send/receive any messages. Then you should enable <code>VoLTE</code> to make it work.</p>
-<p>Steps:</p>
-<ol>
-<li>Install <code>Shizuku</code> : <a href="https://github.com/RikkaApps/Shizuku">https://github.com/RikkaApps/Shizuku</a></li>
-<li>Install <code>Pixel-IMS</code>: <a href="https://github.com/kyujin-cho/pixel-volte-patch">https://github.com/kyujin-cho/pixel-volte-patch</a></li>
-<li>Follow the tutorial in <code>Pixel-IMS</code> and you are fine.</li>
-</ol>
-<h2 id="Enable-5G"><a href="#Enable-5G" class="headerlink" title="Enable 5G"></a>Enable 5G</h2><p>Not recommended in PRC. </p>
-<p>Some reviews say the 5G speed depends on which city you are in, and 4G is enough in most cases.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><a href="https://www.androidgreek.com/now-you-can-use-32-bit-apps-on-your-pixel-7-unofficially/">Now you can use 32-bit apps on your Pixel 7 (unofficially)</a></li>
-<li><a href="https://www.xda-developers.com/how-to-unlock-bootloader-root-magisk-google-pixel-7-pro/">https://www.xda-developers.com/how-to-unlock-bootloader-root-magisk-google-pixel-7-pro/</a></li>
-<li><a href="https://forum.xda-developers.com/t/guide-root-pixel-7-pro-with-magisk-unlock-bootloader-pass-safetynet-more.4505353/">https://forum.xda-developers.com/t/guide-root-pixel-7-pro-with-magisk-unlock-bootloader-pass-safetynet-more.4505353/</a></li>
-<li><a href="https://k.sina.com.cn/article_1914010467_72157b6301901ozz5.html?from=tech">让新手机发挥全部实力，在国内如何「正确」使用 Pixel 7|pixel_新浪新闻</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>android</tag>
-        <tag>pixel</tag>
-        <tag>phone</tag>
-        <tag>root</tag>
-        <tag>magisk</tag>
-        <tag>os</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on hexo-render</title>
-    <url>/./posts/play-on-hexo-render/</url>
-    <content><![CDATA[
-$$
-\boxed{@}
-
-% Color % 
-\newcommand\c[2]{\textcolor{#1}{#2}} 
-\newcommand\r[1]{\textcolor{red}{#1}} 
-\newcommand\g[1]{\textcolor{green}{#1}} 
-\newcommand\b[1]{\textcolor{blue}{#1}} 
-\newcommand\red[1]{\textcolor{red}{#1}} 
-\newcommand\blue[1]{\textcolor{blue}{#1}} 
-\newcommand\green[1]{\textcolor{green}{#1}} 
-\newcommand\black[1]{\textcolor{black}{#1}} 
-\newcommand\white[1]{\textcolor{white}{#1}} 
-\newcommand\cyan[1]{\textcolor{cyan}{#1}} 
-\newcommand\magenta[1]{\textcolor{magenta}{#1}} 
-\newcommand\yellow[1]{\textcolor{yellow}{#1}} 
-\newcommand\orange[1]{\textcolor{orange}{#1}} 
-\newcommand\lime[1]{\textcolor{lime}{#1}} 
-\newcommand\pink[1]{\textcolor{pink}{#1}} 
-\newcommand\darkgray[1]{\textcolor{darkgray}{#1}} 
-\newcommand\gray[1]{\textcolor{gray}{#1}} 
-\newcommand\lightgray[1]{\textcolor{lightgray}{#1}} 
-\newcommand\brown[1]{\textcolor{brown}{#1}} 
-\newcommand\olive[1]{\textcolor{olive}{#1}} 
-\newcommand\purple[1]{\textcolor{purple}{#1}} 
-\newcommand\teal[1]{\textcolor{teal}{#1}} 
-\newcommand\violet[1]{\textcolor{violet}{#1}} 
-\newcommand\hotpink[1]{\textcolor{hotpink}{#1}} 
-\newcommand\blueviolet[1]{\textcolor{blueviolet}{#1}} 
-\newcommand\navyblue[1]{\textcolor{navyblue}{#1}} 
-\newcommand\peach[1]{\textcolor{Peach}{#1}} 
-\newcommand\orangeRed[1]{\textcolor{OrangeRed}{#1}} 
-\newcommand\salmon[1]{\textcolor{Salmon}{#1}} 
-\newcommand\skyblue[1]{\textcolor{SkyBlue}{#1}} 
-\newcommand\springreen[1]{\textcolor{SpringGreen}{#1}} 
-\newcommand\aqua[1]{\textcolor{aqua}{#1}} 
-\newcommand\navy[1]{\textcolor{navy}{#1}} 
-\newcommand\silver[1]{\textcolor{silver}{#1}} 
-\newcommand\fuchsia[1]{\textcolor{fuchsia}{#1}} 
-\newcommand\maroon[1]{\textcolor{maroon}{#1}} 
-\definecolor{luo}{RGB}{102,204,255}
-\definecolor{miku}{RGB}{57,197,187} 
-\newcommand\luo[1]{\textcolor{luo}{#1}} 
-\newcommand\miku[1]{\textcolor{miku}{#1}}
-
-% Typography % 
-\newcommand\a[1]{\begin{aligned}#1\end{aligned}} 
-\newcommand\t[1]{\text{#1}} 
-\newcommand\lb[1]{\left{\begin{aligned} #1 \end{aligned}\right.} 
-\newcommand\rb[1]{\left.\begin{aligned} #1 \end{aligned}\right}} 
-\newcommand\env[2]{\begin{#1}#2\end{#1}}
-
-% Misc % 
-\newcommand\s[1]{{#1}} 
-\newcommand\qed{\quad\square} 
-\newcommand\define{\dot{=}} 
-\newcommand\then{\implies} 
-\newcommand\rounddown[1]{\lfloor{#1}\rfloor} 
-\newcommand\roundup[1]{\lceil{#1}\rceil} 
-\newcommand\graph[4]{#1 = (#2, #3) \quad |#2| = #4} 
-\newcommand\G{G = (V, E) \quad |V| = n} 
-\newcommand\so{\therefore} 
-\newcommand\comment[1]{\quad\text{(#1)}} 
-\newcommand\note[1]{\quad\text{(#1)}} 
-\newcommand\bt[1]{\boxed{\text{#1}}} 
-\newcommand\max[1]{\textbf{ max } {#1} } 
-\newcommand\min[1]{\textbf{ min } {#1} } 
-\newcommand\IF{\textbf{ IF }} 
-\newcommand\if{\textbf{ if }} 
-\newcommand\IS{\textbf{ IS }} 
-\newcommand\is{\textbf{ is }} 
-\newcommand\but{\textbf{ but }} 
-\newcommand\however{\textbf{ however }} 
-\newcommand\AND{\textbf{ AND }} 
-\newcommand\OR{\textbf{ OR }} 
-\newcommand\NOT{\textbf{ NOT }} 
-\newcommand\THEN{\textbf{ THEN }} 
-\newcommand\IN{\textbf{ IN }} 
-\newcommand\NOTIN{\textbf{ NOT-IN }} 
-\newcommand\assume{\textbf{ Assuming that: }} 
-\newcommand\contradictory{\textbf{ Thus lead to contradiction }} 
-\newcommand\proof{\textbf{Proof: }} 
-\newcommand\st{\text{ such that }} 
-\newcommand\hold{\text{ holds }} 
-\newcommand\lhs{\text{ LHS }} 
-\newcommand\rhs{\text{ RHS }} 
-\newcommand\wlg{\text{ Without loss of generality }} 
-\newcommand\nb{\text{ nota bene }} 
-\newcommand\analogously{\text{ analogously }} 
-\newcommand\viceversa{\textbf{ viceversa }} 
-\newcommand\let{\textbf{ let }} 
-\newcommand\as{\textbf{ as }} 
-\newcommand\for{\textbf{ As for }} 
-\newcommand\select{\textbf{ SELECT }} 
-\newcommand\m[1]{\mathit{#1}} 
-\newcommand+[1]{\mathcal{#1}} 
-\newcommand\warnning[1]{\colorbox{Blue}{\textcolor{Yellow}{#1}}} 
-\newcommand\error[1]{\colorbox{Black}{\textcolor{White}{#1}}}
-$$
-
-<hr>
-<p>这是中文<code>and</code>英文</p>
-<p>这是中文 <code>and</code> 英文</p>
-<p>这是 <code>code fence</code></p>
-<blockquote>
-<p><strong>Warning</strong></p>
-<p>This is a warning</p>
-</blockquote>
-<pre><code class="lang-java">Hello World
-</code></pre>
-<pre><code class="lang-mermaid">graph TD;
-      A--&gt;B;
-      A--&gt;C;
-      B--&gt;D;
-      C--&gt;D;
-</code></pre>
-<blockquote>
-<pre><code class="lang-mermaid">graph TD;
-     A--&gt;B;
-     A--&gt;C;
-     B--&gt;D;
-     C--&gt;D;
-</code></pre>
-<pre><code class="lang-java">This is the first line.
-This is the second line.
-This is the thrid line.
-</code></pre>
-<pre><code class="lang-mermaid">classDiagram
-class JspContext &#123;
-+getAttribute(String name)
-+getAttribute(String name, int scope)
-+getAttributeNames()
-+findAttribuite(String name)
-&#125;
-
-JspContext &lt;-- PageContext
-class PageContext&#123;
-+APPLICATION_SCOPE
-+PAGE_SCOPE
-+REQUEST_SCOPE
-+SESSION_SCOPE
-+getRequest()
-+getServletConfig()
-+getServletContext()
-+getSession()
-&#125;
-</code></pre>
-<p>原理：$\lceil x/y \rceil = \lfloor(x\textcolor{blue}{+y-1})/y \rfloor$</p>
-<p>证明</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\boxed{\text{采用Biasing修复算术右移默认的向下舍入误差}} \\
-&x \dot{=} qy + r,\quad 0 \le r \lt y \\
-&\implies (x+y-1)/y = q + (r+y-1)/y \\
-&\implies \lfloor (\textcolor{red}{x}+y-1)/y \rfloor = q + \lfloor (\textcolor{red}{r}+y-1)/y\rfloor \\
-&= q + epsilon(r) =
-\begin{cases}
-0,& r = 0 \\
-1 ,& r \gt 0
-\end{cases}
-\end{aligned}</script></blockquote>
-<p>$\lceil x/y \rceil = \lfloor(x\textcolor{blue}{+y-1})/y \rfloor$</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-first \\
-second
-\end{aligned}</script><p>Hi, here are some katex/mathjax examples.</p>
-<p>linebreak</p>
-<script type="math/tex; mode=display">
-\a{
-& \boxed{\t{This is a box}} \\
-& \r{\t{This is red}} \\
-& \b{\t{This is blue}}
-}</script><p><img src="https://camo.githubusercontent.com/53d0e59a884a0744867fe672d691af14c3d7ff00dc1db8d2354c0d897307607c/687474703a2f2f7777772e706f6c6f6e656c2e636f6d2f736e61636b6261722f6c6f676f5f6c617267652e706e67" alt="SnackBar"></p>
-]]></content>
-      <tags>
-        <tag>web</tag>
-        <tag>jsp</tag>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on hexo</title>
-    <url>/./posts/play-on-hexo/</url>
-    <content><![CDATA[<h1 id="从WordPress到Hexo"><a href="#从WordPress到Hexo" class="headerlink" title="从WordPress到Hexo"></a>从WordPress到Hexo</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在经历过 <code>WordPress</code> 的数次折磨之后，最终决定将 <code>Blog</code> 系统迁移到 <code>Hexo</code>。</p>
-<h2 id="为什么WordPress不适合作为博客系统"><a href="#为什么WordPress不适合作为博客系统" class="headerlink" title="为什么WordPress不适合作为博客系统"></a>为什么WordPress不适合作为博客系统</h2><p>对于Blog搭建而言，是时候该放弃 WordPress 了，至少出于以下这些原因：</p>
-<ul>
-<li><p>WordPress定位早已不属于Blog系统，它更像一个 <code>复杂易用</code> 的全能的建站网站。</p>
-</li>
-<li><p>WordPress过于臃肿。</p>
-<blockquote>
-<p>存在大量的陈年代码，想修改和新增功能必须按照官方那套繁琐的文档进行。</p>
-<p>WordPress有丰富的现成 <code>plugin</code> ，尽管使用门槛很低，但是自定义的门槛较高。</p>
-<p>并且想找到合适的 <code>plugin</code> 并配置到完美工作的状态，也需要耗费不少的时间。 </p>
-<p>一般来说，你很难直接修改WordPress的核心代码（版本更新的时候会覆盖，况且不优雅），只能通过大量的 <code>hook</code> 来完成。</p>
-<p>相比于直接修改原生代码而言，麻烦很多。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/4saLYcGC6A7eNrb.png" alt="image-20230125133135140"></p>
-<blockquote>
-<p>更糟糕的是，WordPress的开发团队<strong>根本不清楚</strong>什么东西应该被加入到核心之中。</p>
-<p>如果你仍然使用 WordPress，请 <code>务必关闭自动更新</code>，否则你不会预料到，你的站点会突然多出什么神奇的东西。</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>WordPress的访问速度过慢。</p>
-<blockquote>
-<p>有很大一部分原因是因为它需要使用PHP来进行数据库查询，动态生成网页。</p>
-<p>尽管可以使用OpenLiteSpeed（提供HTTP 3.0 QUIC协议） + CachePlugin（静态资源，数据库缓存） 进行极大地优化，但是仍然略显笨重。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/jgToz6hDynfvV8l.png" alt="image-20230125133354174"></p>
-<p>以下是经过高度优化之后的Google Lighthouse分析。</p>
-<p>尽管如此，在用户的实际体验上，WordPress 仍然会存在 <strong>明显的卡顿感</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/4TQ9guNr1ohRPsv.png" alt="image-20230125133711341"></p>
-</blockquote>
-</li>
-<li><p>WordPress容易收到垃圾回复。</p>
-<blockquote>
-<p>针对 WordPress 站点存在大量的自动爬虫。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/WuQh5fFmOLvrGD9.png" alt="image-20230125133345387"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/JsYa49fvQcCpdSL.png" alt="image-20230125133327838"></p>
-</blockquote>
-</li>
-</ul>
-<h2 id="迁移到新的博客系统"><a href="#迁移到新的博客系统" class="headerlink" title="迁移到新的博客系统"></a>迁移到新的博客系统</h2><p>  对于 <code>博客系统</code> 来说，首要考虑的是 <code>是否能满足写作的纯粹性</code>。</p>
-<p>  它应该至少能提供 <code>较为舒适</code> 的  <code>写作环境</code> 和 <code>阅读环境</code></p>
-<h3 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h3><p>  比如说，我期望使用 <code>Markdown</code> 这门简单但功能完备的标记语言来进行写作  ，并且除了自带的网页编辑器以外，可以选择独立的编辑器。</p>
-<p>  至少要 <code>完美地</code> 支持以下几种 <code>渲染器</code>：</p>
-<ul>
-<li>Markdown</li>
-<li>Highlightjs/Prism</li>
-<li>Mathjax/Katex</li>
-<li>Mermaid</li>
-</ul>
-<blockquote>
-<p>WordPress的 <code>Gutenberg Editor</code> 是很糟糕的，甚至远远差于 <code>Classic Editor</code>。</p>
-<p>它的语言是 <code>Rich Text</code>，或者说，它根本没有一种适合写作的语言。</p>
-<p>当你使用它的时候，你更像是在做 <code>设计 (Design)</code> 工作，而不是单纯的 <code>写作 (Writing)</code> 。</p>
-<p>总之，富文本很难使用，而且难以协调。</p>
-<blockquote>
-<p>当然，WordPress也可以安装第三方的渲染插件，比如 <code>Markdown插件</code>。</p>
-<p>但是我要说的是，直到2023年，WordPress还没有一个 <code>能用的Markdown插件</code>。</p>
-<p>更致命的是，如果你选择在 <code>WordPress的后台页面</code> 通过 <code>Live Preview</code> 来书写 Markdown，那么神奇的事情会发生在 <code>草稿被发布之后</code>：你将看到由于 <code>前后台CSS样式的不一致性</code>，导致 <code>渲染结果</code> 错乱。</p>
-<p>可以说，WordPress从来没有考虑过打造一个更舒适的写作环境。</p>
-<blockquote>
-<p>Hexo在尝试打造一个更舒适的写作环境，但 <code>失败</code> 了。</p>
-<blockquote>
-<p>尽管经过多年的发展，Hexo的 <code>renders</code> 仍然存在一些问题：</p>
-<ul>
-<li><p>因为调用 <code>syntax render</code> 与渲染引擎存在的冲突，无法正确识别 <code>blockquote</code> 中的代码。（你必须手动实现。）</p>
-</li>
-<li><p>因为模板引擎的原因，你甚至会因为一些在文章中输入<code> {# </code>而直接引发整个渲染系统的悄无声息的崩溃。</p>
-<blockquote>
-<p>当你使用 <code>Mathjax</code> 进行书写 <code>macro</code> 的时候，你就可以很自然地发现这个问题。（使用繁琐转义语法可以解决）</p>
-</blockquote>
-</li>
-<li><p>采用 <code>hexo-renderer-marked</code> 导致 <code>mathjax</code> 必须用 <code>\\\\</code> 才能实现换行。</p>
-</li>
-<li><code>extented-tag</code> 使用繁琐，无法保证与本地Markdown编辑器的一致性。</li>
-<li>…</li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>目前为止，我所发现的在WordPress上 <code>完美</code> 实现 <code>Markdown</code> 写作的方式是：自定义CSS + Typora导出为HTML代码进行嵌入</p>
-<p>对于 Hexo 来说，可以自行通过引用 <code>CSS</code> + <code>JS</code> 的方式，来实现自己喜欢的 <code>render</code></p>
-<h3 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h3><p>我更倾向于选择 <code>minimalism theme</code>，前端所展示的界面应当只有 <code>article container</code> 和 <code>comment container</code>。</p>
-<p>此外，再加上 <code>toc</code> 功能和一些必要的 <code>跳转链接</code> 即可。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mCrvBHM68IQGwN1.png" alt="image-20230125141549951"></p>
-<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>评论系统必须基于 <code>Github Issue/Discussion</code>，以便将所有的数据存放在 <code>Github Repository</code> 之中。</p>
-<p>没有任何理由选择 <strong>某些</strong> 要求 <code>实名认证信息</code> 甚至 <code>人脸识别数据</code> 的 评论系统。</p>
-<blockquote>
-<p>在 <code>后互联网时代</code>，<code>每个人</code> 都应该有属于自己的 <code>Github</code> 账号。</p>
-</blockquote>
-<p><code>markdown</code> 和 <code>syntax</code> 的 <code>style</code> 均复刻 <code>github style</code>，实现一致性。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/6kGMenzcrhUBIJx.png" alt="image-20230125141805248"></p>
-<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><p>基于 <code>本地搜索</code>，提供按 <code>keyword</code> 查询的能力。</p>
-<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><p>通过 <code>tag</code> 来分类文章。（<code>category</code> 的功能和 <code>tag</code> 重复了，并且可以被后者所替代。）</p>
-<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/f1u4Ckpw2SrQmPo.png" alt="image-20230125140808447"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eaRkUsD74CMYfHI.png" alt="image-20230125140749365"></p>
-]]></content>
-      <tags>
-        <tag>wordpress</tag>
-        <tag>blog</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on kde</title>
-    <url>/./posts/play-on-kde/</url>
-    <content><![CDATA[<h1 id="KDE使用偏好"><a href="#KDE使用偏好" class="headerlink" title="KDE使用偏好"></a>KDE使用偏好</h1><h2 id="保持桌面的整潔"><a href="#保持桌面的整潔" class="headerlink" title="保持桌面的整潔"></a>保持桌面的整潔</h2><blockquote>
-<p> 比起 <code>模糊搜索</code> 而言, 在 <code>雜亂的桌面</code> 上尋找 <code>某個圖標</code>, 是 <code>低效</code> 且 <code>不優雅</code> 的</p>
-</blockquote>
-<p>良好的 <code>桌面</code> 應當保持 <code>0 圖標</code> , 在桌面上放置一個或多個常用的圖標並不能提高工作效率, 相反地還會影響桌面的美觀. 一個 <code>app launcher</code> 即可取代 <code>所有被放置在桌面上的圖標</code></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427070040885.png" alt="image-20230427070040885"></p>
-<h2 id="將k-runner作爲調色板"><a href="#將k-runner作爲調色板" class="headerlink" title="將k-runner作爲調色板"></a>將k-runner作爲調色板</h2><h3 id="作爲-“搜索引擎”"><a href="#作爲-“搜索引擎”" class="headerlink" title="作爲 “搜索引擎”"></a>作爲 “搜索引擎”</h3><blockquote>
-<p>如果任何 <code>文件</code> 都可以通過 <code>模糊搜索</code> 在瞬間取得, 那麼花費時間來精心整理文件, 則是徒勞的.</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427070530582.png" alt="image-20230427070530582"></p>
-<blockquote>
-<p>請注意, 該圖中的 <code>左上角</code> 並沒有 <code>app launcher</code>. 這是因爲 <code>k-runner</code> 可以完全替代它, 並且做得更好.</p>
-<p><code>app launcher</code> 至少有以下幾個缺點:</p>
-<ol>
-<li>喚起的速度過慢</li>
-<li>索引的速度過慢</li>
-<li>容易因按到 “meta鍵” 而誤觸</li>
-</ol>
-<p>而通過 <code>alt + space</code> 觸發的 <code>k-runner</code> 則沒有這些缺陷.</p>
-<blockquote>
-<p>其實對於 <code>window switcher</code>, 也可以使用 <code>meta + 1/2/../9</code></p>
-<p>對於這種 <code>高頻度且瑣碎的</code> 任務, 最好有個 <code>brain sensor</code> 或者 <code>eyes tracker</code> …</p>
-</blockquote>
-<p>儘管 <code>app launcher</code> 很常見, 但我要說的是, 存在並不一定合理. 移除 <code>app launcher</code> 也並不會導致整個系統的崩潰.</p>
-<blockquote>
-<p>注: 此處並<strong>不</strong>引用黑格爾的原話 <code>“Alles, was ist, ist vernünftig”</code> 的翻譯, 此句的含義依據現代的通俗解釋, 而非哲學領域的釋義.</p>
-</blockquote>
-</blockquote>
-<p>相比於 <code>windows</code> 上的 <code>everything</code> 和 <code>listray</code> 來說, 在 <code>linux</code> 上則可以選擇 <code>k-runner</code> 作爲一種替代.</p>
-<p>這個東西本質上是一個 <code>search engine</code>, 你可以通過配置各種 <code>plugin</code> 來添加一種新的 <code>search source</code> ,</p>
-<p>以便: <code>搜索某個文件</code>, <code>搜索某個當前正運行的window</code>, <code>搜索某個已安裝的application</code>, <code>搜索某個virtual-desktop</code></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071247858.png" alt="image-20230427071247858"></p>
-<blockquote>
-<p>啓用 <code>fs index</code> 即可讓 <code>k-runner</code> 擁有在 <code>瞬間</code> 完成 <code>搜索某個文件</code> 的能力.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427082130592.png" alt="image-20230427082130592"></p>
-</blockquote>
-<h3 id="作爲”解釋器”"><a href="#作爲”解釋器”" class="headerlink" title="作爲”解釋器”"></a>作爲”解釋器”</h3><p>也可以使用k-runner來執行一些 <code>簡單的命令</code>.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071422368.png" alt="image-20230427071422368"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071442153.png" alt="image-20230427071442153"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071500325.png" alt="image-20230427071500325"></p>
-<h2 id="讓-tray-icons-保持簡潔"><a href="#讓-tray-icons-保持簡潔" class="headerlink" title="讓 tray icons 保持簡潔"></a>讓 <code>tray icons</code> 保持簡潔</h2><p>默認的 <code>tray icons</code> 包含非常多 <code>不常用的tray icon</code>, 所以我們需要根據 <code>自己的使用偏好</code>. </p>
-<p>只將 <code>常用的tray icons</code> 顯示出來.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427071719723.png" alt="image-20230427071719723"></p>
-<p>對於某些 <code>重要但不常用的tray icon</code>, 可以設置顯示策略爲 <code>當相關時顯示</code></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427072548159.png" alt="image-20230427072548159"></p>
-<h2 id="善用-Do-not-disturb-模式"><a href="#善用-Do-not-disturb-模式" class="headerlink" title="善用 Do not disturb 模式"></a>善用 <code>Do not disturb</code> 模式</h2><p>設置 <code>快捷鍵</code> 以便通過 <code>meta + n</code> 來切換 <code>do not disturb mode</code> .</p>
-<p>當需要免打擾環境時, 可以快速切入.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427075918984.png" alt="image-20230427075918984"></p>
-<h2 id="選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色"><a href="#選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色" class="headerlink" title="選擇使用 multi-activity 和 multi-vitrual-desktop 來區分 角色"></a>選擇使用 <code>multi-activity</code> 和 <code>multi-vitrual-desktop</code> 來區分 <code>角色</code></h2><blockquote>
-<p>在某些 <code>工作場景</code> 下, 我們往往需要扮演 <code>多角色</code>.</p>
-<p>比如, 我們可能需要: 同時扮演 <code>前端工程師</code> 和 <code>後端工程師</code>, 同時扮演 <code>軟件開發工程師</code> 和 <code>軟件測試員</code></p>
-<p>此時需要運行 <code>一組不同的application</code>, 如果將 <code>所有的application</code> 都放在 <code>同一個virtual-desktop</code> 或者 <code>同一個activity</code>, 然後通過 <code>alt+tab</code> 來切換的話, 則有以下這些缺點:</p>
-<ol>
-<li>繁瑣, 你無法精準切換你想要的application (如果通過 <code>k-runner</code> 來切斷可能會好些)</li>
-<li>你會因爲切換application而 <code>打亂</code> 窗口之間的 <code>layout</code>. (這可能會迫使你使用鼠標來重新對此進行調整)</li>
-</ol>
-<p>此時, 通過切換 <code>virtual-desktop</code> 或 <code>activity</code> , 就如同 <code>你使用2塊不同的顯示屏</code> 一樣.</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427073203338.png" alt="image-20230427073203338"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427073220301.png" alt="image-20230427073220301"></p>
-<p>使用 <code>meta+tab</code> 即可 <code>切換到下一個activity</code>, 這裏建議只設置 <code>2個activity</code>, 避免切換時的繁瑣. </p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427074024802.png" alt="image-20230427074024802"></p>
-<p><code>virtual-desktop</code> 和 <code>activity</code> 是兩種不同 <code>粒度</code> 的用於解決 <code>多角色問題</code> 的解決方案, 可以根據自己的需求選擇.</p>
-<h2 id="設置更動聽的-窗口移動特效"><a href="#設置更動聽的-窗口移動特效" class="headerlink" title="設置更動聽的 窗口移動特效"></a>設置更動聽的 <code>窗口移動特效</code></h2><p>通過啓用 <code>translucency</code> 和 <code>wobbly windows</code>, 使得: </p>
-<ol>
-<li><code>window</code> 在 <code>移動時</code> 自動 <code>透明化</code> , 以便觀察 <code>底部的windows</code></li>
-<li>讓 <code>window</code> 在移動時像 <code>果凍</code> 一樣</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-48.gif" alt="Peek 2023-04-27 07-48"></p>
-<h2 id="設置更方便的-window-actions"><a href="#設置更方便的-window-actions" class="headerlink" title="設置更方便的 window actions"></a>設置更方便的 <code>window actions</code></h2><p>將 <code>meta + 鼠標輸入</code> 設置爲一系列的 <code>window指令</code>, 如:</p>
-<ol>
-<li><code>meta</code> + <code>mouse scroll</code> = 窗口最大化/最小化</li>
-<li><code>meta</code> + <code>mouse left click</code> = 移動窗口 (這樣就可以在 <code>window的內部</code> 直接 <code>發送移動指令</code> , 而不必拖着狹小的 <code>title bar</code>  來<code>發送移動指令</code>)</li>
-<li><code>meta</code> + <code>mouse right click</code> = 調整窗口大小 (如果通過 <code>窗口邊緣</code>來調整大小的話, 則對 <code>鼠標的精準操作</code> 有很高要求. )x</li>
-<li>…</li>
-</ol>
-<p>理論上講, 任何需要 <code>高精準度的鼠標操作</code> 都應該有 <code>替代方案</code>. </p>
-<p>點擊一個 <code>面積更大的區域</code> 總是比 <code>更小的區域</code> 更方便.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-53.gif" alt="Peek 2023-04-27 07-53"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2007-54.gif" alt="Peek 2023-04-27 07-54"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Peek%202023-04-27%2008-15.gif" alt="Peek 2023-04-27 08-15"></p>
-<h2 id="使用-window-rule-進行-自動化佈局"><a href="#使用-window-rule-進行-自動化佈局" class="headerlink" title="使用 window rule 進行 自動化佈局"></a>使用 <code>window rule</code> 進行 <code>自動化佈局</code></h2><p>在某些 <code>工作場景</code> 下, 可能需要進行 <code>長時間保持某個窗口佈局方式</code>, 比如: 一邊開啓 <code>IDE</code>, 一邊開啓 <code>browser</code> 查閱文檔. 此時可以通過設置 <code>window rule</code> 來自動完成這種 <code>窗口佈局</code>.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427075705312.png" alt="image-20230427075705312"></p>
-<h2 id="對-input-method-進行微調至合適"><a href="#對-input-method-進行微調至合適" class="headerlink" title="對 input method 進行微調至合適"></a>對 <code>input method</code> 進行微調至合適</h2><p>此處建議使用 <code>開源的input method</code> , 如果你還有點關注 <code>你的privacy</code> 的話.</p>
-<blockquote>
-<p>開源方案建議: <code>rime</code> , <code>fcitx-chinese-addons</code></p>
-</blockquote>
-<p>配置 <code>im group</code> 和 <code>im layout</code> , 以及 <code>切換快捷鍵</code> , 使得 <code>切換im</code> 不會與 <code>某些全屏應用</code> 發生衝突.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080032005.png" alt="image-20230427080032005"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080258247.png" alt="image-20230427080258247"></p>
-<h2 id="取消-不可信證書"><a href="#取消-不可信證書" class="headerlink" title="取消 不可信證書"></a>取消 <code>不可信證書</code></h2><p>爲了避免 <code>MITM attack</code>, 並不是所有的 <code>CA證書</code> 都值得你信任.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427080522193.png" alt="image-20230427080522193"></p>
-<h2 id="電源管理"><a href="#電源管理" class="headerlink" title="電源管理"></a>電源管理</h2><p>設置 <code>閒置時</code>  自動熄屏</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427081025652.png" alt="image-20230427081025652"></p>
-<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>啓用 <code>firewall</code> 對 <code>traffic</code> 進行控制.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427081810808.png" alt="image-20230427081810808"></p>
-<h2 id="在設備開機後自動部署工作環境"><a href="#在設備開機後自動部署工作環境" class="headerlink" title="在設備開機後自動部署工作環境"></a>在設備開機後自動部署工作環境</h2><p>如果你經常 <code>關機</code> 的話…</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230427082245821.png" alt="image-20230427082245821"></p>
-]]></content>
-      <tags>
-        <tag>os</tag>
-        <tag>kde</tag>
       </tags>
   </entry>
   <entry>
@@ -13283,194 +13471,6 @@ world-settings:
 ]]></content>
       <tags>
         <tag>minecraft</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on stable-diffusion</title>
-    <url>/./posts/play-on-stable-diffusion/</url>
-    <content><![CDATA[<h1 id="Play-on-Stable-Diffusion"><a href="#Play-on-Stable-Diffusion" class="headerlink" title="Play on Stable-Diffusion"></a>Play on Stable-Diffusion</h1><h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><blockquote>
-<p>If you just want to use <code>stable-diffusion</code> <strong>online</strong>, you can try apps like: <a href="https://huggingface.co/spaces/stabilityai/stable-diffusion">https://huggingface.co/spaces/stabilityai/stable-diffusion</a></p>
-<p>However, we highly recommend you setup <code>stable-diffusion</code> locally for higher customizability.</p>
-</blockquote>
-<h3 id="Platform"><a href="#Platform" class="headerlink" title="Platform"></a>Platform</h3><h4 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h4><p><code>stable-diffusion webui</code> is a browser interface for <code>stable-diffusion</code>.</p>
-<p>Firstly, use the following commands to install it.</p>
-<pre><code class="lang-shell">git clone git@github.com:AUTOMATIC1111/stable-diffusion-webui.git
-cd stable-diffusion-webui
-bash webui.sh
-</code></pre>
-<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h4><h5 id="Optimise-video-memory-usage"><a href="#Optimise-video-memory-usage" class="headerlink" title="Optimise video memory-usage"></a>Optimise video memory-usage</h5><pre><code class="lang-shell"># webui-user.sh
-export COMMANDLINE_ARGS=&quot;--xformers&quot;
-</code></pre>
-<p>For some GPUs with a high cuda version. (cuda &gt; 11.8), you should <strong>manually</strong> install the <strong>required python dependencies</strong></p>
-<pre><code class="lang-shell">NVIDIA GeForce RTX 3080 Ti with CUDA capability sm_86 is not compatible with the current PyTorch installation.
-The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
-If you want to use the NVIDIA GeForce RTX 3080 Ti GPU with PyTorch, please check the instructions at Start Locally | PyTorch 31
-</code></pre>
-<p>See: <a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></p>
-<h5 id="Solve-the-problem-of-generating-a-black-image-empty-image"><a href="#Solve-the-problem-of-generating-a-black-image-empty-image" class="headerlink" title="Solve the problem of generating a black-image/empty-image"></a>Solve the problem of generating a black-image/empty-image</h5><pre><code class="lang-shell"># webui-user.sh
-export COMMANDLINE_ARGS=&quot;--no-half-vae --disable-nan-check&quot;
-</code></pre>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><h4 id="Installation-1"><a href="#Installation-1" class="headerlink" title="Installation"></a>Installation</h4><p>You can download the models from this link: <a href="https://rentry.org/sdmodels">https://rentry.org/sdmodels</a></p>
-<blockquote>
-<p>Q: Should we pay for the latest <code>NovelAI</code> now ?</p>
-<p>A: Maybe not, just wait for it to leak.</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/TSL9TF0.png" alt="image-20230208150000465"></p>
-</blockquote>
-<h4 id="Configuration-1"><a href="#Configuration-1" class="headerlink" title="Configuration"></a>Configuration</h4><p>The <code>stable-diffusion model</code> (sd-model) contains all the data needed to <code>generate an image</code>.</p>
-<p>Beyond that, <code>a specific model</code> might also come with the <code>pre-configuration file</code> , <code>vae.pt file</code> and <code>hyper-network file</code>, which can be used to <code>modify and enhance the style of the final generated image</code></p>
-<p>For example, the architecture may be like: </p>
-<pre><code class="lang-shell">stable-diffusion-webui/
-├─ models/
-│  ├─ Stable-diffusion/
-│  │  ├─ model_name.ckpt
-│  │  ├─ model_name.yaml
-│  ├─ VAE/
-│  │  ├─ model_name.vae.pt
-│  ├─ hypernetworks/
-│  │  ├─ anime.pt
-│  │  ├─ furry.pt
-│  │  ├─ pony.pt
-</code></pre>
-<h2 id="Use-case"><a href="#Use-case" class="headerlink" title="Use-case"></a>Use-case</h2><h3 id="Control-the-weight-of-prompts"><a href="#Control-the-weight-of-prompts" class="headerlink" title="Control the weight of prompts"></a>Control the weight of prompts</h3><p>Use <code>(token)</code> to strength the weight.</p>
-<blockquote>
-<p>For Novel-AI, use <code>&#123;token&#125;</code> instead.</p>
-<p><code>stable-diffusion webui</code> ‘s coefficient differs from <code>novel-ai</code></p>
-</blockquote>
-<p>Use <code>[token]</code> to reduce the weight.</p>
-<h3 id="The-magic-spell-to-control-the-quality-of-generated-image"><a href="#The-magic-spell-to-control-the-quality-of-generated-image" class="headerlink" title="The magic-spell to control the quality of generated-image"></a>The magic-spell to control the quality of generated-image</h3><p>There are some <code>common prompts</code> called <code>magic-spell</code> which can be used to control the <code>quality</code> , <code>style</code> , <code>category</code> and <code>color</code>  of the image.</p>
-<p>For examples:</p>
-<h4 id="Positive-Prompts"><a href="#Positive-Prompts" class="headerlink" title="Positive Prompts"></a>Positive Prompts</h4><pre><code>(masterpiece), (best quality), (masterpiece),(best quality),(official art),(extremely detailed CG unity 8k wallpaper),
-</code></pre><pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring)
-</code></pre><blockquote>
-<p>These websites provide prompt examples:</p>
-<ol>
-<li><a href="https://openart.ai/presets">https://openart.ai/presets</a></li>
-<li><a href="https://prompthero.com/">https://prompthero.com/</a></li>
-<li><a href="https://stablediffusionweb.com/prompts">https://stablediffusionweb.com/prompts</a></li>
-</ol>
-</blockquote>
-<h4 id="Negative-Prompts"><a href="#Negative-Prompts" class="headerlink" title="Negative Prompts"></a>Negative Prompts</h4><p><code>negative prompt</code> is <strong>essential</strong> to get rid of <code>bad products</code></p>
-<pre><code>lowres, bad anatomy, bad hands, text, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, from behind,from side,normal quality, jpeg artifacts, watermark, username, Missing limbs,three arms, bad feet,text font ui,malformed hands,long neck,long body,limb,bad anatomy disfigured malformed mutated,large head,(mutated hands and fingers :1.5).(long body :1.3),(mutation ,poorly drawn :1.2), disfigured, malformed, mutated,multiple breasts,three legs,
-</code></pre><pre><code>(((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis, (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis
-</code></pre><h3 id="Text-to-image"><a href="#Text-to-image" class="headerlink" title="Text-to-image"></a>Text-to-image</h3><p>You can use some ready-made prompts to get started <strong>or</strong> write your prompt from scratch.</p>
-<blockquote>
-<p>Prompt-auxiliary: </p>
-<ol>
-<li><a href="https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion">https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion</a></li>
-<li><a href="https://wolfchen.top/tag/">https://wolfchen.top/tag/</a></li>
-</ol>
-</blockquote>
-<p>Some recommended params:</p>
-<ul>
-<li>Sample method: <code>Euler a</code> or <code>DDIM</code></li>
-<li>Sample steps: about 30 ~ 40 is good</li>
-<li>Width &amp; Height: you can use a small resolution for testing, and then generate a high-resolution image by <code>Hires. fix</code>. (Power of 2 preferred)</li>
-<li>CFG Scale: about 5~7 is good, </li>
-<li>VAE: select <code>auto</code> and keep the same <code>model_name</code> between <code>model_name.ckpt</code> and <code>model_name.vae.pt</code></li>
-<li>hypernetworks: simply add this <code>token</code> into your <code>prompt</code>:  <code>&lt;hypernet:anime:1&gt;</code></li>
-<li>skip-clip: default 1, set to <code>2</code> if you are using <code>novel-diffusion</code></li>
-</ul>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><h5 id="Case-1"><a href="#Case-1" class="headerlink" title="Case 1"></a>Case 1</h5><pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring), 1girl, animal_ears, bell, bracelet, choker, collar, fox_mask, fox_tail, fur_trim, gradient, gradient_background, grey_background, hair_bell, japanese_clothes, jingle_bell, kimono, mask, mask_on_head, mask_removed, multiple_tails, neck_bell, red_eyes, short_hair, solo, tail, tail_bell, tail_ornament, white_hair, wide_sleeves
-</code></pre><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/Q283LSb.jpg" alt="image-20230208150646685"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/lijzFhH.jpg" alt="image-20230208150706389"></p>
-<p><img src="https://i.imgur.com/x9rov6R.png" alt="image-20230208150714475"></p>
-<h5 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2"></a>Case 2</h5><pre><code>1girl, :d, animal_ears, architecture, bangs, blue_hair, blush, breasts, building, east_asian_architecture, eyebrows_visible_through_hair, fox_mask, hakama, hakama_skirt, holding, japanese_clothes, kimono, long_hair, long_sleeves, looking_at_viewer, mask, mask_on_head, miko, open_mouth, outdoors, purple_eyes, ribbon-trimmed_sleeves, ribbon_trim, sash, smile, solo, white_kimono, wide_sleeves
-</code></pre><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/vw69NCp.png" alt="img"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/nYSG36u.png" alt="image-20230208153950160"></p>
-<h3 id="Image-to-image"><a href="#Image-to-image" class="headerlink" title="Image-to-image"></a>Image-to-image</h3><p>If you want to draw another-image based on original-image, you can use <code>image-to-image</code></p>
-<p><code>tag reverse</code> can help you to analyze the tags from the original-image:</p>
-<blockquote>
-<p>See: <a href="https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/">https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/</a></p>
-</blockquote>
-<pre><code class="lang-shell"># webui-user.sh
-export COMMANDLINE_ARGS=&quot;--deepdanbooru&quot;
-</code></pre>
-<h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h4><h5 id="Case-1-1"><a href="#Case-1-1" class="headerlink" title="Case 1"></a>Case 1</h5><p><strong>parameters</strong></p>
-<pre><code>(extremely detailed CG unity 8k wallpaper), (official concept art), (outline), (ultra-detailed), (lightfast), (highly detailed reflection), (best shadow),(schematic), (anime coloring), aerial_fireworks, architecture, bow, building, city_lights, cloud, constellation, east_asian_architecture, festival, fire, fireworks, fish, full_moon, galaxy, goldfish, jack-o&#39;-lantern, japanese_clothes, kimono, lantern, long_hair, milky_way, moon, multiple_girls, night, night_sky, paper_lantern, scenery, shooting_star, sitting, sky, smile, snow, snowing, space, star_\(sky\), starry_sky, starry_sky_print, summer_festival, tanabata, tanzaku, telescope, town, yukata
-Negative prompt: (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis, (((deformed))), blurry, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar, multiple breasts, (mutated hands and fingers:1.5), (long body :1.3), (mutation, poorly drawn :1.2), black-white, bad anatomy, liquid body, liquidtongue, disfigured, malformed, mutated, anatomical nonsense, text font ui, error, malformed hands, long neck, blurred, lowers, low res, bad anatomy, bad proportions, bad shadow, uncoordinated body, unnatural body, fused breasts, bad breasts, huge breasts, poorly drawn breasts, extra breasts, liquid breasts, heavy breasts, missingbreasts, huge haunch, huge thighs, huge calf, bad hands, fused hand, missing hand, disappearing arms, disappearing thigh, disappearing calf, disappearing legs, fusedears, bad ears, poorly drawn ears, extra ears, liquid ears, heavy ears, missing ears, fused animal ears, bad animal ears, poorly drawn animal ears, extra animal ears, liquidanimal ears, heavy animal ears, missing animal ears, text, ui, error, missing fingers, missing limb, fused fingers, one hand with more than 5 fingers, one hand with less than5 fingers, one hand with more than 5 digit, one hand with less than 5 digit, extra digit, fewer digits, fused digit, missing digit, bad digit, liquid digit, colorful tongue, blacktongue, cropped, watermark, username, blurry, JPEG artifacts, signature, 3D, 3D game, 3D game scene, 3D character, malformed feet, extra feet, bad feet, poorly drawnfeet, fused feet, missing feet, extra shoes, bad shoes, fused shoes, more than two shoes, poorly drawn shoes, bad gloves, poorly drawn gloves, fused gloves, bad cum, poorly drawn cum, fused cum, bad hairs, poorly drawn hairs, fused hairs, big muscles, ugly, bad face, fused face, poorly drawn face, cloned face, big face, long face, badeyes, fused eyes poorly drawn eyes, extra eyes, malformed limbs, more than 2 nipples, missing nipples, different nipples, fused nipples, bad nipples, poorly drawnnipples, black nipples, colorful nipples, gross proportions. short arm, (((missing arms))), missing thighs, missing calf, missing legs, mutation, duplicate, morbid, mutilated, poorly drawn hands, more than 1 left hand, more than 1 right hand, deformed, (blurry), disfigured, missing legs, extra arms, extra thighs, more than 2 thighs, extra calf,fused calf, extra legs, bad knee, extra knee, more than 2 legs, bad tails, bad mouth, fused mouth, poorly drawn mouth, bad tongue, tongue within mouth, too longtongue, black tongue, big mouth, cracked mouth, bad mouth, dirty face, dirty teeth, dirty pantie, fused pantie, poorly drawn pantie, fused cloth, poorly drawn cloth, badpantie, yellow teeth, thick lips, bad camel toe, colorful camel toe, bad asshole, poorly drawn asshole, fused asshole, missing asshole, bad anus, bad pussy, bad crotch, badcrotch seam, fused anus, fused pussy, fused anus, fused crotch, poorly drawn crotch, fused seam, poorly drawn anus, poorly drawn pussy, poorly drawn crotch, poorlydrawn crotch seam, bad thigh gap, missing thigh gap, fused thigh gap, liquid thigh gap, poorly drawn thigh gap, poorly drawn anus, bad collarbone, fused collarbone, missing collarbone, liquid collarbone, strong girl, obesity, worst quality, low quality, normal quality, liquid tentacles, bad tentacles, poorly drawn tentacles, split tentacles, fused tentacles, missing clit, bad clit, fused clit, colorful clit, black clit, liquid clit, QR code, bar code, censored, safety panties, safety knickers, beard, furry, pony, pubic hair, mosaic, futa, testis
-Steps: 40, Sampler: Euler a, CFG scale: 6, Seed: [?], Size: 1024x702, Model hash: 8712e20a5d, Model: [anything-diffusion] Anything-V3.0, Denoising strength: 0.75, Mask blur: 4
-</code></pre><p><strong>original-image</strong></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9y5jBfQ.png" alt="original-image"></p>
-<p><strong>generated-image</strong></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/tXKbX94.jpg" alt="image-20230208154144700"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/BZUntu6.jpg" alt="image-20230208144901544"></p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://blog.csdn.net/weixin_53065229/article/details/127814292">https://blog.csdn.net/weixin_53065229/article/details/127814292</a></li>
-<li><a href="https://www.bilibili.com/read/cv19113199?from=articleDetail">https://www.bilibili.com/read/cv19113199?from=articleDetail</a></li>
-<li><a href="https://www.bilibili.com/read/cv19060316?from=search">https://www.bilibili.com/read/cv19060316?from=search</a></li>
-<li><a href="https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/">https://gigazine.net/gsc_news/en/20221012-automatic1111-stable-diffusion-webui-deep-danbooru/</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>practice</tag>
-        <tag>ai</tag>
-        <tag>gpt</tag>
-        <tag>diffusion</tag>
-        <tag>art</tag>
-        <tag>cg</tag>
-        <tag>novel_ai</tag>
-        <tag>cuda</tag>
-        <tag>nvidia</tag>
-        <tag>python</tag>
-        <tag>computation</tag>
-        <tag>anime</tag>
-        <tag>draw</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on vim</title>
-    <url>/./posts/play-on-vim/</url>
-    <content><![CDATA[<h1 id="Vim-Cheat-Sheet"><a href="#Vim-Cheat-Sheet" class="headerlink" title="Vim Cheat-Sheet"></a>Vim Cheat-Sheet</h1><h2 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230224070054563.png" alt="image-20230224070054563"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/image-20230224070257167.png" alt="image-20230224070257167"></p>
-<blockquote>
-<p>They show too many things and too less.</p>
-</blockquote>
-<h2 id="Cheat-sheet"><a href="#Cheat-sheet" class="headerlink" title="Cheat-sheet"></a>Cheat-sheet</h2><p>VIM是一個非常具有 <code>創造性</code> 的 <code>editor</code>，也有很多人認爲，“VIM不僅僅是editor，更是一種pattern，或者thinking”。</p>
-<p>這一點體現在，大部分的主流IDE/Editor其實都有提供 <code>VIM Plugin</code>，使得你可以使用 <code>VIM的方式</code> 進行 <code>文本編輯</code>。</p>
-<blockquote>
-<p>實際上，<code>IDE + VIM</code> 是一個非常恐怖的生產力殺手。</p>
-<p>這裡點名提出，<code>Jetbrains Platform + IdeaVIM</code> 的組合，使得每個人都可以 <code>輕鬆地</code> 創建屬於自己的 <code>monster</code></p>
-<blockquote>
-<p>個人發現，很多人在關於 <code>如何熟練使用Idea</code> 這個話題上，有個非常大的誤解：<strong>如果你想熟練使用Idea，你需要熟練地記憶好Shortcut</strong></p>
-<p>我在這裡直接給出結論：<strong>如果你認爲熟練記憶Idea的那些所謂的人體工程學的Shortcut，足以證明你對Idea這個工具的熟練掌握程度，那麼我可以說，你對Idea，或者說，對Jetbrains Platform是一竅不通的。JP是action-based，而不是shortcut-based。如果只能使用1個Shortcut，那麼我將會選擇Ctrl + Shift + A，並且，在大部分的情況下，僅記憶這個Shortcut就足夠使用了。（搭配IdeaVim的前提下）</strong></p>
-<p>當然，讀者在嘗試完該方案後，也可以自然地得出該結論。</p>
-</blockquote>
-<p>個人暫時沒有在 <code>Editor + VIM</code> 的組合上看到多大的進步，雖然 <code>Visual Studio Code</code> 也有 <code>VIM Plugin</code>，但是 <code>難用</code>。</p>
-<blockquote>
-<p>或者應該說，<code>VSC</code> 的官方沒有多在意這個插件，它與 <code>VSC</code> 的集成度不是很高。</p>
-</blockquote>
-<p>另外，如果一個 <code>editor</code> 僅僅是像其他大多數的 <code>editor</code> 那樣，完成基本的 <code>edit</code> 功能，那麼它其實沒有多大的吸引力。</p>
-<p><code>VSC</code> 的定位比較尷尬，雖然本質上仍然認爲它是一個 <code>editor</code>，但是作爲 <code>基於chromium的內存殺手</code>，它並沒有其他大部分 <code>editor</code> 所具有的 <code>小巧</code> 的優點，也沒有 <code>快速的冷啓動</code> 優勢。</p>
-<p>此外，雖然 <code>VSC</code> 可以 <code>integrate</code> 很多的 <code>extension</code>，但是實際的效果遠遠不如開箱即用的 <code>IDE</code>。</p>
-<blockquote>
-<p>IDE knows what the hell thing happened, while editor knows nothing.</p>
-</blockquote>
-<p>對於使用 <code>VSC</code> 來進行 <code>工程代碼</code> 的情況來說，<code>VSC</code> 更是顯得 <code>尷尬</code>：對這種情況，一般 <code>小巧</code> 和 <code>啓動速度</code> 並不是那麼關鍵。</p>
-</blockquote>
-<p>如你所見，下面放出2張 <code>cheat-sheet</code>，<code>VIM</code> 提供了非常多的 <code>原子操作</code>，使得你可以擁有非常多的 <code>創造性的</code> 操作組合。</p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/vim_cheat_sheet_for_programmers_screen.png" alt="img"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iigrixvxp5aYN9ox7Gr1dfI_rhLRotWlLsCafjJqjEQ.png" alt="img"></p>
-]]></content>
-      <tags>
-        <tag>note</tag>
-        <tag>vim</tag>
-        <tag>editor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>play on wallpaper</title>
-    <url>/./posts/play-on-wallpaper/</url>
-    <content><![CDATA[<h1 id="Wallpaper-Sharing"><a href="#Wallpaper-Sharing" class="headerlink" title="Wallpaper Sharing"></a>Wallpaper Sharing</h1><h2 id="Plasma-Kay"><a href="#Plasma-Kay" class="headerlink" title="Plasma-Kay"></a>Plasma-Kay</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-kay.png" alt="plasma-kay"></p>
-<h2 id="Plasma-Shell"><a href="#Plasma-Shell" class="headerlink" title="Plasma-Shell"></a>Plasma-Shell</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-shell.jpg" alt="plasma-shell"></p>
-<h2 id="Plasma-Honeywave"><a href="#Plasma-Honeywave" class="headerlink" title="Plasma-Honeywave"></a>Plasma-Honeywave</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-honeywave.jpg" alt="plasma-honeywave"></p>
-<h2 id="Plasma-Cluster"><a href="#Plasma-Cluster" class="headerlink" title="Plasma-Cluster"></a>Plasma-Cluster</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cluster.png" alt="plasma-cluster"></p>
-<h2 id="Plasma-Cascade"><a href="#Plasma-Cascade" class="headerlink" title="Plasma-Cascade"></a>Plasma-Cascade</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-cascade.png" alt="plasma-cascade"></p>
-<h2 id="Plasma-Canopee"><a href="#Plasma-Canopee" class="headerlink" title="Plasma-Canopee"></a>Plasma-Canopee</h2><p><img src="https://github.com/SakuraWald/sakurawald.github.io/raw/main/images/plasma-canopee.png" alt="plasma-canopee"></p>
-<h2 id="Plasma-Altai"><a href="#Plasma-Altai" class="headerlink" title="Plasma-Altai"></a>Plasma-Altai</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/plasma-altai.png" alt="plasma-altai"></p>
-<h2 id="Ubuntu-Jellyfish"><a href="#Ubuntu-Jellyfish" class="headerlink" title="Ubuntu-Jellyfish"></a>Ubuntu-Jellyfish</h2><p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/ubuntu-jellyfish.jpg" alt="ubuntu-jellyfish"></p>
-]]></content>
-      <tags>
-        <tag>wallpaper</tag>
       </tags>
   </entry>
   <entry>
