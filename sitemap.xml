@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/play-on-vim/</loc>
     
     <lastmod>2023-05-07</lastmod>
@@ -147,6 +138,15 @@
   
   <url>
     <loc>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
     
     <lastmod>2023-05-07</lastmod>
     

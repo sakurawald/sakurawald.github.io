@@ -1,4 +1,3 @@
-https://sakurawald.github.io/posts/play-on-stable-diffusion/
 https://sakurawald.github.io/posts/play-on-vim/
 https://sakurawald.github.io/posts/play-on-wallpaper/
 https://sakurawald.github.io/posts/play-on-stl/
@@ -15,6 +14,7 @@ https://sakurawald.github.io/posts/play-on-hexo-render/
 https://sakurawald.github.io/posts/play-on-hexo/
 https://sakurawald.github.io/posts/play-on-kde/
 https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/
+https://sakurawald.github.io/posts/play-on-stable-diffusion/
 https://sakurawald.github.io/posts/database-relational-query-language/
 https://sakurawald.github.io/posts/algorithm-circle-permutation/
 https://sakurawald.github.io/posts/algorithm-majority-problem/
