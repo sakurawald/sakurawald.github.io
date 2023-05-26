@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "857146853848931b",
+        "id": "94e87db1d9de24d2",
         "type": "tabs",
         "children": [
           {
-            "id": "8a253dcb991326b9",
+            "id": "8c7fa14a9f23310c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
+                "file": "_posts/play-on-google-pixel.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "645d49533cc4dcb1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
+                "file": "_posts/play-on-google-pixel.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
+                "file": "_posts/play-on-google-pixel.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md"
+                "file": "_posts/play-on-google-pixel.md"
               }
             }
           }
@@ -144,29 +152,37 @@
       "templates:Insert template": false
     }
   },
-  "active": "8a253dcb991326b9",
+  "active": "8c7fa14a9f23310c",
   "lastOpenFiles": [
-    "_posts/algorithm-set-partition-problem.md",
+    "_posts/test.md",
+    "_posts/play-on-google-pixel.md",
+    "_posts/database-design.md",
+    "_posts/codesnippet-a-simple-judger-for-java.md",
+    "_drafts/WordPress Setup.md",
+    "_drafts/a-discussion-about-minecraft-server-configurations.md",
+    "_drafts/a4.png",
+    "tags/index.md",
+    "categories/index.md",
+    "_template/post_template.md",
+    "_posts/c-string-lib-functions.md",
+    "_posts/play-on-android-emulator.md",
+    "_posts/database-relational-query-language.md",
+    "_posts/expression-evaluation.md",
+    "_posts/jsp-servlet-jsp-short-hand.md",
+    "_posts/play-on-wordpress.md",
+    "_posts/play-on-stl.md",
+    "_posts/play-on-wallpaper.md",
+    "().md",
+    "_posts/play-on-bookmarks.md",
+    "_posts/algorithm-back-tracking-and-iddfs.md",
     "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
+    "_posts/algorithm-set-partition-problem.md",
     "_posts/algorithm-oiling-car-and-optimal-merge.md",
     "_posts/play-on-kde.md",
     "Pasted image 20230427065322.png",
-    "_posts/play-on-google-pixel.md",
-    "_posts/database-design.md",
     "_posts/tool-box.md",
-    "_template/post_template.md",
-    "categories/index.md",
     "_posts/stl-simple-usage-of-stl.md",
     "_template",
-    "_posts/database-relational-query-language.md",
-    "_posts/compiler-test.md",
-    "Untitled.canvas",
-    "202304262236.md",
-    "_drafts/computer-organization-representaion-and-computation-integer.md",
-    "2023-04-26.md",
-    "_posts/algorithm-back-tracking-and-iddfs.md",
-    "_posts/database-advanced-sql.md",
-    "_posts/algorithm-circle-permutation.md",
-    "_posts/algorithm-majority-problem.md"
+    "Untitled.canvas"
   ]
 }
