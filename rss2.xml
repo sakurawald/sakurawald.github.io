@@ -15,8 +15,59 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 26 Nov 2023 13:54:14 GMT</pubDate>
+    <pubDate>Sun, 26 Nov 2023 14:40:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>trick-to-fake-the-github-board</title>
+      <link>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</link>
+      <guid>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</guid>
+      <pubDate>Sun, 26 Nov 2023 14:16:53 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;This script will fake the GitHub board from 1970-1-1 till now.&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/github/">github</category>
+      
+      <category domain="https://sakurawald.github.io/tags/shell/">shell</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>clean-unused-chunks-in-minecraft</title>
+      <link>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</link>
+      <guid>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</guid>
+      <pubDate>Sun, 26 Nov 2023 14:14:19 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>play on minecraft server configuration</title>
@@ -353,11 +404,11 @@ $$
       
       
       
-      <category domain="https://sakurawald.github.io/tags/test/">test</category>
-      
       <category domain="https://sakurawald.github.io/tags/web/">web</category>
       
       <category domain="https://sakurawald.github.io/tags/jsp/">jsp</category>
+      
+      <category domain="https://sakurawald.github.io/tags/test/">test</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-hexo-render/#disqus_thread</comments>
@@ -561,63 +612,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Algorithm] Multiple-Knapsack Problem &amp; Pebble Merge Problem</title>
-      <link>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</link>
-      <guid>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</guid>
-      <pubDate>Mon, 18 Apr 2022 23:53:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Dynamic-Programming-Problems&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Problems&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/dynamic-programming/">dynamic_programming</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>play on stl</title>
-      <link>https://sakurawald.github.io/posts/play-on-stl/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-stl/</guid>
-      <pubDate>Mon, 18 Apr 2022 14:44:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>
-
-&lt;h1&gt;Code Snippet&lt;/h1&gt;
-&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/stl/">stl</category>
-      
-      <category domain="https://sakurawald.github.io/tags/cpp/">cpp</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-stl/#disqus_thread</comments>
       
     </item>
     
