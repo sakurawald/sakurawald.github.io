@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/play-on-wordpress.md",
+                "file": "_posts/trick-to-fake-the-github-board.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/play-on-wordpress.md",
+                "file": "_posts/trick-to-fake-the-github-board.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/play-on-wordpress.md",
+                "file": "_posts/trick-to-fake-the-github-board.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/play-on-wordpress.md"
+                "file": "_posts/trick-to-fake-the-github-board.md"
               }
             }
           }
@@ -154,11 +154,16 @@
   },
   "active": "f96cc65c51332a8e",
   "lastOpenFiles": [
+    "_posts/play-on-wordpress.md",
+    "_posts/trick-to-fake-the-github-board.md",
+    "_posts/play-on-stl.md",
+    "_posts/play-on-kde.md",
+    "_posts/clean-unused-chunks-in-minecraft.md",
+    "_posts/database-advanced-sql.md",
+    "_posts/algorithm-back-tracking-and-iddfs.md",
     "_posts/database-relational-query-language.md",
     "_posts/algorithm-circle-permutation.md",
-    "_posts/algorithm-back-tracking-and-iddfs.md",
     "_posts/jsp-servlet-jsp-short-hand.md",
-    "_posts/play-on-wordpress.md",
     "_posts/play-on-vim.md",
     "_posts/expression-evaluation.md",
     "_posts/database-intermediate-sql.md",
@@ -176,11 +181,6 @@
     "categories/index.md",
     "_posts/c-string-lib-functions.md",
     "_posts/play-on-android-emulator.md",
-    "_posts/play-on-stl.md",
-    "_posts/play-on-wallpaper.md",
-    "().md",
-    "_posts/play-on-bookmarks.md",
-    "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
     "Pasted image 20230427065322.png",
     "_template",
     "Untitled.canvas"
