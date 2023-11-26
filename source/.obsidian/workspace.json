@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "94e87db1d9de24d2",
+        "id": "dcbe1b5199db3173",
         "type": "tabs",
         "children": [
           {
-            "id": "8c7fa14a9f23310c",
+            "id": "f96cc65c51332a8e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/play-on-google-pixel.md",
+                "file": "_posts/play-on-wordpress.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/play-on-google-pixel.md",
+                "file": "_posts/play-on-wordpress.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/play-on-google-pixel.md",
+                "file": "_posts/play-on-wordpress.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/play-on-google-pixel.md"
+                "file": "_posts/play-on-wordpress.md"
               }
             }
           }
@@ -152,10 +152,21 @@
       "templates:Insert template": false
     }
   },
-  "active": "8c7fa14a9f23310c",
+  "active": "f96cc65c51332a8e",
   "lastOpenFiles": [
-    "_posts/test.md",
+    "_posts/database-relational-query-language.md",
+    "_posts/algorithm-circle-permutation.md",
+    "_posts/algorithm-back-tracking-and-iddfs.md",
+    "_posts/jsp-servlet-jsp-short-hand.md",
+    "_posts/play-on-wordpress.md",
+    "_posts/play-on-vim.md",
+    "_posts/expression-evaluation.md",
+    "_posts/database-intermediate-sql.md",
+    "_posts/database-elementary-sql.md",
+    "_posts/play-on-anbox.md",
+    "_template/post_template.md",
     "_posts/play-on-google-pixel.md",
+    "_posts/test.md",
     "_posts/database-design.md",
     "_posts/codesnippet-a-simple-judger-for-java.md",
     "_drafts/WordPress Setup.md",
@@ -163,25 +174,14 @@
     "_drafts/a4.png",
     "tags/index.md",
     "categories/index.md",
-    "_template/post_template.md",
     "_posts/c-string-lib-functions.md",
     "_posts/play-on-android-emulator.md",
-    "_posts/database-relational-query-language.md",
-    "_posts/expression-evaluation.md",
-    "_posts/jsp-servlet-jsp-short-hand.md",
-    "_posts/play-on-wordpress.md",
     "_posts/play-on-stl.md",
     "_posts/play-on-wallpaper.md",
     "().md",
     "_posts/play-on-bookmarks.md",
-    "_posts/algorithm-back-tracking-and-iddfs.md",
     "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
-    "_posts/algorithm-set-partition-problem.md",
-    "_posts/algorithm-oiling-car-and-optimal-merge.md",
-    "_posts/play-on-kde.md",
     "Pasted image 20230427065322.png",
-    "_posts/tool-box.md",
-    "_posts/stl-simple-usage-of-stl.md",
     "_template",
     "Untitled.canvas"
   ]
