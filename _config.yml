@@ -100,11 +100,12 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: toxic
 
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:SakuraWald/sakurawald.github.io.git
+  repo: git@github.com:sakurawald/sakurawald.github.io.git
   branch: main
 
 search:
