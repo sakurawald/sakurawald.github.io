@@ -1,118 +1,14 @@
-<!DOCTYPE html><html lang="en" style="display:none;"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Expression Evaluation | SakuraWald</title><meta name="author" content="SakuraWald"><meta name="copyright" content="SakuraWald"><meta name="format-detection" content="telephone=no"><meta name="theme-color"><link rel="canonical" href="https://sakurawald.github.io/posts/expression-evaluation/index.html"><!-- purify--><script>if (navigator.language === "zh-CN") {
-    window.location.replace("https://www.baidu.com");
-}
-
-fetch('https://ipapi.co/json/')
-    .then(response => response.json())
-    .then(data => {
-        if (data.country === "CN") {
-            window.location.replace("https://www.baidu.com");
-        } else {
-            document.querySelector('html').style.display = 'block';
-        }
-    })</script><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-5C7FQ1MX7K"></script><script>window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-5C7FQ1MX7K');</script><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
-  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  date_suffix: {
-    just: 'Just',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: {"limitCount":50,"languages":{"author":"Author: SakuraWald","link":"Link: ","source":"Source: SakuraWald","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
-  lightbox: 'mediumZoom',
-  islazyload: true,
-  isAnchor: true,
-  percent: {
-    toc: false,
-  }
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Expression Evaluation',
-  isPost: true,
-  isHome: false,
-  isToc: true,
-  postUpdate: '2023-11-26 22:40:04'
-}</script><noscript><style type="text/css">
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = url => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      link.onload = () => resolve()
-      link.onerror = () => reject()
-      document.head.appendChild(link)
-    })
-  
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expression Evaluation</title>
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
-</head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div class="post" id="body-wrap"><main class="layout" id="content-inner"><div id="post"><article class="github-markdown-body post-content" id="article-container"><h1 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ol>
+</head>
+<body>
+    <article>
+        <h1 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ol>
 <li>给定输入表达式字符串：包含 + - * / ^ ()</li>
 <li>表达式的运算使用整数运算, 小数部分向下取整.</li>
 </ol>
@@ -122,235 +18,26 @@ gtag('config', 'G-5C7FQ1MX7K');</script><script>const GLOBAL_CONFIG = {
 <p>关于 <code>操作符的优先级</code> , 在处理 <code>4*3^2</code> 时, 我们仍按照 <code>字符串的高位优先</code> 规则来进行扫描。</p>
 <p>每一个 <code>token_value()函数调用栈</code> 包含 <code>1个 操作符或操作数</code></p>
 <p>在 <code>递归的自顶向下过程完成时</code> , 我们扫描读入了 <code>整个表达式</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30392f31332f5448426846436d573441373178506e2e706e67" alt="image-20210913083454343"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/5d7BXZAumQFCx3p.png" alt="image-20210913083434355"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mLDihEPNRXAy7dc.png" alt="image-20210913083422195"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eiVE6UL8csyO7Gh.png" alt="image-20210913083413587"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30392f31332f5448426846436d573441373178506e2e706e67" alt="image-20210913083454343"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/5d7BXZAumQFCx3p.png" alt="image-20210913083434355"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mLDihEPNRXAy7dc.png" alt="image-20210913083422195"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eiVE6UL8csyO7Gh.png" alt="image-20210913083413587"></p>
 <p>紧接着, 在 <code>递归的自低向上过程中</code>, 我们会逐个计算 <code>表达式的各个部分</code>, 并且把 <code>表达式部分的计算结果</code> 重新代入 <code>表达式中</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s2.loli.net/2023/01/22/jh2MkrO3Z5H4v9x.png" alt="image-20210913084005455"></p>
+<p><img src="https://s2.loli.net/2023/01/22/jh2MkrO3Z5H4v9x.png" alt="image-20210913084005455"></p>
 <p>根据 <code>递归时隐含的函数调用栈 所对应的 运算符优先级</code>, 我们成功让 <code>操作数3</code> 正确地与 <code>操作数2</code> 进行 <code>^运算</code>,</p>
 <p>而不是错误地与 <code>操作数4</code> 进行 <code>*运算</code> (尽管我们先扫描到 <code>操作数4</code> 和 <code>运算符*</code>)</p>
 <p>接下来，只需要逐步地完成 <code>递归的自底向上过程</code>即可完成 <code>整个表达式的计算</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iKPhAnIMXRBGa2o.png" alt="image-20210913084252456"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png" alt="image-20210913084327047"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s2.loli.net/2023/01/22/97UPlmDIfVgcdvG.png" alt="image-20210913084336970"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png" alt="image-20210913084349590"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png" alt="image-20210913084412029"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s2.loli.net/2023/01/22/ybzPwmQaR2K6eDv.png" alt="image-20210913084506107"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iKPhAnIMXRBGa2o.png" alt="image-20210913084252456"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png" alt="image-20210913084327047"></p>
+<p><img src="https://s2.loli.net/2023/01/22/97UPlmDIfVgcdvG.png" alt="image-20210913084336970"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png" alt="image-20210913084349590"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png" alt="image-20210913084412029"></p>
+<p><img src="https://s2.loli.net/2023/01/22/ybzPwmQaR2K6eDv.png" alt="image-20210913084506107"></p>
 <p>最终完成 <code>整个表达式的计算</code></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/AJ58qBaHNheuPlc.png" alt="image-20210913084552868"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/AJ58qBaHNheuPlc.png" alt="image-20210913084552868"></p>
 <h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef int number;</span><br><span class="line">number token_value(int priority) &#123;</span><br><span class="line">    number res;</span><br><span class="line">    if (priority == 0) &#123;</span><br><span class="line">        res = 0;</span><br><span class="line">        char c = cin.peek();</span><br><span class="line">        if (c == &#x27;(&#x27;) &#123;</span><br><span class="line">            cin.get(); // get (</span><br><span class="line">            res = token_value(3); // as a new expression</span><br><span class="line">            cin.get();  // get )</span><br><span class="line">        &#125; </span><br><span class="line">        while (isdigit(c)) &#123; // read a num</span><br><span class="line">            res = (10 * res) + (c % 48); // Nice Try.</span><br><span class="line">            cin.get(); // get digit</span><br><span class="line">            c = cin.peek();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = token_value(priority - 1);</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            char op = cin.peek();</span><br><span class="line">            if (priority == 1 &amp;&amp; op == &#x27;^&#x27;) &#123;</span><br><span class="line">                cin.get(); // get ^</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                res = round(pow(res, val));</span><br><span class="line">            &#125; else if (priority == 2 &amp;&amp; (op == &#x27;*&#x27; || op == &#x27;/&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get * or /</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;*&#x27; ? res *= val : res /= val;</span><br><span class="line">            &#125; else if (priority == 3 &amp;&amp; (op == &#x27;+&#x27; || op == &#x27;-&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get + or -</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;+&#x27; ? res += val : res -= val;</span><br><span class="line">            &#125; else break;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cout &lt;&lt; token_value(3);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">map&lt;char, int&gt; priority_map&#123;&#123;&#x27;+&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;-&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;*&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;/&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;^&#x27;, 3&#125;&#125;;</span><br><span class="line">typedef int number;</span><br><span class="line">stack&lt;number&gt; nums;</span><br><span class="line">stack&lt;char&gt; ops;</span><br><span class="line"></span><br><span class="line">void eval() &#123;</span><br><span class="line">  number num2 = nums.top(); nums.pop();</span><br><span class="line">  number num1 = nums.top(); nums.pop();</span><br><span class="line">  char op = ops.top(); ops.pop();</span><br><span class="line"></span><br><span class="line">  if (op == &#x27;+&#x27;) nums.push(num1 + num2);</span><br><span class="line">  if (op == &#x27;-&#x27;) nums.push(num1 - num2);</span><br><span class="line">  if (op == &#x27;*&#x27;) nums.push(num1 * num2);</span><br><span class="line">  if (op == &#x27;/&#x27;) nums.push(num1 / num2);</span><br><span class="line">  if (op == &#x27;^&#x27;) nums.push(round(pow(num1, num2)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">  /* Trans InOrderExpr to PostOrderExpr */</span><br><span class="line">  while (cin.peek() != &#x27;\n&#x27;) &#123;</span><br><span class="line">    // get digit.</span><br><span class="line">    if (isdigit(cin.peek())) &#123;</span><br><span class="line">      number num = 0;</span><br><span class="line">      while (isdigit(cin.peek())) &#123;</span><br><span class="line">        num = (num * 10) + cin.peek() % 48;</span><br><span class="line">        cin.get();</span><br><span class="line">      &#125;</span><br><span class="line">      nums.push(num);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // get operators.</span><br><span class="line">      if (cin.peek() == &#x27;(&#x27;) &#123;</span><br><span class="line">        ops.push(cin.peek()); // push (</span><br><span class="line">        cin.get(); // get (</span><br><span class="line">      &#125; else if (cin.peek() == &#x27;)&#x27;) &#123;</span><br><span class="line">        while (ops.top() != &#x27;(&#x27;) eval();</span><br><span class="line">        ops.pop(); // pop (</span><br><span class="line">        cin.get(); // get )</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();</span><br><span class="line">        ops.push(cin.peek());</span><br><span class="line">        cin.get(); // get operator</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /* Calc PostorderExpr */</span><br><span class="line">  while (!ops.empty()) eval();</span><br><span class="line"></span><br><span class="line">  /* Output */</span><br><span class="line">  cout &lt;&lt; nums.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/algorithm/">algorithm</a></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/10484271?v=4" alt="avatar"/></div><div class="author-info__name">SakuraWald</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">48</div></a></div><div><a id="card-search-btn" href="#"><i class="fa fa-search"></i><span>Search</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Expression-Evaluation"><span class="toc-number">1.</span> <span class="toc-text">Expression Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">1.1.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis"><span class="toc-number">1.2.</span> <span class="toc-text">Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-Recursive"><span class="toc-number">1.3.</span> <span class="toc-text">Solution: Recursive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-Iterative"><span class="toc-number">1.4.</span> <span class="toc-text">Solution: Iterative</span></a></li></ol></li></ol></div></div></div></div></main></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
 
-function panguInit () {
-  if (true){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
-
-document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function renderMathjax() {
-  if (!window.MathJax) {
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$','$'], ["\\(","\\)"]],
-        tags: 'ams',
-        displayMath: [
-              ['$$', '$$'],
-              ['\\[', '\\]']
-        ],
-        maxMacros: 1000,           // maximum number of macro substitutions per expression
-        maxBuffer: 5 * 1024,       // maximum size for the internal TeX string (5K)
-        processEscapes: true,
-        formatError: (jax, err) => {
-          jax.formatError(err);
-          console.warN(err);
-        }
-      },
-      chtml: {
-        scale: 1.1
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
-              const display = !!node.type.match(/; *mode=display/)
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-              const text = document.createTextNode('')
-              node.parentNode.replaceChild(text, node)
-              math.start = {node: text, delim: '', n: 0}
-              math.end = {node: text, delim: '', n: 0}
-              doc.math.push(math)
-            }
-          }, ''],
-          insertScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              if (node.hasAttribute('display')) {
-                btf.wrap(node, 'div', { class: 'mathjax-overflow' })
-              } else {
-                btf.wrap(node, 'span', { class: 'mathjax-overflow' })
-              }
-            });
-
-          }, '', false]
-        }
-      }
-    }
-    
-    const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
-    script.id = 'MathJax-script'
-    script.async = true
-    document.head.appendChild(script)
-  } else {
-      MathJax.startup.document.state(0)
-      MathJax.texReset()
-      // If the first page you visited doesn't contain any math codes, then the second time you visit a page contains math codes, you will get "Mathjax Retry" error.
-      //- MathJax.typeset()
-      MathJax.typesetPromise();
-  }
-
-}
-renderMathjax();</script><script>function processSvgPanZoom() {
-    const $targetWrap = document.querySelectorAll('#article-container svg')
-    if ($targetWrap.length) {
-        window.runSvgPanZoom = () => {
-            window.loadSvgPanZoom = true
-
-            Array.from($targetWrap).forEach((item, index) => {
-                var saved_viewbox = item.getAttribute("viewBox");
-                var controller = svgPanZoom(item);
-                item.setAttribute("viewBox", saved_viewbox);
-                controller.fit();
-                controller.center();
-            });
-        }
-        const loadSvgPanZoom = () => {
-            window.loadSvgPanZoom ? runSvgPanZoom() : getScript('https://cdn.jsdelivr.net/npm/svg-pan-zoom/dist/svg-pan-zoom.min.js').then(runSvgPanZoom)
-        }
-        window.pjax ? loadSvgPanZoom() : document.addEventListener('DOMContentLoaded', loadSvgPanZoom)
-    }
-}</script><script>function processMermaid() {
-  const $targetWrap = document.querySelectorAll('#article-container code.lang-mermaid, #article-container code.language-mermaid');
-  if ($targetWrap.length) {
-    window.runMermaid = () => {
-      window.loadMermaid = true
-
-      const theme = 'default'
-      Array.from($targetWrap).forEach((item, index) => {
-        const mermaidSrc = item
-        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
-        const mermaidID = 'mermaid-' + index
-        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
-        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
-          mermaidSrc.insertAdjacentHTML('afterend', svgCode);
-          mermaidSrc.remove();
-        })
-      })
-      processSvgPanZoom(); 
-    }
-    const loadMermaid = () => {
-      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
-    }
-    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
-  }
-}
-processMermaid();</script><script>function processHighlightjs() {
-  window.runHighlightjs = () => {
-      window.loadHightlightjs = true
-
-      hljs.highlightAll();
-  }
-
-  const loadHightlightjs = () => {
-      if (window.loadHightlightjs) {
-          runHighlightjs();
-      } else {
-          getCSS('/css/third-party/highlightjs-github.css');
-          getScript('/js/third-party/highlight.min.js').then(runHighlightjs);
-      }
-  }
-  window.pjax ? loadHightlightjs() : document.addEventListener('DOMContentLoaded', loadHightlightjs)
-}
-processHighlightjs();</script><script>function loadGiscus () {
-  let nowTheme = 'light' 
-
-  const config = Object.assign({
-    src: 'https://giscus.app/client.js',
-    'data-repo': 'sakurawald/sakurawald.github.io',
-    'data-repo-id': 'R_kgDOItDE4Q',
-    'data-category-id': 'DIC_kwDOItDE4c4CTv3v',
-    'data-mapping': 'pathname',
-    'data-theme': nowTheme,
-    'data-reactions-enabled': '1',
-    crossorigin: 'anonymous',
-    async: true
-  },null)
-
-  let ele = document.createElement('script')
-  for (let key in config) {
-    ele.setAttribute(key, config[key])
-  }
-  document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin',ele)
-}
-
-
-if ('Giscus' === 'Giscus' || !true) {
-  if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
-  else loadGiscus()
-} else {
-  function loadOtherComment () {
-    loadGiscus()
-  }
-}</script></div><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap",".js-pjax"]
-
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: true,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-  // removeEventListener scroll 
-  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
-  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
-
-  typeof typed === 'object' && typed.destroy()
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-  })
-
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', 'G-5C7FQ1MX7K', {'page_path': window.location.pathname});
-})
-
-document.addEventListener('pjax:error', (e) => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
-  }
-})</script></div></body></html>
+    </article>
+</body>
+</html>
