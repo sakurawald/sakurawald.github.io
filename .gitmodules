@@ -1,6 +1,3 @@
 [submodule "themes/toxic"]
 	path = themes/toxic
-	url = git@github.com:sakurawald/hexo-theme-toxic.git
-[submodule "themes/hexo-theme-toxic"]
-	path = themes/hexo-theme-toxic
-	url = git@github.com:sakurawald/hexo-theme-toxic.git
+	url = git@github.com:sakurawald/toxic.git
