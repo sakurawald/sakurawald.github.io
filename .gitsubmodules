@@ -1,7 +1,3 @@
 [submodule "themes/toxic"]
     path = themes/toxic
     url = https://github.com/sakurawald/toxic.git
-
-[submodule "themes/hexo-theme-toxic"]
-    path = themes/hexo-theme-toxic
-    url = https://github.com/sakurawald/hexo-theme-toxic.git
