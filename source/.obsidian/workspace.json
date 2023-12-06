@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "dcbe1b5199db3173",
+        "id": "f3a5edad4161dcf0",
         "type": "tabs",
         "children": [
           {
-            "id": "f96cc65c51332a8e",
+            "id": "990a6b1d74a5008f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/trick-to-fake-the-github-board.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -48,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "s ",
+                "query": "tag:github",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -73,7 +69,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -93,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/trick-to-fake-the-github-board.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +106,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/trick-to-fake-the-github-board.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,9 +127,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "_posts/trick-to-fake-the-github-board.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -152,10 +145,10 @@
       "templates:Insert template": false
     }
   },
-  "active": "f96cc65c51332a8e",
+  "active": "990a6b1d74a5008f",
   "lastOpenFiles": [
-    "_posts/play-on-wordpress.md",
     "_posts/trick-to-fake-the-github-board.md",
+    "_posts/play-on-wordpress.md",
     "_posts/play-on-stl.md",
     "_posts/play-on-kde.md",
     "_posts/clean-unused-chunks-in-minecraft.md",

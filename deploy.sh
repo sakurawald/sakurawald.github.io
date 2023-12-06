@@ -1,6 +1,6 @@
 echo "Saving current theme..."
-cd ./themes/hexo-theme-toxic
-git add . && git commit -m "save" && git push origin HEAD:remix
+cd ./themes/toxic
+git add . && git commit -m "save" && git push origin master
 
 echo "Saving current blog..."
 cd ../..
