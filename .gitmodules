@@ -1,0 +1,3 @@
+[submodule "themes/toxic"]
+	path = themes/toxic
+	url = https://github.com/sakurawald/toxic.git
