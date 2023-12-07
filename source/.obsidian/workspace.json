@@ -11,8 +11,12 @@
             "id": "990a6b1d74a5008f",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/guide-to-install-qubes-on-qemu.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -44,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:github",
+                "query": "path:",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/guide-to-install-qubes-on-qemu.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/guide-to-install-qubes-on-qemu.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/guide-to-install-qubes-on-qemu.md"
+              }
             }
           }
         ]
@@ -147,6 +155,8 @@
   },
   "active": "990a6b1d74a5008f",
   "lastOpenFiles": [
+    "Untitled.md",
+    "_posts/guide-to-install-qubes-on-qemu.md",
     "_posts/trick-to-fake-the-github-board.md",
     "_posts/play-on-wordpress.md",
     "_posts/play-on-stl.md",
@@ -172,8 +182,6 @@
     "_drafts/a4.png",
     "tags/index.md",
     "categories/index.md",
-    "_posts/c-string-lib-functions.md",
-    "_posts/play-on-android-emulator.md",
     "Pasted image 20230427065322.png",
     "_template",
     "Untitled.canvas"
