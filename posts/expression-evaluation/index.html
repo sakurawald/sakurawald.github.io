@@ -7,6 +7,7 @@
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
 </head>
 <body>
+<main>
     <article>
         <h1 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ol>
 <li>给定输入表达式字符串：包含 + - * / ^ ()</li>
@@ -39,5 +40,114 @@
 <h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">map&lt;char, int&gt; priority_map&#123;&#123;&#x27;+&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;-&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;*&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;/&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;^&#x27;, 3&#125;&#125;;</span><br><span class="line">typedef int number;</span><br><span class="line">stack&lt;number&gt; nums;</span><br><span class="line">stack&lt;char&gt; ops;</span><br><span class="line"></span><br><span class="line">void eval() &#123;</span><br><span class="line">  number num2 = nums.top(); nums.pop();</span><br><span class="line">  number num1 = nums.top(); nums.pop();</span><br><span class="line">  char op = ops.top(); ops.pop();</span><br><span class="line"></span><br><span class="line">  if (op == &#x27;+&#x27;) nums.push(num1 + num2);</span><br><span class="line">  if (op == &#x27;-&#x27;) nums.push(num1 - num2);</span><br><span class="line">  if (op == &#x27;*&#x27;) nums.push(num1 * num2);</span><br><span class="line">  if (op == &#x27;/&#x27;) nums.push(num1 / num2);</span><br><span class="line">  if (op == &#x27;^&#x27;) nums.push(round(pow(num1, num2)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">  /* Trans InOrderExpr to PostOrderExpr */</span><br><span class="line">  while (cin.peek() != &#x27;\n&#x27;) &#123;</span><br><span class="line">    // get digit.</span><br><span class="line">    if (isdigit(cin.peek())) &#123;</span><br><span class="line">      number num = 0;</span><br><span class="line">      while (isdigit(cin.peek())) &#123;</span><br><span class="line">        num = (num * 10) + cin.peek() % 48;</span><br><span class="line">        cin.get();</span><br><span class="line">      &#125;</span><br><span class="line">      nums.push(num);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // get operators.</span><br><span class="line">      if (cin.peek() == &#x27;(&#x27;) &#123;</span><br><span class="line">        ops.push(cin.peek()); // push (</span><br><span class="line">        cin.get(); // get (</span><br><span class="line">      &#125; else if (cin.peek() == &#x27;)&#x27;) &#123;</span><br><span class="line">        while (ops.top() != &#x27;(&#x27;) eval();</span><br><span class="line">        ops.pop(); // pop (</span><br><span class="line">        cin.get(); // get )</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();</span><br><span class="line">        ops.push(cin.peek());</span><br><span class="line">        cin.get(); // get operator</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /* Calc PostorderExpr */</span><br><span class="line">  while (!ops.empty()) eval();</span><br><span class="line"></span><br><span class="line">  /* Output */</span><br><span class="line">  cout &lt;&lt; nums.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </article>
+</main>
+<footer>
+    <hr>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>Click here to <a href="">homepage</a></p>
+
+<p>See tags:
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/greedy/">greedy</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/website/">website</a>
+    
+        <a href="/tags/favorite/">favorite</a>
+    
+        <a href="/tags/pixel/">pixel</a>
+    
+        <a href="/tags/phone/">phone</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/magisk/">magisk</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/test/">test</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
+    
+        <a href="/tags/blog/">blog</a>
+    
+        <a href="/tags/wordpress/">wordpress</a>
+    
+        <a href="/tags/hexo/">hexo</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/wallpaper/">wallpaper</a>
+    
+        <a href="/tags/github/">github</a>
+    
+        <a href="/tags/shell/">shell</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2023 SakuraWald</p>
+
+</footer>
 </body>
 </html>
