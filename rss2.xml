@@ -15,8 +15,45 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 07 Dec 2023 04:43:30 GMT</pubDate>
+    <pubDate>Thu, 07 Dec 2023 10:08:41 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>guide-to-install-qubes-on-qemu</title>
+      <link>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</link>
+      <guid>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</guid>
+      <pubDate>Thu, 07 Dec 2023 07:22:03 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Guide-to-install-qubes-on-qemu&quot;&gt;&lt;a href=&quot;#Guide-to-install-qubes-on-qemu&quot; class=&quot;headerlink&quot; title=&quot;Guide to install qubes on</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/security/">security</category>
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
+      <category domain="https://sakurawald.github.io/tags/qemu/">qemu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kvm/">kvm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>trick-to-fake-the-github-board</title>
@@ -164,6 +201,8 @@
       
       
       
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
       <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
       <category domain="https://sakurawald.github.io/tags/pixel/">pixel</category>
@@ -173,8 +212,6 @@
       <category domain="https://sakurawald.github.io/tags/root/">root</category>
       
       <category domain="https://sakurawald.github.io/tags/magisk/">magisk</category>
-      
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-google-pixel/#disqus_thread</comments>
@@ -228,19 +265,19 @@
       
       
       
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
       
       <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
       <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
       
-      <category domain="https://sakurawald.github.io/tags/note/">note</category>
-      
       <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
       
       <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
-      
-      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-android-emulator/#disqus_thread</comments>
@@ -582,36 +619,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-elementary-sql/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Algorithm] Oiling Car &amp; Optimal Merge</title>
-      <link>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</link>
-      <guid>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</guid>
-      <pubDate>Tue, 26 Apr 2022 22:16:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Greedy-Problems&quot;&gt;&lt;a href=&quot;#Greedy-Problems&quot; class=&quot;headerlink&quot; title=&quot;Greedy Problems&quot;&gt;&lt;/a&gt;Greedy Problems&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/greedy/">greedy</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
       
     </item>
     

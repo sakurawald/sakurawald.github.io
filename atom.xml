@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2023-12-07T04:43:30.095Z</updated>
+  <updated>2023-12-07T10:08:41.099Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -17,11 +17,46 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>guide-to-install-qubes-on-qemu</title>
+    <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
+    <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
+    <published>2023-12-07T07:22:03.000Z</published>
+    <updated>2023-12-07T10:08:41.099Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Guide-to-install-qubes-on-qemu&quot;&gt;&lt;a href=&quot;#Guide-to-install-qubes-on-qemu&quot; class=&quot;headerlink&quot; title=&quot;Guide to install qubes on</summary>
+        
+      
+    
+    
+    
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+    <category term="security" scheme="https://sakurawald.github.io/tags/security/"/>
+    
+    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
+    
+    <category term="qemu" scheme="https://sakurawald.github.io/tags/qemu/"/>
+    
+    <category term="kvm" scheme="https://sakurawald.github.io/tags/kvm/"/>
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
+    
+  </entry>
+  
+  <entry>
     <title>trick-to-fake-the-github-board</title>
     <link href="https://sakurawald.github.io/posts/trick-to-fake-the-github-board/"/>
     <id>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</id>
     <published>2023-11-26T14:16:53.000Z</published>
-    <updated>2023-12-07T04:43:30.095Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -47,7 +82,7 @@
     <link href="https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/"/>
     <id>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</id>
     <published>2023-11-26T14:14:19.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
+    <updated>2023-12-07T10:08:41.095Z</updated>
     
     
       
@@ -68,7 +103,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T21:05:28.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -91,7 +126,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T14:05:28.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -116,7 +151,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-wallpaper/"/>
     <id>https://sakurawald.github.io/posts/play-on-wallpaper/</id>
     <published>2023-04-15T01:51:57.000Z</published>
-    <updated>2023-12-07T04:43:30.095Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -139,7 +174,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-google-pixel/"/>
     <id>https://sakurawald.github.io/posts/play-on-google-pixel/</id>
     <published>2023-02-26T21:46:02.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -153,6 +188,8 @@
     
     
     
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
     <category term="android" scheme="https://sakurawald.github.io/tags/android/"/>
     
     <category term="pixel" scheme="https://sakurawald.github.io/tags/pixel/"/>
@@ -163,8 +200,6 @@
     
     <category term="magisk" scheme="https://sakurawald.github.io/tags/magisk/"/>
     
-    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
-    
   </entry>
   
   <entry>
@@ -172,7 +207,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T22:10:35.000Z</published>
-    <updated>2023-12-07T04:43:30.095Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -199,7 +234,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T22:38:07.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -213,19 +248,19 @@
     
     
     
+    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
+    
     <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
     
     <category term="android" scheme="https://sakurawald.github.io/tags/android/"/>
     
     <category term="emulator" scheme="https://sakurawald.github.io/tags/emulator/"/>
     
-    <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
-    
     <category term="practice" scheme="https://sakurawald.github.io/tags/practice/"/>
     
     <category term="solution" scheme="https://sakurawald.github.io/tags/solution/"/>
-    
-    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
     
   </entry>
   
@@ -234,7 +269,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-08T00:35:54.000Z</published>
-    <updated>2023-12-07T04:43:30.095Z</updated>
+    <updated>2023-12-07T10:08:41.103Z</updated>
     
     
       
@@ -281,7 +316,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-hexo/"/>
     <id>https://sakurawald.github.io/posts/play-on-hexo/</id>
     <published>2023-01-25T05:11:58.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -308,7 +343,7 @@
     <link href="https://sakurawald.github.io/posts/database-design/"/>
     <id>https://sakurawald.github.io/posts/database-design/</id>
     <published>2023-01-22T13:01:39.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
+    <updated>2023-12-07T10:08:41.095Z</updated>
     
     
       
@@ -334,7 +369,7 @@ $$
     <link href="https://sakurawald.github.io/posts/play-on-bookmarks/"/>
     <id>https://sakurawald.github.io/posts/play-on-bookmarks/</id>
     <published>2023-01-22T09:37:54.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -359,7 +394,7 @@ $$
     <link href="https://sakurawald.github.io/posts/play-on-hexo-render/"/>
     <id>https://sakurawald.github.io/posts/play-on-hexo-render/</id>
     <published>2023-01-15T03:00:00.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -392,7 +427,7 @@ $$
     <link href="https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/"/>
     <id>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</id>
     <published>2022-06-13T03:00:00.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -420,7 +455,7 @@ $$
     <link href="https://sakurawald.github.io/posts/play-on-anbox/"/>
     <id>https://sakurawald.github.io/posts/play-on-anbox/</id>
     <published>2022-06-09T09:41:00.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -449,7 +484,7 @@ sudo snap install --devmode --edge</summary>
     <link href="https://sakurawald.github.io/posts/database-relational-query-language/"/>
     <id>https://sakurawald.github.io/posts/database-relational-query-language/</id>
     <published>2022-04-30T02:53:00.000Z</published>
-    <updated>2023-12-07T04:43:30.091Z</updated>
+    <updated>2023-12-07T10:08:41.099Z</updated>
     
     
       
@@ -475,7 +510,7 @@ sudo snap install --devmode --edge</summary>
     <link href="https://sakurawald.github.io/posts/database-advanced-sql/"/>
     <id>https://sakurawald.github.io/posts/database-advanced-sql/</id>
     <published>2022-04-29T13:35:00.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
+    <updated>2023-12-07T10:08:41.095Z</updated>
     
     
       
@@ -501,7 +536,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-intermediate-sql/"/>
     <id>https://sakurawald.github.io/posts/database-intermediate-sql/</id>
     <published>2022-04-29T08:39:00.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
+    <updated>2023-12-07T10:08:41.095Z</updated>
     
     
       
@@ -527,7 +562,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-elementary-sql/"/>
     <id>https://sakurawald.github.io/posts/database-elementary-sql/</id>
     <published>2022-04-28T11:55:00.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
+    <updated>2023-12-07T10:08:41.095Z</updated>
     
     
       
@@ -542,34 +577,6 @@ $$
     
     
     <category term="database" scheme="https://sakurawald.github.io/tags/database/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Algorithm] Oiling Car &amp; Optimal Merge</title>
-    <link href="https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/"/>
-    <id>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</id>
-    <published>2022-04-26T22:16:00.000Z</published>
-    <updated>2023-12-07T04:43:30.087Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Greedy-Problems&quot;&gt;&lt;a href=&quot;#Greedy-Problems&quot; class=&quot;headerlink&quot; title=&quot;Greedy Problems&quot;&gt;&lt;/a&gt;Greedy Problems&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</summary>
-        
-      
-    
-    
-    
-    
-    <category term="algorithm" scheme="https://sakurawald.github.io/tags/algorithm/"/>
-    
-    <category term="greedy" scheme="https://sakurawald.github.io/tags/greedy/"/>
     
   </entry>
   
