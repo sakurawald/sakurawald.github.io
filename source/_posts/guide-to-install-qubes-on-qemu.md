@@ -16,7 +16,7 @@ tags:
 
 This post is a guide for someone who want to install qubes (the reasonable security os in the world) on their virtual machine. Our targets are:
 1. Use qemu (a virtual machine emulator) to emulate a virtual machine (which contains all the emulated hardware and firmware, e.g. cpu, memory, disk, nic, video card and bios)
-2. Let the qubes installer believe it runs in a metal-bare machine (Include feature-pass like VT-d and IOMMU)
+2. Let the qubes installer believe it runs in a bare-metal machine (Include feature-pass like VT-d and IOMMU)
 3. Setup the guest of (qubes os) and run virtual machines inside the guest os. (Nested Virtialization)
 
 
@@ -65,9 +65,10 @@ Here are some FOSS viewers that works in linux platform: spicy, virt-viewer, tig
 > However, `vnc` works like a charm.
 
 > compression is disabled for localhost only connection, so that the input/output latency can be greatly reduced.
+
 ### Run the qubes installer 
 
- Qubes Installer will check if the machine enables `VT-d` and `IOMMU` feature, so here we need to pass these 2 features from host os to the guest os. (If you succeed, then the installer will not reminder you this tip).
+ Qubes Installer will check if the machine enables `VT-x` and `IOMMU` feature, so here we need to pass these 2 features from host os to the guest os. (If you succeed, then the installer will not reminder you this tip).
 
  Because the feature is passed from your host os, so your need to enable these features in your bios. (I mean, the bios in the host os)
 
