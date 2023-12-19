@@ -2,7 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</loc>
+    
+    <lastmod>2023-12-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-12-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/tags/index.html</loc>
+    
+    <lastmod>2023-12-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
+    
+    <lastmod>2023-12-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -29,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-google-pixel/</loc>
+    <loc>https://sakurawald.github.io/posts/play-on-bookmarks/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -38,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-bookmarks/</loc>
+    <loc>https://sakurawald.github.io/posts/play-on-google-pixel/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -83,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
+    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -92,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</loc>
+    <loc>https://sakurawald.github.io/posts/play-on-stable-diffusion/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -128,15 +164,6 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</loc>
-    
-    <lastmod>2023-12-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/play-on-stl/</loc>
     
     <lastmod>2023-12-19</lastmod>
@@ -146,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/categories/index.html</loc>
+    <loc>https://sakurawald.github.io/posts/codesnippet-a-simple-judger-for-java/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -191,24 +218,6 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
-    
-    <lastmod>2023-12-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</loc>
-    
-    <lastmod>2023-12-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/database-relational-query-language/</loc>
     
     <lastmod>2023-12-19</lastmod>
@@ -236,25 +245,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</loc>
-    
-    <lastmod>2023-12-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</loc>
-    
-    <lastmod>2023-12-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/c-string-lib-functions/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -272,6 +263,15 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/posts/c-string-lib-functions/</loc>
+    
+    <lastmod>2023-12-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</loc>
     
     <lastmod>2023-12-19</lastmod>
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/codesnippet-a-simple-judger-for-java/</loc>
+    <loc>https://sakurawald.github.io/posts/algorithm-circle-permutation/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -290,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/algorithm-circle-permutation/</loc>
+    <loc>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</loc>
     
     <lastmod>2023-12-19</lastmod>
     
@@ -318,13 +318,6 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/algorithm/</loc>
-    <lastmod>2023-12-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/dynamic-programming/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -373,14 +366,14 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/tags/database/</loc>
+    <loc>https://sakurawald.github.io/tags/code/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/tags/code/</loc>
+    <loc>https://sakurawald.github.io/tags/database/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -464,6 +457,20 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/tags/website/</loc>
+    <lastmod>2023-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/favorite/</loc>
+    <lastmod>2023-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/tags/pixel/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -486,20 +493,6 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/magisk/</loc>
-    <lastmod>2023-12-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/website/</loc>
-    <lastmod>2023-12-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/tags/favorite/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -668,6 +661,13 @@
   
   <url>
     <loc>https://sakurawald.github.io/tags/shell/</loc>
+    <lastmod>2023-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/tags/dynamic-programming/</loc>
     <lastmod>2023-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
