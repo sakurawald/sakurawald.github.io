@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "a409656e54add376",
+        "id": "e7a22d6e4d41df16",
         "type": "tabs",
         "children": [
           {
-            "id": "066e30ed5e8f42c5",
+            "id": "db9ecf98fc6ae5d0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/c-string-lib-functions.md",
+                "file": "_posts/grapheneos-review.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:mobile",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/c-string-lib-functions.md",
+                "file": "_posts/grapheneos-review.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/c-string-lib-functions.md",
+                "file": "_posts/grapheneos-review.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/c-string-lib-functions.md"
+                "file": "_posts/grapheneos-review.md"
               }
             }
           }
@@ -153,8 +153,12 @@
       "templates:Insert template": false
     }
   },
-  "active": "066e30ed5e8f42c5",
+  "active": "46b2cf0b93d2a79a",
   "lastOpenFiles": [
+    "_posts/expression-evaluation.md",
+    "_posts/grapheneos-review.md",
+    "_posts/database-relational-query-language.md",
+    "_posts/c-string-lib-functions.md",
     "_posts/guide-to-install-qubes-on-qemu.md",
     "_posts/clean-unused-chunks-in-minecraft.md",
     "Untitled.md",
@@ -164,11 +168,9 @@
     "_posts/play-on-kde.md",
     "_posts/database-advanced-sql.md",
     "_posts/algorithm-back-tracking-and-iddfs.md",
-    "_posts/database-relational-query-language.md",
     "_posts/algorithm-circle-permutation.md",
     "_posts/jsp-servlet-jsp-short-hand.md",
     "_posts/play-on-vim.md",
-    "_posts/expression-evaluation.md",
     "_posts/database-intermediate-sql.md",
     "_posts/database-elementary-sql.md",
     "_posts/play-on-anbox.md",
@@ -180,8 +182,6 @@
     "_drafts/WordPress Setup.md",
     "_drafts/a-discussion-about-minecraft-server-configurations.md",
     "_drafts/a4.png",
-    "tags/index.md",
-    "categories/index.md",
     "Pasted image 20230427065322.png",
     "_template",
     "Untitled.canvas"

@@ -1,13 +1,11 @@
 ---
-title: Use c language standard library to solve problems!
+title: use c language standard library to solve problems!
 date: 2021-02-06 13:53:00
 tags:
   - oj
   - c
   - library
 ---
-​
-
 # Use c language standard library to solve problems!
 
 ## 用字符串函数来解题！
