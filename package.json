@@ -12,7 +12,7 @@
     "version": "7.0.0"
   },
   "dependencies": {
-    "github-markdown-css": "^5.2.0",
+    "github-markdown-css": "^5.5.0",
     "hexo": "^7.0.0",
     "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
@@ -29,7 +29,7 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
-    "highlight.js": "^11.8.0",
+    "highlight.js": "^11.9.0",
     "pjax": "^0.2.8",
     "remove": "^0.1.5"
   }
