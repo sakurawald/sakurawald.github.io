@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Use c language standard library to solve problems!</title>
+    <title>use c language standard library to solve problems!</title>
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
 </head>
 <body>
 <main>
     <article>
-        <p>​</p>
-<h1 id="Use-c-language-standard-library-to-solve-problems"><a href="#Use-c-language-standard-library-to-solve-problems" class="headerlink" title="Use c language standard library to solve problems!"></a>Use c language standard library to solve problems!</h1><h2 id="用字符串函数来解题！"><a href="#用字符串函数来解题！" class="headerlink" title="用字符串函数来解题！"></a>用字符串函数来解题！</h2><h3 id="获取字符串长度-gt-strlen"><a href="#获取字符串长度-gt-strlen" class="headerlink" title="获取字符串长度 -&gt; strlen()"></a>获取字符串长度 -&gt; strlen()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定字符串的长度（不包含&#x27;\0&#x27;字符）</span></span><br><span class="line"><span class="comment">// str: 目标字符串</span></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str)</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Use-c-language-standard-library-to-solve-problems"><a href="#Use-c-language-standard-library-to-solve-problems" class="headerlink" title="Use c language standard library to solve problems!"></a>Use c language standard library to solve problems!</h1><h2 id="用字符串函数来解题！"><a href="#用字符串函数来解题！" class="headerlink" title="用字符串函数来解题！"></a>用字符串函数来解题！</h2><h3 id="获取字符串长度-gt-strlen"><a href="#获取字符串长度-gt-strlen" class="headerlink" title="获取字符串长度 -&gt; strlen()"></a>获取字符串长度 -&gt; strlen()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取指定字符串的长度（不包含&#x27;\0&#x27;字符）</span></span><br><span class="line"><span class="comment">// str: 目标字符串</span></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str)</span></span><br></pre></td></tr></table></figure>
 <p>关键点：题目的单词要么是“click”要么是“double click”，因此没有必要真正去解析词语，只需要运用字符串的长度关系，直接计算出“click”出现次数即可。</p>
 <h6 id="SOJ1409-双击666-AC-c"><a href="#SOJ1409-双击666-AC-c" class="headerlink" title="SOJ1409 双击666 AC.c"></a>SOJ1409 双击666 AC.c</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[];main(n)&#123;gets(&amp;n);<span class="built_in">strchr</span>(gets(s),<span class="string">&#x27;d&#x27;</span>)?<span class="built_in">puts</span>(<span class="string">&quot;666&quot;</span>):<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,<span class="built_in">strlen</span>(s)/<span class="number">6</span>+<span class="number">1</span>);&#125;</span><br></pre></td></tr></table></figure>
 <p>实际上，这道题的“click”出现次数也可以不计算。</p>
@@ -65,11 +64,7 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
-    
         <a href="/tags/greedy/">greedy</a>
-    
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/oj/">oj</a>
     
@@ -81,9 +76,11 @@
     
         <a href="/tags/note/">note</a>
     
+        <a href="/tags/code/">code</a>
+    
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -108,6 +105,8 @@
         <a href="/tags/website/">website</a>
     
         <a href="/tags/favorite/">favorite</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/pixel/">pixel</a>
     

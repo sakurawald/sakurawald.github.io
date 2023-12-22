@@ -23,17 +23,12 @@
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/5d7BXZAumQFCx3p.png" alt="image-20210913083434355"></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mLDihEPNRXAy7dc.png" alt="image-20210913083422195"></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eiVE6UL8csyO7Gh.png" alt="image-20210913083413587"></p>
-<p>紧接着, 在 <code>递归的自低向上过程中</code>, 我们会逐个计算 <code>表达式的各个部分</code>, 并且把 <code>表达式部分的计算结果</code> 重新代入 <code>表达式中</code></p>
-<p><img src="https://s2.loli.net/2023/01/22/jh2MkrO3Z5H4v9x.png" alt="image-20210913084005455"></p>
-<p>根据 <code>递归时隐含的函数调用栈 所对应的 运算符优先级</code>, 我们成功让 <code>操作数3</code> 正确地与 <code>操作数2</code> 进行 <code>^运算</code>,</p>
+<p>紧接着, 在 <code>递归的自低向上过程中</code>, 我们会逐个计算 <code>表达式的各个部分</code>, 并且把 <code>表达式部分的计算结果</code> 重新代入 <code>表达式中</code><br>根据 <code>递归时隐含的函数调用栈 所对应的 运算符优先级</code>, 我们成功让 <code>操作数3</code> 正确地与 <code>操作数2</code> 进行 <code>^运算</code>,</p>
 <p>而不是错误地与 <code>操作数4</code> 进行 <code>*运算</code> (尽管我们先扫描到 <code>操作数4</code> 和 <code>运算符*</code>)</p>
 <p>接下来，只需要逐步地完成 <code>递归的自底向上过程</code>即可完成 <code>整个表达式的计算</code></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iKPhAnIMXRBGa2o.png" alt="image-20210913084252456"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png" alt="image-20210913084327047"></p>
-<p><img src="https://s2.loli.net/2023/01/22/97UPlmDIfVgcdvG.png" alt="image-20210913084336970"></p>
-<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png" alt="image-20210913084349590"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png" alt="image-20210913084327047"><br><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png" alt="image-20210913084349590"></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png" alt="image-20210913084412029"></p>
-<p><img src="https://s2.loli.net/2023/01/22/ybzPwmQaR2K6eDv.png" alt="image-20210913084506107"></p>
 <p>最终完成 <code>整个表达式的计算</code></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/AJ58qBaHNheuPlc.png" alt="image-20210913084552868"></p>
 <h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef int number;</span><br><span class="line">number token_value(int priority) &#123;</span><br><span class="line">    number res;</span><br><span class="line">    if (priority == 0) &#123;</span><br><span class="line">        res = 0;</span><br><span class="line">        char c = cin.peek();</span><br><span class="line">        if (c == &#x27;(&#x27;) &#123;</span><br><span class="line">            cin.get(); // get (</span><br><span class="line">            res = token_value(3); // as a new expression</span><br><span class="line">            cin.get();  // get )</span><br><span class="line">        &#125; </span><br><span class="line">        while (isdigit(c)) &#123; // read a num</span><br><span class="line">            res = (10 * res) + (c % 48); // Nice Try.</span><br><span class="line">            cin.get(); // get digit</span><br><span class="line">            c = cin.peek();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = token_value(priority - 1);</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            char op = cin.peek();</span><br><span class="line">            if (priority == 1 &amp;&amp; op == &#x27;^&#x27;) &#123;</span><br><span class="line">                cin.get(); // get ^</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                res = round(pow(res, val));</span><br><span class="line">            &#125; else if (priority == 2 &amp;&amp; (op == &#x27;*&#x27; || op == &#x27;/&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get * or /</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;*&#x27; ? res *= val : res /= val;</span><br><span class="line">            &#125; else if (priority == 3 &amp;&amp; (op == &#x27;+&#x27; || op == &#x27;-&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get + or -</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;+&#x27; ? res += val : res -= val;</span><br><span class="line">            &#125; else break;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cout &lt;&lt; token_value(3);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -50,11 +45,7 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
-    
         <a href="/tags/greedy/">greedy</a>
-    
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/oj/">oj</a>
     
@@ -66,9 +57,11 @@
     
         <a href="/tags/note/">note</a>
     
+        <a href="/tags/code/">code</a>
+    
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -93,6 +86,8 @@
         <a href="/tags/website/">website</a>
     
         <a href="/tags/favorite/">favorite</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/pixel/">pixel</a>
     
