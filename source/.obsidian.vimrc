@@ -7,3 +7,7 @@ exmap back obcommand app:go-back
 nmap <C-o> :back
 exmap forward obcommand app:go-forward
 nmap <C-i> :go-forward
+
+set clipboard=unnamed
+
+set tabstop=2

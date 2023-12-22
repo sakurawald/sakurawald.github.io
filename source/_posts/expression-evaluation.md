@@ -4,7 +4,6 @@ date: 2021-09-13 08:53:00
 tags:
   - algorithm
 ---
-
 # Expression Evaluation
 
 ## Problem
@@ -35,9 +34,6 @@ eg: `2*((11+3)*(2+3)^2)+2` = `702`
 ![image-20210913083413587](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eiVE6UL8csyO7Gh.png)
 
 紧接着, 在 `递归的自低向上过程中`, 我们会逐个计算 `表达式的各个部分`, 并且把 `表达式部分的计算结果` 重新代入 `表达式中`
-
-![image-20210913084005455](https://s2.loli.net/2023/01/22/jh2MkrO3Z5H4v9x.png)
-
 根据 `递归时隐含的函数调用栈 所对应的 运算符优先级`, 我们成功让 `操作数3` 正确地与 `操作数2` 进行 `^运算`,
 
 而不是错误地与 `操作数4` 进行 `*运算` (尽管我们先扫描到 `操作数4` 和 `运算符*`)
@@ -47,14 +43,9 @@ eg: `2*((11+3)*(2+3)^2)+2` = `702`
 ![image-20210913084252456](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iKPhAnIMXRBGa2o.png)
 
 ![image-20210913084327047](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png)
-
-![image-20210913084336970](https://s2.loli.net/2023/01/22/97UPlmDIfVgcdvG.png)
-
 ![image-20210913084349590](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png)
 
 ![image-20210913084412029](https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png)
-
-![image-20210913084506107](https://s2.loli.net/2023/01/22/ybzPwmQaR2K6eDv.png)
 
 最终完成 `整个表达式的计算`
 

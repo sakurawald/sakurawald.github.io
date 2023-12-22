@@ -38,3 +38,4 @@ Pixel allows you to do:
 1. Hardware-supported filesystem-based full-disk encrypt
 	1. all the files and metadata is always stored encrypted, there is not any keys stored in the memory.
 	2. The encryption are diverse for different user profile.
+
