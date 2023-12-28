@@ -1,7 +1,12 @@
 .highlight {
-  border: solid gray 1px;
+  border: solid lightgrey 1px;
 }
 
 img {
   width: 50%;
+}
+
+blockquote {
+  padding-left: 12px;
+  border-left: 2px solid lightgrey;
 }
