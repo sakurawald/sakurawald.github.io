@@ -5,8 +5,9 @@ tags:
   - github
   - shell
 ---
-This script will fake the GitHub board from 1970-1-1 till now.
+# Trick to fake the github board 
 
+This script will paint your github board more green, you can revert the changes by deleting the repository and its commits.
 ```sh
 # painter.sh
 for i in {1..19477}; do 
