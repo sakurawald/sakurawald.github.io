@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 28 Dec 2023 04:15:00 GMT</pubDate>
+    <pubDate>Thu, 28 Dec 2023 04:47:47 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -422,41 +422,6 @@ $$
     </item>
     
     <item>
-      <title>play on hexo-render</title>
-      <link>https://sakurawald.github.io/posts/play-on-hexo-render/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-hexo-render/</guid>
-      <pubDate>Sun, 15 Jan 2023 03:00:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>
-$$
-&#92;boxed{@}
-
-% Color % 
-&#92;newcommand&#92;c[2]{&#92;textcolor{#1}{#2}} 
-&#92;newcommand&#92;r[1]{&#92;textcolor{red}{#1}}</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/test/">test</category>
-      
-      <category domain="https://sakurawald.github.io/tags/web/">web</category>
-      
-      <category domain="https://sakurawald.github.io/tags/jsp/">jsp</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-hexo-render/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
       <title>[JSP] Servlet &amp; JSP Short-Hand</title>
       <link>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</link>
       <guid>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</guid>
@@ -496,11 +461,7 @@ $$
         
           
           
-      <description>
-
-&lt;h1&gt;Install and Launch Anbox&lt;/h1&gt;
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot; lang=&quot;shell&quot;&gt;# Install the anbox
-sudo snap install --devmode --edge</description>
+      <description>&lt;h1 id=&quot;Install-and-Launch-Anbox&quot;&gt;&lt;a href=&quot;#Install-and-Launch-Anbox&quot; class=&quot;headerlink&quot; title=&quot;Install and Launch Anbox&quot;&gt;&lt;/a&gt;Install and</description>
           
         
       
@@ -623,6 +584,36 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-elementary-sql/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>[Algorithm] Oiling Car &amp; Optimal Merge</title>
+      <link>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</link>
+      <guid>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</guid>
+      <pubDate>Tue, 26 Apr 2022 22:16:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Greedy-Problems&quot;&gt;&lt;a href=&quot;#Greedy-Problems&quot; class=&quot;headerlink&quot; title=&quot;Greedy Problems&quot;&gt;&lt;/a&gt;Greedy Problems&lt;/h1&gt;
+$$
+&#92;boxed{@}
+%</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/greedy/">greedy</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
       
     </item>
     
