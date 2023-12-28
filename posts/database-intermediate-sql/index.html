@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>[Database] Intermediate SQL</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
 </head>
@@ -148,8 +151,8 @@ $$
 </blockquote>
 <hr>
 <p>我们考虑下面两个连接。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> takes</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> takes</span><br></pre></td></tr></table></figure>
 <p><code>SQL1</code> $\ne$ <code>SQL 2</code> ，但它们的 <code>结果关系</code> 高度 <code>相似</code>，<code>唯一的区别</code> 是：<code>SQL 1</code> 的 <code>结果关系</code> 中， <code>ID属性</code> 出现 <code>2次</code>，分别为 <code>student.ID</code> 和 <code>takes.ID</code> </p>
 <blockquote>
 <p>注意 <code>on &lt;predicate&gt;</code> 的 <code>语义</code>：<code>&lt;predicate&gt;</code>  <code>过滤出</code> <code>能参与连接的元组</code>。</p>
@@ -161,20 +164,20 @@ $$
 <p>然而，对于 <code>SQL 2</code>来说，由于 <code>student关系</code> 和 <code>takes关系</code> 的 <code>共有属性</code> 仅有 <code>ID</code>，所以 <code>连接条件</code> 也是 <code>student.ID = takes.ID</code>。</p>
 <p>但 <code>Natural Join</code> 会 <code>自动地去除属性名相同的列</code>，所以 <code>ID属性</code> 仅在 <code>SQL 2的结果关系</code> 中 <code>出现1次</code></p>
 <p>更确切地</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 3 equals SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student, takes</span><br><span class="line"><span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 4 equals SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> student.ID <span class="keyword">as</span> ID, name, dept_name, tot_cred, course_id, sec_id, semester, <span class="keyword">year</span>, grade</span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 3 equals SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student, takes</span><br><span class="line"><span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 4 equals SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> student.ID <span class="keyword">as</span> ID, name, dept_name, tot_cred, course_id, sec_id, semester, <span class="keyword">year</span>, grade</span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID</span><br></pre></td></tr></table></figure>
 <h3 id="Join-Type"><a href="#Join-Type" class="headerlink" title="Join Type"></a>Join Type</h3><h4 id="Inner-Join"><a href="#Inner-Join" class="headerlink" title="Inner Join"></a>Inner Join</h4><p><code>内连接 (Inner Join)</code> 是 <code>默认的连接类型</code>。</p>
 <blockquote>
 <p>当我们写 <code>JOIN</code> 时，实际上是省略了 <code>INNER</code> 的 <code>INNER JOIN</code>。</p>
 <p>同理，<code>NATURAL JOIN</code> = <code>NATURAL INNER JOIN</code></p>
 </blockquote>
 <h4 id="Outer-Join"><a href="#Outer-Join" class="headerlink" title="Outer Join"></a>Outer Join</h4><p>考虑该语句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> takes;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> takes;</span><br></pre></td></tr></table></figure>
 <p>该 <code>语句</code> 的 <code>期望</code> 是： <code>查询出所有学生的选课信息</code></p>
 <p>但是，如果 <code>某些学生没有选任何课</code>，那么在 <code>结果关系</code> 中，我们将无法看到 <code>这些学生</code>。</p>
 <p>如果我们 <code>希望</code> 在 <code>结果关系</code> 中，<code>仍然显示出</code> <code>没有选任何课的学生</code> 的信息，并且 <code>将它们的选课信息</code> 显示为 <code>null</code>。</p>
 <p>则可以使用 <code>外连接</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">NATURAL</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes;</span><br></pre></td></tr></table></figure>
 <hr>
 <p><code>外连接 (Outer Join)</code>：在 <code>内连接</code> 的基础上，通过在 <code>结果关系</code> 中 <code>创建包含空值的元组</code> 来 <code>保留</code> <code>哪些本来在内连接中丢失的元组</code></p>
 <blockquote>
@@ -194,9 +197,9 @@ $$
 </blockquote>
 <hr>
 <p>考虑该查询</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> student.ID <span class="operator">=</span> takes.ID;</span><br></pre></td></tr></table></figure>
 <p><code>SQL 1</code> $\ne$ <code>SQL 2</code> </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> takes <span class="keyword">ON</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><code>SQL 1</code>：<code>结果关系</code> 类似于 <code>student LEFT NATURAL OUTER JOIN takes</code>  ，只不过 <code>ID属性将出现2次</code>。</p>
 </li>
@@ -215,9 +218,9 @@ $$
 <p>该 <code>定义</code> 暂时不考虑 <code>物化视图 (Materialized View)</code></p>
 </blockquote>
 <h3 id="Create-a-view"><a href="#Create-a-view" class="headerlink" title="Create a view"></a>Create a view</h3><p>所定义的 <code>视图</code> 的 <code>模式</code> 可以从 <code>查询语句</code> 中自动地被 <code>推导</code> 出来 </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> faculty <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> ID, name, dept_name</span><br><span class="line"><span class="keyword">FROM</span> instructor;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> faculty <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> ID, name, dept_name</span><br><span class="line"><span class="keyword">FROM</span> instructor;</span><br></pre></td></tr></table></figure>
 <p>当然，也可以指定 <code>视图的属性名</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> departments_total_salary(dept_name, total_salary) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_name, <span class="built_in">sum</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> departments_total_salary(dept_name, total_salary) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_name, <span class="built_in">sum</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name;</span><br></pre></td></tr></table></figure>
 <h3 id="Materialized-View"><a href="#Materialized-View" class="headerlink" title="Materialized View"></a>Materialized View</h3><p><code>物化视图 (Materialized View)</code>：和 <code>非物化视图</code> 的区别在于，<code>物化视图</code> 会 <code>存储查询的结果关系</code>，并 <code>保证</code> 当 <code>实际关系</code> 更新时，<code>物化视图</code> 也应当有 <code>相应的维护策略</code>。这个过程称为 <code>物化视图的维护 (Materialized View Maintenance)</code></p>
 <p><code>物化视图</code> 的 <code>维护策略 (Maintenance Strategy)</code>：</p>
 <ul>
@@ -231,9 +234,9 @@ $$
 <p>这是因为 <code>单纯从视图定义的查询语句</code> 很难 <code>翻译出等价的且合法的更新语句</code>。</p>
 </blockquote>
 <p>考虑该 <code>视图定义</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> history_instructors <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;History&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> history_instructors <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;History&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>如果我们 <code>视图</code> 执行 <code>该语句</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> history_instructors</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;25566&#x27;</span>, <span class="string">&#x27;Brown&#x27;</span>, <span class="string">&#x27;Biology&#x27;</span>, <span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> history_instructors</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;25566&#x27;</span>, <span class="string">&#x27;Brown&#x27;</span>, <span class="string">&#x27;Biology&#x27;</span>, <span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
 <p>则也 <code>可能</code> 存在 <code>错误</code>，原因在于：<code>欲插入视图中的元组</code> 无法在 <code>视图中被查询出来</code>。即 <code>新值</code> 不满足 <code>视图的WHERE子句</code></p>
 <blockquote>
 <p><code>SQL</code> 默认允许这种操作。如果希望禁止这种操作，可以在 <code>CREATE VIEW</code> 时添加 <code>WITH CHECK OPTION</code></p>
@@ -249,13 +252,13 @@ $$
 <h3 id="Integrity-Constraint-for-Single-Relation"><a href="#Integrity-Constraint-for-Single-Relation" class="headerlink" title="Integrity Constraint for Single-Relation"></a>Integrity Constraint for Single-Relation</h3><ul>
 <li><code>not null约束</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">bugder <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">name <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">bugder <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
 <p>由于 <code>空值</code> 是 <code>所有的域的成员</code>，所以对于 <code>SQL</code>来说，<code>空值</code> 可以是 <code>任何属性</code> 的 <code>合法值</code>。</p>
 <p>如果希望 <code>禁止某个属性的值为空值</code>，则可以设置 <code>not null</code></p>
 <ul>
 <li><code>unique约束</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UNIQUE</span>(attribute_list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UNIQUE</span>(attribute_list)</span><br></pre></td></tr></table></figure>
 <p><code>unique约束</code> 用于指定 <code>某个属性列表</code> 为 <code>候选码</code>：即在 <code>关系</code> 中，没有 <code>任何两个元组</code> 可以在 <code>作为候选码的属性</code> 上的 <code>取值</code> <code>都相同</code>。</p>
 <blockquote>
 <p>n.b. <code>候选码属性</code> 可以被设置为 <code>null</code> （除非已经被声明 <code>not null</code>），由于 <code>unique约束</code> 是基于 <code>元组的相等性测试</code> 的，它和 <code>unique结构</code> 对待 <code>null</code> 的方式相同。</p>
@@ -267,7 +270,7 @@ $$
 <blockquote>
 <p>可以使用 <code>check</code> 来 <code>代替</code> <code>unique</code>，<code>not null</code></p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> section</span><br><span class="line">(course_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line"> sec_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line"> semester <span class="type">varchar</span>(<span class="number">6</span>),</span><br><span class="line"> <span class="keyword">year</span> <span class="type">numeric</span>(<span class="number">4</span>,<span class="number">0</span>),</span><br><span class="line"> building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line"> room_number <span class="type">varchar</span>(<span class="number">7</span>),</span><br><span class="line"> time_slot_id <span class="type">varchar</span>(<span class="number">4</span>),</span><br><span class="line"> <span class="keyword">PRIMARY</span> KEY (course_id, sec_id, semester, <span class="keyword">year</span>),</span><br><span class="line"> <span class="keyword">CHECK</span>(semester <span class="keyword">IN</span> (<span class="string">&#x27;Fall&#x27;</span>, <span class="string">&#x27;Winter&#x27;</span>, <span class="string">&#x27;Spring&#x27;</span>, <span class="string">&#x27;Summer&#x27;</span>))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> section</span><br><span class="line">(course_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line"> sec_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line"> semester <span class="type">varchar</span>(<span class="number">6</span>),</span><br><span class="line"> <span class="keyword">year</span> <span class="type">numeric</span>(<span class="number">4</span>,<span class="number">0</span>),</span><br><span class="line"> building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line"> room_number <span class="type">varchar</span>(<span class="number">7</span>),</span><br><span class="line"> time_slot_id <span class="type">varchar</span>(<span class="number">4</span>),</span><br><span class="line"> <span class="keyword">PRIMARY</span> KEY (course_id, sec_id, semester, <span class="keyword">year</span>),</span><br><span class="line"> <span class="keyword">CHECK</span>(semester <span class="keyword">IN</span> (<span class="string">&#x27;Fall&#x27;</span>, <span class="string">&#x27;Winter&#x27;</span>, <span class="string">&#x27;Spring&#x27;</span>, <span class="string">&#x27;Summer&#x27;</span>))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h3 id="Referential-Integrity"><a href="#Referential-Integrity" class="headerlink" title="Referential Integrity"></a>Referential Integrity</h3><h4 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h4><p><code>参照完整性 (Referential Integrity)</code>：在 <code>某个关系的给定属性集上的取值</code> 也 <code>必须出现在</code> <code>另一个关系的特定属性集的取值</code> 。</p>
 <blockquote>
 <p>若 <code>关系</code> $r_1$ 和 <code>关系</code> $r_2$ 的 <code>属性集</code> 分别为 $R_1$ 和 $R_2$，<code>主码</code> 分别为 $K_1$ 和 $K_2$。</p>
@@ -280,7 +283,7 @@ $$
 </blockquote>
 </blockquote>
 <hr>
-<h4 id="A-simple-demo"><a href="#A-simple-demo" class="headerlink" title="A simple demo"></a>A simple demo</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> section</span><br><span class="line">(...</span><br><span class="line"> <span class="keyword">FOREIGN</span> KEY(dept_name) <span class="keyword">REFERENCES</span> department</span><br><span class="line"> <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line"> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> CASCADE</span><br><span class="line"> ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="A-simple-demo"><a href="#A-simple-demo" class="headerlink" title="A simple demo"></a>A simple demo</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> section</span><br><span class="line">(...</span><br><span class="line"> <span class="keyword">FOREIGN</span> KEY(dept_name) <span class="keyword">REFERENCES</span> department</span><br><span class="line"> <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line"> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> CASCADE</span><br><span class="line"> ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>使用 <code>REFERENCE子句</code> 时，要求 <code>属性列表</code> 必须是 <code>被参照关系的候选码</code>。</p>
 <blockquote>
@@ -301,9 +304,9 @@ $$
 <h3 id="Complex-Check-Constraint"><a href="#Complex-Check-Constraint" class="headerlink" title="Complex Check Constraint"></a>Complex Check Constraint</h3><p>根据 <code>SQL标准</code> 来说，<code>check</code> 中允许定义 <code>任何谓词</code>。</p>
 <p>如果 <code>check的谓词</code> 中包含 <code>子查询</code>，则该 <code>check</code> 是 <code>复杂的</code>。</p>
 <p>考虑该例子</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CHECK</span>(time_slot_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> time_slot_id <span class="keyword">FROM</span> time_slot))</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CHECK</span>(time_slot_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> time_slot_id <span class="keyword">FROM</span> time_slot))</span><br></pre></td></tr></table></figure>
 <p>为了维护 <code>check约束</code>，并非仅仅是 <code>简单地在插入或更新元组时</code> 进行 <code>检查</code>，在 <code>子查询所涉及的关系</code> 发生 <code>变化</code> 时，也需要进行 <code>检查</code>。</p>
-<h2 id="Assertion"><a href="#Assertion" class="headerlink" title="Assertion"></a>Assertion</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> ASSERTION credits_earned_constraint <span class="keyword">CHECK</span>(</span><br><span class="line"><span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> ID</span><br><span class="line">           <span class="keyword">FROM</span> student</span><br><span class="line">           <span class="keyword">WHERE</span> tot_cred <span class="operator">&lt;&gt;</span> (<span class="keyword">SELECT</span> <span class="built_in">sum</span>(credits)</span><br><span class="line">                             <span class="keyword">FROM</span> takes <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> course</span><br><span class="line">                              <span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID</span><br><span class="line">                              <span class="keyword">AND</span> grade <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">                              <span class="keyword">AND</span> grade <span class="operator">&lt;&gt;</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line">                              )</span><br><span class="line">)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="Assertion"><a href="#Assertion" class="headerlink" title="Assertion"></a>Assertion</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> ASSERTION credits_earned_constraint <span class="keyword">CHECK</span>(</span><br><span class="line"><span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> ID</span><br><span class="line">           <span class="keyword">FROM</span> student</span><br><span class="line">           <span class="keyword">WHERE</span> tot_cred <span class="operator">&lt;&gt;</span> (<span class="keyword">SELECT</span> <span class="built_in">sum</span>(credits)</span><br><span class="line">                             <span class="keyword">FROM</span> takes <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> course</span><br><span class="line">                              <span class="keyword">WHERE</span> student.ID <span class="operator">=</span> takes.ID</span><br><span class="line">                              <span class="keyword">AND</span> grade <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">                              <span class="keyword">AND</span> grade <span class="operator">&lt;&gt;</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line">                              )</span><br><span class="line">)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p><code>断言 (Assertion)</code>：<code>断言</code> 是 <code>谓词</code> 的一种形式，用于描述我们希望 <code>数据库</code>  <code>总能</code> <code>满足的条件</code>。</p>
 <blockquote>
 <p><code>域约束</code>，<code>参照完整性约束</code> 均属于 <code>断言</code> </p>
@@ -334,13 +337,13 @@ $$
 </tbody>
 </table>
 </div>
-<h3 id="Default-Value"><a href="#Default-Value" class="headerlink" title="Default Value"></a>Default Value</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student</span><br><span class="line">(ID <span class="type">varchar</span>(<span class="number">5</span>),</span><br><span class="line"> name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"> dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"> tot_cred <span class="type">numeric</span>(<span class="number">3</span>, <span class="number">0</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">PRIMARY</span> KEY(ID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX studentID_index <span class="keyword">ON</span> student(ID)</span><br></pre></td></tr></table></figure>
+<h3 id="Default-Value"><a href="#Default-Value" class="headerlink" title="Default Value"></a>Default Value</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student</span><br><span class="line">(ID <span class="type">varchar</span>(<span class="number">5</span>),</span><br><span class="line"> name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"> dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"> tot_cred <span class="type">numeric</span>(<span class="number">3</span>, <span class="number">0</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">PRIMARY</span> KEY(ID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX studentID_index <span class="keyword">ON</span> student(ID)</span><br></pre></td></tr></table></figure>
 <h3 id="Big-Object-Type"><a href="#Big-Object-Type" class="headerlink" title="Big Object Type"></a>Big Object Type</h3><script type="math/tex; mode=display">
 \t{Large OBject} \lb{
 & \t{Character LOB} \\
 & \t{Binary LOB}
-}</script><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> demo</span><br><span class="line">(</span><br><span class="line">    book_review <span class="type">clob</span>(<span class="number">10</span>KB)</span><br><span class="line">    image <span class="type">blob</span>(<span class="number">10</span>MB)</span><br><span class="line">    movie <span class="type">blob</span>(<span class="number">2</span>GB)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+}</script><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> demo</span><br><span class="line">(</span><br><span class="line">    book_review <span class="type">clob</span>(<span class="number">10</span>KB)</span><br><span class="line">    image <span class="type">blob</span>(<span class="number">10</span>MB)</span><br><span class="line">    movie <span class="type">blob</span>(<span class="number">2</span>GB)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>当 <code>查询</code> <code>大对象</code> 时，<code>数据库</code> 并非直接 <code>返回整个大对象</code>。而是 <code>返回用于检索该大对象的定位器</code>。</p>
 <p>这类似于 <code>迭代器</code> 或 <code>文件指针</code>，可以 <code>按小片段</code> <code>逐步地访问</code> <code>整个大对象</code></p>
@@ -352,8 +355,8 @@ $$
 }</script><ul>
 <li><code>独特类型 (Distinct Type)</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> TYPE Dollars <span class="keyword">AS</span> <span class="type">numeric</span>(<span class="number">12</span>, <span class="number">2</span>) <span class="keyword">FINAL</span>;</span><br><span class="line"><span class="keyword">CREATE</span> TYPE Pounds <span class="keyword">AS</span> <span class="type">numeric</span>(<span class="number">12</span>, <span class="number">2</span>) <span class="keyword">FINAL</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> department</span><br><span class="line">(dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"> building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line"> budget Dollars</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> TYPE Dollars <span class="keyword">AS</span> <span class="type">numeric</span>(<span class="number">12</span>, <span class="number">2</span>) <span class="keyword">FINAL</span>;</span><br><span class="line"><span class="keyword">CREATE</span> TYPE Pounds <span class="keyword">AS</span> <span class="type">numeric</span>(<span class="number">12</span>, <span class="number">2</span>) <span class="keyword">FINAL</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> department</span><br><span class="line">(dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"> building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line"> budget Dollars</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>final关键字</code> 是没有任何意义的。属于 <code>SQL标准</code> 的 <code>历史遗留问题</code></p>
 </blockquote>
@@ -362,8 +365,8 @@ $$
 <p>尽管 <code>Dollars</code> 和 <code>Pounds</code> 基于 <code>相同的基本数据类型</code> 而定义的。</p>
 </blockquote>
 <p>甚至，我们也无法将 <code>Integer</code> 赋值给 <code>Dollars</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This is wrong</span></span><br><span class="line">department.budget <span class="operator">+</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This is right</span></span><br><span class="line"><span class="built_in">cast</span>(department.budget <span class="keyword">to</span> <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>)) <span class="operator">+</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This is wrong</span></span><br><span class="line">department.budget <span class="operator">+</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This is right</span></span><br><span class="line"><span class="built_in">cast</span>(department.budget <span class="keyword">to</span> <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>)) <span class="operator">+</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>之前我们讨论过 <code>域 (Domain)</code>，它和  <code>独特类型</code> 的区别在于：</p>
 <ul>
@@ -375,13 +378,13 @@ $$
 <li><code>结构化数据类型 (Structured Data Type)</code></li>
 </ul>
 <p>可以创建 <code>具有嵌套记录结构</code>，<code>数组</code>，<code>多重集</code> 的 <code>复杂数据类型</code></p>
-<h2 id="Create-Table-Extension"><a href="#Create-Table-Extension" class="headerlink" title="Create Table Extension"></a>Create Table Extension</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> temp_instructor <span class="keyword">LIKE</span> instructor</span><br></pre></td></tr></table></figure>
+<h2 id="Create-Table-Extension"><a href="#Create-Table-Extension" class="headerlink" title="Create Table Extension"></a>Create Table Extension</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> temp_instructor <span class="keyword">LIKE</span> instructor</span><br></pre></td></tr></table></figure>
 <h2 id="Schema-Catalog-and-Environment"><a href="#Schema-Catalog-and-Environment" class="headerlink" title="Schema, Catalog and Environment"></a>Schema, Catalog and Environment</h2><p><code>目录 (Catalog)</code> 和<code>模式 (Schema)</code>用于为 <code>关系</code> 提供 <code>命名空间</code>，它们都是用于 <code>限定</code> <code>关系</code> 的 <code>限定名</code>。 </p>
 <blockquote>
 <p>部分 <code>数据库实现</code> 使用 <code>数据库</code> 术语 来代替 <code>目录</code>。</p>
 </blockquote>
 <p>如下例子</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catelog5.univ_schema.course</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">catelog5.univ_schema.course</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>每个 <code>用户 (User)</code> 都有自己的 <code>默认目录 (Default Catalog)</code> 和 <code>默认模式 (Default Schema)</code>。</p>
 <p>当 <code>用户</code> 连接到 <code>数据库</code> 时，会为 <code>该连接自动地配置为</code> <code>默认目录</code> 和 <code>默认模式</code>。</p>
@@ -391,35 +394,35 @@ $$
 <p>当 <code>创建</code> <code>新用户</code> 时，会 <code>自动地</code> 创建 <code>与该用户名同名的模式</code></p>
 <p>在前面的例子中，我们都没有指定 <code>catelog</code> 和 <code>schema</code>。</p>
 <p>这是因为我们一直在使用 <code>用户的默认目录</code> 和 <code>用户的默认模式</code>。即直接用</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">course</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">course</span><br></pre></td></tr></table></figure>
 <p>来 <code>定位</code> <code>course关系</code></p>
 </blockquote>
 <h2 id="Authorization"><a href="#Authorization" class="headerlink" title="Authorization"></a>Authorization</h2><p><code>授权 (Authorization)</code>：将某种 <code>权限 (Privilege/Permission)</code> 授予 <code>某个用户 (User)</code> 或 <code>某个角色 (Role)</code></p>
 <h3 id="Grant-and-Revoke"><a href="#Grant-and-Revoke" class="headerlink" title="Grant and Revoke"></a>Grant and Revoke</h3><p><code>授予权限</code> 和 <code>撤销权限</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit, Satoshi;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">FROM</span> AMit, Satoshi;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit, Satoshi;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">FROM</span> AMit, Satoshi;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>授权的 <code>最细粒度</code> 为 <code>关系的属性</code> ：<code>SQL标准</code> 允许对 <code>关系的某个属性</code> 授权，但不允许对 <code>关系的某个特定元组</code> 进行授权。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">UPDATE</span>(budget) <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit, Satoshi;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">UPDATE</span>(budget) <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit, Satoshi;</span><br></pre></td></tr></table></figure>
 <h3 id="Role"><a href="#Role" class="headerlink" title="Role"></a>Role</h3><p><code>角色 (Role)</code>：即 <code>权限(Permission)的集合</code>。可以将 <code>角色</code> 授予 <code>用户</code>，使得 <code>用户</code> 获得 <code>这些权限</code></p>
 <p>使用 <code>角色</code> 的两点好处：</p>
 <ul>
 <li>可以一次性地授予 <code>权限集</code> 给 <code>角色</code>，然后再把 <code>角色</code> 授予给 <code>用户</code>，避免对 <code>每个用户</code> 都繁琐的授予 <code>权限集</code></li>
 <li>即可以 <code>标识</code> <code>用户的身份</code>，同时可以避免 <code>所有相同身份的人使用同个用户</code> 导致 <code>安全隐患</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> ROLE instructor;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> takes <span class="keyword">TO</span> instructor</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> instructor <span class="keyword">TO</span> Amit</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> ROLE instructor;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> takes <span class="keyword">TO</span> instructor</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> instructor <span class="keyword">TO</span> Amit</span><br></pre></td></tr></table></figure>
 <h3 id="View-Authorization"><a href="#View-Authorization" class="headerlink" title="View Authorization"></a>View Authorization</h3><p>对于 <code>仅有查看Geology系权限的工作人员</code>，尽管 <code>它没有权限查看其他系的元组</code>，下列 <code>语句</code> 仍然是 <code>合法的</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> geo_instructor <span class="keyword">AS</span></span><br><span class="line">(<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"> <span class="keyword">FROM</span> instructor</span><br><span class="line"> <span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Geology&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> geo_instructor</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> geo_instructor <span class="keyword">AS</span></span><br><span class="line">(<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"> <span class="keyword">FROM</span> instructor</span><br><span class="line"> <span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Geology&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> geo_instructor</span><br></pre></td></tr></table></figure>
 <p>这表明，<code>创建某个视图的用户</code> 并不需要 <code>获得该视图上的所有权限</code>。</p>
 <p>该 <code>用户</code> 在 <code>该视图上所获得的权限</code> 并不会 <code>多余它已有的权限</code></p>
 <blockquote>
 <p> 即 <code>危险的用户</code> 无法通过 <code>视图</code>，<code>函数</code> 或 <code>过程</code> 来 <code>获得</code>  <code>超越它本有的权限</code> 的 <code>权限</code></p>
 </blockquote>
 <h3 id="Reference-Authorization"><a href="#Reference-Authorization" class="headerlink" title="Reference Authorization"></a>Reference Authorization</h3><p><code>用户</code> 在 <code>创建外码</code>时，必须要拥有 <code>被参照关系</code> 的 <code>REFERENCE权限</code>。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">REFERENCES</span> (dept_name) <span class="keyword">ON</span> department <span class="keyword">TO</span> Mariano;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">REFERENCES</span> (dept_name) <span class="keyword">ON</span> department <span class="keyword">TO</span> Mariano;</span><br></pre></td></tr></table></figure>
 <p>一个很关键在原因在于：<code>所创建的外码</code> 会对 <code>被参照关系</code> 的 <code>删除和更新</code> 产生 <code>阻碍</code>。</p>
 <p>如果 <code>某个用户</code> <code>创建了许多外码约束</code>，那么那个 <code>被参照关系</code> 在 <code>删除和更新</code> 时会 <code>背负许多毫无意义的外码约束</code>，使得因为 <code>违反外码约束</code> 而 <code>无法进行</code> <code>删除和更新</code>。</p>
 <p>因此，<code>只有拥有被参照关系的REFERENCES权限的用户</code> 才可以 <code>创建引用该关系的外码</code>。</p>
@@ -428,27 +431,27 @@ $$
 </blockquote>
 <h3 id="Transfer-Permission-and-Revoke-Permission"><a href="#Transfer-Permission-and-Revoke-Permission" class="headerlink" title="Transfer Permission and Revoke Permission"></a>Transfer Permission and Revoke Permission</h3><p><code>SQL</code> <code>默认</code> 禁止 <code>转授</code> <code>授予某个用户的权限</code>。</p>
 <p>如果希望 <code>授予Amit的SELECT权限</code>，<code>Amit仍然可以转授该权限给其他用户</code>，则使用 <code>WIGH GRANT OPTION</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">TO</span> Amit <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
 <hr>
 <p><code>用户</code> 和 <code>角色</code> 之间的 <code>权限授予</code> 用 <code>授权图 (Authorization Graph)</code> 来描述。</p>
 <p>考虑如下情况，如果 <code>危险用户A</code> 从 <code>DBA</code> 获得 <code>某权限</code>，然后 <code>危险用户A</code> 将 <code>该权限转授</code> <code>危险用户B</code>。</p>
 <p>同时，<code>危险用户B</code> 再将 <code>该权限</code> <code>转授</code> <code>危险用户A</code>。</p>
 <p>也就是说，形成了一个 <code>转授环</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; a((A))</span><br><span class="line">a --&gt; b((B))</span><br><span class="line">b --&gt; a</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; a((A))</span><br><span class="line">a --&gt; b((B))</span><br><span class="line">b --&gt; a</span><br></pre></td></tr></table></figure>
 <p>使用 <code>授权图</code> 可以 <code>处理</code>  <code>这种情况</code> </p>
 <p>我们规定，<code>用户具有权限的充分必要条件</code> 是 从<code>授权图的根节点(DBA)</code> 到 <code>该用户的顶点</code> 之间要存在 <code>路径</code>。</p>
 <p>对于上述的情况，当我们 <code>撤销授予用户A的权限</code>时，由于 <code>用户B的权限</code> 是 <code>用户A转授给它的</code>，所以，实际上 <code>撤销的路径为</code> $dba \to a \to b$</p>
 <p>于是 <code>授权图</code> 变成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA))</span><br><span class="line">a((A))</span><br><span class="line">b((B))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA))</span><br><span class="line">a((A))</span><br><span class="line">b((B))</span><br></pre></td></tr></table></figure>
 <hr>
 <p>可以使用 <code>restrict</code> 来 <code>阻止</code> <code>级联收回</code>，如果 <code>存在级联收回</code>，则 <code>不执行任何收权动作</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">FROM</span> amit, Satoshi RESTRICT</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> department <span class="keyword">FROM</span> amit, Satoshi RESTRICT</span><br></pre></td></tr></table></figure>
 <hr>
 <p>如果确实希望 <code>只收回用户A的权限</code>，但 <code>不收回用户A授予用户B的权限</code>。</p>
 <p>则不应当使用 <code>上述的权限拓扑</code>，<code>DBA</code> 应当将 <code>权限</code> 授予 <code>角色</code>，然后将 <code>角色</code> 授予 <code>用户</code>。即</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; role(instructor)</span><br><span class="line">role --&gt; a((A))</span><br><span class="line">role --&gt; b((B))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; role(instructor)</span><br><span class="line">role --&gt; a((A))</span><br><span class="line">role --&gt; b((B))</span><br></pre></td></tr></table></figure>
 <p>当需要 <code>仅撤销用户A的权限时</code>，只需要 <code>简单地撤销用户A的角色instructor即可</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; role(instructor)</span><br><span class="line">a((A))</span><br><span class="line">role --&gt; b((B))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">dba((DBA)) --&gt; role(instructor)</span><br><span class="line">a((A))</span><br><span class="line">role --&gt; b((B))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>n.b. 作为一种规范，如果可能的话，<code>权限</code> 应该由 <code>角色</code> 来 <code>授予</code>，而不是由 <code>特定的用户</code> 授予 ！</p>
 </blockquote>
@@ -464,19 +467,19 @@ $$
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/greedy/">greedy</a>
+    
         <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
-        <a href="/tags/greedy/">greedy</a>
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
     
         <a href="/tags/oj/">oj</a>
     
         <a href="/tags/c/">c</a>
     
         <a href="/tags/library/">library</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
-        <a href="/tags/note/">note</a>
     
         <a href="/tags/database/">database</a>
     
@@ -494,19 +497,15 @@ $$
     
         <a href="/tags/linux/">linux</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
-    
         <a href="/tags/android/">android</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/emulator/">emulator</a>
     
         <a href="/tags/practice/">practice</a>
     
         <a href="/tags/solution/">solution</a>
-    
-        <a href="/tags/website/">website</a>
-    
-        <a href="/tags/favorite/">favorite</a>
     
         <a href="/tags/pixel/">pixel</a>
     
@@ -516,17 +515,13 @@ $$
     
         <a href="/tags/magisk/">magisk</a>
     
+        <a href="/tags/kde/">kde</a>
+    
         <a href="/tags/blog/">blog</a>
     
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/kde/">kde</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/ai/">ai</a>
     
@@ -558,13 +553,17 @@ $$
     
         <a href="/tags/wallpaper/">wallpaper</a>
     
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
         <a href="/tags/github/">github</a>
     
         <a href="/tags/shell/">shell</a>
     
-        <a href="/tags/stl/">stl</a>
+        <a href="/tags/web/">web</a>
     
-        <a href="/tags/cpp/">cpp</a>
+        <a href="/tags/jsp/">jsp</a>
     
 </p>
 

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Expression Evaluation</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
 </head>
@@ -31,8 +34,8 @@
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png" alt="image-20210913084412029"></p>
 <p>最终完成 <code>整个表达式的计算</code></p>
 <p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/AJ58qBaHNheuPlc.png" alt="image-20210913084552868"></p>
-<h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef int number;</span><br><span class="line">number token_value(int priority) &#123;</span><br><span class="line">    number res;</span><br><span class="line">    if (priority == 0) &#123;</span><br><span class="line">        res = 0;</span><br><span class="line">        char c = cin.peek();</span><br><span class="line">        if (c == &#x27;(&#x27;) &#123;</span><br><span class="line">            cin.get(); // get (</span><br><span class="line">            res = token_value(3); // as a new expression</span><br><span class="line">            cin.get();  // get )</span><br><span class="line">        &#125; </span><br><span class="line">        while (isdigit(c)) &#123; // read a num</span><br><span class="line">            res = (10 * res) + (c % 48); // Nice Try.</span><br><span class="line">            cin.get(); // get digit</span><br><span class="line">            c = cin.peek();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = token_value(priority - 1);</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            char op = cin.peek();</span><br><span class="line">            if (priority == 1 &amp;&amp; op == &#x27;^&#x27;) &#123;</span><br><span class="line">                cin.get(); // get ^</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                res = round(pow(res, val));</span><br><span class="line">            &#125; else if (priority == 2 &amp;&amp; (op == &#x27;*&#x27; || op == &#x27;/&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get * or /</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;*&#x27; ? res *= val : res /= val;</span><br><span class="line">            &#125; else if (priority == 3 &amp;&amp; (op == &#x27;+&#x27; || op == &#x27;-&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get + or -</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;+&#x27; ? res += val : res -= val;</span><br><span class="line">            &#125; else break;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cout &lt;&lt; token_value(3);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">map&lt;char, int&gt; priority_map&#123;&#123;&#x27;+&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;-&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;*&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;/&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;^&#x27;, 3&#125;&#125;;</span><br><span class="line">typedef int number;</span><br><span class="line">stack&lt;number&gt; nums;</span><br><span class="line">stack&lt;char&gt; ops;</span><br><span class="line"></span><br><span class="line">void eval() &#123;</span><br><span class="line">  number num2 = nums.top(); nums.pop();</span><br><span class="line">  number num1 = nums.top(); nums.pop();</span><br><span class="line">  char op = ops.top(); ops.pop();</span><br><span class="line"></span><br><span class="line">  if (op == &#x27;+&#x27;) nums.push(num1 + num2);</span><br><span class="line">  if (op == &#x27;-&#x27;) nums.push(num1 - num2);</span><br><span class="line">  if (op == &#x27;*&#x27;) nums.push(num1 * num2);</span><br><span class="line">  if (op == &#x27;/&#x27;) nums.push(num1 / num2);</span><br><span class="line">  if (op == &#x27;^&#x27;) nums.push(round(pow(num1, num2)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">  /* Trans InOrderExpr to PostOrderExpr */</span><br><span class="line">  while (cin.peek() != &#x27;\n&#x27;) &#123;</span><br><span class="line">    // get digit.</span><br><span class="line">    if (isdigit(cin.peek())) &#123;</span><br><span class="line">      number num = 0;</span><br><span class="line">      while (isdigit(cin.peek())) &#123;</span><br><span class="line">        num = (num * 10) + cin.peek() % 48;</span><br><span class="line">        cin.get();</span><br><span class="line">      &#125;</span><br><span class="line">      nums.push(num);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // get operators.</span><br><span class="line">      if (cin.peek() == &#x27;(&#x27;) &#123;</span><br><span class="line">        ops.push(cin.peek()); // push (</span><br><span class="line">        cin.get(); // get (</span><br><span class="line">      &#125; else if (cin.peek() == &#x27;)&#x27;) &#123;</span><br><span class="line">        while (ops.top() != &#x27;(&#x27;) eval();</span><br><span class="line">        ops.pop(); // pop (</span><br><span class="line">        cin.get(); // get )</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();</span><br><span class="line">        ops.push(cin.peek());</span><br><span class="line">        cin.get(); // get operator</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /* Calc PostorderExpr */</span><br><span class="line">  while (!ops.empty()) eval();</span><br><span class="line"></span><br><span class="line">  /* Output */</span><br><span class="line">  cout &lt;&lt; nums.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef int number;</span><br><span class="line">number token_value(int priority) &#123;</span><br><span class="line">    number res;</span><br><span class="line">    if (priority == 0) &#123;</span><br><span class="line">        res = 0;</span><br><span class="line">        char c = cin.peek();</span><br><span class="line">        if (c == &#x27;(&#x27;) &#123;</span><br><span class="line">            cin.get(); // get (</span><br><span class="line">            res = token_value(3); // as a new expression</span><br><span class="line">            cin.get();  // get )</span><br><span class="line">        &#125; </span><br><span class="line">        while (isdigit(c)) &#123; // read a num</span><br><span class="line">            res = (10 * res) + (c % 48); // Nice Try.</span><br><span class="line">            cin.get(); // get digit</span><br><span class="line">            c = cin.peek();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = token_value(priority - 1);</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            char op = cin.peek();</span><br><span class="line">            if (priority == 1 &amp;&amp; op == &#x27;^&#x27;) &#123;</span><br><span class="line">                cin.get(); // get ^</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                res = round(pow(res, val));</span><br><span class="line">            &#125; else if (priority == 2 &amp;&amp; (op == &#x27;*&#x27; || op == &#x27;/&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get * or /</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;*&#x27; ? res *= val : res /= val;</span><br><span class="line">            &#125; else if (priority == 3 &amp;&amp; (op == &#x27;+&#x27; || op == &#x27;-&#x27;)) &#123;</span><br><span class="line">                cin.get(); // get + or -</span><br><span class="line">                number val = token_value(priority - 1);</span><br><span class="line">                op == &#x27;+&#x27; ? res += val : res -= val;</span><br><span class="line">            &#125; else break;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cout &lt;&lt; token_value(3);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">map&lt;char, int&gt; priority_map&#123;&#123;&#x27;+&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;-&#x27;, 1&#125;,</span><br><span class="line">                            &#123;&#x27;*&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;/&#x27;, 2&#125;,</span><br><span class="line">                            &#123;&#x27;^&#x27;, 3&#125;&#125;;</span><br><span class="line">typedef int number;</span><br><span class="line">stack&lt;number&gt; nums;</span><br><span class="line">stack&lt;char&gt; ops;</span><br><span class="line"></span><br><span class="line">void eval() &#123;</span><br><span class="line">  number num2 = nums.top(); nums.pop();</span><br><span class="line">  number num1 = nums.top(); nums.pop();</span><br><span class="line">  char op = ops.top(); ops.pop();</span><br><span class="line"></span><br><span class="line">  if (op == &#x27;+&#x27;) nums.push(num1 + num2);</span><br><span class="line">  if (op == &#x27;-&#x27;) nums.push(num1 - num2);</span><br><span class="line">  if (op == &#x27;*&#x27;) nums.push(num1 * num2);</span><br><span class="line">  if (op == &#x27;/&#x27;) nums.push(num1 / num2);</span><br><span class="line">  if (op == &#x27;^&#x27;) nums.push(round(pow(num1, num2)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">  /* Trans InOrderExpr to PostOrderExpr */</span><br><span class="line">  while (cin.peek() != &#x27;\n&#x27;) &#123;</span><br><span class="line">    // get digit.</span><br><span class="line">    if (isdigit(cin.peek())) &#123;</span><br><span class="line">      number num = 0;</span><br><span class="line">      while (isdigit(cin.peek())) &#123;</span><br><span class="line">        num = (num * 10) + cin.peek() % 48;</span><br><span class="line">        cin.get();</span><br><span class="line">      &#125;</span><br><span class="line">      nums.push(num);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // get operators.</span><br><span class="line">      if (cin.peek() == &#x27;(&#x27;) &#123;</span><br><span class="line">        ops.push(cin.peek()); // push (</span><br><span class="line">        cin.get(); // get (</span><br><span class="line">      &#125; else if (cin.peek() == &#x27;)&#x27;) &#123;</span><br><span class="line">        while (ops.top() != &#x27;(&#x27;) eval();</span><br><span class="line">        ops.pop(); // pop (</span><br><span class="line">        cin.get(); // get )</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();</span><br><span class="line">        ops.push(cin.peek());</span><br><span class="line">        cin.get(); // get operator</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /* Calc PostorderExpr */</span><br><span class="line">  while (!ops.empty()) eval();</span><br><span class="line"></span><br><span class="line">  /* Output */</span><br><span class="line">  cout &lt;&lt; nums.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </article>
 </main>
@@ -45,19 +48,19 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/greedy/">greedy</a>
+    
         <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
-        <a href="/tags/greedy/">greedy</a>
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
     
         <a href="/tags/oj/">oj</a>
     
         <a href="/tags/c/">c</a>
     
         <a href="/tags/library/">library</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
-        <a href="/tags/note/">note</a>
     
         <a href="/tags/database/">database</a>
     
@@ -75,19 +78,15 @@
     
         <a href="/tags/linux/">linux</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
-    
         <a href="/tags/android/">android</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/emulator/">emulator</a>
     
         <a href="/tags/practice/">practice</a>
     
         <a href="/tags/solution/">solution</a>
-    
-        <a href="/tags/website/">website</a>
-    
-        <a href="/tags/favorite/">favorite</a>
     
         <a href="/tags/pixel/">pixel</a>
     
@@ -97,17 +96,13 @@
     
         <a href="/tags/magisk/">magisk</a>
     
+        <a href="/tags/kde/">kde</a>
+    
         <a href="/tags/blog/">blog</a>
     
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/kde/">kde</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/ai/">ai</a>
     
@@ -139,13 +134,17 @@
     
         <a href="/tags/wallpaper/">wallpaper</a>
     
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
         <a href="/tags/github/">github</a>
     
         <a href="/tags/shell/">shell</a>
     
-        <a href="/tags/stl/">stl</a>
+        <a href="/tags/web/">web</a>
     
-        <a href="/tags/cpp/">cpp</a>
+        <a href="/tags/jsp/">jsp</a>
     
 </p>
 

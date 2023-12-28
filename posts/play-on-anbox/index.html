@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>play on anbox</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="SakuraWald" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="SakuraWald" type="application/rss+xml">
 </head>
 <body>
 <main>
     <article>
-        <h1 id="Install-and-Launch-Anbox"><a href="#Install-and-Launch-Anbox" class="headerlink" title="Install and Launch Anbox"></a>Install and Launch Anbox</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the anbox</span></span><br><span class="line">sudo snap install --devmode --edge anbox</span><br><span class="line">sudo snap refresh --edge --devmode anbox</span><br><span class="line">sudo snap info anbox</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debug mode</span></span><br><span class="line">sudo snap set anbox debug.enable=true</span><br><span class="line">sudo /snap/bin/anbox.collect-bug-info</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start session-manager (Recommended)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description: https://github.com/Fuseteam/systemd-service-files<span class="comment">#anbox-session-manager</span></span></span><br><span class="line">mkdir -p ~/.config/systemd/user</span><br><span class="line">wget -O ~/.config/systemd/user/anbox-session-manager.service https://raw.githubusercontent.com/Fuseteam/systemd-service-files/main/user/anbox-session-manager.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sudo systemctl --user <span class="built_in">enable</span> --now anbox-session-manager</span></span><br><span class="line">sudo systemctl --machine=teeth@.host --user enable --now anbox-session-manager</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">A magic way to launch the anbox.appmgr</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">WARNING: <span class="keyword">do</span> not add <span class="string">&#x27;sudo&#x27;</span> <span class="keyword">for</span> the <span class="built_in">command</span>, or you will get error messages: [daemon.cpp:61@Run] Failed to connect to DBus</span></span><br><span class="line">anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity</span><br></pre></td></tr></table></figure>
-<h1 id="Create-Desktop-File"><a href="#Create-Desktop-File" class="headerlink" title="Create Desktop File"></a>Create Desktop File</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">anbox-application-manager.desktop</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=Anbox Application Manager</span><br><span class="line">Icon=/snap/anbox/213/meta/gui/icon.png</span><br><span class="line">Exec=sh -c &quot;systemctl --machine=teeth@.host --user enable --now anbox-session-manager; anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity&quot;</span><br><span class="line">Terminal=false</span><br><span class="line">Type=Application</span><br><span class="line">Comment=Anbox Applicatoin Manager</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create desktop file</span></span><br><span class="line">sudo desktop-file-install &#x27;/home/teeth/Desktop/anbox-application-manager.desktop&#x27; </span><br></pre></td></tr></table></figure>
-<h1 id="Additional-shells-for-bugs"><a href="#Additional-shells-for-bugs" class="headerlink" title="Additional shells for bugs"></a>Additional shells for bugs</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Switch software-rendering <span class="keyword">for</span> anbox</span></span><br><span class="line">sudo snap set anbox software-rendering.enable=true</span><br><span class="line">sudo snap restart anbox.container-manager</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start session-manager</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description: https://docs.anbox.io/userguide/advanced/software_rendering.html</span></span><br><span class="line">EGL_PLATFORM=x11 anbox session-manager</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">EGL_PLATFORM=x11 anbox session-manager --software-rendering</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install google-playstore and arm-applications-support</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arm-application-support can make you able to install most of the apks that only compile <span class="keyword">for</span> arm-architecture (not compiled <span class="keyword">for</span> x86-64 architectur</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">eg. without arm-application-support, you can<span class="string">&#x27;t install QQ...</span></span></span><br><span class="line">wget https://raw.githubusercontent.com/geeks-r-us/anbox-playstore-installer/master/install-playstore.sh</span><br><span class="line">chmod +x install-playstore.sh</span><br><span class="line">sudo bash ./install-playstore.sh</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For binder:<span class="literal">false</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">I just found that the we should not to care <span class="string">&quot;binder&quot;</span> <span class="keyword">in</span> the latest ubuntu (like Ubuntu 22.04 LTS)</span></span><br><span class="line">sudo mkdir /dev/binder</span><br><span class="line">sudo mount -t binder binder /dev/binder</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Solve google-play-store network connectivity problem</span></span><br><span class="line">sudo /snap/anbox/current/bin/anbox-bridge.sh start</span><br></pre></td></tr></table></figure>
+        <h1 id="Install-and-Launch-Anbox"><a href="#Install-and-Launch-Anbox" class="headerlink" title="Install and Launch Anbox"></a>Install and Launch Anbox</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the anbox</span></span><br><span class="line">sudo snap install --devmode --edge anbox</span><br><span class="line">sudo snap refresh --edge --devmode anbox</span><br><span class="line">sudo snap info anbox</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debug mode</span></span><br><span class="line">sudo snap set anbox debug.enable=true</span><br><span class="line">sudo /snap/bin/anbox.collect-bug-info</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start session-manager (Recommended)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description: https://github.com/Fuseteam/systemd-service-files<span class="comment">#anbox-session-manager</span></span></span><br><span class="line">mkdir -p ~/.config/systemd/user</span><br><span class="line">wget -O ~/.config/systemd/user/anbox-session-manager.service https://raw.githubusercontent.com/Fuseteam/systemd-service-files/main/user/anbox-session-manager.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sudo systemctl --user <span class="built_in">enable</span> --now anbox-session-manager</span></span><br><span class="line">sudo systemctl --machine=teeth@.host --user enable --now anbox-session-manager</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">A magic way to launch the anbox.appmgr</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">WARNING: <span class="keyword">do</span> not add <span class="string">&#x27;sudo&#x27;</span> <span class="keyword">for</span> the <span class="built_in">command</span>, or you will get error messages: [daemon.cpp:61@Run] Failed to connect to DBus</span></span><br><span class="line">anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity</span><br></pre></td></tr></table></figure>
+<h1 id="Create-Desktop-File"><a href="#Create-Desktop-File" class="headerlink" title="Create Desktop File"></a>Create Desktop File</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">anbox-application-manager.desktop</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=Anbox Application Manager</span><br><span class="line">Icon=/snap/anbox/213/meta/gui/icon.png</span><br><span class="line">Exec=sh -c &quot;systemctl --machine=teeth@.host --user enable --now anbox-session-manager; anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity&quot;</span><br><span class="line">Terminal=false</span><br><span class="line">Type=Application</span><br><span class="line">Comment=Anbox Applicatoin Manager</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create desktop file</span></span><br><span class="line">sudo desktop-file-install &#x27;/home/teeth/Desktop/anbox-application-manager.desktop&#x27; </span><br></pre></td></tr></table></figure>
+<h1 id="Additional-shells-for-bugs"><a href="#Additional-shells-for-bugs" class="headerlink" title="Additional shells for bugs"></a>Additional shells for bugs</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Switch software-rendering <span class="keyword">for</span> anbox</span></span><br><span class="line">sudo snap set anbox software-rendering.enable=true</span><br><span class="line">sudo snap restart anbox.container-manager</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start session-manager</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description: https://docs.anbox.io/userguide/advanced/software_rendering.html</span></span><br><span class="line">EGL_PLATFORM=x11 anbox session-manager</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">EGL_PLATFORM=x11 anbox session-manager --software-rendering</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install google-playstore and arm-applications-support</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arm-application-support can make you able to install most of the apks that only compile <span class="keyword">for</span> arm-architecture (not compiled <span class="keyword">for</span> x86-64 architectur</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">eg. without arm-application-support, you can<span class="string">&#x27;t install QQ...</span></span></span><br><span class="line">wget https://raw.githubusercontent.com/geeks-r-us/anbox-playstore-installer/master/install-playstore.sh</span><br><span class="line">chmod +x install-playstore.sh</span><br><span class="line">sudo bash ./install-playstore.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For binder:<span class="literal">false</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">I just found that the we should not to care <span class="string">&quot;binder&quot;</span> <span class="keyword">in</span> the latest ubuntu (like Ubuntu 22.04 LTS)</span></span><br><span class="line">sudo mkdir /dev/binder</span><br><span class="line">sudo mount -t binder binder /dev/binder</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Solve google-play-store network connectivity problem</span></span><br><span class="line">sudo /snap/anbox/current/bin/anbox-bridge.sh start</span><br></pre></td></tr></table></figure>
     </article>
 </main>
 <footer>
@@ -31,19 +34,19 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/greedy/">greedy</a>
+    
         <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
-        <a href="/tags/greedy/">greedy</a>
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
     
         <a href="/tags/oj/">oj</a>
     
         <a href="/tags/c/">c</a>
     
         <a href="/tags/library/">library</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
-        <a href="/tags/note/">note</a>
     
         <a href="/tags/database/">database</a>
     
@@ -61,19 +64,15 @@
     
         <a href="/tags/linux/">linux</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
-    
         <a href="/tags/android/">android</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/emulator/">emulator</a>
     
         <a href="/tags/practice/">practice</a>
     
         <a href="/tags/solution/">solution</a>
-    
-        <a href="/tags/website/">website</a>
-    
-        <a href="/tags/favorite/">favorite</a>
     
         <a href="/tags/pixel/">pixel</a>
     
@@ -83,17 +82,13 @@
     
         <a href="/tags/magisk/">magisk</a>
     
+        <a href="/tags/kde/">kde</a>
+    
         <a href="/tags/blog/">blog</a>
     
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/kde/">kde</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/ai/">ai</a>
     
@@ -125,13 +120,17 @@
     
         <a href="/tags/wallpaper/">wallpaper</a>
     
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
         <a href="/tags/github/">github</a>
     
         <a href="/tags/shell/">shell</a>
     
-        <a href="/tags/stl/">stl</a>
+        <a href="/tags/web/">web</a>
     
-        <a href="/tags/cpp/">cpp</a>
+        <a href="/tags/jsp/">jsp</a>
     
 </p>
 

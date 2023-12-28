@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 28 Dec 2023 05:02:41 GMT</pubDate>
+    <pubDate>Thu, 28 Dec 2023 07:52:48 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -65,8 +65,7 @@
         
           
           
-      <description>&lt;p&gt;This script will fake the GitHub board from 1970-1-1 till now.&lt;/p&gt;
-&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+      <description>&lt;h1 id=&quot;Trick-to-fake-the-github-board&quot;&gt;&lt;a href=&quot;#Trick-to-fake-the-github-board&quot; class=&quot;headerlink&quot; title=&quot;Trick to fake the github</description>
           
         
       
@@ -395,33 +394,6 @@ $$
     </item>
     
     <item>
-      <title>play on bookmarks</title>
-      <link>https://sakurawald.github.io/posts/play-on-bookmarks/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-bookmarks/</guid>
-      <pubDate>Sun, 22 Jan 2023 09:37:54 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Tool-Box&quot;&gt;&lt;a href=&quot;#Tool-Box&quot; class=&quot;headerlink&quot; title=&quot;Tool-Box&quot;&gt;&lt;/a&gt;Tool-Box&lt;/h1&gt;&lt;h2 id=&quot;出版网站&quot;&gt;&lt;a href=&quot;#出版网站&quot; class=&quot;headerlink&quot;</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/website/">website</category>
-      
-      <category domain="https://sakurawald.github.io/tags/favorite/">favorite</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-bookmarks/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
       <title>[JSP] Servlet &amp; JSP Short-Hand</title>
       <link>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</link>
       <guid>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</guid>
@@ -614,6 +586,33 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>[Algorithm] Multiple-Knapsack Problem &amp; Pebble Merge Problem</title>
+      <link>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</link>
+      <guid>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</guid>
+      <pubDate>Mon, 18 Apr 2022 23:53:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Dynamic-Programming-Problems&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Problems&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/dynamic-programming/">dynamic_programming</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/#disqus_thread</comments>
       
     </item>
     
