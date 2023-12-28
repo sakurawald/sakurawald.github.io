@@ -8,6 +8,7 @@ img {
 }
 
 blockquote {
+  margin-inline-start: 12px;
   padding-left: 12px;
   border-left: 2px solid lightgrey;
 }

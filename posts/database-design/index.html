@@ -169,7 +169,15 @@ $$
 <p>实际上，<code>同样的概念</code> 可能是 <code>复合属性</code> 也可能是 <code>简单属性</code>，这取决于 <code>具体需求</code>。</p>
 <p>同理，对于 <code>单值属性</code> 和 <code>多值属性</code> 也有类似的情况。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">address --&gt; state(state)</span><br><span class="line">address --&gt; city(city)</span><br><span class="line">address(address) --&gt; street(street)</span><br><span class="line">address --&gt; postal_code(postal_code)</span><br><span class="line">street --&gt; street_number(street_number)</span><br><span class="line">street --&gt; street_name(street_name)</span><br><span class="line">street --&gt; apartment_number(apartment_number)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-mermaid">graph TD;
+address --&gt; state(state)
+address --&gt; city(city)
+address(address) --&gt; street(street)
+address --&gt; postal_code(postal_code)
+street --&gt; street_number(street_number)
+street --&gt; street_name(street_name)
+street --&gt; apartment_number(apartment_number)
+</code></pre>
 <h4 id="Single-Valued-Attribute-amp-Multi-Valued-Attribute"><a href="#Single-Valued-Attribute-amp-Multi-Valued-Attribute" class="headerlink" title="Single-Valued Attribute &amp; Multi-Valued Attribute"></a>Single-Valued Attribute &amp; Multi-Valued Attribute</h4><p><code>多值属性</code> 使用 <code>花括号</code> 包围 <code>属性名</code>：$\s{phone_numer}$</p>
 <div class="table-container">
 <table>
@@ -207,19 +215,90 @@ $$
 <ul>
 <li><code>one-to-one</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">subgraph A</span><br><span class="line">a1</span><br><span class="line">a2</span><br><span class="line">a3</span><br><span class="line">a4</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">subgraph B</span><br><span class="line">b1</span><br><span class="line">b2</span><br><span class="line">b3</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">a1 --- b1</span><br><span class="line">a2 --- b2</span><br><span class="line">a3 --- b3</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-mermaid">graph LR;
+subgraph A
+a1
+a2
+a3
+a4
+end
+
+subgraph B
+b1
+b2
+b3
+end
+
+a1 --- b1
+a2 --- b2
+a3 --- b3
+</code></pre>
 <ul>
 <li><code>one-to-many</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">subgraph A</span><br><span class="line">a1</span><br><span class="line">a2</span><br><span class="line">a3</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">subgraph B</span><br><span class="line">b1</span><br><span class="line">b2</span><br><span class="line">b3</span><br><span class="line">b4</span><br><span class="line">b5</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">a1 --- b1</span><br><span class="line">a1 --- b2</span><br><span class="line">a2 --- b3</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-mermaid">graph LR;
+subgraph A
+a1
+a2
+a3
+end
+
+subgraph B
+b1
+b2
+b3
+b4
+b5
+end
+
+a1 --- b1
+a1 --- b2
+a2 --- b3
+</code></pre>
 <ul>
 <li><code>many-to-one</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">subgraph A</span><br><span class="line">a1</span><br><span class="line">a2</span><br><span class="line">a3</span><br><span class="line">a4</span><br><span class="line">a5</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">subgraph B</span><br><span class="line">b1</span><br><span class="line">b2</span><br><span class="line">b3</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">a1 --- b1</span><br><span class="line">a2 --- b1</span><br><span class="line">a3 --- b2</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-mermaid">graph LR;
+subgraph A
+a1
+a2
+a3
+a4
+a5
+end
+
+subgraph B
+b1
+b2
+b3
+end
+
+a1 --- b1
+a2 --- b1
+a3 --- b2
+</code></pre>
 <ul>
 <li><code>many-to-many</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">subgraph A</span><br><span class="line">a1</span><br><span class="line">a2</span><br><span class="line">a3</span><br><span class="line">a4</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">subgraph B</span><br><span class="line">b1</span><br><span class="line">b2</span><br><span class="line">b3</span><br><span class="line">b4</span><br><span class="line">end</span><br><span class="line">a1 --- b1</span><br><span class="line">a1 --- b2</span><br><span class="line">a2 --- b1</span><br><span class="line">a3 --- b3</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-mermaid">graph LR;
+subgraph A
+a1
+a2
+a3
+a4
+end
+
+subgraph B
+b1
+b2
+b3
+b4
+end
+a1 --- b1
+a1 --- b2
+a2 --- b1
+a3 --- b3
+</code></pre>
 <blockquote>
 <p>n.b. <code>一</code> 只能表示 <code>确切地要有1个实体</code>，而 <code>多</code> 可以是 <code>零个或多个实体</code>。</p>
 <p>这里所说的 <code>实体个数</code> 都是 <code>至多的实体个数</code></p>
@@ -293,6 +372,8 @@ $$
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
         <a href="/tags/greedy/">greedy</a>
     
         <a href="/tags/oj/">oj</a>
@@ -305,11 +386,11 @@ $$
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+        <a href="/tags/code/">code</a>
     
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -322,10 +403,6 @@ $$
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -348,8 +425,6 @@ $$
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/kde/">kde</a>
     
@@ -376,6 +451,10 @@ $$
         <a href="/tags/anime/">anime</a>
     
         <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/vim/">vim</a>
     

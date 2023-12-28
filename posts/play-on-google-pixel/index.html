@@ -18,7 +18,9 @@
 <p>WARNING: IF YOU UNLOCK BOOTLOADER, ALL YOUR DATA WILL BE WIPED.</p>
 </blockquote>
 <p>Inside <code>developer options</code>  , we need to <code>unlock OEM</code> so that we can unlock <code>bootloader</code> after.</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb reboot bootloader</span><br><span class="line">fastboot flashing unlock</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-shell">adb reboot bootloader
+fastboot flashing unlock
+</code></pre>
 <h3 id="Download-the-factory-images"><a href="#Download-the-factory-images" class="headerlink" title="Download the factory images"></a>Download the factory images</h3><ol>
 <li><p>Install <code>magisk.apk</code> from <a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk">https://github.com/topjohnwu/Magisk</a> </p>
 </li>
@@ -33,7 +35,10 @@
 <li><p>Use <code>adb pull /storage/emulated/0/Downloads/&#123;the_patched_init_boot.img&#125; ./</code> to get <code>patched init_boot.img</code> from the mobile device.</p>
 </li>
 <li><p>Flash <code>the_patched_init_boot.img</code> file into your mobie device</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb reboot bootloader</span><br><span class="line">fastboot flash init_boot &#123;the_patched_init_boot.img&#125;</span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-shell">adb reboot bootloader
+fastboot flash init_boot &#123;the_patched_init_boot.img&#125;
+fastboot reboot
+</code></pre>
 </li>
 <li><p>Done.</p>
 </li>
@@ -45,7 +50,9 @@
 <p>So, if you want to install a <code>specific kernel version</code> with <code>root</code> and without <code>wipe your mobile</code>. You should use <code>factory image</code> instead of <code>OTA image</code></p>
 <blockquote>
 <p>If you don’t want to <code>wipe your mobile</code>, just modify <code>flash-all.sh</code> :</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">fastboot -w update image-cheetah-td1a.220804.009.a2.zip</span></span><br><span class="line">fastboot update image-cheetah-td1a.220804.009.a2.zip</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-shell"># fastboot -w update image-cheetah-td1a.220804.009.a2.zip
+fastboot update image-cheetah-td1a.220804.009.a2.zip
+</code></pre>
 </blockquote>
 </blockquote>
 <ol>
@@ -89,6 +96,8 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
         <a href="/tags/greedy/">greedy</a>
     
         <a href="/tags/oj/">oj</a>
@@ -101,11 +110,11 @@
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+        <a href="/tags/code/">code</a>
     
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -118,10 +127,6 @@
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -144,8 +149,6 @@
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/kde/">kde</a>
     
@@ -172,6 +175,10 @@
         <a href="/tags/anime/">anime</a>
     
         <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/vim/">vim</a>
     

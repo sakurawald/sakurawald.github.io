@@ -58,30 +58,55 @@
 <p>但请注意，当我们使用 <code>char</code> 和 <code>varchar</code> 进行 <code>相等性测试</code>时，<code>行为</code> 将是 <code>未定义的</code>，某些实现可能会 <code>自动为varchar在末尾补空格</code>。</p>
 <p>出于这点考虑，建议 <code>永远只使用varchar</code></p>
 </blockquote>
-<h2 id="Define-a-Database-Pattern"><a href="#Define-a-Database-Pattern" class="headerlink" title="Define a Database Pattern"></a>Define a Database Pattern</h2><h3 id="General-Form"><a href="#General-Form" class="headerlink" title="General Form"></a>General Form</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> r</span><br><span class="line">(Attribute1 Domain1,</span><br><span class="line"> Attribute2 Domain2,</span><br><span class="line"> ...,</span><br><span class="line"> Attributen Domainn,</span><br><span class="line"> <span class="operator">&lt;</span>Integrity <span class="keyword">Constraint</span><span class="operator">&gt;</span>,</span><br><span class="line"> ...,</span><br><span class="line"> <span class="operator">&lt;</span>Integrity <span class="keyword">Constraint</span><span class="operator">&gt;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Define-a-Database-Pattern"><a href="#Define-a-Database-Pattern" class="headerlink" title="Define a Database Pattern"></a>Define a Database Pattern</h2><h3 id="General-Form"><a href="#General-Form" class="headerlink" title="General Form"></a>General Form</h3><pre><code class="lang-sql">CREATE TABLE r
+(Attribute1 Domain1,
+ Attribute2 Domain2,
+ ...,
+ Attributen Domainn,
+ &lt;Integrity Constraint&gt;,
+ ...,
+ &lt;Integrity Constraint&gt;);
+</code></pre>
 <blockquote>
 <p><code>域 (Domain)</code> ：用于指定 <code>与域相关联的属性</code> 的 <code>数据类型</code> 以及 <code>约束</code></p>
 </blockquote>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> teaches(</span><br><span class="line">id <span class="type">varchar</span>(<span class="number">5</span>),</span><br><span class="line">course_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line">section_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line">semester <span class="type">varchar</span>(<span class="number">6</span>),</span><br><span class="line"><span class="keyword">year</span> <span class="type">numeric</span>(<span class="number">4</span>,<span class="number">0</span>),</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (id, course_id, section_id, semester, <span class="keyword">year</span>),</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (course_id, section_id, semester, <span class="keyword">year</span>) <span class="keyword">REFERENCES</span> section,</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (id) <span class="keyword">REFERENCES</span> instructor    </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h2 id="Basic-DML"><a href="#Basic-DML" class="headerlink" title="Basic DML"></a>Basic DML</h2><h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> instructor <span class="keyword">VALUES</span> (<span class="number">10211</span>, <span class="string">&#x27;Smith&#x27;</span>, <span class="string">&#x27;Biology&#x27;</span>, <span class="number">66000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><pre><code class="lang-sql">CREATE TABLE teaches(
+id varchar(5),
+course_id varchar(8),
+section_id varchar(8),
+semester varchar(6),
+year numeric(4,0),
+PRIMARY KEY (id, course_id, section_id, semester, year),
+FOREIGN KEY (course_id, section_id, semester, year) REFERENCES section,
+FOREIGN KEY (id) REFERENCES instructor    
+);
+</code></pre>
+<h2 id="Basic-DML"><a href="#Basic-DML" class="headerlink" title="Basic DML"></a>Basic DML</h2><h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><pre><code class="lang-sql">INSERT INTO instructor VALUES (10211, &#39;Smith&#39;, &#39;Biology&#39;, 66000);
+</code></pre>
 <h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><ul>
 <li>Delete a <code>Relationship</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> r;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">DROP TABLE r;
+</code></pre>
 <ul>
 <li>Delete <code>Tuple</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> student;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">DELETE FROM student;
+</code></pre>
 <blockquote>
 <p>可以使用 <code>DELETE FROM r</code>来删除 <code>关系中的所有元组</code>，但 <code>保留关系的模式定义</code> </p>
 </blockquote>
-<h4 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> r <span class="keyword">ADD</span> attribute domain;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> r <span class="keyword">DROP</span> attribute;</span><br></pre></td></tr></table></figure>
+<h4 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h4><pre><code class="lang-sql">ALTER TABLE r ADD attribute domain;
+</code></pre>
+<pre><code class="lang-sql">ALTER TABLE r DROP attribute;
+</code></pre>
 <blockquote>
 <p>某些 <code>数据库</code> 仅仅支持 <code>删除整个关系</code> ，而不支持 <code>删除关系中的某个属性</code>。</p>
 </blockquote>
 <h2 id="Basic-Structure"><a href="#Basic-Structure" class="headerlink" title="Basic Structure"></a>Basic Structure</h2><p><code>SQL</code> 的 <code>基本查询</code> 由 <code>SELECT</code>，<code>FROM</code>，<code>WHERE</code> 三大 <code>子句</code> 所构成。</p>
-<h3 id="Single-Relation-query"><a href="#Single-Relation-query" class="headerlink" title="Single-Relation query"></a>Single-Relation query</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor;</span><br></pre></td></tr></table></figure>
+<h3 id="Single-Relation-query"><a href="#Single-Relation-query" class="headerlink" title="Single-Relation query"></a>Single-Relation query</h3><pre><code class="lang-sql">SELECT name
+FROM instructor;
+</code></pre>
 <blockquote>
 <p><code>数学</code> 上的 <code>关系</code> 本质是 <code>集合</code>，不允许 <code>重复元素</code>。</p>
 <p>但 <code>维护元素的唯一性</code> 的 <code>代价</code> 非常大，在 <code>数据库</code> 中则是 <code>允许关系中的元素发生重复</code> </p>
@@ -90,15 +115,25 @@
 <li><code>all</code>  和 <code>distinct</code></li>
 </ul>
 <p>对于 <code>SELECT</code> 来说，<code>去重选项</code> 默认为 <code>ALL</code> 即表示 <code>不去重</code>。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ALL</span> dept_name</span><br><span class="line"><span class="keyword">FROM</span> instructor;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT ALL dept_name
+FROM instructor;
+</code></pre>
 <p>也可以手动指定为 <code>distinct</code> 表示需要进行 <code>去重</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> dept_name</span><br><span class="line"><span class="keyword">FROM</span> instructor;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT DISTINCT dept_name
+FROM instructor;
+</code></pre>
 </blockquote>
 </blockquote>
 <p>使用 <code>WHERE子句</code> 可以从 <code>FROM子句的结果关系</code> 中 <code>筛选</code> 出 <code>使得谓词为True的元组</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> deptname  <span class="string">&#x27;Comp.Sci.&#x27;</span> <span class="keyword">AND</span> salary <span class="operator">&gt;</span> <span class="number">70000</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT name
+FROM instructor
+WHERE deptname  &#39;Comp.Sci.&#39; AND salary &gt; 70000;
+</code></pre>
 <h3 id="Multi-Relation-query"><a href="#Multi-Relation-query" class="headerlink" title="Multi-Relation query"></a>Multi-Relation query</h3><h4 id="General-Form-1"><a href="#General-Form-1" class="headerlink" title="General Form"></a>General Form</h4><p><code>多表查询</code> 的 <code>通用格式</code> </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> attribute1, attribute2, ..., attributen</span><br><span class="line"><span class="keyword">FROM</span> r1, r2, ..., rn</span><br><span class="line"><span class="keyword">WHERE</span> P;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT attribute1, attribute2, ..., attributen
+FROM r1, r2, ..., rn
+WHERE P;
+</code></pre>
 <p>其中，每种 <code>子句</code> 的作用如下：</p>
 <ul>
 <li><code>SELECT子句</code>：从 <code>WHERE子句给出的元组</code> 中 <code>投影</code> 指定的 <code>属性列表</code></li>
@@ -117,7 +152,10 @@
 <p>对于 <code>FROM instructor, department</code> 来说，就是对 <code>instructor关系</code> 和 <code>department关系</code> 进行 <code>笛卡尔积</code> 作为 <code>结果关系</code></p>
 </blockquote>
 <h4 id="Match-Condition-Specified-by-Where-Clause"><a href="#Match-Condition-Specified-by-Where-Clause" class="headerlink" title="Match Condition Specified by Where Clause"></a>Match Condition Specified by Where Clause</h4><p>通过 <code>Where子句</code> 指定 <code>匹配条件</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, course_id</span><br><span class="line"><span class="keyword">FROM</span> instructor, teaches</span><br><span class="line"><span class="keyword">WHERE</span> instructor.ID <span class="operator">=</span> teaches.ID;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID;
+</code></pre>
 <blockquote>
 <p>当 <code>属性名</code> 仅出现在 <code>FROM子句所指定的关系</code> 的 <code>一个关系</code> 中时，可以省略掉 <code>属性名的全限定前缀</code>。</p>
 <p>当然，<code>总是为属性名写上关系名前缀</code> 是没有错的。 </p>
@@ -126,20 +164,36 @@
 </blockquote>
 <h4 id="Match-Condition-Specified-by-Natural-Join"><a href="#Match-Condition-Specified-by-Natural-Join" class="headerlink" title="Match Condition Specified by Natural Join"></a>Match Condition Specified by Natural Join</h4><h5 id="Natural-Join-Compare-all-the-common-attributes"><a href="#Natural-Join-Compare-all-the-common-attributes" class="headerlink" title="Natural Join: Compare all the common attributes"></a>Natural Join: Compare all the common attributes</h5><p><code>自然连接 (Natural Join)</code>：将输入的 <code>2个关系</code> 中 <code>共有属性 (Common Condition) 的值</code> <code>均相等</code> <code>的元组</code> 作为 <code>输出结果</code></p>
 <p>下列 <code>查询</code> 的 <code>等价形式</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, course_id</span><br><span class="line"><span class="keyword">FROM</span> instructor, teaches</span><br><span class="line"><span class="keyword">WHERE</span> instructor.ID <span class="operator">=</span> teaches. ID</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, course_id</span><br><span class="line"><span class="keyword">FROM</span> instructor <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> teaches</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches. ID
+</code></pre>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor NATURAL JOIN teaches
+</code></pre>
 <blockquote>
 <p>实际上，可以将 <code>NATURAL JOIN语句</code> 看作是一种形式的 <code>宏展开 (Macro Expansion)</code>。</p>
 <p>先查找 <code>两个关系的共有属性</code>，然后 <code>改写</code> 成 <code>WHERE子句</code> 形式的 <code>谓词</code>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WHERE</span> S.common_attribute_1 <span class="operator">=</span> T.common_attribute_1</span><br><span class="line"><span class="keyword">AND</span> S.common_attribute_2 <span class="operator">=</span> T.common_attribute_2</span><br><span class="line">...</span><br><span class="line"><span class="keyword">AND</span> S.common_attribute_n <span class="operator">=</span> T.common_attribute_n</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">WHERE S.common_attribute_1 = T.common_attribute_1
+AND S.common_attribute_2 = T.common_attribute_2
+...
+AND S.common_attribute_n = T.common_attribute_n
+</code></pre>
 </blockquote>
 <h5 id="Natural-Join-Specify-specific-common-attributes"><a href="#Natural-Join-Specify-specific-common-attributes" class="headerlink" title="Natural Join: Specify specific common attributes"></a>Natural Join: Specify specific common attributes</h5><p>首先，考虑下面这个 <code>查询</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 1</span></span><br><span class="line"><span class="keyword">SELECT</span> name, title</span><br><span class="line"><span class="keyword">FROM</span> instructor <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> teaches, course</span><br><span class="line"><span class="keyword">WHERE</span> teaches.course_id <span class="operator">=</span> course.course_id;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 1
+SELECT name, title
+FROM instructor NATURAL JOIN teaches, course
+WHERE teaches.course_id = course.course_id;
+</code></pre>
 <blockquote>
 <p>n.b. <code>teaches.course_id</code> 追根溯源来自 <code>teaches</code>，我们是无法直接 <code>引用</code> <code>自然连接的结果关系</code> 的，但可以 <code>直接引用</code> <code>参与自然连接的属性</code>，因为 <code>自然连接的结果关系</code> 中的 <code>属性</code> 正来自这些 <code>单个关系的属性</code>。</p>
 </blockquote>
 <p>但是，该查询  <code>并不等价于</code> 下列这个 <code>查询</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 2</span></span><br><span class="line"><span class="keyword">SELECT</span> name, title</span><br><span class="line"><span class="keyword">FROM</span> instructor <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> teaches <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> course</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 2
+SELECT name, title
+FROM instructor NATURAL JOIN teaches NATURAL JOIN course
+</code></pre>
 <blockquote>
 <p><code>instructor关系</code>，<code>teaches关系</code>，<code>course关系</code> 均有 <code>dept_name属性</code>。</p>
 <p>对于 <code>Query 1</code> ：则只需要考虑 <code>这两个关系的</code> <code>dept_name属性</code> 的 <code>相等</code>，而 <code>course关系的dept_name属性</code> 可以与他们不同。也就是说，该查询会显示出 <code>教师所讲授的课程</code> 不是 <code>教师所在系的课程</code></p>
@@ -150,7 +204,10 @@
 <p><code>course关系</code> 共有2个 <code>共同属性</code>：<code>course_id</code>，<code>dept_name</code></p>
 </blockquote>
 <p>对此，我们可以通过 <code>带指定属性列表的自然连接 (Natural Join with Specific Arrtibute List)</code> 来改写 <code>Query 2</code> </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 3</span></span><br><span class="line"><span class="keyword">SELECT</span> name, title</span><br><span class="line"><span class="keyword">FROM</span> (instructor <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> teaches) <span class="keyword">JOIN</span> course <span class="keyword">USING</span> (course_id)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 3
+SELECT name, title
+FROM (instructor NATURAL JOIN teaches) JOIN course USING (course_id)
+</code></pre>
 <p>这样，<code>Query 3</code> 等价于 <code>Query 1</code>。</p>
 <blockquote>
 <p>n.b. 同样的道理，可以再将 <code>NATURAL JOIN</code> 视为 <code>JOIN relation USING attribute_list</code> 的 <code>宏展开</code>。</p>
@@ -160,12 +217,17 @@
 <p>它主要有以下几种作用：</p>
 <ul>
 <li><p>修改 <code>输出关系</code>中的 <code>长属性名</code> 修改为 <code>短属性名</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> instructor_name <span class="keyword">AS</span> inst_name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT instructor_name AS inst_name
+FROM instructor
+</code></pre>
 </li>
 <li><p>为 <code>运算中间结果</code> 指定 <code>标识符</code>，以便 <code>后续对它的引用</code></p>
 </li>
 <li><p>用于 <code>区分</code> <code>涉及自身关系的笛卡尔积运算</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> T.name</span><br><span class="line"><span class="keyword">FROM</span> instructor <span class="keyword">AS</span> T, instructor <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> T.salary <span class="operator">&gt;</span> S.salary <span class="keyword">AND</span> S.dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT DISTINCT T.name
+FROM instructor AS T, instructor AS S
+WHERE T.salary &gt; S.salary AND S.dept_name = &#39;Biology&#39;
+</code></pre>
 <blockquote>
 <p>n.b. 可以将 <code>T</code> 和 <code>S</code> 看作是 <code>instructor关系</code> 的 <code>2份拷贝</code></p>
 <blockquote>
@@ -175,7 +237,10 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="String-Operation"><a href="#String-Operation" class="headerlink" title="String Operation"></a>String Operation</h3><h4 id="Pattern-Matching"><a href="#Pattern-Matching" class="headerlink" title="Pattern Matching"></a>Pattern Matching</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_name</span><br><span class="line"><span class="keyword">FROM</span> department</span><br><span class="line"><span class="keyword">WHERE</span> building <span class="keyword">LIKE</span> <span class="string">&#x27;%Watson%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="String-Operation"><a href="#String-Operation" class="headerlink" title="String Operation"></a>String Operation</h3><h4 id="Pattern-Matching"><a href="#Pattern-Matching" class="headerlink" title="Pattern Matching"></a>Pattern Matching</h4><pre><code class="lang-sql">SELECT dept_name
+FROM department
+WHERE building LIKE &#39;%Watson%&#39;;
+</code></pre>
 <p>通过使用 <code>LIKE操作符</code>可以实现 <code>模式匹配 (Pattern Matching)</code>，使用如下 <code>字符</code> 来 <code>定义模式</code>：</p>
 <ul>
 <li><code>百分号 (%)</code>：匹配 <code>任意子串</code></li>
@@ -186,30 +251,52 @@
 <p>但 <code>某些数据库</code>，如 <code>MySQL</code> 和 <code>SQL Server</code> 却在 <code>匹配字符串</code> 时 <code>不区分大小写</code>！</p>
 <p>关于 <code>字符串相等性测试</code> 的具体详情，应当查阅 <code>Manual</code> </p>
 </blockquote>
-<h4 id="Escape-Character"><a href="#Escape-Character" class="headerlink" title="Escape Character"></a>Escape Character</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">LIKE</span> <span class="string">&#x27;ab\%cd%&#x27;</span> <span class="keyword">ESCAPE</span> <span class="string">&#x27;\&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Escape-Character"><a href="#Escape-Character" class="headerlink" title="Escape Character"></a>Escape Character</h4><pre><code class="lang-sql">LIKE &#39;ab\%cd%&#39; ESCAPE &#39;\&#39;
+</code></pre>
 <p>使用 <code>ESCAPE关键字</code> 定义 <code>转义字符</code> 为 <code>\</code></p>
-<h3 id="Order-Operation"><a href="#Order-Operation" class="headerlink" title="Order Operation"></a>Order Operation</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Physics&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> salary <span class="keyword">DESC</span>, name <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Order-Operation"><a href="#Order-Operation" class="headerlink" title="Order Operation"></a>Order Operation</h3><pre><code class="lang-sql">SELECT *
+FROM instructor
+WHERE dept_name = &#39;Physics&#39;
+ORDER BY salary DESC, name ASC;
+</code></pre>
 <blockquote>
 <p><code>ORDER BY子句</code> 的 <code>默认值</code> 为 <code>asc</code>，而 <code>desc</code> 需要手动指定。</p>
 </blockquote>
-<h4 id="Between-Operation"><a href="#Between-Operation" class="headerlink" title="Between Operation"></a>Between Operation</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 1</span></span><br><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="keyword">BETWEEN</span> <span class="number">9000</span> <span class="keyword">AND</span> <span class="number">10000</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 2</span></span><br><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;=</span> <span class="number">9000</span> <span class="keyword">AND</span> salary <span class="operator">&lt;=</span> <span class="number">10000</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="Between-Operation"><a href="#Between-Operation" class="headerlink" title="Between Operation"></a>Between Operation</h4><pre><code class="lang-sql">-- Query 1
+SELECT name
+FROM instructor
+WHERE salary BETWEEN 9000 AND 10000;
+</code></pre>
+<pre><code class="lang-sql">-- Query 2
+SELECT name
+FROM instructor
+WHERE salary &gt;= 9000 AND salary &lt;= 10000;
+</code></pre>
 <p><code>Query 1</code> 等价于 <code>Query 2</code></p>
 <blockquote>
 <p>n.b. 可以将 <code>Between运算符</code> 和 <code>Not Between运算符</code>  视为 <code>基于不等式比较运算符写法</code> 的 <code>宏展开</code>。</p>
 <p>但使用 <code>Between</code> 和 <code>Not Between</code> 使得 <code>查询</code> 更加 <code>清晰</code>，而且更不容易 <code>错写</code> </p>
 </blockquote>
 <h4 id="Multi-Dimensional-Tuple"><a href="#Multi-Dimensional-Tuple" class="headerlink" title="Multi-Dimensional Tuple"></a>Multi-Dimensional Tuple</h4><p>考虑下列 <code>包含多个AND的相等性测试语句</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 1</span></span><br><span class="line"><span class="keyword">SELECT</span> name, course_id</span><br><span class="line"><span class="keyword">FROM</span> instructor, teaches</span><br><span class="line"><span class="keyword">WHERE</span> instructor.ID <span class="operator">=</span> teaches.ID <span class="keyword">AND</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 1
+SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID AND dept_name = &#39;Biology&#39;
+</code></pre>
 <p>以及</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 2</span></span><br><span class="line"><span class="keyword">SELECT</span> name, course_id</span><br><span class="line"><span class="keyword">FROM</span> instructor, teaches</span><br><span class="line"><span class="keyword">WHERE</span> (instructor.ID, dept_name) <span class="operator">=</span> (teaches.ID, <span class="string">&#x27;Biology&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 2
+SELECT name, course_id
+FROM instructor, teaches
+WHERE (instructor.ID, dept_name) = (teaches.ID, &#39;Biology&#39;)
+</code></pre>
 <p><code>Query 1</code> 等价于 <code>Query 2</code></p>
 <blockquote>
 <p>作为一种更为 <code>抽象</code> 的考虑。我们可以认为 <code>常规所书写的相等语句</code> 本质上就属于 <code>1维元组</code>。</p>
 <p>而如果需要同时测试 <code>多个属性的某种比较关系</code>，可以使用 <code>向量/元组</code>。</p>
 <p>上述仅仅是 <code>测试</code> <code>相等关系</code>。同理，也可以用于 <code>测试</code> <code>偏序关系</code>。</p>
 <blockquote>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">(x1, y1) <span class="operator">&lt;</span> (x2, y2) </span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">(x1, y1) &lt; (x2, y2)
+</code></pre>
 </blockquote>
 </blockquote>
 <h3 id="Set-Operation"><a href="#Set-Operation" class="headerlink" title="Set Operation"></a>Set Operation</h3><p><code>SQL标准</code> 中所定义的 <code>集合运算</code> 都是基于 <code>数学的集合论语义</code> 的：<code>所有的集合运算</code> 会 <code>自动去重</code></p>
@@ -220,9 +307,33 @@
 <li><code>不带去重的all版本</code> ： <code>intersect all</code>，<code>union all</code>，<code>except all</code></li>
 </ul>
 </blockquote>
-<h4 id="Intersect-Operation"><a href="#Intersect-Operation" class="headerlink" title="Intersect Operation"></a>Intersect Operation</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"> <span class="keyword">FROM</span> section</span><br><span class="line"> <span class="keyword">WHERE</span> semester<span class="operator">=</span><span class="string">&#x27;Fall&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line">) <span class="keyword">INTERSECT</span></span><br><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"><span class="keyword">FROM</span> section</span><br><span class="line"><span class="keyword">WHERE</span> semester<span class="operator">=</span><span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2010</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h4 id="Union-Operation"><a href="#Union-Operation" class="headerlink" title="Union Operation"></a>Union Operation</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"> <span class="keyword">FROM</span> section</span><br><span class="line"> <span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line">) <span class="keyword">UNION</span></span><br><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"><span class="keyword">FROM</span> section</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2010</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h4 id="Except-Operation"><a href="#Except-Operation" class="headerlink" title="Except Operation"></a>Except Operation</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"> <span class="keyword">FROM</span> section</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line">) <span class="keyword">EXCEPT</span></span><br><span class="line">(<span class="keyword">SELECT</span> course_id</span><br><span class="line"><span class="keyword">FROM</span> section</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2010</span>   </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="Intersect-Operation"><a href="#Intersect-Operation" class="headerlink" title="Intersect Operation"></a>Intersect Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+ WHERE semester=&#39;Fall&#39; AND year = 2009
+) INTERSECT
+(SELECT course_id
+FROM section
+WHERE semester=&#39;Spring&#39; AND year = 2010
+)
+</code></pre>
+<h4 id="Union-Operation"><a href="#Union-Operation" class="headerlink" title="Union Operation"></a>Union Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+ WHERE semester = &#39;Fall&#39; AND year = 2009
+) UNION
+(SELECT course_id
+FROM section
+WHERE semester = &#39;Spring&#39; AND year = 2010
+)
+</code></pre>
+<h4 id="Except-Operation"><a href="#Except-Operation" class="headerlink" title="Except Operation"></a>Except Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+WHERE semester = &#39;Fall&#39; AND year = 2009
+) EXCEPT
+(SELECT course_id
+FROM section
+WHERE semester = &#39;Spring&#39; AND year = 2010   
+)
+</code></pre>
 <h2 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h2><h3 id="The-type-of-operation-involved"><a href="#The-type-of-operation-involved" class="headerlink" title="The type of operation involved"></a>The type of operation involved</h3><div class="table-container">
 <table>
 <thead>
@@ -307,29 +418,48 @@
 </tbody>
 </table>
 </div>
-<h3 id="Basic-Aggregate"><a href="#Basic-Aggregate" class="headerlink" title="Basic Aggregate"></a>Basic Aggregate</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">avg</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Comp.Sci.&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Basic-Aggregate"><a href="#Basic-Aggregate" class="headerlink" title="Basic Aggregate"></a>Basic Aggregate</h3><pre><code class="lang-sql">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = &#39;Comp.Sci.&#39;;
+</code></pre>
 <hr>
 <p>计算 <code>某个关系中的元组个数</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> course;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT count(*)
+FROM course;
+</code></pre>
 <hr>
 <p>若需要在 <code>聚集操作</code> <code>之前</code> 进行 <code>去重</code>，则可以使用 <code>distinct关键字</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="keyword">DISTINCT</span> ID) </span><br><span class="line"><span class="keyword">FROM</span> teaches</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="string">&#x27;2010&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT count(DISTINCT ID) 
+FROM teaches
+WHERE semester = &#39;Spring&#39; AND year = &#39;2010&#39;;
+</code></pre>
 <blockquote>
 <p>n.b. 可以认为，对于 <code>内置的5个聚集函数</code> 而言，默认的 <code>去重选项</code> 是 <code>all</code></p>
 <p>n.b. <code>SQL标准</code> 并不允许为 <code>count(*)</code> 使用 <code>distinct</code>。但却可以为 <code>min</code> 和 <code>max</code> 使用 <code>distinct</code>。尽管这些 <code>distinct</code> 并不会改变 <code>运算结果</code> ！</p>
 </blockquote>
 <h3 id="Grouped-Aggregate"><a href="#Grouped-Aggregate" class="headerlink" title="Grouped Aggregate"></a>Grouped Aggregate</h3><p><code>分组聚集 (Grouped Aggregate)</code> ：可以先对 <code>某个关系中的元组</code> 进行 <code>分组</code>，然后再 <code>分别地</code> 对 <code>每个分组</code> 进行 <code>聚集操作</code>。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">AS</span> avg_salary</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT dept_name, avg(salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name;
+</code></pre>
 <blockquote>
 <p>可以认为，默认情况下 <code>省略</code> <code>GROUP BY子句</code> 意味着：将 <code>整个关系的所有元组</code> 分为 <code>唯一的一组</code>。</p>
 </blockquote>
 <hr>
 <p>考虑一个 <code>错误的查询例子</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This is a wrong query example</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_name, ID, <span class="built_in">avg</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- This is a wrong query example
+SELECT dept_name, ID, avg(salary)
+FROM instructor
+GROUP BY dept_name;
+</code></pre>
 <p>该 <code>查询</code> 的问题在于，我们使用 <code>dept_name属性</code> 将 <code>instructor关系的元组</code> 按 <code>系</code> 进行 <code>分组</code>，之后的 <code>avg(salary)</code> 计算的是 <code>某个系的所有教师的平均工资</code>。</p>
 <p>而 <code>ID属性</code> 的问题在于，对于 <code>某个系</code> 来说， <code>该系中有许多的教师</code>，如果确实需要 <code>输出ID</code>，那么究竟要输出 <code>该系的所有教师中的哪一个教师的ID</code>？</p>
 <p>综上，我们对于 <code>GROUP BY</code> 有一个规则：出现在 <code>SELECT子句</code> 中，但没有被 <code>聚集</code> 的 <code>属性</code>。必须出现在 <code>GROUP BY</code> 中。</p>
-<h3 id="Grouped-Aggregate-with-Having-Clause"><a href="#Grouped-Aggregate-with-Having-Clause" class="headerlink" title="Grouped Aggregate with Having Clause"></a>Grouped Aggregate with Having Clause</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">avg</span>(salary) <span class="operator">&gt;</span> <span class="number">42000</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Grouped-Aggregate-with-Having-Clause"><a href="#Grouped-Aggregate-with-Having-Clause" class="headerlink" title="Grouped Aggregate with Having Clause"></a>Grouped Aggregate with Having Clause</h3><pre><code class="lang-sql">SELECT dept_name, avg(salary) as avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg(salary) &gt; 42000;
+</code></pre>
 <p><code>HAVING 子句</code> 在 <code>Grouped Aggregate输出结果</code> <code>之后</code> 才进行 <code>过滤</code>。</p>
 <blockquote>
 <p>换句话说，<code>HAVING</code> 必须在 <code>GROUP BY</code> 的 <code>分组形成后</code> 才能 <code>执行</code></p>
@@ -349,16 +479,34 @@
 <ul>
 <li><code>in</code> 和 <code>not in</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> course_id</span><br><span class="line"><span class="keyword">FROM</span> section</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2009</span> </span><br><span class="line"><span class="keyword">AND</span> course_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> course_id</span><br><span class="line">                  <span class="keyword">FROM</span> section</span><br><span class="line">                  <span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2010</span>;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT DISTINCT course_id
+FROM section
+WHERE semester = &#39;Fall&#39; AND year = 2009 
+AND course_id IN (SELECT course_id
+                  FROM section
+                  WHERE semester = &#39;Spring&#39; AND year = 2010;
+);
+</code></pre>
 <ul>
 <li><code>all</code> 和 <code>any/some</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> T.name</span><br><span class="line"><span class="keyword">FROM</span> instructor <span class="keyword">AS</span> T, instructor <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> T.salary <span class="operator">&gt;</span> S.salary <span class="keyword">AND</span> S.dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 1
+SELECT DISTINCT T.name
+FROM instructor AS T, instructor AS S
+WHERE T.salary &gt; S.salary AND S.dept_name = &#39;Biology&#39;;
+</code></pre>
 <blockquote>
 <p>n.b. 这种实现方式中，必须要加 <code>DISTINCT</code>：因为 <code>FROM子句</code> 输出的 <code>结果关系</code> 为 <code>2个关系的笛卡尔积</code>，此时 <code>结果关系</code> 中 <code>满足WHERE条件的元组</code> 会 <code>重复</code></p>
 </blockquote>
 <p>等价于</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 2</span></span><br><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span> <span class="keyword">some</span>(<span class="keyword">SELECT</span> salary</span><br><span class="line">                   <span class="keyword">FROM</span> instructor</span><br><span class="line">                   <span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br><span class="line">                   );</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 2
+SELECT name
+FROM instructor
+WHERE salary &gt; some(SELECT salary
+                   FROM instructor
+                   WHERE dept_name = &#39;Biology&#39;
+                   );
+</code></pre>
 <blockquote>
 <p>n.b. 两条关于 <code>全称量词和特称量词</code> 的 <code>等价性规则</code>：</p>
 <ul>
@@ -369,7 +517,15 @@
 <ul>
 <li><p><code>exists</code></p>
 <p><code>exists</code>：若 <code>作为exists参数的子查询</code> 产生的 <code>结果关系</code> 是 <code>非空的</code>时，则返回 <code>true</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> course_id</span><br><span class="line"><span class="keyword">FROM</span> section <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line"><span class="keyword">AND</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">           <span class="keyword">FROM</span> section <span class="keyword">AS</span> T</span><br><span class="line">           <span class="keyword">WHERE</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">AND</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2010</span></span><br><span class="line">           <span class="keyword">AND</span> S.course_id <span class="operator">=</span> T.course_id;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT course_id
+FROM section AS S
+WHERE semester = &#39;Fall&#39; AND year = 2009
+AND EXISTS(SELECT *
+          FROM section AS T
+          WHERE semester = &#39;Spring&#39; AND year = 2010
+          AND S.course_id = T.course_id;
+);
+</code></pre>
 </li>
 </ul>
 <blockquote>
@@ -382,15 +538,43 @@
 <hr>
 <p><code>not exists</code> 可以用于 <code>测试</code> <code>子查询的结果集</code> 中 <code>是否不存在元组</code>。</p>
 <p>我们可以利用这个 <code>特性</code> 来模拟 <code>集合的包含关系</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- use not exists to represent subset relationship</span></span><br><span class="line"><span class="keyword">SELECT</span> S.ID, S.name</span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">    (<span class="keyword">SELECT</span> course_id</span><br><span class="line">     <span class="keyword">FROM</span> course</span><br><span class="line">     <span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br><span class="line">    ) </span><br><span class="line">    <span class="keyword">EXCEPT</span></span><br><span class="line">    (<span class="keyword">SELECT</span> T.course_id</span><br><span class="line">     <span class="keyword">FROM</span> takes <span class="keyword">AS</span> T</span><br><span class="line">     <span class="keyword">WHERE</span> S.ID <span class="operator">=</span> T.ID</span><br><span class="line">    )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- use not exists to represent subset relationship
+SELECT S.ID, S.name
+FROM student AS S
+WHERE NOT EXISTS(
+    (SELECT course_id
+     FROM course
+     WHERE dept_name = &#39;Biology&#39;
+    ) 
+    EXCEPT
+    (SELECT T.course_id
+     FROM takes AS T
+     WHERE S.ID = T.ID
+    )
+);
+</code></pre>
 <ul>
 <li><code>unique</code></li>
 </ul>
 <p><code>unique</code>：若 <code>作为unique参数的子查询</code> 产生的 <code>结果关系</code> 中 <code>不存在重复元组</code>，则返回 <code>true</code>。它为 <code>空集</code> 返回 <code>true</code>。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> T.course_id</span><br><span class="line"><span class="keyword">FROM</span> course <span class="keyword">AS</span> T</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">UNIQUE</span>(<span class="keyword">SELECT</span> R.course_id</span><br><span class="line">            <span class="keyword">FROM</span> section <span class="keyword">AS</span> R</span><br><span class="line">             <span class="keyword">WHERE</span> T.course_id <span class="operator">=</span> R.course_id</span><br><span class="line">             <span class="keyword">AND</span> R.year <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT T.course_id
+FROM course AS T
+WHERE UNIQUE(SELECT R.course_id
+            FROM section AS R
+             WHERE T.course_id = R.course_id
+             AND R.year = 2009
+            )
+</code></pre>
 <blockquote>
 <p>实际上，可以利用 <code>count()</code> 将 <code>exists</code> ，<code>not exists</code> ，<code>unique</code> 和 <code>not unique</code> 进行 <code>宏展开</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> T.course_id</span><br><span class="line"><span class="keyword">FROM</span> course <span class="keyword">AS</span> T</span><br><span class="line"><span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">&gt;=</span> (<span class="keyword">SELECT</span> <span class="built_in">count</span>(R.course_id)</span><br><span class="line">         <span class="keyword">FROM</span> section <span class="keyword">AS</span> R</span><br><span class="line">         <span class="keyword">WHERE</span> T.course_id <span class="operator">=</span> R.course_id</span><br><span class="line">         <span class="keyword">AND</span> R.year <span class="operator">=</span> <span class="number">2009</span></span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT T.course_id
+FROM course AS T
+WHERE 1 &gt;= (SELECT count(R.course_id)
+         FROM section AS R
+         WHERE T.course_id = R.course_id
+         AND R.year = 2009
+        )
+</code></pre>
 <p>解释：<code>WHERE子句</code> 将对 <code>T关系中的每个元组</code> 进行 <code>测试</code>，判断 <code>嵌套子查询</code> 中 <code>与该元组相等的元组的个数</code> 是否 <code>小于等于1</code></p>
 <blockquote>
 <p>该例子中，通过 <code>course_id</code> 作为 <code>主键</code> 来判断 <code>两个元组是否相等</code>。</p>
@@ -404,16 +588,35 @@
 <li><code>FROM子查询</code></li>
 </ul>
 <p>可以利用 <code>FROM子查询</code> 来 <code>去除</code>  <code>HAVING子句</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 1</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">avg</span>(salary) <span class="operator">&gt;</span> <span class="number">42000</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 1
+SELECT dept_name, avg(salary) as avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg(salary) &gt; 42000;
+</code></pre>
 <p>等价于</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- Query 2</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_name, avg_salary</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> dept_name, <span class="built_in">avg</span>(salary)</span><br><span class="line">     <span class="keyword">FROM</span> instructor</span><br><span class="line">     <span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name) <span class="keyword">AS</span> dept_avg(dept_name, avg_salary)</span><br><span class="line"><span class="keyword">WHERE</span> avg_salary <span class="operator">&gt;</span> <span class="number">42000</span>; </span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- Query 2
+SELECT dept_name, avg_salary
+FROM (SELECT dept_name, avg(salary)
+     FROM instructor
+     GROUP BY dept_name) AS dept_avg(dept_name, avg_salary)
+WHERE avg_salary &gt; 42000;
+</code></pre>
 <p>该 <code>转化</code> 的思想在于：<code>HAVING子句</code> 实际上的 <code>执行时机</code> 是在 <code>GROUP BY产生结果关系之后</code>，再对 <code>结果关系(也就是一些分组)</code> 进行 <code>过滤</code>。</p>
 <p>因此，我们可以 <code>先获得作为结果关系的这些分组</code>，然后再 <code>对这些分组进行过滤</code>。</p>
 <ul>
 <li><code>WITH子句</code></li>
 </ul>
 <p><code>WITH子句</code>：用于定义 <code>仅对包含with子句的查询可见</code> 的 <code>临时关系</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WITH</span> dept_total(dept_name, <span class="keyword">value</span>) <span class="keyword">AS</span> (<span class="keyword">SELECT</span> dept_name, <span class="built_in">sum</span>(salary)</span><br><span class="line">                                     <span class="keyword">FROM</span> instructor</span><br><span class="line">                                     <span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_name),</span><br><span class="line">	dept_total_avg(<span class="keyword">value</span>) <span class="keyword">AS</span> (<span class="keyword">SELECT</span> <span class="built_in">avg</span>(salary)</span><br><span class="line">                             <span class="keyword">FROM</span> dept_total)</span><br><span class="line"><span class="keyword">SELECT</span> dept_name</span><br><span class="line"><span class="keyword">FROM</span> dept_total, dept_total_avg</span><br><span class="line"><span class="keyword">WHERE</span> dept_total.value <span class="operator">&gt;=</span> dept_total_avg.value;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">WITH dept_total(dept_name, value) AS (SELECT dept_name, sum(salary)
+                                     FROM instructor
+                                     GROUP BY dept_name),
+    dept_total_avg(value) AS (SELECT avg(salary)
+                             FROM dept_total)
+SELECT dept_name
+FROM dept_total, dept_total_avg
+WHERE dept_total.value &gt;= dept_total_avg.value;
+</code></pre>
 <blockquote>
 <p>n.b. 使用 <code>WITH子句</code> 可以 <code>非常有效地</code> 去除 <code>嵌套子查询</code>。</p>
 <p>如果可能，<code>应当尽量使用WITH子句来消除嵌套子查询</code></p>
@@ -422,7 +625,11 @@
 <li><code>标量子查询 (Scalar Subquery)</code></li>
 </ul>
 <p><code>SQL</code> 会 <code>自动地</code> 将 <code>仅含有单属性单元组的关系</code>  <code>解包</code>为 <code>单个值</code>。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name</span><br><span class="line"><span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">avg</span>(salary)</span><br><span class="line">               <span class="keyword">FROM</span> instructor)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">SELECT name
+FROM instructor
+WHERE salary &lt; (SELECT avg(salary)
+               FROM instructor)
+</code></pre>
 <blockquote>
 <p> n.b. 从 <code>本质</code> 上来说， <code>标量子查询</code> 返回的 <code>数据类型</code> 是确确实实的 <code>关系</code>。</p>
 <p> 只不过，在 <code>SQL</code> 实现中可以自动地 <code>对这种类型的关系</code> 进行 <code>拆包</code>。这类似于 <code>Java</code> 中的 <code>Auto Boxed/Unboxed</code></p>
@@ -430,7 +637,11 @@
 <p> 如果在 <code>运行时</code> 发现 <code>需要输入单个值的地方</code> 所使用的 <code>标量子查询</code> 包含 <code>多个值</code>，则会导致 <code>运行时错误</code></p>
 </blockquote>
 <h3 id="Modifying-Operation"><a href="#Modifying-Operation" class="headerlink" title="Modifying Operation"></a>Modifying Operation</h3><h3 id="Delete-1"><a href="#Delete-1" class="headerlink" title="Delete"></a>Delete</h3><p>考虑该例子的 <code>语句执行顺序</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This is a wrong example</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> instructor</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">avg</span>(salary)</span><br><span class="line">               <span class="keyword">FROM</span> instructor)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- This is a wrong example
+DELETE FROM instructor
+WHERE salary &lt; (SELECT avg(salary)
+               FROM instructor)
+</code></pre>
 <p>请注意，<code>我们所编写的SQL语句</code> 应当 <code>满足</code> ：在该语句进行 <code>修改性操作</code> 之前，必须先 <code>测试所有的元组</code>，将 <code>符合测试条件的元组</code> 加入到 <code>待删除列表</code>，之后再 <code>一次性地</code> 执行 <code>修改性操作</code>。</p>
 <p>注意：这里所说的 <code>修改性操作</code> 不仅仅是指 <code>Delete</code>，包括 <code>Insert</code> 和 <code>Alter</code> 都有 <code>类似的问题</code></p>
 <blockquote>
@@ -439,10 +650,20 @@
 <p>1093 - You can’t specify target table ‘instructor’ for update in FROM clause</p>
 </blockquote>
 <h3 id="Insert-1"><a href="#Insert-1" class="headerlink" title="Insert"></a>Insert</h3><p>常用的插入操作</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> course(course_id, title, dept_name, credits)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;CS-437&#x27;</span>, <span class="string">&#x27;Database Systems&#x27;</span>, <span class="string">&#x27;Comp. SCi.&#x27;</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> instructor</span><br><span class="line"><span class="keyword">SELECT</span> ID, name, dept_name, <span class="number">18000</span></span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Music&#x27;</span> <span class="keyword">AND</span> total_cred <span class="operator">&gt;</span> <span class="number">144</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">INSERT INTO course(course_id, title, dept_name, credits)
+VALUES (&#39;CS-437&#39;, &#39;Database Systems&#39;, &#39;Comp. SCi.&#39;, 4);
+</code></pre>
+<pre><code class="lang-sql">INSERT INTO instructor
+SELECT ID, name, dept_name, 18000
+FROM student
+WHERE dept_name = &#39;Music&#39; AND total_cred &gt; 144;
+</code></pre>
 <hr>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- This is a wrong example</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> student</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- This is a wrong example
+INSERT INTO student
+SELECT *
+FROM student
+</code></pre>
 <p>该语句 <code>可能会导致无限递归插入</code>，这取决于 <code>数据库的具体实现</code>。</p>
 <blockquote>
 <p>经过实际测试，<code>MySQL 8.0</code> 以上可以 <code>正常地执行该语句</code>，并且 <code>查询会终止</code>。</p>
@@ -451,10 +672,23 @@
 <p><img src="https://s2.loli.net/2023/01/22/nSNc6QLpFMDde1Z.png" alt="image-20220428194617665"></p>
 </blockquote>
 <h3 id="Alter-1"><a href="#Alter-1" class="headerlink" title="Alter"></a>Alter</h3><p>当 <code>update语句</code> 之间 <code>受语句执行顺序</code> 所 <code>影响</code> 时，可以使用 <code>case结构</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 1</span></span><br><span class="line"><span class="keyword">UPDATE</span> instructor</span><br><span class="line"><span class="keyword">SET</span> salary <span class="operator">=</span> salary <span class="operator">*</span> <span class="number">1.03</span></span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span> <span class="number">100000</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- SQL 2</span></span><br><span class="line"><span class="keyword">UPDATE</span> instructor</span><br><span class="line"><span class="keyword">SET</span> salary <span class="operator">=</span> salary <span class="operator">*</span> <span class="number">1.05</span></span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&lt;=</span> <span class="number">100000</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">-- SQL 1
+UPDATE instructor
+SET salary = salary * 1.03
+WHERE salary &gt; 100000
+</code></pre>
+<pre><code class="lang-sql">-- SQL 2
+UPDATE instructor
+SET salary = salary * 1.05
+WHERE salary &lt;= 100000
+</code></pre>
 <p>为了 <code>正确地表达语义</code>，我们可以使用 <code>case</code> 结构来 <code>正确表述执行顺序之间相互影响的语句</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> instructor</span><br><span class="line"><span class="keyword">SET</span> salary <span class="operator">=</span> <span class="keyword">CASE</span></span><br><span class="line">             <span class="keyword">WHEN</span> salary <span class="operator">&lt;=</span> <span class="number">100000</span> <span class="keyword">THEN</span> salary <span class="operator">*</span> <span class="number">1.05</span></span><br><span class="line">             <span class="keyword">ELSE</span> salary <span class="operator">*</span> <span class="number">1.03</span></span><br><span class="line">             <span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-sql">UPDATE instructor
+SET salary = CASE
+             WHEN salary &lt;= 100000 THEN salary * 1.05
+             ELSE salary * 1.03
+             END
+</code></pre>
 
     </article>
 </main>
@@ -466,6 +700,8 @@
 <p>See tags:
     
         <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/greedy/">greedy</a>
     
@@ -479,11 +715,11 @@
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+        <a href="/tags/code/">code</a>
     
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -496,10 +732,6 @@
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -522,8 +754,6 @@
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/kde/">kde</a>
     
@@ -550,6 +780,10 @@
         <a href="/tags/anime/">anime</a>
     
         <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/vim/">vim</a>
     

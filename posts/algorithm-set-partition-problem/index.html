@@ -51,15 +51,188 @@
 
 据此得出递推关系</script><p>S(n,m) = S(n-1, m-1) + m * S(n-1, m)</p>
 <p>$$</p>
-<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">S</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (m == <span class="number">0</span> || n &lt; m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (m == <span class="number">1</span> || n == m) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> S(n - <span class="number">1</span>, m - <span class="number">1</span>) + m * S(n - <span class="number">1</span>, m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">A</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">1</span>; m &lt;= n; m++) &#123;</span><br><span class="line">        sum += S(n, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL0.in</span> <span class="string">&amp;</span> <span class="string">BELL0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">5</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">52</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">52</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.643300</span> <span class="string">ms</span> <span class="string">(1643300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL1.in</span> <span class="string">&amp;</span> <span class="string">BELL1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">15</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1382958545</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1382958545</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.033600</span> <span class="string">ms</span> <span class="string">(1033600</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL2.in</span> <span class="string">&amp;</span> <span class="string">BELL2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1890207555</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1890207555</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.819100</span> <span class="string">ms</span> <span class="string">(819100</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL3.in</span> <span class="string">&amp;</span> <span class="string">BELL3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">17</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1260491180</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1260491180</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.877300</span> <span class="string">ms</span> <span class="string">(877300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL4.in</span> <span class="string">&amp;</span> <span class="string">BELL4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">14</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">190899322</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">190899322</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.726000</span> <span class="string">ms</span> <span class="string">(726000</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL5.in</span> <span class="string">&amp;</span> <span class="string">BELL5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">13</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">27644437</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">27644437</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.634700</span> <span class="string">ms</span> <span class="string">(634700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL6.in</span> <span class="string">&amp;</span> <span class="string">BELL6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">6</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">203</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">203</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.676200</span> <span class="string">ms</span> <span class="string">(676200</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL7.in</span> <span class="string">&amp;</span> <span class="string">BELL7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">877</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">877</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.712700</span> <span class="string">ms</span> <span class="string">(712700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><pre><code class="lang-java">    public static int S(int n, int m) &#123;
+        if (m == 0 || n &lt; m) return 0;
+        if (m == 1 || n == m) return 1;
+        return S(n - 1, m - 1) + m * S(n - 1, m);
+    &#125;
+
+    public static int A(int n) &#123;
+        int sum = 0;
+        for (int m = 1; m &lt;= n; m++) &#123;
+            sum += S(n, m);
+        &#125;
+        return sum;
+    &#125;
+</code></pre>
+<h4 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h4><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: BELL0.in &amp; BELL0.out
+Expected  Input: [5]
+Expected Output: [52]
+Your     Output: [52]
+Time Cost: 1.643300 ms (1643300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL1.in &amp; BELL1.out
+Expected  Input: [15]
+Expected Output: [1382958545]
+Your     Output: [1382958545]
+Time Cost: 1.033600 ms (1033600 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL2.in &amp; BELL2.out
+Expected  Input: [16]
+Expected Output: [1890207555]
+Your     Output: [1890207555]
+Time Cost: 0.819100 ms (819100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL3.in &amp; BELL3.out
+Expected  Input: [17]
+Expected Output: [1260491180]
+Your     Output: [1260491180]
+Time Cost: 0.877300 ms (877300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL4.in &amp; BELL4.out
+Expected  Input: [14]
+Expected Output: [190899322]
+Your     Output: [190899322]
+Time Cost: 0.726000 ms (726000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL5.in &amp; BELL5.out
+Expected  Input: [13]
+Expected Output: [27644437]
+Your     Output: [27644437]
+Time Cost: 0.634700 ms (634700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL6.in &amp; BELL6.out
+Expected  Input: [6]
+Expected Output: [203]
+Your     Output: [203]
+Time Cost: 0.676200 ms (676200 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL7.in &amp; BELL7.out
+Expected  Input: [7]
+Expected Output: [877]
+Your     Output: [877]
+Time Cost: 0.712700 ms (712700 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √ √
+</code></pre>
 <h3 id="Solution-2-Simulation"><a href="#Solution-2-Simulation" class="headerlink" title="Solution 2 (Simulation)"></a>Solution 2 (Simulation)</h3><h4 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h4><p>这种方法通过观察<script type="math/tex">n=1,2,3 \dots</script>等<code>前几个比较简单的案例</code>，得到从<code>前一种案例</code>中<code>生成</code> <code>下一种案例的方法</code>。</p>
 <p>即该种方法<code>完全地模拟了实际的集合划分情况</code>，对<code>时间和空间</code>的消耗都比较大。</p>
 <blockquote>
 <p>可以使用<code>备忘录机制</code>，<code>滚动数组</code>，<code>更优的数据结构表示</code>等手段来进行优化。</p>
 </blockquote>
-<h4 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;Integer&gt; M = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;Integer&gt; <span class="title function_">generateSimulateList</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Initialize simulate list */</span></span><br><span class="line">    ArrayList&lt;Integer&gt; simulateList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> simulateList;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Construct simulate list */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">2</span>; k &lt; n; k++) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; tempList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> t : simulateList) &#123;</span><br><span class="line">            <span class="comment">// add a (self + 1)</span></span><br><span class="line">            tempList.add(t + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// add self amount of self</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; t; i++) tempList.add(t);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// calc sum</span></span><br><span class="line">            sum += (t + <span class="number">1</span>) + (t * t);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == M.size()) &#123;</span><br><span class="line">            M.add(sum);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        simulateList = tempList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> simulateList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">solve</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Generate M[] */</span></span><br><span class="line">    generateSimulateList(n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Accumulate plans */</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">        sum += M.get(k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Benchmark-1"><a href="#Benchmark-1" class="headerlink" title="Benchmark"></a>Benchmark</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL0.in</span> <span class="string">&amp;</span> <span class="string">BELL0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">5</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">52</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">52</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.638300</span> <span class="string">ms</span> <span class="string">(1638300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL1.in</span> <span class="string">&amp;</span> <span class="string">BELL1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">15</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1382958545</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1382958545</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">5871.995300 </span><span class="string">ms</span> <span class="string">(5871995300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL2.in</span> <span class="string">&amp;</span> <span class="string">BELL2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1890207555</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> []</span><br><span class="line"><span class="string">Skipped.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL3.in</span> <span class="string">&amp;</span> <span class="string">BELL3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">17</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1260491180</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> []</span><br><span class="line"><span class="string">Skipped.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL4.in</span> <span class="string">&amp;</span> <span class="string">BELL4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">14</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">190899322</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">190899322</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">5377.599300 </span><span class="string">ms</span> <span class="string">(5377599300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL5.in</span> <span class="string">&amp;</span> <span class="string">BELL5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">13</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">27644437</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">27644437</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">45.983500</span> <span class="string">ms</span> <span class="string">(45983500</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL6.in</span> <span class="string">&amp;</span> <span class="string">BELL6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">6</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">203</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">203</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.636100</span> <span class="string">ms</span> <span class="string">(636100</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">BELL7.in</span> <span class="string">&amp;</span> <span class="string">BELL7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">877</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">877</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.658200</span> <span class="string">ms</span> <span class="string">(658200</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">→</span> <span class="string">→</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
+<h4 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><pre><code class="lang-java">    public static ArrayList&lt;Integer&gt; M = new ArrayList&lt;&gt;(Arrays.asList(1, 1));
+
+    public static ArrayList&lt;Integer&gt; generateSimulateList(int n) &#123;
+
+        /* Initialize simulate list */
+        ArrayList&lt;Integer&gt; simulateList = new ArrayList&lt;&gt;(Arrays.asList(1));
+        if (n == 0) return simulateList;
+
+        /* Construct simulate list */
+        for (int k = 2; k &lt; n; k++) &#123;
+            ArrayList&lt;Integer&gt; tempList = new ArrayList&lt;&gt;();
+            int sum = 0;
+
+            for (int t : simulateList) &#123;
+                // add a (self + 1)
+                tempList.add(t + 1);
+
+                // add self amount of self
+                for (int i = 0; i &lt; t; i++) tempList.add(t);
+
+                // calc sum
+                sum += (t + 1) + (t * t);
+            &#125;
+
+            if (k == M.size()) &#123;
+                M.add(sum);
+            &#125;
+
+            simulateList = tempList;
+        &#125;
+
+        return simulateList;
+    &#125;
+
+    public static int solve(int n) &#123;
+
+        /* Generate M[] */
+        generateSimulateList(n);
+
+        /* Accumulate plans */
+        int sum = 0;
+        for (int k = 0; k &lt; n; k++) &#123;
+            sum += M.get(k);
+        &#125;
+        return sum;
+    &#125;
+</code></pre>
+<h4 id="Benchmark-1"><a href="#Benchmark-1" class="headerlink" title="Benchmark"></a>Benchmark</h4><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: BELL0.in &amp; BELL0.out
+Expected  Input: [5]
+Expected Output: [52]
+Your     Output: [52]
+Time Cost: 1.638300 ms (1638300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL1.in &amp; BELL1.out
+Expected  Input: [15]
+Expected Output: [1382958545]
+Your     Output: [1382958545]
+Time Cost: 5871.995300 ms (5871995300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL2.in &amp; BELL2.out
+Expected  Input: [16]
+Expected Output: [1890207555]
+Your     Output: []
+Skipped.
+-----------------------------------------------------
+Current Case: BELL3.in &amp; BELL3.out
+Expected  Input: [17]
+Expected Output: [1260491180]
+Your     Output: []
+Skipped.
+-----------------------------------------------------
+Current Case: BELL4.in &amp; BELL4.out
+Expected  Input: [14]
+Expected Output: [190899322]
+Your     Output: [190899322]
+Time Cost: 5377.599300 ms (5377599300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL5.in &amp; BELL5.out
+Expected  Input: [13]
+Expected Output: [27644437]
+Your     Output: [27644437]
+Time Cost: 45.983500 ms (45983500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL6.in &amp; BELL6.out
+Expected  Input: [6]
+Expected Output: [203]
+Your     Output: [203]
+Time Cost: 0.636100 ms (636100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL7.in &amp; BELL7.out
+Expected  Input: [7]
+Expected Output: [877]
+Your     Output: [877]
+Time Cost: 0.658200 ms (658200 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ → → √ √ √ √
+</code></pre>
 
     </article>
 </main>
@@ -71,6 +244,8 @@
 <p>See tags:
     
         <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/greedy/">greedy</a>
     
@@ -84,11 +259,11 @@
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+        <a href="/tags/code/">code</a>
     
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -101,10 +276,6 @@
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -127,8 +298,6 @@
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/kde/">kde</a>
     
@@ -155,6 +324,10 @@
         <a href="/tags/anime/">anime</a>
     
         <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/vim/">vim</a>
     

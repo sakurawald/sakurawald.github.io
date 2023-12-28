@@ -122,7 +122,17 @@ $$
 <p><strong>输出文件示例</strong></p>
 <p>output.txt</p>
 <p>5</p>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><h4 id="Analyse-the-Dimensions-amp-Establish-the-Recursive-Equation"><a href="#Analyse-the-Dimensions-amp-Establish-the-Recursive-Equation" class="headerlink" title="Analyse the Dimensions &amp; Establish the Recursive Equation"></a>Analyse the Dimensions &amp; Establish the Recursive Equation</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">class Knapsack &#123;</span><br><span class="line"> +capacity</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Item &#123;</span><br><span class="line"> +value</span><br><span class="line"> +weight</span><br><span class="line"> +amount</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><h4 id="Analyse-the-Dimensions-amp-Establish-the-Recursive-Equation"><a href="#Analyse-the-Dimensions-amp-Establish-the-Recursive-Equation" class="headerlink" title="Analyse the Dimensions &amp; Establish the Recursive Equation"></a>Analyse the Dimensions &amp; Establish the Recursive Equation</h4><pre><code class="lang-mermaid">classDiagram
+class Knapsack &#123;
+ +capacity
+&#125;
+
+class Item &#123;
+ +value
+ +weight
+ +amount
+&#125;
+</code></pre>
 <p>首先，分析出题目中的 <code>对象 (Object)</code> 所涉及到的 <code>属性 (Attribute)</code>  有哪些。</p>
 <p>我们可以得到：</p>
 <ul>
@@ -230,7 +240,9 @@ dp[capacity][type] = \lb{
 <p>同时这也意味着，<code>每种硬币的数量是特定的</code>和<code>每种硬币的数量是无限的</code>这两种问题本质上是相同的。</p>
 </blockquote>
 </blockquote>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Iterative-Method"><a href="#Iterative-Method" class="headerlink" title="Iterative Method"></a>Iterative Method</h4><h5 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">2</span> <span class="number">3</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">6</span> <span class="number">1</span>, <span class="number">12</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Iterative-Method"><a href="#Iterative-Method" class="headerlink" title="Iterative Method"></a>Iterative Method</h4><h5 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h5><pre><code class="lang-yaml">Expected  Input: [3, 2 3, 3 3, 6 1, 12]
+Expected Output: [3]
+</code></pre>
 <div class="table-container">
 <table>
 <thead>
@@ -319,17 +331,474 @@ dp[capacity][type] = \lb{
 </tbody>
 </table>
 </div>
-<h5 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">solve</span><span class="params">(<span class="type">int</span>[] values, <span class="type">int</span>[] amounts, <span class="type">int</span> capacity)</span> &#123;</span><br><span class="line">    <span class="comment">// define dp array</span></span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[values.length + <span class="number">1</span>][capacity + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// init</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= values.length; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= capacity; j++) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// only use the first i coins</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= values.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> values[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// to satisfy j capacity</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= capacity; j++) &#123;</span><br><span class="line">            <span class="comment">// how many coins of this type should be used ?</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt;= j / value &amp;&amp; k &lt;= amounts[i - <span class="number">1</span>]; k++) &#123;</span><br><span class="line">                dp[i][j] = Math.min(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - k * value] + k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> dp[values.length][capacity];</span><br><span class="line">    <span class="keyword">return</span> ans == <span class="number">0x3f3f3f3f</span> ? -<span class="number">1</span> : ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS0.in</span> <span class="string">&amp;</span> <span class="string">COINS0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">12</span>, <span class="number">5</span> <span class="number">180</span>, <span class="number">10</span> <span class="number">0</span>, <span class="number">20</span> <span class="number">109</span>, <span class="number">50</span> <span class="number">126</span>, <span class="number">100</span> <span class="number">192</span>, <span class="number">200</span> <span class="number">107</span>, <span class="number">500</span> <span class="number">47</span>, <span class="number">1000 </span><span class="number">20</span>, <span class="number">14758</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">25.284600</span> <span class="string">ms</span> <span class="string">(25284600</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS1.in</span> <span class="string">&amp;</span> <span class="string">COINS1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">12</span>, <span class="number">5</span> <span class="number">180</span>, <span class="number">10</span> <span class="number">0</span>, <span class="number">20</span> <span class="number">109</span>, <span class="number">50</span> <span class="number">126</span>, <span class="number">100</span> <span class="number">192</span>, <span class="number">200</span> <span class="number">107</span>, <span class="number">500</span> <span class="number">47</span>, <span class="number">1000 </span><span class="number">20</span>, <span class="number">14758</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">16.951400</span> <span class="string">ms</span> <span class="string">(16951400</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS2.in</span> <span class="string">&amp;</span> <span class="string">COINS2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">45</span>, <span class="number">5</span> <span class="number">0</span>, <span class="number">10</span> <span class="number">148</span>, <span class="number">20</span> <span class="number">145</span>, <span class="number">50</span> <span class="number">136</span>, <span class="number">100</span> <span class="number">181</span>, <span class="number">200</span> <span class="number">17</span>, <span class="number">500</span> <span class="number">172</span>, <span class="number">1000 </span><span class="number">152</span>, <span class="number">16834</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">23</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">23</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">13.734800</span> <span class="string">ms</span> <span class="string">(13734800</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS3.in</span> <span class="string">&amp;</span> <span class="string">COINS3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">22</span>, <span class="number">5</span> <span class="number">0</span>, <span class="number">10</span> <span class="number">27</span>, <span class="number">20</span> <span class="number">52</span>, <span class="number">50</span> <span class="number">192</span>, <span class="number">100</span> <span class="number">164</span>, <span class="number">200</span> <span class="number">110</span>, <span class="number">500</span> <span class="number">62</span>, <span class="number">1000 </span><span class="number">98</span>, <span class="number">17397</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">10.814700</span> <span class="string">ms</span> <span class="string">(10814700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS4.in</span> <span class="string">&amp;</span> <span class="string">COINS4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">99</span>, <span class="number">5</span> <span class="number">173</span>, <span class="number">10</span> <span class="number">11</span>, <span class="number">20</span> <span class="number">54</span>, <span class="number">50</span> <span class="number">101</span>, <span class="number">100</span> <span class="number">6</span>, <span class="number">200</span> <span class="number">44</span>, <span class="number">500</span> <span class="number">15</span>, <span class="number">1000 </span><span class="number">126</span>, <span class="number">12810</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">8.838500</span> <span class="string">ms</span> <span class="string">(8838500</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS5.in</span> <span class="string">&amp;</span> <span class="string">COINS5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">133</span>, <span class="number">5</span> <span class="number">6</span>, <span class="number">10</span> <span class="number">137</span>, <span class="number">20</span> <span class="number">196</span>, <span class="number">50</span> <span class="number">198</span>, <span class="number">100</span> <span class="number">176</span>, <span class="number">200</span> <span class="number">0</span>, <span class="number">500</span> <span class="number">168</span>, <span class="number">1000 </span><span class="number">94</span>, <span class="number">2253</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.159000</span> <span class="string">ms</span> <span class="string">(1159000</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS6.in</span> <span class="string">&amp;</span> <span class="string">COINS6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">0</span>, <span class="number">5</span> <span class="number">3</span>, <span class="number">10</span> <span class="number">131</span>, <span class="number">20</span> <span class="number">24</span>, <span class="number">50</span> <span class="number">78</span>, <span class="number">100</span> <span class="number">66</span>, <span class="number">200</span> <span class="number">84</span>, <span class="number">500</span> <span class="number">147</span>, <span class="number">1000 </span><span class="number">152</span>, <span class="number">16423</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">8.171400</span> <span class="string">ms</span> <span class="string">(8171400</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
-<h4 id="Recursive-Method-2-Dimension"><a href="#Recursive-Method-2-Dimension" class="headerlink" title="Recursive Method (2-Dimension)"></a>Recursive Method (2-Dimension)</h4><h5 id="Diagram-1"><a href="#Diagram-1" class="headerlink" title="Diagram"></a>Diagram</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">2</span> <span class="number">3</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">6</span> <span class="number">1</span>, <span class="number">12</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">root((root)) --#1, 0 * 6--&gt; 47c306e5((12))</span><br><span class="line">47c306e5 --#2, 0 * 3--&gt; 1c2ac852((12))</span><br><span class="line">1c2ac852 --#3, 0 * 2--&gt; a6e0b278((12))</span><br><span class="line">1c2ac852 --#4, 1 * 2--&gt; d03ca462((10))</span><br><span class="line">1c2ac852 --#5, 2 * 2--&gt; 91c93566((8))</span><br><span class="line">1c2ac852 --#6, 3 * 2--&gt; 4180836e((6))</span><br><span class="line">style 4180836e fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">47c306e5 --#7, 1 * 3--&gt; 5ecc1041((9))</span><br><span class="line">5ecc1041 --#8, 0 * 2--&gt; b759c285((9))</span><br><span class="line">5ecc1041 --#9, 1 * 2--&gt; 01ecf723((7))</span><br><span class="line">5ecc1041 --#10, 2 * 2--&gt; a3105e86((5))</span><br><span class="line">5ecc1041 --#11, 3 * 2--&gt; 25c25e57((3))</span><br><span class="line">style 25c25e57 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">47c306e5 --#12, 2 * 3--&gt; be869faa((6))</span><br><span class="line">style be869faa fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">be869faa --#13, 0 * 2--&gt; 3314f76a((6))</span><br><span class="line">style 3314f76a fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">be869faa --#14, 1 * 2--&gt; e07a5826((4))</span><br><span class="line">be869faa --#15, 2 * 2--&gt; bdcf5e09((2))</span><br><span class="line">be869faa --#16, 3 * 2--&gt; b6de7abb((0))</span><br><span class="line">style b6de7abb fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">47c306e5 --#17, 3 * 3--&gt; 4fd2a78a((3))</span><br><span class="line">style 4fd2a78a fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">4fd2a78a --#18, 0 * 2--&gt; 24309338((3))</span><br><span class="line">style 24309338 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">4fd2a78a --#19, 1 * 2--&gt; a9927e68((1))</span><br><span class="line">root((root)) --#20, 1 * 6--&gt; 30bd713b((6))</span><br><span class="line">30bd713b --#21, 0 * 3--&gt; 82f6a912((6))</span><br><span class="line">style 82f6a912 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">30bd713b --#22, 1 * 3--&gt; a1adc784((3))</span><br><span class="line">style a1adc784 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">30bd713b --#23, 2 * 3--&gt; 2bd1ac23((0))</span><br><span class="line">2bd1ac23 --#24, 0 * 2--&gt; 9eccd897((0))</span><br><span class="line">style 9eccd897 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="Source-1"><a href="#Source-1" class="headerlink" title="Source"></a>Source</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> n;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] values;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] amounts;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> capacity;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[][] dp;</span><br><span class="line"><span class="keyword">static</span> <span class="type">boolean</span>[][] visited;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="variable">INF</span> <span class="operator">=</span> <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> firstCoins, <span class="type">int</span> capacity)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base Case */</span></span><br><span class="line">    <span class="keyword">if</span> (visited[firstCoins][capacity] || firstCoins == <span class="number">0</span>) <span class="keyword">return</span> dp[firstCoins][capacity];</span><br><span class="line">    <span class="keyword">else</span> visited[firstCoins][capacity] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Recursive Case */</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> values[firstCoins - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; (k &lt;= capacity / value) &amp;&amp; (k &lt;= amounts[firstCoins - <span class="number">1</span>]); k++) &#123;</span><br><span class="line">        <span class="comment">// the following are the same</span></span><br><span class="line">        <span class="comment">// dp[firstCoins][capacity] = Math.min(f(firstCoins - 1, capacity), f(firstCoins - 1, capacity - (k * value)) + k);</span></span><br><span class="line">        dp[firstCoins][capacity] = Math.min(dp[firstCoins - <span class="number">1</span>][capacity], f(firstCoins - <span class="number">1</span>, capacity - (k * value)) + k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[firstCoins][capacity];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">solve</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// define dp array</span></span><br><span class="line">    dp = <span class="keyword">new</span> <span class="title class_">int</span>[values.length + <span class="number">1</span>][capacity + <span class="number">1</span>];</span><br><span class="line">    visited = <span class="keyword">new</span> <span class="title class_">boolean</span>[values.length + <span class="number">1</span>][capacity + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// init</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= values.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= capacity; j++) &#123;</span><br><span class="line">            dp[i][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= values.length; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= capacity; j++) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = INF;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// dp</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> f(values.length, capacity);</span><br><span class="line">    <span class="keyword">return</span> ans == INF ? -<span class="number">1</span> : ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Scanner scanner : judger) &#123;</span><br><span class="line">        n = scanner.nextInt();</span><br><span class="line">        values = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        amounts = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">            <span class="type">int</span> <span class="variable">amount</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">            values[i] = value;</span><br><span class="line">            amounts[i] = amount;</span><br><span class="line">        &#125;</span><br><span class="line">        capacity = scanner.nextInt();</span><br><span class="line">        judger.manuallyStartTimer();</span><br><span class="line">        System.out.println(solve());</span><br><span class="line">        judger.manuallyStopTimer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Benchmark-1"><a href="#Benchmark-1" class="headerlink" title="Benchmark"></a>Benchmark</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS0.in</span> <span class="string">&amp;</span> <span class="string">COINS0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">12</span>, <span class="number">5</span> <span class="number">180</span>, <span class="number">10</span> <span class="number">0</span>, <span class="number">20</span> <span class="number">109</span>, <span class="number">50</span> <span class="number">126</span>, <span class="number">100</span> <span class="number">192</span>, <span class="number">200</span> <span class="number">107</span>, <span class="number">500</span> <span class="number">47</span>, <span class="number">1000 </span><span class="number">20</span>, <span class="number">14758</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">8.383200</span> <span class="string">ms</span> <span class="string">(8383200</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS1.in</span> <span class="string">&amp;</span> <span class="string">COINS1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">12</span>, <span class="number">5</span> <span class="number">180</span>, <span class="number">10</span> <span class="number">0</span>, <span class="number">20</span> <span class="number">109</span>, <span class="number">50</span> <span class="number">126</span>, <span class="number">100</span> <span class="number">192</span>, <span class="number">200</span> <span class="number">107</span>, <span class="number">500</span> <span class="number">47</span>, <span class="number">1000 </span><span class="number">20</span>, <span class="number">14758</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">21</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">5.690600</span> <span class="string">ms</span> <span class="string">(5690600</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS2.in</span> <span class="string">&amp;</span> <span class="string">COINS2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">45</span>, <span class="number">5</span> <span class="number">0</span>, <span class="number">10</span> <span class="number">148</span>, <span class="number">20</span> <span class="number">145</span>, <span class="number">50</span> <span class="number">136</span>, <span class="number">100</span> <span class="number">181</span>, <span class="number">200</span> <span class="number">17</span>, <span class="number">500</span> <span class="number">172</span>, <span class="number">1000 </span><span class="number">152</span>, <span class="number">16834</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">23</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">23</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">6.921800</span> <span class="string">ms</span> <span class="string">(6921800</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS3.in</span> <span class="string">&amp;</span> <span class="string">COINS3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">22</span>, <span class="number">5</span> <span class="number">0</span>, <span class="number">10</span> <span class="number">27</span>, <span class="number">20</span> <span class="number">52</span>, <span class="number">50</span> <span class="number">192</span>, <span class="number">100</span> <span class="number">164</span>, <span class="number">200</span> <span class="number">110</span>, <span class="number">500</span> <span class="number">62</span>, <span class="number">1000 </span><span class="number">98</span>, <span class="number">17397</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.721700</span> <span class="string">ms</span> <span class="string">(1721700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS4.in</span> <span class="string">&amp;</span> <span class="string">COINS4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">99</span>, <span class="number">5</span> <span class="number">173</span>, <span class="number">10</span> <span class="number">11</span>, <span class="number">20</span> <span class="number">54</span>, <span class="number">50</span> <span class="number">101</span>, <span class="number">100</span> <span class="number">6</span>, <span class="number">200</span> <span class="number">44</span>, <span class="number">500</span> <span class="number">15</span>, <span class="number">1000 </span><span class="number">126</span>, <span class="number">12810</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">16</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">4.294700</span> <span class="string">ms</span> <span class="string">(4294700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS5.in</span> <span class="string">&amp;</span> <span class="string">COINS5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">133</span>, <span class="number">5</span> <span class="number">6</span>, <span class="number">10</span> <span class="number">137</span>, <span class="number">20</span> <span class="number">196</span>, <span class="number">50</span> <span class="number">198</span>, <span class="number">100</span> <span class="number">176</span>, <span class="number">200</span> <span class="number">0</span>, <span class="number">500</span> <span class="number">168</span>, <span class="number">1000 </span><span class="number">94</span>, <span class="number">2253</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.258100</span> <span class="string">ms</span> <span class="string">(1258100</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS6.in</span> <span class="string">&amp;</span> <span class="string">COINS6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">10</span>, <span class="number">1</span> <span class="number">0</span>, <span class="number">2</span> <span class="number">0</span>, <span class="number">5</span> <span class="number">3</span>, <span class="number">10</span> <span class="number">131</span>, <span class="number">20</span> <span class="number">24</span>, <span class="number">50</span> <span class="number">78</span>, <span class="number">100</span> <span class="number">66</span>, <span class="number">200</span> <span class="number">84</span>, <span class="number">500</span> <span class="number">147</span>, <span class="number">1000 </span><span class="number">152</span>, <span class="number">16423</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">-1</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">2.296300</span> <span class="string">ms</span> <span class="string">(2296300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS7.in</span> <span class="string">&amp;</span> <span class="string">COINS7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">1</span> <span class="number">1</span>, <span class="number">2</span> <span class="number">2</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">11</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.092600</span> <span class="string">ms</span> <span class="string">(92600</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
-<h4 id="Recursive-Method-4-Dimension"><a href="#Recursive-Method-4-Dimension" class="headerlink" title="Recursive Method (4-Dimension)"></a>Recursive Method (4-Dimension)</h4><h5 id="Diagram-2"><a href="#Diagram-2" class="headerlink" title="Diagram"></a>Diagram</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">2</span> <span class="number">3</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">6</span> <span class="number">1</span>, <span class="number">12</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">root((root)) --#36, 0 * 6--&gt; a7411865((12))</span><br><span class="line">a7411865 --#37, 0 * 3--&gt; 45b1eb92((12))</span><br><span class="line">45b1eb92 --#38, 0 * 2--&gt; 23c84bd8((12))</span><br><span class="line">style 23c84bd8 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">45b1eb92 --#39, 1 * 2--&gt; 3a989a55((10))</span><br><span class="line">style 3a989a55 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">45b1eb92 --#40, 2 * 2--&gt; 01f72111((8))</span><br><span class="line">style 01f72111 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">45b1eb92 --#41, 3 * 2--&gt; bf018faf((6))</span><br><span class="line">style bf018faf fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">a7411865 --#42, 1 * 3--&gt; e48ee7e2((9))</span><br><span class="line">e48ee7e2 --#43, 0 * 2--&gt; 4edc439b((9))</span><br><span class="line">style 4edc439b fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">e48ee7e2 --#44, 1 * 2--&gt; f92a6278((7))</span><br><span class="line">style f92a6278 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">e48ee7e2 --#45, 2 * 2--&gt; 1b25d26a((5))</span><br><span class="line">style 1b25d26a fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">e48ee7e2 --#46, 3 * 2--&gt; 39611a30((3))</span><br><span class="line">style 39611a30 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">a7411865 --#47, 2 * 3--&gt; 0abad9d3((6))</span><br><span class="line">0abad9d3 --#48, 0 * 2--&gt; ba8ca012((6))</span><br><span class="line">style ba8ca012 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">0abad9d3 --#49, 1 * 2--&gt; 0475bb15((4))</span><br><span class="line">style 0475bb15 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">0abad9d3 --#50, 2 * 2--&gt; ea8374c3((2))</span><br><span class="line">style ea8374c3 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">0abad9d3 --#51, 3 * 2--&gt; eeff9ef2((0))</span><br><span class="line">style eeff9ef2 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">a7411865 --#52, 3 * 3--&gt; fbb80b24((3))</span><br><span class="line">fbb80b24 --#53, 0 * 2--&gt; a96a30bc((3))</span><br><span class="line">style a96a30bc fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">fbb80b24 --#54, 1 * 2--&gt; fc4ee4be((1))</span><br><span class="line">style fc4ee4be fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">root((root)) --#55, 1 * 6--&gt; 8c399954((6))</span><br><span class="line">8c399954 --#56, 0 * 3--&gt; 59fdd542((6))</span><br><span class="line">59fdd542 --#57, 0 * 2--&gt; 49d33747((6))</span><br><span class="line">style 49d33747 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">59fdd542 --#58, 1 * 2--&gt; 8d975ef6((4))</span><br><span class="line">style 8d975ef6 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">59fdd542 --#59, 2 * 2--&gt; 89d23054((2))</span><br><span class="line">style 89d23054 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">59fdd542 --#60, 3 * 2--&gt; 1ec22271((0))</span><br><span class="line">style 1ec22271 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">8c399954 --#61, 1 * 3--&gt; 4de3015f((3))</span><br><span class="line">4de3015f --#62, 0 * 2--&gt; 010c58d1((3))</span><br><span class="line">style 010c58d1 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">4de3015f --#63, 1 * 2--&gt; 951f5029((1))</span><br><span class="line">style 951f5029 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">8c399954 --#64, 2 * 3--&gt; ce3992c9((0))</span><br><span class="line">style ce3992c9 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="Source-2"><a href="#Source-2" class="headerlink" title="Source"></a>Source</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> n;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] values;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] amounts;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> capacity;</span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="variable">INF</span> <span class="operator">=</span> <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Memo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ArrayList&lt;Memo&gt; memo = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> firstCoins;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> capacity;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] amounts;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> value;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> visited;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Memo</span><span class="params">(<span class="type">int</span> firstCoins, <span class="type">int</span> capacity, <span class="type">int</span>[] amounts, <span class="type">int</span> value, <span class="type">boolean</span> visited)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.firstCoins = firstCoins;</span><br><span class="line">        <span class="built_in">this</span>.capacity = capacity;</span><br><span class="line">        <span class="built_in">this</span>.amounts = amounts;</span><br><span class="line">        <span class="built_in">this</span>.value = value;</span><br><span class="line">        <span class="built_in">this</span>.visited = visited;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == o) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="literal">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">Memo</span> <span class="variable">memo</span> <span class="operator">=</span> (Memo) o;</span><br><span class="line">        <span class="keyword">if</span> (firstCoins != memo.firstCoins) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (capacity != memo.capacity) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> Arrays.equals(amounts, memo.amounts);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">resetMemo</span><span class="params">()</span> &#123;</span><br><span class="line">        memo.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(<span class="type">int</span> firstCoins, <span class="type">int</span> capacity, <span class="type">int</span>[] amounts, <span class="type">int</span> value, <span class="type">boolean</span> visited)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> memo.indexOf(<span class="keyword">new</span> <span class="title class_">Memo</span>(firstCoins, capacity, amounts, value, visited));</span><br><span class="line">        <span class="keyword">if</span> (index == -<span class="number">1</span>) &#123;</span><br><span class="line">            memo.add(<span class="keyword">new</span> <span class="title class_">Memo</span>(firstCoins, capacity, amounts, value, visited));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            memo.set(index, <span class="keyword">new</span> <span class="title class_">Memo</span>(firstCoins, capacity, amounts, value, visited));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Memo</span> <span class="variable">MEMO_ZERO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memo</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">null</span>, <span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Memo</span> <span class="variable">MEMO_INF</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memo</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">null</span>, INF, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Memo <span class="title function_">get</span><span class="params">(<span class="type">int</span> firstCoins, <span class="type">int</span> capacity, <span class="type">int</span>[] amounts)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Special cases */</span></span><br><span class="line">        <span class="keyword">if</span> (capacity == <span class="number">0</span>) <span class="keyword">return</span> MEMO_ZERO;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (firstCoins == <span class="number">0</span>) <span class="keyword">return</span> MEMO_INF;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Normal cases */</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> memo.indexOf(<span class="keyword">new</span> <span class="title class_">Memo</span>(firstCoins, capacity, amounts, -<span class="number">1</span>, <span class="literal">false</span>));</span><br><span class="line">        <span class="keyword">if</span> (index == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">Memo</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memo</span>(firstCoins, capacity, amounts, INF, <span class="literal">false</span>);</span><br><span class="line">            memo.add(temp);</span><br><span class="line">            <span class="keyword">return</span> temp;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">return</span> memo.get(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> firstCoins, <span class="type">int</span> capacity, <span class="type">int</span>[] amounts)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base Case */</span></span><br><span class="line">    <span class="keyword">if</span> (Memo.get(firstCoins, capacity, amounts).visited) &#123;</span><br><span class="line">        <span class="keyword">return</span> Memo.get(firstCoins, capacity, amounts).value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Recursive Case */</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> values[firstCoins - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; (k &lt;= capacity / value) &amp;&amp; (k &lt;= amounts[firstCoins - <span class="number">1</span>]); k++) &#123;</span><br><span class="line">        <span class="comment">// choice 1</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">do_not_use_current_type_of_coin</span> <span class="operator">=</span> Memo.get(firstCoins - <span class="number">1</span>, capacity, amounts).value;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// choice 2</span></span><br><span class="line">        <span class="type">int</span>[] amounts_clone = amounts.clone();</span><br><span class="line">        amounts_clone[firstCoins - <span class="number">1</span>] -= k;</span><br><span class="line">        <span class="type">int</span> <span class="variable">use_current_type_of_coin</span> <span class="operator">=</span> f(firstCoins - <span class="number">1</span>, capacity - (k * value), amounts_clone) + k;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// optimal choice</span></span><br><span class="line">        Memo.set(firstCoins, capacity, amounts, Math.min(do_not_use_current_type_of_coin, use_current_type_of_coin), <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Memo.get(firstCoins, capacity, amounts).value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">solve</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// define dp array</span></span><br><span class="line">    Memo.resetMemo();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// dp</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> f(values.length, capacity, amounts);</span><br><span class="line">    <span class="keyword">return</span> ans == INF ? -<span class="number">1</span> : ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Scanner scanner : judger) &#123;</span><br><span class="line">        n = scanner.nextInt();</span><br><span class="line">        values = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        amounts = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">            <span class="type">int</span> <span class="variable">amount</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">            values[i] = value;</span><br><span class="line">            amounts[i] = amount;</span><br><span class="line">        &#125;</span><br><span class="line">        capacity = scanner.nextInt();</span><br><span class="line">        judger.manuallyStartTimer();</span><br><span class="line">        System.out.println(solve());</span><br><span class="line">        judger.manuallyStopTimer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Benchmark-2"><a href="#Benchmark-2" class="headerlink" title="Benchmark"></a>Benchmark</h5><h6 id="Recursive-Method-with-4-Dimension"><a href="#Recursive-Method-with-4-Dimension" class="headerlink" title="Recursive Method with 4-Dimension"></a>Recursive Method with 4-Dimension</h6><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS7.in</span> <span class="string">&amp;</span> <span class="string">COINS7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">1</span> <span class="number">1</span>, <span class="number">2</span> <span class="number">2</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">11</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.000600</span> <span class="string">ms</span> <span class="string">(1000600</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS8.in</span> <span class="string">&amp;</span> <span class="string">COINS8.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">2</span> <span class="number">3</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">6</span> <span class="number">1</span>, <span class="number">12</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">3</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">3</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.242400</span> <span class="string">ms</span> <span class="string">(242400</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS9.in</span> <span class="string">&amp;</span> <span class="string">COINS9.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">9</span>, <span class="number">1</span> <span class="number">1</span>, <span class="number">2</span> <span class="number">2</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">4</span> <span class="number">4</span>, <span class="number">5</span> <span class="number">5</span>, <span class="number">6</span> <span class="number">6</span>, <span class="number">7</span> <span class="number">7</span>, <span class="number">8</span> <span class="number">8</span>, <span class="number">9</span> <span class="number">9</span>, <span class="number">60</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">17775.069700</span> <span class="string">ms</span> <span class="string">(17775069700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
-<h6 id="Recursive-Method-with-2-Dimention"><a href="#Recursive-Method-with-2-Dimention" class="headerlink" title="Recursive Method with 2-Dimention"></a>Recursive Method with 2-Dimention</h6><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS7.in</span> <span class="string">&amp;</span> <span class="string">COINS7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">1</span> <span class="number">1</span>, <span class="number">2</span> <span class="number">2</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">11</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">4</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">8.181900</span> <span class="string">ms</span> <span class="string">(8181900</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS8.in</span> <span class="string">&amp;</span> <span class="string">COINS8.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">3</span>, <span class="number">2</span> <span class="number">3</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">6</span> <span class="number">1</span>, <span class="number">12</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">3</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">3</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">3.047300</span> <span class="string">ms</span> <span class="string">(3047300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">COINS9.in</span> <span class="string">&amp;</span> <span class="string">COINS9.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">9</span>, <span class="number">1</span> <span class="number">1</span>, <span class="number">2</span> <span class="number">2</span>, <span class="number">3</span> <span class="number">3</span>, <span class="number">4</span> <span class="number">4</span>, <span class="number">5</span> <span class="number">5</span>, <span class="number">6</span> <span class="number">6</span>, <span class="number">7</span> <span class="number">7</span>, <span class="number">8</span> <span class="number">8</span>, <span class="number">9</span> <span class="number">9</span>, <span class="number">60</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">7</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">69.721200</span> <span class="string">ms</span> <span class="string">(69721200</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
+<h5 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h5><pre><code class="lang-java">    public static int solve(int[] values, int[] amounts, int capacity) &#123;
+        // define dp array
+        int[][] dp = new int[values.length + 1][capacity + 1];
+
+        // init
+        for (int i = 0; i &lt;= values.length; i++) &#123;
+            dp[i][0] = 0;
+        &#125;
+        for (int j = 1; j &lt;= capacity; j++) &#123;
+            dp[0][j] = 0x3f3f3f3f;
+        &#125;
+
+        // only use the first i coins
+        for (int i = 1; i &lt;= values.length; i++) &#123;
+            int value = values[i - 1];
+            // to satisfy j capacity
+            for (int j = 1; j &lt;= capacity; j++) &#123;
+                // how many coins of this type should be used ?
+                for (int k = 0; k &lt;= j / value &amp;&amp; k &lt;= amounts[i - 1]; k++) &#123;
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - k * value] + k);
+                &#125;
+            &#125;
+        &#125;
+
+        int ans = dp[values.length][capacity];
+        return ans == 0x3f3f3f3f ? -1 : ans;
+    &#125;
+</code></pre>
+<h5 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h5><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: COINS0.in &amp; COINS0.out
+Expected  Input: [10, 1 0, 2 12, 5 180, 10 0, 20 109, 50 126, 100 192, 200 107, 500 47, 1000 20, 14758]
+Expected Output: [21]
+Your     Output: [21]
+Time Cost: 25.284600 ms (25284600 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS1.in &amp; COINS1.out
+Expected  Input: [10, 1 0, 2 12, 5 180, 10 0, 20 109, 50 126, 100 192, 200 107, 500 47, 1000 20, 14758]
+Expected Output: [21]
+Your     Output: [21]
+Time Cost: 16.951400 ms (16951400 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS2.in &amp; COINS2.out
+Expected  Input: [10, 1 0, 2 45, 5 0, 10 148, 20 145, 50 136, 100 181, 200 17, 500 172, 1000 152, 16834]
+Expected Output: [23]
+Your     Output: [23]
+Time Cost: 13.734800 ms (13734800 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS3.in &amp; COINS3.out
+Expected  Input: [10, 1 0, 2 22, 5 0, 10 27, 20 52, 50 192, 100 164, 200 110, 500 62, 1000 98, 17397]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 10.814700 ms (10814700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS4.in &amp; COINS4.out
+Expected  Input: [10, 1 0, 2 99, 5 173, 10 11, 20 54, 50 101, 100 6, 200 44, 500 15, 1000 126, 12810]
+Expected Output: [16]
+Your     Output: [16]
+Time Cost: 8.838500 ms (8838500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS5.in &amp; COINS5.out
+Expected  Input: [10, 1 0, 2 133, 5 6, 10 137, 20 196, 50 198, 100 176, 200 0, 500 168, 1000 94, 2253]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 1.159000 ms (1159000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS6.in &amp; COINS6.out
+Expected  Input: [10, 1 0, 2 0, 5 3, 10 131, 20 24, 50 78, 100 66, 200 84, 500 147, 1000 152, 16423]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 8.171400 ms (8171400 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √
+</code></pre>
+<h4 id="Recursive-Method-2-Dimension"><a href="#Recursive-Method-2-Dimension" class="headerlink" title="Recursive Method (2-Dimension)"></a>Recursive Method (2-Dimension)</h4><h5 id="Diagram-1"><a href="#Diagram-1" class="headerlink" title="Diagram"></a>Diagram</h5><pre><code class="lang-yaml">Expected  Input: [3, 2 3, 3 3, 6 1, 12]
+Expected Output: [3]
+</code></pre>
+<pre><code class="lang-mermaid">graph TD;
+root((root)) --#1, 0 * 6--&gt; 47c306e5((12))
+47c306e5 --#2, 0 * 3--&gt; 1c2ac852((12))
+1c2ac852 --#3, 0 * 2--&gt; a6e0b278((12))
+1c2ac852 --#4, 1 * 2--&gt; d03ca462((10))
+1c2ac852 --#5, 2 * 2--&gt; 91c93566((8))
+1c2ac852 --#6, 3 * 2--&gt; 4180836e((6))
+style 4180836e fill: lightgreen,stroke: #333,stroke-width: 4px
+47c306e5 --#7, 1 * 3--&gt; 5ecc1041((9))
+5ecc1041 --#8, 0 * 2--&gt; b759c285((9))
+5ecc1041 --#9, 1 * 2--&gt; 01ecf723((7))
+5ecc1041 --#10, 2 * 2--&gt; a3105e86((5))
+5ecc1041 --#11, 3 * 2--&gt; 25c25e57((3))
+style 25c25e57 fill: lightgreen,stroke: #333,stroke-width: 4px
+47c306e5 --#12, 2 * 3--&gt; be869faa((6))
+style be869faa fill: lightgreen,stroke: #333,stroke-width: 4px
+be869faa --#13, 0 * 2--&gt; 3314f76a((6))
+style 3314f76a fill: lightgray,stroke: #333,stroke-width: 4px
+be869faa --#14, 1 * 2--&gt; e07a5826((4))
+be869faa --#15, 2 * 2--&gt; bdcf5e09((2))
+be869faa --#16, 3 * 2--&gt; b6de7abb((0))
+style b6de7abb fill: lightgreen,stroke: #333,stroke-width: 4px
+47c306e5 --#17, 3 * 3--&gt; 4fd2a78a((3))
+style 4fd2a78a fill: lightgreen,stroke: #333,stroke-width: 4px
+4fd2a78a --#18, 0 * 2--&gt; 24309338((3))
+style 24309338 fill: lightgray,stroke: #333,stroke-width: 4px
+4fd2a78a --#19, 1 * 2--&gt; a9927e68((1))
+root((root)) --#20, 1 * 6--&gt; 30bd713b((6))
+30bd713b --#21, 0 * 3--&gt; 82f6a912((6))
+style 82f6a912 fill: lightgray,stroke: #333,stroke-width: 4px
+30bd713b --#22, 1 * 3--&gt; a1adc784((3))
+style a1adc784 fill: lightgray,stroke: #333,stroke-width: 4px
+30bd713b --#23, 2 * 3--&gt; 2bd1ac23((0))
+2bd1ac23 --#24, 0 * 2--&gt; 9eccd897((0))
+style 9eccd897 fill: lightgray,stroke: #333,stroke-width: 4px
+</code></pre>
+<h5 id="Source-1"><a href="#Source-1" class="headerlink" title="Source"></a>Source</h5><pre><code class="lang-java">    static int n;
+    static int[] values;
+    static int[] amounts;
+    static int capacity;
+    static int[][] dp;
+    static boolean[][] visited;
+    static int INF = 0x3f3f3f3f;
+
+    public static int f(int firstCoins, int capacity) &#123;
+
+        /* Base Case */
+        if (visited[firstCoins][capacity] || firstCoins == 0) return dp[firstCoins][capacity];
+        else visited[firstCoins][capacity] = true;
+
+        /* Recursive Case */
+        int value = values[firstCoins - 1];
+        for (int k = 0; (k &lt;= capacity / value) &amp;&amp; (k &lt;= amounts[firstCoins - 1]); k++) &#123;
+            // the following are the same
+            // dp[firstCoins][capacity] = Math.min(f(firstCoins - 1, capacity), f(firstCoins - 1, capacity - (k * value)) + k);
+            dp[firstCoins][capacity] = Math.min(dp[firstCoins - 1][capacity], f(firstCoins - 1, capacity - (k * value)) + k);
+        &#125;
+
+        return dp[firstCoins][capacity];
+    &#125;
+
+    public static int solve() &#123;
+
+        // define dp array
+        dp = new int[values.length + 1][capacity + 1];
+        visited = new boolean[values.length + 1][capacity + 1];
+
+        // init
+        for (int i = 0; i &lt;= values.length; i++) &#123;
+            for (int j = 0; j &lt;= capacity; j++) &#123;
+                dp[i][j] = INF;
+            &#125;
+        &#125;
+
+        for (int i = 0; i &lt;= values.length; i++) &#123;
+            dp[i][0] = 0;
+        &#125;
+        for (int j = 1; j &lt;= capacity; j++) &#123;
+            dp[0][j] = INF;
+        &#125;
+
+        // dp
+        int ans = f(values.length, capacity);
+        return ans == INF ? -1 : ans;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        for (Scanner scanner : judger) &#123;
+            n = scanner.nextInt();
+            values = new int[n];
+            amounts = new int[n];
+            for (int i = 0; i &lt; n; i++) &#123;
+                int value = scanner.nextInt();
+                int amount = scanner.nextInt();
+                values[i] = value;
+                amounts[i] = amount;
+            &#125;
+            capacity = scanner.nextInt();
+            judger.manuallyStartTimer();
+            System.out.println(solve());
+            judger.manuallyStopTimer();
+        &#125;
+    &#125;
+</code></pre>
+<h5 id="Benchmark-1"><a href="#Benchmark-1" class="headerlink" title="Benchmark"></a>Benchmark</h5><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: COINS0.in &amp; COINS0.out
+Expected  Input: [10, 1 0, 2 12, 5 180, 10 0, 20 109, 50 126, 100 192, 200 107, 500 47, 1000 20, 14758]
+Expected Output: [21]
+Your     Output: [21]
+Time Cost: 8.383200 ms (8383200 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS1.in &amp; COINS1.out
+Expected  Input: [10, 1 0, 2 12, 5 180, 10 0, 20 109, 50 126, 100 192, 200 107, 500 47, 1000 20, 14758]
+Expected Output: [21]
+Your     Output: [21]
+Time Cost: 5.690600 ms (5690600 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS2.in &amp; COINS2.out
+Expected  Input: [10, 1 0, 2 45, 5 0, 10 148, 20 145, 50 136, 100 181, 200 17, 500 172, 1000 152, 16834]
+Expected Output: [23]
+Your     Output: [23]
+Time Cost: 6.921800 ms (6921800 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS3.in &amp; COINS3.out
+Expected  Input: [10, 1 0, 2 22, 5 0, 10 27, 20 52, 50 192, 100 164, 200 110, 500 62, 1000 98, 17397]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 1.721700 ms (1721700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS4.in &amp; COINS4.out
+Expected  Input: [10, 1 0, 2 99, 5 173, 10 11, 20 54, 50 101, 100 6, 200 44, 500 15, 1000 126, 12810]
+Expected Output: [16]
+Your     Output: [16]
+Time Cost: 4.294700 ms (4294700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS5.in &amp; COINS5.out
+Expected  Input: [10, 1 0, 2 133, 5 6, 10 137, 20 196, 50 198, 100 176, 200 0, 500 168, 1000 94, 2253]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 1.258100 ms (1258100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS6.in &amp; COINS6.out
+Expected  Input: [10, 1 0, 2 0, 5 3, 10 131, 20 24, 50 78, 100 66, 200 84, 500 147, 1000 152, 16423]
+Expected Output: [-1]
+Your     Output: [-1]
+Time Cost: 2.296300 ms (2296300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: COINS7.in &amp; COINS7.out
+Expected  Input: [3, 1 1, 2 2, 3 3, 11]
+Expected Output: [4]
+Your     Output: [4]
+Time Cost: 0.092600 ms (92600 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √ √
+</code></pre>
+<h4 id="Recursive-Method-4-Dimension"><a href="#Recursive-Method-4-Dimension" class="headerlink" title="Recursive Method (4-Dimension)"></a>Recursive Method (4-Dimension)</h4><h5 id="Diagram-2"><a href="#Diagram-2" class="headerlink" title="Diagram"></a>Diagram</h5><pre><code class="lang-yaml">Expected  Input: [3, 2 3, 3 3, 6 1, 12]
+Expected Output: [3]
+</code></pre>
+<pre><code class="lang-mermaid">graph TD;
+root((root)) --#36, 0 * 6--&gt; a7411865((12))
+a7411865 --#37, 0 * 3--&gt; 45b1eb92((12))
+45b1eb92 --#38, 0 * 2--&gt; 23c84bd8((12))
+style 23c84bd8 fill: lightgray,stroke: #333,stroke-width: 4px
+45b1eb92 --#39, 1 * 2--&gt; 3a989a55((10))
+style 3a989a55 fill: lightgray,stroke: #333,stroke-width: 4px
+45b1eb92 --#40, 2 * 2--&gt; 01f72111((8))
+style 01f72111 fill: lightgray,stroke: #333,stroke-width: 4px
+45b1eb92 --#41, 3 * 2--&gt; bf018faf((6))
+style bf018faf fill: lightgray,stroke: #333,stroke-width: 4px
+a7411865 --#42, 1 * 3--&gt; e48ee7e2((9))
+e48ee7e2 --#43, 0 * 2--&gt; 4edc439b((9))
+style 4edc439b fill: lightgray,stroke: #333,stroke-width: 4px
+e48ee7e2 --#44, 1 * 2--&gt; f92a6278((7))
+style f92a6278 fill: lightgray,stroke: #333,stroke-width: 4px
+e48ee7e2 --#45, 2 * 2--&gt; 1b25d26a((5))
+style 1b25d26a fill: lightgray,stroke: #333,stroke-width: 4px
+e48ee7e2 --#46, 3 * 2--&gt; 39611a30((3))
+style 39611a30 fill: lightgray,stroke: #333,stroke-width: 4px
+a7411865 --#47, 2 * 3--&gt; 0abad9d3((6))
+0abad9d3 --#48, 0 * 2--&gt; ba8ca012((6))
+style ba8ca012 fill: lightgray,stroke: #333,stroke-width: 4px
+0abad9d3 --#49, 1 * 2--&gt; 0475bb15((4))
+style 0475bb15 fill: lightgray,stroke: #333,stroke-width: 4px
+0abad9d3 --#50, 2 * 2--&gt; ea8374c3((2))
+style ea8374c3 fill: lightgray,stroke: #333,stroke-width: 4px
+0abad9d3 --#51, 3 * 2--&gt; eeff9ef2((0))
+style eeff9ef2 fill: lightgray,stroke: #333,stroke-width: 4px
+a7411865 --#52, 3 * 3--&gt; fbb80b24((3))
+fbb80b24 --#53, 0 * 2--&gt; a96a30bc((3))
+style a96a30bc fill: lightgray,stroke: #333,stroke-width: 4px
+fbb80b24 --#54, 1 * 2--&gt; fc4ee4be((1))
+style fc4ee4be fill: lightgray,stroke: #333,stroke-width: 4px
+root((root)) --#55, 1 * 6--&gt; 8c399954((6))
+8c399954 --#56, 0 * 3--&gt; 59fdd542((6))
+59fdd542 --#57, 0 * 2--&gt; 49d33747((6))
+style 49d33747 fill: lightgray,stroke: #333,stroke-width: 4px
+59fdd542 --#58, 1 * 2--&gt; 8d975ef6((4))
+style 8d975ef6 fill: lightgray,stroke: #333,stroke-width: 4px
+59fdd542 --#59, 2 * 2--&gt; 89d23054((2))
+style 89d23054 fill: lightgray,stroke: #333,stroke-width: 4px
+59fdd542 --#60, 3 * 2--&gt; 1ec22271((0))
+style 1ec22271 fill: lightgray,stroke: #333,stroke-width: 4px
+8c399954 --#61, 1 * 3--&gt; 4de3015f((3))
+4de3015f --#62, 0 * 2--&gt; 010c58d1((3))
+style 010c58d1 fill: lightgray,stroke: #333,stroke-width: 4px
+4de3015f --#63, 1 * 2--&gt; 951f5029((1))
+style 951f5029 fill: lightgray,stroke: #333,stroke-width: 4px
+8c399954 --#64, 2 * 3--&gt; ce3992c9((0))
+style ce3992c9 fill: lightgray,stroke: #333,stroke-width: 4px
+</code></pre>
+<h5 id="Source-2"><a href="#Source-2" class="headerlink" title="Source"></a>Source</h5><pre><code class="lang-java">    static int n;
+    static int[] values;
+    static int[] amounts;
+    static int capacity;
+    static int INF = 0x3f3f3f3f;
+
+    public static class Memo &#123;
+        private static final ArrayList&lt;Memo&gt; memo = new ArrayList&lt;&gt;();
+        public int firstCoins;
+        public int capacity;
+        public int[] amounts;
+        public int value;
+        public boolean visited;
+
+        public Memo(int firstCoins, int capacity, int[] amounts, int value, boolean visited) &#123;
+            this.firstCoins = firstCoins;
+            this.capacity = capacity;
+            this.amounts = amounts;
+            this.value = value;
+            this.visited = visited;
+        &#125;
+
+        @Override
+        public boolean equals(Object o) &#123;
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Memo memo = (Memo) o;
+            if (firstCoins != memo.firstCoins) return false;
+            if (capacity != memo.capacity) return false;
+            return Arrays.equals(amounts, memo.amounts);
+        &#125;
+
+        public static void resetMemo() &#123;
+            memo.clear();
+        &#125;
+
+        public static void set(int firstCoins, int capacity, int[] amounts, int value, boolean visited) &#123;
+            int index = memo.indexOf(new Memo(firstCoins, capacity, amounts, value, visited));
+            if (index == -1) &#123;
+                memo.add(new Memo(firstCoins, capacity, amounts, value, visited));
+            &#125; else &#123;
+                memo.set(index, new Memo(firstCoins, capacity, amounts, value, visited));
+            &#125;
+        &#125;
+
+        public static Memo MEMO_ZERO = new Memo(0, 0, null, 0, true);
+        public static Memo MEMO_INF = new Memo(0, 0, null, INF, true);
+
+        public static Memo get(int firstCoins, int capacity, int[] amounts) &#123;
+
+            /* Special cases */
+            if (capacity == 0) return MEMO_ZERO;
+            else if (firstCoins == 0) return MEMO_INF;
+
+            /* Normal cases */
+            int index = memo.indexOf(new Memo(firstCoins, capacity, amounts, -1, false));
+            if (index == -1) &#123;
+                Memo temp = new Memo(firstCoins, capacity, amounts, INF, false);
+                memo.add(temp);
+                return temp;
+            &#125; else return memo.get(index);
+        &#125;
+
+    &#125;
+
+    public static int f(int firstCoins, int capacity, int[] amounts) &#123;
+
+        /* Base Case */
+        if (Memo.get(firstCoins, capacity, amounts).visited) &#123;
+            return Memo.get(firstCoins, capacity, amounts).value;
+        &#125;
+
+        /* Recursive Case */
+        int value = values[firstCoins - 1];
+        for (int k = 0; (k &lt;= capacity / value) &amp;&amp; (k &lt;= amounts[firstCoins - 1]); k++) &#123;
+            // choice 1
+            int do_not_use_current_type_of_coin = Memo.get(firstCoins - 1, capacity, amounts).value;
+
+            // choice 2
+            int[] amounts_clone = amounts.clone();
+            amounts_clone[firstCoins - 1] -= k;
+            int use_current_type_of_coin = f(firstCoins - 1, capacity - (k * value), amounts_clone) + k;
+
+            // optimal choice
+            Memo.set(firstCoins, capacity, amounts, Math.min(do_not_use_current_type_of_coin, use_current_type_of_coin), true);
+        &#125;
+
+        return Memo.get(firstCoins, capacity, amounts).value;
+    &#125;
+
+    public static int solve() &#123;
+
+        // define dp array
+        Memo.resetMemo();
+
+        // dp
+        int ans = f(values.length, capacity, amounts);
+        return ans == INF ? -1 : ans;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        for (Scanner scanner : judger) &#123;
+            n = scanner.nextInt();
+            values = new int[n];
+            amounts = new int[n];
+            for (int i = 0; i &lt; n; i++) &#123;
+                int value = scanner.nextInt();
+                int amount = scanner.nextInt();
+                values[i] = value;
+                amounts[i] = amount;
+            &#125;
+            capacity = scanner.nextInt();
+            judger.manuallyStartTimer();
+            System.out.println(solve());
+            judger.manuallyStopTimer();
+        &#125;
+    &#125;
+</code></pre>
+<h5 id="Benchmark-2"><a href="#Benchmark-2" class="headerlink" title="Benchmark"></a>Benchmark</h5><h6 id="Recursive-Method-with-4-Dimension"><a href="#Recursive-Method-with-4-Dimension" class="headerlink" title="Recursive Method with 4-Dimension"></a>Recursive Method with 4-Dimension</h6><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: COINS7.in &amp; COINS7.out
+Expected  Input: [3, 1 1, 2 2, 3 3, 11]
+Expected Output: [4]
+Your     Output: [4]
+Time Cost: 1.000600 ms (1000600 ns)
+Accepted
+-----------------------------------------------------
+Current Case: COINS8.in &amp; COINS8.out
+Expected  Input: [3, 2 3, 3 3, 6 1, 12]
+Expected Output: [3]
+Your     Output: [3]
+Time Cost: 0.242400 ms (242400 ns)
+Accepted
+-----------------------------------------------------
+Current Case: COINS9.in &amp; COINS9.out
+Expected  Input: [9, 1 1, 2 2, 3 3, 4 4, 5 5, 6 6, 7 7, 8 8, 9 9, 60]
+Expected Output: [7]
+Your     Output: [7]
+Time Cost: 17775.069700 ms (17775069700 ns)
+Accepted
+-----------------------------------------------------
+Result Statistics: √ √ √
+</code></pre>
+<h6 id="Recursive-Method-with-2-Dimention"><a href="#Recursive-Method-with-2-Dimention" class="headerlink" title="Recursive Method with 2-Dimention"></a>Recursive Method with 2-Dimention</h6><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: COINS7.in &amp; COINS7.out
+Expected  Input: [3, 1 1, 2 2, 3 3, 11]
+Expected Output: [4]
+Your     Output: [4]
+Time Cost: 8.181900 ms (8181900 ns)
+Accepted
+-----------------------------------------------------
+Current Case: COINS8.in &amp; COINS8.out
+Expected  Input: [3, 2 3, 3 3, 6 1, 12]
+Expected Output: [3]
+Your     Output: [3]
+Time Cost: 3.047300 ms (3047300 ns)
+Accepted
+-----------------------------------------------------
+Current Case: COINS9.in &amp; COINS9.out
+Expected  Input: [9, 1 1, 2 2, 3 3, 4 4, 5 5, 6 6, 7 7, 8 8, 9 9, 60]
+Expected Output: [7]
+Your     Output: [7]
+Time Cost: 69.721200 ms (69721200 ns)
+Accepted
+-----------------------------------------------------
+Result Statistics: √ √ √
+</code></pre>
 <h2 id="Pebble-Merging-Problem"><a href="#Pebble-Merging-Problem" class="headerlink" title="Pebble Merging Problem"></a>Pebble Merging Problem</h2><h3 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h3><p>在一个圆形操场的四周摆放着 n 堆石子。现要将石子有次序地合并成一堆。规定每次只<br>能选相邻的 2 堆石子合并成新的一堆，并将新的一堆石子数记为该次合并的得分。试设计一<br>个算法，计算出将 n 堆石子合并成一堆的最小得分和最大得分。</p>
 <h3 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h3><p>由文件 input.txt 提供输入数据。文件的第 1 行是正整数 n，1≤n≤100，表示有 n 堆石子。<br>第二行有 n 个数，分别表示每堆石子的个数。</p>
 <h3 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h3><p>程序运行结束时，将计算结果输出到文件 output.txt 中。文件的第 1 行中的数是最小得<br>分；第 2 行中的数是最大得分；。</p>
@@ -398,7 +867,9 @@ dp[i][j] = \lb {
 </blockquote>
 <p>但通过 <code>递归形式</code>产生的 <code>子问题空间树</code>是 <code>“残缺的”</code>，在只有 <code>少量子问题</code>重复出现的情况下，用 <code>递归形式的动态规划</code>会更加高效。</p>
 </blockquote>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Iterative-Method-1"><a href="#Iterative-Method-1" class="headerlink" title="Iterative Method"></a>Iterative Method</h4><h5 id="Diagram-3"><a href="#Diagram-3" class="headerlink" title="Diagram"></a>Diagram</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">4</span>, <span class="number">1</span> <span class="number">2</span> <span class="number">3333 </span><span class="number">2</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6676</span>, <span class="number">10010</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="Iterative-Method-1"><a href="#Iterative-Method-1" class="headerlink" title="Iterative Method"></a>Iterative Method</h4><h5 id="Diagram-3"><a href="#Diagram-3" class="headerlink" title="Diagram"></a>Diagram</h5><pre><code class="lang-yaml">Expected  Input: [4, 1 2 3333 2]
+Expected Output: [6676, 10010]
+</code></pre>
 <div class="table-container">
 <table>
 <thead>
@@ -485,13 +956,395 @@ dp[i][j] = \lb {
 </tbody>
 </table>
 </div>
-<h5 id="Source-3"><a href="#Source-3" class="headerlink" title="Source"></a>Source</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> Judger.Pair&lt;Integer, Integer&gt; <span class="title function_">solve</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span>[] sum)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n][n];</span><br><span class="line">    <span class="type">int</span> min, max;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Min cost</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == j) dp[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>; len &lt; n; len++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; (n - len); i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + len;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i; k &lt; j; k++) &#123;</span><br><span class="line">                dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + <span class="number">1</span>][j] + (sum[j + <span class="number">1</span>] - sum[i]));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    min = dp[<span class="number">0</span>][n - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Max Cost</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == j) dp[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>; len &lt; n; len++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; (n - len); i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + len;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i; k &lt; j; k++) &#123;</span><br><span class="line">                dp[i][j] = Math.max(dp[i][j], dp[i][k] + (dp[k + <span class="number">1</span>][j] + sum[j + <span class="number">1</span>] - sum[i]));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    max = dp[<span class="number">0</span>][n - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Judger</span>.Pair&lt;&gt;(min, max);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Scanner scanner : judger) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            a[i] = scanner.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Pre-solve: partial sum</span></span><br><span class="line">        <span class="type">int</span>[] sum = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        sum[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; sum.length; i++) &#123;</span><br><span class="line">            sum[i] = sum[i - <span class="number">1</span>] + a[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Judger.Pair&lt;Integer, Integer&gt; answer = solve(n, sum);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%d\n%d&quot;</span>, answer.getKey(), answer.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Benchmark-3"><a href="#Benchmark-3" class="headerlink" title="Benchmark"></a>Benchmark</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE0.in</span> <span class="string">&amp;</span> <span class="string">MERGE0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">37</span>, <span class="number">53</span> <span class="number">49</span> <span class="number">2</span> <span class="number">9</span> <span class="number">9</span> <span class="number">30</span> <span class="number">2</span> <span class="number">35</span> <span class="number">1</span> <span class="number">46</span> <span class="number">39</span> <span class="number">46</span> <span class="number">42</span> <span class="number">33</span> <span class="number">13</span> <span class="number">41</span> <span class="number">35</span> <span class="number">57</span> <span class="number">38</span> <span class="number">59</span> <span class="number">15</span> <span class="number">40</span> <span class="number">18</span> <span class="number">6</span> <span class="number">46</span> <span class="number">30</span> <span class="number">53</span> <span class="number">31</span> <span class="number">34</span> <span class="number">57</span> <span class="number">41</span> <span class="number">20</span> <span class="number">1</span> <span class="number">42</span> <span class="number">59</span> <span class="number">46</span> <span class="number">45</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6186</span>, <span class="number">25130</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6186</span>, <span class="number">25130</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">4.828800</span> <span class="string">ms</span> <span class="string">(4828800</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE1.in</span> <span class="string">&amp;</span> <span class="string">MERGE1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">4</span>, <span class="number">1</span> <span class="number">2</span> <span class="number">3333 </span><span class="number">2</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6676</span>, <span class="number">10010</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6676</span>, <span class="number">10010</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.929800</span> <span class="string">ms</span> <span class="string">(929800</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE2.in</span> <span class="string">&amp;</span> <span class="string">MERGE2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">30</span> <span class="number">35</span> <span class="number">15</span> <span class="number">5</span> <span class="number">10</span> <span class="number">20</span> <span class="number">25</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">370</span>, <span class="number">580</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">370</span>, <span class="number">580</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.354100</span> <span class="string">ms</span> <span class="string">(1354100</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE3.in</span> <span class="string">&amp;</span> <span class="string">MERGE3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">116</span>, <span class="number">187</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">116</span>, <span class="number">187</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.063500</span> <span class="string">ms</span> <span class="string">(1063500</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE4.in</span> <span class="string">&amp;</span> <span class="string">MERGE4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">30</span>, <span class="number">3</span> <span class="number">4</span> <span class="number">7</span> <span class="number">11</span> <span class="number">13</span> <span class="number">15</span> <span class="number">18</span> <span class="number">21</span> <span class="number">17</span> <span class="number">14</span> <span class="number">7</span> <span class="number">5</span> <span class="number">8</span> <span class="number">10</span> <span class="number">19</span> <span class="number">16</span> <span class="number">13</span> <span class="number">10</span> <span class="number">7</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">3</span> <span class="number">15</span> <span class="number">3</span> <span class="number">10</span> <span class="number">8</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1342</span>, <span class="number">5318</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1342</span>, <span class="number">5318</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.857000</span> <span class="string">ms</span> <span class="string">(1857000</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE5.in</span> <span class="string">&amp;</span> <span class="string">MERGE5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">4</span>, <span class="number">1</span> <span class="number">3</span> <span class="number">15</span> <span class="number">2</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">42</span>, <span class="number">59</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">42</span>, <span class="number">59</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.901300</span> <span class="string">ms</span> <span class="string">(901300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE6.in</span> <span class="string">&amp;</span> <span class="string">MERGE6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">1</span> <span class="number">7</span> <span class="number">6</span> <span class="number">12</span> <span class="number">3</span> <span class="number">15</span> <span class="number">2</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">129</span>, <span class="number">218</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">129</span>, <span class="number">218</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.066700</span> <span class="string">ms</span> <span class="string">(1066700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE7.in</span> <span class="string">&amp;</span> <span class="string">MERGE7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">5</span>, <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3333 </span><span class="number">2</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6680</span>, <span class="number">13349</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6680</span>, <span class="number">13349</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.969700</span> <span class="string">ms</span> <span class="string">(969700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE8.in</span> <span class="string">&amp;</span> <span class="string">MERGE8.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">87</span>, <span class="number">14</span> <span class="number">27</span> <span class="number">48</span> <span class="number">9</span> <span class="number">8</span> <span class="number">14</span> <span class="number">9</span> <span class="number">29</span> <span class="number">25</span> <span class="number">14</span> <span class="number">8</span> <span class="number">30</span> <span class="number">37</span> <span class="number">37</span> <span class="number">4</span> <span class="number">4</span> <span class="number">3</span> <span class="number">6</span> <span class="number">39</span> <span class="number">40</span> <span class="number">19</span> <span class="number">30</span> <span class="number">22</span> <span class="number">37</span> <span class="number">25</span> <span class="number">17</span> <span class="number">41</span> <span class="number">41</span> <span class="number">7</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">10</span> <span class="number">33</span> <span class="number">12</span> <span class="number">28</span> <span class="number">13</span> <span class="number">18</span> <span class="number">42</span> <span class="number">16</span> <span class="number">16</span> <span class="number">33</span> <span class="number">34</span> <span class="number">45</span> <span class="number">16</span> <span class="number">24</span> <span class="number">15</span> <span class="number">38</span> <span class="number">37</span> <span class="number">28</span> <span class="number">36</span> <span class="number">21</span> <span class="number">27</span> <span class="number">30</span> <span class="number">44</span> <span class="number">33</span> <span class="number">6</span> <span class="number">24</span> <span class="number">20</span> <span class="number">6</span> <span class="number">3</span> <span class="number">27</span> <span class="number">33</span> <span class="number">4</span> <span class="number">46</span> <span class="number">42</span> <span class="number">34</span> <span class="number">46</span> <span class="number">14</span> <span class="number">35</span> <span class="number">36</span> <span class="number">25</span> <span class="number">33</span> <span class="number">8</span> <span class="number">12</span> <span class="number">47</span> <span class="number">18</span> <span class="number">7</span> <span class="number">49</span> <span class="number">16</span> <span class="number">3</span> <span class="number">5</span> <span class="number">43</span> <span class="number">28</span> <span class="number">35</span> <span class="number">5</span> <span class="number">33</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">12799</span>, <span class="number">96955</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">12799</span>, <span class="number">96955</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">6.057900</span> <span class="string">ms</span> <span class="string">(6057900</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE9.in</span> <span class="string">&amp;</span> <span class="string">MERGE9.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">20</span>, <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">20</span> <span class="number">19</span> <span class="number">18</span> <span class="number">17</span> <span class="number">16</span> <span class="number">15</span> <span class="number">14</span> <span class="number">13</span> <span class="number">12</span> <span class="number">11</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">864</span>, <span class="number">2850</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">864</span>, <span class="number">2850</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.526400</span> <span class="string">ms</span> <span class="string">(1526400</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
-<h4 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a>Recursive Method</h4><h5 id="Diagram-4"><a href="#Diagram-4" class="headerlink" title="Diagram"></a>Diagram</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Expected  Input: [4, 1 2 3333 2]</span><br><span class="line">Expected Output: [6676, 10010]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">style db2871da fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 984401db fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 108f3e6e fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style d053e213 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 3a08e73b fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 905d2093 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">d053e213 --#1L, 3333--&gt; 3a08e73b((2..2&lt;/br&gt;0))</span><br><span class="line">d053e213 --#1R, 2--&gt; 905d2093((3..3&lt;/br&gt;0))</span><br><span class="line">984401db --#2L, 2--&gt; 108f3e6e((1..1&lt;/br&gt;0))</span><br><span class="line">984401db --#2R, 3335--&gt; d053e213((2..3&lt;/br&gt;3335))</span><br><span class="line">style 9a62f0a0 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style d33c7169 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 64212337 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">9a62f0a0 --#3L, 2--&gt; d33c7169((1..1&lt;/br&gt;0))</span><br><span class="line">9a62f0a0 --#3R, 3333--&gt; 64212337((2..2&lt;/br&gt;0))</span><br><span class="line">style c78fd6db fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">984401db --#4L, 3335--&gt; 9a62f0a0((1..2&lt;/br&gt;3335))</span><br><span class="line">984401db --#4R, 2--&gt; c78fd6db((3..3&lt;/br&gt;0))</span><br><span class="line">root((root)) --#5L, 1--&gt; db2871da((0..0&lt;/br&gt;0))</span><br><span class="line">root((root)) --#5R, 3337--&gt; 984401db((1..3&lt;/br&gt;6672))</span><br><span class="line">style 4361b325 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 1f5338ec fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style c9c46067 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">4361b325 --#6L, 1--&gt; 1f5338ec((0..0&lt;/br&gt;0))</span><br><span class="line">4361b325 --#6R, 2--&gt; c9c46067((1..1&lt;/br&gt;0))</span><br><span class="line">style 6b63e09f fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">root((root)) --#7L, 3--&gt; 4361b325((0..1&lt;/br&gt;3))</span><br><span class="line">root((root)) --#7R, 3335--&gt; 6b63e09f((2..3&lt;/br&gt;3335))</span><br><span class="line">style 4bd4d793 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 2c2b9065 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 20a281ee fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">4bd4d793 --#8L, 1--&gt; 2c2b9065((0..0&lt;/br&gt;0))</span><br><span class="line">4bd4d793 --#8R, 3335--&gt; 20a281ee((1..2&lt;/br&gt;3335))</span><br><span class="line">style 42941b97 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 7de997a1 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">4bd4d793 --#9L, 3--&gt; 42941b97((0..1&lt;/br&gt;3))</span><br><span class="line">4bd4d793 --#9R, 3333--&gt; 7de997a1((2..2&lt;/br&gt;0))</span><br><span class="line">style 5565dbef fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">root((root)) --#10L, 3336--&gt; 4bd4d793((0..2&lt;/br&gt;3339))</span><br><span class="line">root((root)) --#10R, 2--&gt; 5565dbef((3..3&lt;/br&gt;0))</span><br><span class="line">style root fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">root((0..3&lt;/br&gt;6676))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">style c39dfc51 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 4b5075a2 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 9a8edd98 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 77669c62 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 3525cd7d fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 27e0a4da fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">77669c62 --#11L, 3333--&gt; 3525cd7d((2..2&lt;/br&gt;0))</span><br><span class="line">77669c62 --#11R, 2--&gt; 27e0a4da((3..3&lt;/br&gt;0))</span><br><span class="line">4b5075a2 --#12L, 2--&gt; 9a8edd98((1..1&lt;/br&gt;0))</span><br><span class="line">4b5075a2 --#12R, 3335--&gt; 77669c62((2..3&lt;/br&gt;3335))</span><br><span class="line">style cad53082 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 5dec4f10 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 57160f17 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">cad53082 --#13L, 2--&gt; 5dec4f10((1..1&lt;/br&gt;0))</span><br><span class="line">cad53082 --#13R, 3333--&gt; 57160f17((2..2&lt;/br&gt;0))</span><br><span class="line">style 43d989e7 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">4b5075a2 --#14L, 3335--&gt; cad53082((1..2&lt;/br&gt;3335))</span><br><span class="line">4b5075a2 --#14R, 2--&gt; 43d989e7((3..3&lt;/br&gt;0))</span><br><span class="line">root((root)) --#15L, 1--&gt; c39dfc51((0..0&lt;/br&gt;0))</span><br><span class="line">root((root)) --#15R, 3337--&gt; 4b5075a2((1..3&lt;/br&gt;6672))</span><br><span class="line">style 59f09ba9 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style ce2df958 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 3b1bc123 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">59f09ba9 --#16L, 1--&gt; ce2df958((0..0&lt;/br&gt;0))</span><br><span class="line">59f09ba9 --#16R, 2--&gt; 3b1bc123((1..1&lt;/br&gt;0))</span><br><span class="line">style 468ac0d5 fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">root((root)) --#17L, 3--&gt; 59f09ba9((0..1&lt;/br&gt;3))</span><br><span class="line">root((root)) --#17R, 3335--&gt; 468ac0d5((2..3&lt;/br&gt;3335))</span><br><span class="line">style 41c67309 fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line">style 62aca470 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">style b51c743b fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">41c67309 --#18L, 1--&gt; 62aca470((0..0&lt;/br&gt;0))</span><br><span class="line">41c67309 --#18R, 3335--&gt; b51c743b((1..2&lt;/br&gt;3335))</span><br><span class="line">style 675fda1c fill: lightgray,stroke: #333,stroke-width: 4px</span><br><span class="line">style 7631db1b fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">41c67309 --#19L, 3--&gt; 675fda1c((0..1&lt;/br&gt;3))</span><br><span class="line">41c67309 --#19R, 3333--&gt; 7631db1b((2..2&lt;/br&gt;0))</span><br><span class="line">style c18be7c1 fill: gray,stroke: #333,stroke-width: 4px</span><br><span class="line">root((root)) --#20L, 3336--&gt; 41c67309((0..2&lt;/br&gt;6671))</span><br><span class="line">root((root)) --#20R, 2--&gt; c18be7c1((3..3&lt;/br&gt;0))</span><br><span class="line">root((0..3&lt;/br&gt;10010))</span><br><span class="line">style root fill: lightgreen,stroke: #333,stroke-width: 4px</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="Source-4"><a href="#Source-4" class="headerlink" title="Source"></a>Source</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> n;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span>[] sum;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span>[][] dp;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="type">static</span> <span class="type">int</span> <span class="title">m</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base Case */</span></span><br><span class="line">    <span class="keyword">if</span> (dp[i][j] != INF) &#123;</span><br><span class="line">        <span class="keyword">return</span> dp[i][j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Recursive Case */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = i; k &lt; j; k++) &#123;</span><br><span class="line">        <span class="comment">// it&#x27;s also correct: dp[i][j] = Math.min(m(i, j), m(i, k) + m(k + 1, j) + (sum[j + 1] - sum[i]));</span></span><br><span class="line">        dp[i][j] = Math.<span class="built_in">min</span>(dp[i][j], <span class="built_in">m</span>(i, k) + <span class="built_in">m</span>(k + <span class="number">1</span>, j) + (sum[j + <span class="number">1</span>] - sum[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="type">static</span> <span class="type">int</span> <span class="title">M</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base Case */</span></span><br><span class="line">    <span class="keyword">if</span> (dp[i][j] != -INF) &#123;</span><br><span class="line">        <span class="keyword">return</span> dp[i][j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Recursive Case */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = i; k &lt; j; k++) &#123;</span><br><span class="line">        dp[i][j] = Math.<span class="built_in">max</span>(dp[i][j], <span class="built_in">M</span>(i, k) + <span class="built_in">M</span>(k + <span class="number">1</span>, j) + (sum[j + <span class="number">1</span>] - sum[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="type">static</span> Judger.<span class="function">Pair&lt;Integer, Integer&gt; <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    dp = <span class="keyword">new</span> <span class="type">int</span>[n][n];</span><br><span class="line">    <span class="type">int</span> min, max;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Min */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            dp[i][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        dp[i][i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    min = <span class="built_in">m</span>(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Max */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            dp[i][j] = -INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        dp[i][i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    max = <span class="built_in">M</span>(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Judger.Pair&lt;&gt;(min, max);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="type">static</span> <span class="type">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Scanner scanner : judger) &#123;</span><br><span class="line">        n = scanner.<span class="built_in">nextInt</span>();</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="type">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            a[i] = scanner.<span class="built_in">nextInt</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Pre-solve: partial sum</span></span><br><span class="line">        sum = <span class="keyword">new</span> <span class="type">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        sum[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; sum.length; i++) &#123;</span><br><span class="line">            sum[i] = sum[i - <span class="number">1</span>] + a[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Judger.Pair&lt;Integer, Integer&gt; answer = <span class="built_in">solve</span>();</span><br><span class="line">        System.out.<span class="built_in">printf</span>(<span class="string">&quot;%d\n%d&quot;</span>, answer.<span class="built_in">getKey</span>(), answer.<span class="built_in">getValue</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Benchmark-4"><a href="#Benchmark-4" class="headerlink" title="Benchmark"></a>Benchmark</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE0.in</span> <span class="string">&amp;</span> <span class="string">MERGE0.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">37</span>, <span class="number">53</span> <span class="number">49</span> <span class="number">2</span> <span class="number">9</span> <span class="number">9</span> <span class="number">30</span> <span class="number">2</span> <span class="number">35</span> <span class="number">1</span> <span class="number">46</span> <span class="number">39</span> <span class="number">46</span> <span class="number">42</span> <span class="number">33</span> <span class="number">13</span> <span class="number">41</span> <span class="number">35</span> <span class="number">57</span> <span class="number">38</span> <span class="number">59</span> <span class="number">15</span> <span class="number">40</span> <span class="number">18</span> <span class="number">6</span> <span class="number">46</span> <span class="number">30</span> <span class="number">53</span> <span class="number">31</span> <span class="number">34</span> <span class="number">57</span> <span class="number">41</span> <span class="number">20</span> <span class="number">1</span> <span class="number">42</span> <span class="number">59</span> <span class="number">46</span> <span class="number">45</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6186</span>, <span class="number">25130</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6186</span>, <span class="number">25130</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">4.601200</span> <span class="string">ms</span> <span class="string">(4601200</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE1.in</span> <span class="string">&amp;</span> <span class="string">MERGE1.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">4</span>, <span class="number">1</span> <span class="number">2</span> <span class="number">3333 </span><span class="number">2</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6676</span>, <span class="number">10010</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6676</span>, <span class="number">10010</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.888000</span> <span class="string">ms</span> <span class="string">(888000</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE2.in</span> <span class="string">&amp;</span> <span class="string">MERGE2.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">30</span> <span class="number">35</span> <span class="number">15</span> <span class="number">5</span> <span class="number">10</span> <span class="number">20</span> <span class="number">25</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">370</span>, <span class="number">580</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">370</span>, <span class="number">580</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.097400</span> <span class="string">ms</span> <span class="string">(1097400</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE3.in</span> <span class="string">&amp;</span> <span class="string">MERGE3.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">116</span>, <span class="number">187</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">116</span>, <span class="number">187</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.463500</span> <span class="string">ms</span> <span class="string">(1463500</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE4.in</span> <span class="string">&amp;</span> <span class="string">MERGE4.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">30</span>, <span class="number">3</span> <span class="number">4</span> <span class="number">7</span> <span class="number">11</span> <span class="number">13</span> <span class="number">15</span> <span class="number">18</span> <span class="number">21</span> <span class="number">17</span> <span class="number">14</span> <span class="number">7</span> <span class="number">5</span> <span class="number">8</span> <span class="number">10</span> <span class="number">19</span> <span class="number">16</span> <span class="number">13</span> <span class="number">10</span> <span class="number">7</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">3</span> <span class="number">15</span> <span class="number">3</span> <span class="number">10</span> <span class="number">8</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">1342</span>, <span class="number">5318</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">1342</span>, <span class="number">5318</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.491700</span> <span class="string">ms</span> <span class="string">(1491700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE5.in</span> <span class="string">&amp;</span> <span class="string">MERGE5.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">4</span>, <span class="number">1</span> <span class="number">3</span> <span class="number">15</span> <span class="number">2</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">42</span>, <span class="number">59</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">42</span>, <span class="number">59</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.847000</span> <span class="string">ms</span> <span class="string">(847000</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE6.in</span> <span class="string">&amp;</span> <span class="string">MERGE6.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">7</span>, <span class="number">1</span> <span class="number">7</span> <span class="number">6</span> <span class="number">12</span> <span class="number">3</span> <span class="number">15</span> <span class="number">2</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">129</span>, <span class="number">218</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">129</span>, <span class="number">218</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.783500</span> <span class="string">ms</span> <span class="string">(783500</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE7.in</span> <span class="string">&amp;</span> <span class="string">MERGE7.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">5</span>, <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3333 </span><span class="number">2</span>]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">6680</span>, <span class="number">13349</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">6680</span>, <span class="number">13349</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">0.795700</span> <span class="string">ms</span> <span class="string">(795700</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE8.in</span> <span class="string">&amp;</span> <span class="string">MERGE8.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">87</span>, <span class="number">14</span> <span class="number">27</span> <span class="number">48</span> <span class="number">9</span> <span class="number">8</span> <span class="number">14</span> <span class="number">9</span> <span class="number">29</span> <span class="number">25</span> <span class="number">14</span> <span class="number">8</span> <span class="number">30</span> <span class="number">37</span> <span class="number">37</span> <span class="number">4</span> <span class="number">4</span> <span class="number">3</span> <span class="number">6</span> <span class="number">39</span> <span class="number">40</span> <span class="number">19</span> <span class="number">30</span> <span class="number">22</span> <span class="number">37</span> <span class="number">25</span> <span class="number">17</span> <span class="number">41</span> <span class="number">41</span> <span class="number">7</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">10</span> <span class="number">33</span> <span class="number">12</span> <span class="number">28</span> <span class="number">13</span> <span class="number">18</span> <span class="number">42</span> <span class="number">16</span> <span class="number">16</span> <span class="number">33</span> <span class="number">34</span> <span class="number">45</span> <span class="number">16</span> <span class="number">24</span> <span class="number">15</span> <span class="number">38</span> <span class="number">37</span> <span class="number">28</span> <span class="number">36</span> <span class="number">21</span> <span class="number">27</span> <span class="number">30</span> <span class="number">44</span> <span class="number">33</span> <span class="number">6</span> <span class="number">24</span> <span class="number">20</span> <span class="number">6</span> <span class="number">3</span> <span class="number">27</span> <span class="number">33</span> <span class="number">4</span> <span class="number">46</span> <span class="number">42</span> <span class="number">34</span> <span class="number">46</span> <span class="number">14</span> <span class="number">35</span> <span class="number">36</span> <span class="number">25</span> <span class="number">33</span> <span class="number">8</span> <span class="number">12</span> <span class="number">47</span> <span class="number">18</span> <span class="number">7</span> <span class="number">49</span> <span class="number">16</span> <span class="number">3</span> <span class="number">5</span> <span class="number">43</span> <span class="number">28</span> <span class="number">35</span> <span class="number">5</span> <span class="number">33</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">12799</span>, <span class="number">96955</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">12799</span>, <span class="number">96955</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">3.839300</span> <span class="string">ms</span> <span class="string">(3839300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Current Case:</span> <span class="string">MERGE9.in</span> <span class="string">&amp;</span> <span class="string">MERGE9.out</span></span><br><span class="line"><span class="attr">Expected  Input:</span> [<span class="number">20</span>, <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">20</span> <span class="number">19</span> <span class="number">18</span> <span class="number">17</span> <span class="number">16</span> <span class="number">15</span> <span class="number">14</span> <span class="number">13</span> <span class="number">12</span> <span class="number">11</span> ]</span><br><span class="line"><span class="attr">Expected Output:</span> [<span class="number">864</span>, <span class="number">2850</span>]</span><br><span class="line"><span class="attr">Your     Output:</span> [<span class="number">864</span>, <span class="number">2850</span>]</span><br><span class="line"><span class="attr">Time Cost:</span> <span class="number">1.105300</span> <span class="string">ms</span> <span class="string">(1105300</span> <span class="string">ns)</span></span><br><span class="line"><span class="string">Accepted.</span></span><br><span class="line"><span class="string">-----------------------------------------------------</span></span><br><span class="line"><span class="attr">Result Statistics:</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> <span class="string">√</span> </span><br></pre></td></tr></table></figure>
+<h5 id="Source-3"><a href="#Source-3" class="headerlink" title="Source"></a>Source</h5><pre><code class="lang-java">     public static Judger.Pair&lt;Integer, Integer&gt; solve(int n, int[] sum) &#123;
+
+        int[][] dp = new int[n][n];
+        int min, max;
+
+        // Min cost
+        for (int i = 0; i &lt; n; i++) &#123;
+            for (int j = 0; j &lt; n; j++) &#123;
+                if (i == j) dp[i][j] = 0;
+                else dp[i][j] = 0x3f3f3f3f;
+            &#125;
+        &#125;
+
+        for (int len = 1; len &lt; n; len++) &#123;
+            for (int i = 0; i &lt; (n - len); i++) &#123;
+                int j = i + len;
+                for (int k = i; k &lt; j; k++) &#123;
+                    dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + 1][j] + (sum[j + 1] - sum[i]));
+                &#125;
+
+            &#125;
+        &#125;
+        min = dp[0][n - 1];
+
+        // Max Cost
+        for (int i = 0; i &lt; n; i++) &#123;
+            for (int j = 0; j &lt; n; j++) &#123;
+                if (i == j) dp[i][j] = 0;
+                else dp[i][j] = 0;
+            &#125;
+        &#125;
+
+        for (int len = 1; len &lt; n; len++) &#123;
+            for (int i = 0; i &lt; (n - len); i++) &#123;
+                int j = i + len;
+                for (int k = i; k &lt; j; k++) &#123;
+                    dp[i][j] = Math.max(dp[i][j], dp[i][k] + (dp[k + 1][j] + sum[j + 1] - sum[i]));
+                &#125;
+
+            &#125;
+        &#125;
+        max = dp[0][n - 1];
+
+        return new Judger.Pair&lt;&gt;(min, max);
+    &#125;
+
+    public static void main(String[] args) &#123;
+
+        for (Scanner scanner : judger) &#123;
+            int n = scanner.nextInt();
+            int[] a = new int[n];
+            for (int i = 0; i &lt; n; i++) &#123;
+                a[i] = scanner.nextInt();
+            &#125;
+
+            // Pre-solve: partial sum
+            int[] sum = new int[n + 1];
+            sum[0] = 0;
+            for (int i = 1; i &lt; sum.length; i++) &#123;
+                sum[i] = sum[i - 1] + a[i - 1];
+            &#125;
+
+            Judger.Pair&lt;Integer, Integer&gt; answer = solve(n, sum);
+            System.out.printf(&quot;%d\n%d&quot;, answer.getKey(), answer.getValue());
+        &#125;
+    &#125;
+</code></pre>
+<h5 id="Benchmark-3"><a href="#Benchmark-3" class="headerlink" title="Benchmark"></a>Benchmark</h5><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: MERGE0.in &amp; MERGE0.out
+Expected  Input: [37, 53 49 2 9 9 30 2 35 1 46 39 46 42 33 13 41 35 57 38 59 15 40 18 6 46 30 53 31 34 57 41 20 1 42 59 46 45 ]
+Expected Output: [6186, 25130]
+Your     Output: [6186, 25130]
+Time Cost: 4.828800 ms (4828800 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE1.in &amp; MERGE1.out
+Expected  Input: [4, 1 2 3333 2]
+Expected Output: [6676, 10010]
+Your     Output: [6676, 10010]
+Time Cost: 0.929800 ms (929800 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE2.in &amp; MERGE2.out
+Expected  Input: [7, 30 35 15 5 10 20 25]
+Expected Output: [370, 580]
+Your     Output: [370, 580]
+Time Cost: 1.354100 ms (1354100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE3.in &amp; MERGE3.out
+Expected  Input: [7, 3 4 5 6 7 8 9]
+Expected Output: [116, 187]
+Your     Output: [116, 187]
+Time Cost: 1.063500 ms (1063500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE4.in &amp; MERGE4.out
+Expected  Input: [30, 3 4 7 11 13 15 18 21 17 14 7 5 8 10 19 16 13 10 7 5 4 3 4 5 6 3 15 3 10 8 ]
+Expected Output: [1342, 5318]
+Your     Output: [1342, 5318]
+Time Cost: 1.857000 ms (1857000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE5.in &amp; MERGE5.out
+Expected  Input: [4, 1 3 15 2 ]
+Expected Output: [42, 59]
+Your     Output: [42, 59]
+Time Cost: 0.901300 ms (901300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE6.in &amp; MERGE6.out
+Expected  Input: [7, 1 7 6 12 3 15 2 ]
+Expected Output: [129, 218]
+Your     Output: [129, 218]
+Time Cost: 1.066700 ms (1066700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE7.in &amp; MERGE7.out
+Expected  Input: [5, 1 1 2 3333 2]
+Expected Output: [6680, 13349]
+Your     Output: [6680, 13349]
+Time Cost: 0.969700 ms (969700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE8.in &amp; MERGE8.out
+Expected  Input: [87, 14 27 48 9 8 14 9 29 25 14 8 30 37 37 4 4 3 6 39 40 19 30 22 37 25 17 41 41 7 5 4 3 10 33 12 28 13 18 42 16 16 33 34 45 16 24 15 38 37 28 36 21 27 30 44 33 6 24 20 6 3 27 33 4 46 42 34 46 14 35 36 25 33 8 12 47 18 7 49 16 3 5 43 28 35 5 33 ]
+Expected Output: [12799, 96955]
+Your     Output: [12799, 96955]
+Time Cost: 6.057900 ms (6057900 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE9.in &amp; MERGE9.out
+Expected  Input: [20, 1 2 3 4 5 6 7 8 9 10 20 19 18 17 16 15 14 13 12 11 ]
+Expected Output: [864, 2850]
+Your     Output: [864, 2850]
+Time Cost: 1.526400 ms (1526400 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √ √ √ √
+</code></pre>
+<h4 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a>Recursive Method</h4><h5 id="Diagram-4"><a href="#Diagram-4" class="headerlink" title="Diagram"></a>Diagram</h5><pre><code class="lang-yaml\">Expected  Input: [4, 1 2 3333 2]
+Expected Output: [6676, 10010]
+</code></pre>
+<pre><code class="lang-mermaid">graph TD;
+style db2871da fill: gray,stroke: #333,stroke-width: 4px
+style 984401db fill: lightgreen,stroke: #333,stroke-width: 4px
+style 108f3e6e fill: gray,stroke: #333,stroke-width: 4px
+style d053e213 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 3a08e73b fill: gray,stroke: #333,stroke-width: 4px
+style 905d2093 fill: gray,stroke: #333,stroke-width: 4px
+d053e213 --#1L, 3333--&gt; 3a08e73b((2..2&lt;/br&gt;0))
+d053e213 --#1R, 2--&gt; 905d2093((3..3&lt;/br&gt;0))
+984401db --#2L, 2--&gt; 108f3e6e((1..1&lt;/br&gt;0))
+984401db --#2R, 3335--&gt; d053e213((2..3&lt;/br&gt;3335))
+style 9a62f0a0 fill: lightgreen,stroke: #333,stroke-width: 4px
+style d33c7169 fill: gray,stroke: #333,stroke-width: 4px
+style 64212337 fill: gray,stroke: #333,stroke-width: 4px
+9a62f0a0 --#3L, 2--&gt; d33c7169((1..1&lt;/br&gt;0))
+9a62f0a0 --#3R, 3333--&gt; 64212337((2..2&lt;/br&gt;0))
+style c78fd6db fill: gray,stroke: #333,stroke-width: 4px
+984401db --#4L, 3335--&gt; 9a62f0a0((1..2&lt;/br&gt;3335))
+984401db --#4R, 2--&gt; c78fd6db((3..3&lt;/br&gt;0))
+root((root)) --#5L, 1--&gt; db2871da((0..0&lt;/br&gt;0))
+root((root)) --#5R, 3337--&gt; 984401db((1..3&lt;/br&gt;6672))
+style 4361b325 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 1f5338ec fill: gray,stroke: #333,stroke-width: 4px
+style c9c46067 fill: gray,stroke: #333,stroke-width: 4px
+4361b325 --#6L, 1--&gt; 1f5338ec((0..0&lt;/br&gt;0))
+4361b325 --#6R, 2--&gt; c9c46067((1..1&lt;/br&gt;0))
+style 6b63e09f fill: lightgray,stroke: #333,stroke-width: 4px
+root((root)) --#7L, 3--&gt; 4361b325((0..1&lt;/br&gt;3))
+root((root)) --#7R, 3335--&gt; 6b63e09f((2..3&lt;/br&gt;3335))
+style 4bd4d793 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 2c2b9065 fill: gray,stroke: #333,stroke-width: 4px
+style 20a281ee fill: lightgray,stroke: #333,stroke-width: 4px
+4bd4d793 --#8L, 1--&gt; 2c2b9065((0..0&lt;/br&gt;0))
+4bd4d793 --#8R, 3335--&gt; 20a281ee((1..2&lt;/br&gt;3335))
+style 42941b97 fill: lightgray,stroke: #333,stroke-width: 4px
+style 7de997a1 fill: gray,stroke: #333,stroke-width: 4px
+4bd4d793 --#9L, 3--&gt; 42941b97((0..1&lt;/br&gt;3))
+4bd4d793 --#9R, 3333--&gt; 7de997a1((2..2&lt;/br&gt;0))
+style 5565dbef fill: gray,stroke: #333,stroke-width: 4px
+root((root)) --#10L, 3336--&gt; 4bd4d793((0..2&lt;/br&gt;3339))
+root((root)) --#10R, 2--&gt; 5565dbef((3..3&lt;/br&gt;0))
+style root fill: lightgreen,stroke: #333,stroke-width: 4px
+root((0..3&lt;/br&gt;6676))
+</code></pre>
+<pre><code class="lang-mermaid">graph TD;
+style c39dfc51 fill: gray,stroke: #333,stroke-width: 4px
+style 4b5075a2 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 9a8edd98 fill: gray,stroke: #333,stroke-width: 4px
+style 77669c62 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 3525cd7d fill: gray,stroke: #333,stroke-width: 4px
+style 27e0a4da fill: gray,stroke: #333,stroke-width: 4px
+77669c62 --#11L, 3333--&gt; 3525cd7d((2..2&lt;/br&gt;0))
+77669c62 --#11R, 2--&gt; 27e0a4da((3..3&lt;/br&gt;0))
+4b5075a2 --#12L, 2--&gt; 9a8edd98((1..1&lt;/br&gt;0))
+4b5075a2 --#12R, 3335--&gt; 77669c62((2..3&lt;/br&gt;3335))
+style cad53082 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 5dec4f10 fill: gray,stroke: #333,stroke-width: 4px
+style 57160f17 fill: gray,stroke: #333,stroke-width: 4px
+cad53082 --#13L, 2--&gt; 5dec4f10((1..1&lt;/br&gt;0))
+cad53082 --#13R, 3333--&gt; 57160f17((2..2&lt;/br&gt;0))
+style 43d989e7 fill: gray,stroke: #333,stroke-width: 4px
+4b5075a2 --#14L, 3335--&gt; cad53082((1..2&lt;/br&gt;3335))
+4b5075a2 --#14R, 2--&gt; 43d989e7((3..3&lt;/br&gt;0))
+root((root)) --#15L, 1--&gt; c39dfc51((0..0&lt;/br&gt;0))
+root((root)) --#15R, 3337--&gt; 4b5075a2((1..3&lt;/br&gt;6672))
+style 59f09ba9 fill: lightgreen,stroke: #333,stroke-width: 4px
+style ce2df958 fill: gray,stroke: #333,stroke-width: 4px
+style 3b1bc123 fill: gray,stroke: #333,stroke-width: 4px
+59f09ba9 --#16L, 1--&gt; ce2df958((0..0&lt;/br&gt;0))
+59f09ba9 --#16R, 2--&gt; 3b1bc123((1..1&lt;/br&gt;0))
+style 468ac0d5 fill: lightgray,stroke: #333,stroke-width: 4px
+root((root)) --#17L, 3--&gt; 59f09ba9((0..1&lt;/br&gt;3))
+root((root)) --#17R, 3335--&gt; 468ac0d5((2..3&lt;/br&gt;3335))
+style 41c67309 fill: lightgreen,stroke: #333,stroke-width: 4px
+style 62aca470 fill: gray,stroke: #333,stroke-width: 4px
+style b51c743b fill: lightgray,stroke: #333,stroke-width: 4px
+41c67309 --#18L, 1--&gt; 62aca470((0..0&lt;/br&gt;0))
+41c67309 --#18R, 3335--&gt; b51c743b((1..2&lt;/br&gt;3335))
+style 675fda1c fill: lightgray,stroke: #333,stroke-width: 4px
+style 7631db1b fill: gray,stroke: #333,stroke-width: 4px
+41c67309 --#19L, 3--&gt; 675fda1c((0..1&lt;/br&gt;3))
+41c67309 --#19R, 3333--&gt; 7631db1b((2..2&lt;/br&gt;0))
+style c18be7c1 fill: gray,stroke: #333,stroke-width: 4px
+root((root)) --#20L, 3336--&gt; 41c67309((0..2&lt;/br&gt;6671))
+root((root)) --#20R, 2--&gt; c18be7c1((3..3&lt;/br&gt;0))
+root((0..3&lt;/br&gt;10010))
+style root fill: lightgreen,stroke: #333,stroke-width: 4px
+</code></pre>
+<h5 id="Source-4"><a href="#Source-4" class="headerlink" title="Source"></a>Source</h5><pre><code class="lang-cpp">    static int n;
+    static int[] sum;
+    static int[][] dp;
+    static int INF = 0x3f3f3f3f;
+
+    public static int m(int i, int j) &#123;
+
+        /* Base Case */
+        if (dp[i][j] != INF) &#123;
+            return dp[i][j];
+        &#125;
+
+        /* Recursive Case */
+        for (int k = i; k &lt; j; k++) &#123;
+            // it&#39;s also correct: dp[i][j] = Math.min(m(i, j), m(i, k) + m(k + 1, j) + (sum[j + 1] - sum[i]));
+            dp[i][j] = Math.min(dp[i][j], m(i, k) + m(k + 1, j) + (sum[j + 1] - sum[i]));
+        &#125;
+        return dp[i][j];
+    &#125;
+
+    public static int M(int i, int j) &#123;
+
+        /* Base Case */
+        if (dp[i][j] != -INF) &#123;
+            return dp[i][j];
+        &#125;
+
+        /* Recursive Case */
+        for (int k = i; k &lt; j; k++) &#123;
+            dp[i][j] = Math.max(dp[i][j], M(i, k) + M(k + 1, j) + (sum[j + 1] - sum[i]));
+        &#125;
+        return dp[i][j];
+    &#125;
+
+    public static Judger.Pair&lt;Integer, Integer&gt; solve() &#123;
+
+        dp = new int[n][n];
+        int min, max;
+
+        /* Min */
+        for (int i = 0; i &lt; n; i++) &#123;
+            for (int j = 0; j &lt; n; j++) &#123;
+                dp[i][j] = INF;
+            &#125;
+        &#125;
+        for (int i = 0; i &lt; n; i++) &#123;
+            dp[i][i] = 0;
+        &#125;
+        min = m(0, n - 1);
+
+        /* Max */
+        for (int i = 0; i &lt; n; i++) &#123;
+            for (int j = 0; j &lt; n; j++) &#123;
+                dp[i][j] = -INF;
+            &#125;
+        &#125;
+        for (int i = 0; i &lt; n; i++) &#123;
+            dp[i][i] = 0;
+        &#125;
+        max = M(0, n - 1);
+
+        return new Judger.Pair&lt;&gt;(min, max);
+    &#125;
+
+    public static void main(String[] args) &#123;
+
+        for (Scanner scanner : judger) &#123;
+            n = scanner.nextInt();
+            int[] a = new int[n];
+            for (int i = 0; i &lt; n; i++) &#123;
+                a[i] = scanner.nextInt();
+            &#125;
+
+            // Pre-solve: partial sum
+            sum = new int[n + 1];
+            sum[0] = 0;
+            for (int i = 1; i &lt; sum.length; i++) &#123;
+                sum[i] = sum[i - 1] + a[i - 1];
+            &#125;
+
+            Judger.Pair&lt;Integer, Integer&gt; answer = solve();
+            System.out.printf(&quot;%d\n%d&quot;, answer.getKey(), answer.getValue());
+        &#125;
+    &#125;
+</code></pre>
+<h5 id="Benchmark-4"><a href="#Benchmark-4" class="headerlink" title="Benchmark"></a>Benchmark</h5><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: MERGE0.in &amp; MERGE0.out
+Expected  Input: [37, 53 49 2 9 9 30 2 35 1 46 39 46 42 33 13 41 35 57 38 59 15 40 18 6 46 30 53 31 34 57 41 20 1 42 59 46 45 ]
+Expected Output: [6186, 25130]
+Your     Output: [6186, 25130]
+Time Cost: 4.601200 ms (4601200 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE1.in &amp; MERGE1.out
+Expected  Input: [4, 1 2 3333 2]
+Expected Output: [6676, 10010]
+Your     Output: [6676, 10010]
+Time Cost: 0.888000 ms (888000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE2.in &amp; MERGE2.out
+Expected  Input: [7, 30 35 15 5 10 20 25]
+Expected Output: [370, 580]
+Your     Output: [370, 580]
+Time Cost: 1.097400 ms (1097400 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE3.in &amp; MERGE3.out
+Expected  Input: [7, 3 4 5 6 7 8 9]
+Expected Output: [116, 187]
+Your     Output: [116, 187]
+Time Cost: 1.463500 ms (1463500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE4.in &amp; MERGE4.out
+Expected  Input: [30, 3 4 7 11 13 15 18 21 17 14 7 5 8 10 19 16 13 10 7 5 4 3 4 5 6 3 15 3 10 8 ]
+Expected Output: [1342, 5318]
+Your     Output: [1342, 5318]
+Time Cost: 1.491700 ms (1491700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE5.in &amp; MERGE5.out
+Expected  Input: [4, 1 3 15 2 ]
+Expected Output: [42, 59]
+Your     Output: [42, 59]
+Time Cost: 0.847000 ms (847000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE6.in &amp; MERGE6.out
+Expected  Input: [7, 1 7 6 12 3 15 2 ]
+Expected Output: [129, 218]
+Your     Output: [129, 218]
+Time Cost: 0.783500 ms (783500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE7.in &amp; MERGE7.out
+Expected  Input: [5, 1 1 2 3333 2]
+Expected Output: [6680, 13349]
+Your     Output: [6680, 13349]
+Time Cost: 0.795700 ms (795700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE8.in &amp; MERGE8.out
+Expected  Input: [87, 14 27 48 9 8 14 9 29 25 14 8 30 37 37 4 4 3 6 39 40 19 30 22 37 25 17 41 41 7 5 4 3 10 33 12 28 13 18 42 16 16 33 34 45 16 24 15 38 37 28 36 21 27 30 44 33 6 24 20 6 3 27 33 4 46 42 34 46 14 35 36 25 33 8 12 47 18 7 49 16 3 5 43 28 35 5 33 ]
+Expected Output: [12799, 96955]
+Your     Output: [12799, 96955]
+Time Cost: 3.839300 ms (3839300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: MERGE9.in &amp; MERGE9.out
+Expected  Input: [20, 1 2 3 4 5 6 7 8 9 10 20 19 18 17 16 15 14 13 12 11 ]
+Expected Output: [864, 2850]
+Your     Output: [864, 2850]
+Time Cost: 1.105300 ms (1105300 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √ √ √ √
+</code></pre>
 
     </article>
 </main>
@@ -503,6 +1356,8 @@ dp[i][j] = \lb {
 <p>See tags:
     
         <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/greedy/">greedy</a>
     
@@ -516,11 +1371,11 @@ dp[i][j] = \lb {
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+        <a href="/tags/code/">code</a>
     
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -533,10 +1388,6 @@ dp[i][j] = \lb {
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -559,8 +1410,6 @@ dp[i][j] = \lb {
         <a href="/tags/wordpress/">wordpress</a>
     
         <a href="/tags/hexo/">hexo</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/kde/">kde</a>
     
@@ -587,6 +1436,10 @@ dp[i][j] = \lb {
         <a href="/tags/anime/">anime</a>
     
         <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/vim/">vim</a>
     
