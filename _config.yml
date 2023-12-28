@@ -1,14 +1,9 @@
-# Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
-
-
 # Site
-title: SakuraWald
+title: sakurawald's blog
 subtitle: ''
 description: ''
 keywords:
-author: SakuraWald
+author: sakurawald
 language: en
 timezone: 'Asia/Shanghai'
 
@@ -17,23 +12,24 @@ url: https://sakurawald.github.io
 permalink: ./posts/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: true
+  trailing_html: truek
 
 # Directory
 source_dir: source
 public_dir: public
 tag_dir: tags
 archive_dir: archives
-category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
 
+    
+
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :title.md
 default_layout: post
-titlecase: false # Transform title into titlecase
+titlecase: false
 external_link:
   enable: true
   field: site
@@ -46,12 +42,7 @@ future: true
   
 syntax_highlighter:
     
-
-
 # Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
   per_page: 0
@@ -95,12 +86,7 @@ deploy:
   repo: git@github.com:sakurawald/sakurawald.github.io.git
   branch: main
 
-search:
-    path: search.xml
-    field: post
-    format: html
-    limit: 10000
-
+# Feed
 feed:
   enable: true
   type: 
@@ -119,6 +105,7 @@ feed:
   autodiscovery: true
   template:
 
+# Sitemap
 sitemap:
   path: 
     - sitemap.xml
@@ -127,7 +114,4 @@ sitemap:
   template_txt: ./sitemap_template.txt
   rel: false
   tags: true
-  categories: true
-
-custom_css:
-  enable: true
+  categories: false
