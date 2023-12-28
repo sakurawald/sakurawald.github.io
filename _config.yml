@@ -37,7 +37,7 @@ future: true
 # render
 skip_render:
 syntax_highlighter:
-
+  
 # home page
 index_generator:
   path: ''
