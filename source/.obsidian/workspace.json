@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "c76a337412095482",
+        "id": "e3f24a4e5fe220db",
         "type": "tabs",
         "children": [
           {
-            "id": "2a2bd9566a4344a8",
+            "id": "6702b618ed18d5fe",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/algorithm-circle-permutation.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -89,6 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/algorithm-circle-permutation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/algorithm-circle-permutation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/algorithm-circle-permutation.md"
+              }
             }
           }
         ]
@@ -144,18 +152,19 @@
       "templates:Insert template": false
     }
   },
-  "active": "2a2bd9566a4344a8",
+  "active": "6702b618ed18d5fe",
   "lastOpenFiles": [
+    "_posts/algorithm-back-tracking-and-iddfs.md",
+    "_posts/algorithm-circle-permutation.md",
+    "_posts/algorithm-majority-problem.md",
     "_posts/play-on-anbox.md",
     "_posts/play-on-hexo.md",
     "_posts/play-on-kde.md",
     "_posts/play-on-minecraft-server-configuration.md",
     "_posts/play-on-hexo-render.md",
     "_posts/play-on-stl.md",
-    "_posts/algorithm-majority-problem.md",
     "_posts/algorithm-oiling-car-and-optimal-merge.md",
     "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
-    "_posts/algorithm-circle-permutation.md",
     "algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
     "algorithm-oiling-car-and-optimal-merge.md",
     "_posts/algorithm-set-partition-problem.md",
@@ -171,7 +180,6 @@
     "_posts/play-on-bookmarks.md",
     "_posts/play-on-google-pixel.md",
     "_posts/play-on-wallpaper.md",
-    "_posts/play-on-wordpress.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",
