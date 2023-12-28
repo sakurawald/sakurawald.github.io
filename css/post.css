@@ -1,14 +1,22 @@
 pre {
-  padding: 2px;
-  border: solid lightgrey 1px;
+    padding: 2px;
+    border: solid lightgrey 1px;
+}
+
+code:not(pre code) {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 img {
-  width: 50%;
+  max-width: 40%;
+  height: auto;
 }
 
 blockquote {
-  margin-inline-start: 12px;
-  padding-left: 12px;
-  border-left: 2px solid lightgrey;
+    margin-inline-start: 12px;
+    padding-left: 12px;
+    border-left: 2px solid lightgrey;
 }
