@@ -13,7 +13,7 @@ permalink: ./posts/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true
-  trailing_html: truek
+  trailing_html: true
 
 # directory
 source_dir: source
