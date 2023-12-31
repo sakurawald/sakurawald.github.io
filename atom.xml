@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2023-12-29T07:10:29.962Z</updated>
+  <updated>2023-12-31T21:51:39.602Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>text auto highlighter configuration</title>
+    <link href="https://sakurawald.github.io/posts/text-auto-highlighter-configuration/"/>
+    <id>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</id>
+    <published>2023-12-31T20:48:47.000Z</published>
+    <updated>2023-12-31T21:51:39.602Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Text-Highlighter-Configuration&quot;&gt;&lt;a href=&quot;#Text-Highlighter-Configuration&quot; class=&quot;headerlink&quot; title=&quot;Text Highlighter</summary>
+        
+      
+    
+    
+    
+    
+    <category term="text" scheme="https://sakurawald.github.io/tags/text/"/>
+    
+    <category term="read" scheme="https://sakurawald.github.io/tags/read/"/>
+    
+  </entry>
+  
+  <entry>
     <title>guide-to-install-qubes-on-qemu</title>
     <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
     <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
     <published>2023-12-07T06:22:03.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -56,7 +81,7 @@
     <link href="https://sakurawald.github.io/posts/trick-to-fake-the-github-board/"/>
     <id>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</id>
     <published>2023-11-26T13:16:53.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -81,7 +106,7 @@
     <link href="https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/"/>
     <id>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</id>
     <published>2023-11-26T13:14:19.000Z</published>
-    <updated>2023-12-29T07:10:29.958Z</updated>
+    <updated>2023-12-31T21:51:39.594Z</updated>
     
     
       
@@ -106,7 +131,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T20:05:28.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -129,7 +154,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T13:05:28.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -154,7 +179,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-wallpaper/"/>
     <id>https://sakurawald.github.io/posts/play-on-wallpaper/</id>
     <published>2023-04-15T00:51:57.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -177,7 +202,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-google-pixel/"/>
     <id>https://sakurawald.github.io/posts/play-on-google-pixel/</id>
     <published>2023-02-26T20:46:02.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -210,7 +235,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T21:10:35.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -237,7 +262,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T21:38:07.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -272,7 +297,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-07T23:35:54.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -319,7 +344,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-hexo/"/>
     <id>https://sakurawald.github.io/posts/play-on-hexo/</id>
     <published>2023-01-25T04:11:58.000Z</published>
-    <updated>2023-12-29T07:10:29.966Z</updated>
+    <updated>2023-12-31T21:51:39.602Z</updated>
     
     
       
@@ -346,7 +371,7 @@
     <link href="https://sakurawald.github.io/posts/database-design/"/>
     <id>https://sakurawald.github.io/posts/database-design/</id>
     <published>2023-01-22T12:01:39.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -372,7 +397,7 @@ $$
     <link href="https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/"/>
     <id>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</id>
     <published>2022-06-13T02:00:00.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -400,7 +425,7 @@ $$
     <link href="https://sakurawald.github.io/posts/play-on-anbox/"/>
     <id>https://sakurawald.github.io/posts/play-on-anbox/</id>
     <published>2022-06-09T08:41:00.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -425,7 +450,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-relational-query-language/"/>
     <id>https://sakurawald.github.io/posts/database-relational-query-language/</id>
     <published>2022-04-30T01:53:00.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -451,7 +476,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-advanced-sql/"/>
     <id>https://sakurawald.github.io/posts/database-advanced-sql/</id>
     <published>2022-04-29T12:35:00.000Z</published>
-    <updated>2023-12-29T07:10:29.958Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -477,7 +502,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-intermediate-sql/"/>
     <id>https://sakurawald.github.io/posts/database-intermediate-sql/</id>
     <published>2022-04-29T07:39:00.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -503,7 +528,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-elementary-sql/"/>
     <id>https://sakurawald.github.io/posts/database-elementary-sql/</id>
     <published>2022-04-28T10:55:00.000Z</published>
-    <updated>2023-12-29T07:10:29.962Z</updated>
+    <updated>2023-12-31T21:51:39.598Z</updated>
     
     
       
@@ -526,7 +551,7 @@ $$
     <link href="https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/"/>
     <id>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</id>
     <published>2022-04-26T21:16:00.000Z</published>
-    <updated>2023-12-29T07:10:29.958Z</updated>
+    <updated>2023-12-31T21:51:39.594Z</updated>
     
     
       
@@ -546,31 +571,6 @@ $$
     <category term="algorithm" scheme="https://sakurawald.github.io/tags/algorithm/"/>
     
     <category term="greedy" scheme="https://sakurawald.github.io/tags/greedy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Algorithm] Multiple-Knapsack Problem &amp; Pebble Merge Problem</title>
-    <link href="https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/"/>
-    <id>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</id>
-    <published>2022-04-18T22:53:00.000Z</published>
-    <updated>2023-12-29T07:10:29.958Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Dynamic-Programming-Problems&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Problems&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming</summary>
-        
-      
-    
-    
-    
-    
-    <category term="algorithm" scheme="https://sakurawald.github.io/tags/algorithm/"/>
-    
-    <category term="dynamic_programming" scheme="https://sakurawald.github.io/tags/dynamic-programming/"/>
     
   </entry>
   

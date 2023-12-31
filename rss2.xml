@@ -15,8 +15,35 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 29 Dec 2023 07:10:29 GMT</pubDate>
+    <pubDate>Sun, 31 Dec 2023 21:51:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>text auto highlighter configuration</title>
+      <link>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</link>
+      <guid>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</guid>
+      <pubDate>Sun, 31 Dec 2023 20:48:47 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Text-Highlighter-Configuration&quot;&gt;&lt;a href=&quot;#Text-Highlighter-Configuration&quot; class=&quot;headerlink&quot; title=&quot;Text Highlighter</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/text/">text</category>
+      
+      <category domain="https://sakurawald.github.io/tags/read/">read</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>guide-to-install-qubes-on-qemu</title>
@@ -586,33 +613,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Algorithm] Multiple-Knapsack Problem &amp; Pebble Merge Problem</title>
-      <link>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</link>
-      <guid>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/</guid>
-      <pubDate>Mon, 18 Apr 2022 22:53:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Dynamic-Programming-Problems&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Problems&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/dynamic-programming/">dynamic_programming</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/#disqus_thread</comments>
       
     </item>
     
