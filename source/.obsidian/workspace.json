@@ -11,8 +11,12 @@
             "id": "0b8f57fb94f18629",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/text-auto-highlighter-configuration.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -89,6 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/text-auto-highlighter-configuration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/text-auto-highlighter-configuration.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/text-auto-highlighter-configuration.md"
+              }
             }
           }
         ]
@@ -144,8 +152,9 @@
       "templates:Insert template": false
     }
   },
-  "active": "68ae6b6ddcab2041",
+  "active": "0b8f57fb94f18629",
   "lastOpenFiles": [
+    "_posts/text-auto-highlighter-configuration.md",
     "_drafts/combinatorics-arrangement-and-combination.md",
     "_drafts/combinatorics-graph-basics-i.md",
     "_drafts/combinatorics-in-exclusion-principle-and-mobius-inversion.md",
@@ -171,7 +180,6 @@
     "_posts/expression-evaluation.md",
     "_posts/play-on-android-emulator.md",
     "_posts/play-on-hexo.md",
-    "algorithm-circle-permutation.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",
