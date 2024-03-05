@@ -15,8 +15,45 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 31 Jan 2024 08:27:36 GMT</pubDate>
+    <pubDate>Tue, 05 Mar 2024 04:04:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>apple magic touch pad review</title>
+      <link>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</link>
+      <guid>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</guid>
+      <pubDate>Tue, 05 Mar 2024 02:55:04 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Apple-Magic-Touchpad-Review&quot;&gt;&lt;a href=&quot;#Apple-Magic-Touchpad-Review&quot; class=&quot;headerlink&quot; title=&quot;Apple Magic Touchpad</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/review/">review</category>
+      
+      <category domain="https://sakurawald.github.io/tags/apple/">apple</category>
+      
+      <category domain="https://sakurawald.github.io/tags/evil/">evil</category>
+      
+      <category domain="https://sakurawald.github.io/tags/touchpad/">touchpad</category>
+      
+      <category domain="https://sakurawald.github.io/tags/device/">device</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/productivity/">productivity</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>text auto highlighter configuration</title>
@@ -583,36 +620,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-elementary-sql/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Algorithm] Oiling Car &amp; Optimal Merge</title>
-      <link>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</link>
-      <guid>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/</guid>
-      <pubDate>Tue, 26 Apr 2022 21:16:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Greedy-Problems&quot;&gt;&lt;a href=&quot;#Greedy-Problems&quot; class=&quot;headerlink&quot; title=&quot;Greedy Problems&quot;&gt;&lt;/a&gt;Greedy Problems&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/greedy/">greedy</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/algorithm-oiling-car-and-optimal-merge/#disqus_thread</comments>
       
     </item>
     
