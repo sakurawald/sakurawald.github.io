@@ -15,8 +15,37 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 05 Mar 2024 04:04:08 GMT</pubDate>
+    <pubDate>Wed, 13 Mar 2024 20:23:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>rescue - system corrupted after forced shutdown during system upgrade</title>
+      <link>https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/</link>
+      <guid>https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/</guid>
+      <pubDate>Wed, 13 Mar 2024 19:08:14 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Rescue-the-system-from-forced-shutdown&quot;&gt;&lt;a href=&quot;#Rescue-the-system-from-forced-shutdown&quot; class=&quot;headerlink&quot; title=&quot;Rescue the</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>apple magic touch pad review</title>
@@ -595,31 +624,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-intermediate-sql/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Database] Elementary SQL</title>
-      <link>https://sakurawald.github.io/posts/database-elementary-sql/</link>
-      <guid>https://sakurawald.github.io/posts/database-elementary-sql/</guid>
-      <pubDate>Thu, 28 Apr 2022 10:55:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Elementary-SQL&quot;&gt;&lt;a href=&quot;#Elementary-SQL&quot; class=&quot;headerlink&quot; title=&quot;Elementary SQL&quot;&gt;&lt;/a&gt;Elementary SQL&lt;/h1&gt;&lt;h2</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-elementary-sql/#disqus_thread</comments>
       
     </item>
     
