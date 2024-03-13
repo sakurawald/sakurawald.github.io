@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "325892542c67c1b8",
+        "id": "3fd46bb2586f0e05",
         "type": "tabs",
         "children": [
           {
-            "id": "045b924e3b212728",
+            "id": "980bfe60947f638c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/apple-magic-touch-pad-review.md",
+                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/apple-magic-touch-pad-review.md",
+                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/apple-magic-touch-pad-review.md",
+                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/apple-magic-touch-pad-review.md"
+                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md"
               }
             }
           }
@@ -152,8 +152,11 @@
       "templates:Insert template": false
     }
   },
-  "active": "045b924e3b212728",
+  "active": "980bfe60947f638c",
   "lastOpenFiles": [
+    "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+    "_posts/play-on-wordpress.md",
+    "_posts/apple-magic-touch-pad-review.md",
     "_posts/text-auto-highlighter-configuration.md",
     "_drafts/combinatorics-arrangement-and-combination.md",
     "_drafts/combinatorics-graph-basics-i.md",
@@ -177,9 +180,6 @@
     "_posts/install-magisk-on-pixel.md",
     "_posts/c-string-lib-functions.md",
     "_posts/jsp-servlet-jsp-short-hand.md",
-    "_posts/expression-evaluation.md",
-    "_posts/play-on-android-emulator.md",
-    "_posts/play-on-hexo.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",

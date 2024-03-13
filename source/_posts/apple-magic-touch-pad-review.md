@@ -17,8 +17,8 @@ To be honest, I still don't know.
 
 ## Cons
 
-1. It's polling rate is only 90Hz.
-2. It use a very laggy wireless connection method.
+1. Its polling rate is only 90Hz.
+2. It uses a very laggy wireless connection method.
 3. The glass surface is not smooth enough.
 4. The pressure sensor performs bad on the edges.  
-5. Bad algorithm to tell `drag` and `move`
+5. Bad algorithm to tell `drag` and `move`.
