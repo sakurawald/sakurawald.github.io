@@ -13,9 +13,9 @@
 <main>
     <article>
         <h1 id="Rescue-the-system-from-forced-shutdown"><a href="#Rescue-the-system-from-forced-shutdown" class="headerlink" title="Rescue the system from forced shutdown"></a>Rescue the system from forced shutdown</h1><h2 id="Cause"><a href="#Cause" class="headerlink" title="Cause"></a>Cause</h2><p>While running the command <code>pacman -Syu</code>, I do some other works.<br>And the os is frozen. After reboot the computer, I failed to boot into the os.<br>Stuck in the boot screen with error msg “[Failed] failed to start d-bus message service”</p>
-<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>The boot screen shows the error msg “[Failed] failed to start d-bus message service”, which says that the service <code>dbus-broker</code> service is broke. (Some problems with d-bus service)</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>The boot screen shows the error msg “[Failed] failed to start d-bus message service”, which says that the service <code>dbus-broker</code> service is broken. (Some problems with d-bus service)</p>
 <p>I can’t change to another terminal using <code>ctrl + alt + F3</code>. (The d-bus related problem)</p>
-<p>The <code>plasma desktop</code> is broke and says some theme <code>.qml</code> files are missing, so i can’t login into the dekstop. (It’s like some of the <code>plasma</code> packages are corrupted)</p>
+<p>The <code>plasma desktop</code> is broken and says some theme <code>.qml</code> files are missing, so i can’t login into the dekstop. (It’s like some of the <code>plasma</code> packages are corrupted)</p>
 <p>If you use a arch-installer sticker, and mount the os, run <code>pacman -Syu</code> again, the output says there is nothing to update. However, if you try run <code>pacman -S &lt;some package&gt;</code> you will get many errors like <code>&lt;some libraries&gt; is empty</code> (It’s like some libraries or packages is corrupted while upgrading)</p>
 <p>In short, the method is to find what packages is corrupted and we manually reinstall all the corrupted packages.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><pre><code>And since it makes me very angry to come to a forum looking for a solution to a problem and see that the thread ends with &quot;Don&#39;t worry, I&#39;ve already solved it&quot; without any further information, here are the steps to follow (based on my notes), for future seekers of solutions to their problems:
@@ -55,7 +55,7 @@ NOTE2: If once all the packages have been reinstalled, in the last one we notice
 
 Last edited by JosepF (2024-03-09 14:41:27)
 </code></pre><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ol>
-<li>Don’t do other jobs while the system is upgrading. It’s may increase the possible whole os is frozen.</li>
+<li>Don’t do other jobs while the system is upgrading. It’s may increase the possibility whole os is frozen.</li>
 <li>Always carry a rescue sticker if you are a linux user. </li>
 </ol>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
@@ -74,6 +74,8 @@ Last edited by JosepF (2024-03-09 14:41:27)
     
         <a href="/tags/algorithm/">algorithm</a>
     
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
         <a href="/tags/greedy/">greedy</a>
     
         <a href="/tags/review/">review</a>
@@ -90,21 +92,19 @@ Last edited by JosepF (2024-03-09 14:41:27)
     
         <a href="/tags/productivity/">productivity</a>
     
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
-        <a href="/tags/note/">note</a>
-    
         <a href="/tags/oj/">oj</a>
     
         <a href="/tags/c/">c</a>
     
         <a href="/tags/library/">library</a>
     
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
+    
         <a href="/tags/database/">database</a>
     
-        <a href="/tags/code/">code</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/os/">os</a>
     
@@ -117,10 +117,6 @@ Last edited by JosepF (2024-03-09 14:41:27)
         <a href="/tags/kvm/">kvm</a>
     
         <a href="/tags/linux/">linux</a>
-    
-        <a href="/tags/web/">web</a>
-    
-        <a href="/tags/jsp/">jsp</a>
     
         <a href="/tags/android/">android</a>
     
@@ -146,6 +142,8 @@ Last edited by JosepF (2024-03-09 14:41:27)
     
         <a href="/tags/kde/">kde</a>
     
+        <a href="/tags/code/">code</a>
+    
         <a href="/tags/ai/">ai</a>
     
         <a href="/tags/gpt/">gpt</a>
@@ -170,11 +168,19 @@ Last edited by JosepF (2024-03-09 14:41:27)
     
         <a href="/tags/draw/">draw</a>
     
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
+    
         <a href="/tags/vim/">vim</a>
     
         <a href="/tags/editor/">editor</a>
     
         <a href="/tags/wallpaper/">wallpaper</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
     
         <a href="/tags/text/">text</a>
     
@@ -183,12 +189,6 @@ Last edited by JosepF (2024-03-09 14:41:27)
         <a href="/tags/github/">github</a>
     
         <a href="/tags/shell/">shell</a>
-    
-        <a href="/tags/stl/">stl</a>
-    
-        <a href="/tags/cpp/">cpp</a>
-    
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
 </p>
 
