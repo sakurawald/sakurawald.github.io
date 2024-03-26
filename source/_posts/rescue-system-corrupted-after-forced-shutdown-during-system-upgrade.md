@@ -16,11 +16,11 @@ Stuck in the boot screen with error msg "[Failed] failed to start d-bus message 
 
 ## Observation
 
-The boot screen shows the error msg "[Failed] failed to start d-bus message service", which says that the service `dbus-broker` service is broke. (Some problems with d-bus service)
+The boot screen shows the error msg "[Failed] failed to start d-bus message service", which says that the service `dbus-broker` service is broken. (Some problems with d-bus service)
 
 I can't change to another terminal using `ctrl + alt + F3`. (The d-bus related problem)
 
-The `plasma desktop` is broke and says some theme `.qml` files are missing, so i can't login into the dekstop. (It's like some of the `plasma` packages are corrupted)
+The `plasma desktop` is broken and says some theme `.qml` files are missing, so i can't login into the dekstop. (It's like some of the `plasma` packages are corrupted)
 
 If you use a arch-installer sticker, and mount the os, run `pacman -Syu` again, the output says there is nothing to update. However, if you try run `pacman -S <some package>` you will get many errors like `<some libraries> is empty` (It's like some libraries or packages is corrupted while upgrading)
 
@@ -69,7 +69,7 @@ Last edited by JosepF (2024-03-09 14:41:27)
 
 ## Summary
 
-1. Don't do other jobs while the system is upgrading. It's may increase the possible whole os is frozen.
+1. Don't do other jobs while the system is upgrading. It's may increase the possibility whole os is frozen.
 2. Always carry a rescue sticker if you are a linux user. 
 
 ## Reference
