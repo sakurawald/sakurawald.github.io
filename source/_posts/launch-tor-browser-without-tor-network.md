@@ -17,3 +17,8 @@ user_pref("network.dns.disabled", false);
 user_pref("network.proxy.socks_remote_dns", false);
 user_pref("network.proxy.type", 0);
 ```
+
+## References
+
+1. https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/40160
+2. https://forums.whonix.org/t/tor-browser-10-without-tor/10313/6

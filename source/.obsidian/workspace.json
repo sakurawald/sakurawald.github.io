@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+                "file": "_posts/launch-tor-browser-without-tor-network.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+                "file": "_posts/launch-tor-browser-without-tor-network.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+                "file": "_posts/launch-tor-browser-without-tor-network.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md"
+                "file": "_posts/launch-tor-browser-without-tor-network.md"
               }
             }
           }
@@ -154,8 +154,10 @@
   },
   "active": "980bfe60947f638c",
   "lastOpenFiles": [
-    "_posts/launch-tor-browser-without-tor-network.md",
+    "_posts/play-on-android-emulator.md",
+    "_posts/expression-evaluation.md",
     "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+    "_posts/launch-tor-browser-without-tor-network.md",
     "_posts/play-on-wordpress.md",
     "_posts/apple-magic-touch-pad-review.md",
     "_posts/text-auto-highlighter-configuration.md",
@@ -178,8 +180,6 @@
     "_posts/database-advanced-sql.md",
     "_posts/codesnippet-a-simple-judger-for-java.md",
     "_posts/clean-unused-chunks-in-minecraft.md",
-    "_posts/install-magisk-on-pixel.md",
-    "_posts/c-string-lib-functions.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",
