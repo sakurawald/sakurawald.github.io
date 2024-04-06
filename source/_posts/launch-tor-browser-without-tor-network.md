@@ -14,7 +14,6 @@ tags:
 ```
 user_pref("extensions.torlauncher.start_tor", false);
 user_pref("network.dns.disabled", false);
-user_pref("network.proxy.socks_remote_dns", false);
 user_pref("network.proxy.type", 0);
 ```
 
