@@ -2,40 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sakurawald&#39;s blog</title>
+    <title>launch tor browser without tor network</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
-<header>
-    <p>== post ==</p>
-</header>
 <main>
-    
-        <article>
-            <p>December 07, 2023
-                <a href="/./posts/guide-to-install-qubes-on-qemu/">guide-to-install-qubes-on-qemu</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>November 26, 2023
-                <a href="/./posts/clean-unused-chunks-in-minecraft/">clean-unused-chunks-in-minecraft</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>February 23, 2023
-                <a href="/./posts/play-on-vim/">play on vim</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>February 21, 2023
-                <a href="/./posts/play-on-android-emulator/">play on android emulator</a>
-            </p>
-        </article>
-    
+    <article>
+        <h1 id="Launch-Tor-Browser-without-Tor-Network"><a href="#Launch-Tor-Browser-without-Tor-Network" class="headerlink" title="Launch Tor Browser without Tor Network"></a>Launch Tor Browser without Tor Network</h1><h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ol>
+<li>Goto the <code>tor browser</code> installed directory and run <code>./firefox -p</code> to start <code>firefox profile manager</code></li>
+<li>Create <code>a new profile</code> named <code>unsafe</code></li>
+<li>Use <code>./firefox -P unsafe</code> to launch <code>tor browser</code> with <code>unsafe</code> profile.</li>
+<li>Goto <code>about:config</code> and set the following options<pre><code>user_pref(&quot;extensions.torlauncher.start_tor&quot;, false);
+user_pref(&quot;network.dns.disabled&quot;, false);
+user_pref(&quot;network.proxy.socks_remote_dns&quot;, false);
+user_pref(&quot;network.proxy.type&quot;, 0);
+</code></pre></li>
+</ol>
+
+    </article>
 </main>
 <footer>
     <hr>

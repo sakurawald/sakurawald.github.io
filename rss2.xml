@@ -15,8 +15,31 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 26 Mar 2024 07:31:37 GMT</pubDate>
+    <pubDate>Sat, 06 Apr 2024 20:34:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>launch tor browser without tor network</title>
+      <link>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</link>
+      <guid>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</guid>
+      <pubDate>Sat, 06 Apr 2024 19:28:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Launch-Tor-Browser-without-Tor-Network&quot;&gt;&lt;a href=&quot;#Launch-Tor-Browser-without-Tor-Network&quot; class=&quot;headerlink&quot; title=&quot;Launch Tor</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>rescue - system corrupted after forced shutdown during system upgrade</title>
@@ -596,34 +619,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-advanced-sql/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Database] Intermediate SQL</title>
-      <link>https://sakurawald.github.io/posts/database-intermediate-sql/</link>
-      <guid>https://sakurawald.github.io/posts/database-intermediate-sql/</guid>
-      <pubDate>Fri, 29 Apr 2022 07:39:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Intermediate-SQL&quot;&gt;&lt;a href=&quot;#Intermediate-SQL&quot; class=&quot;headerlink&quot; title=&quot;Intermediate SQL&quot;&gt;&lt;/a&gt;Intermediate SQL&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-intermediate-sql/#disqus_thread</comments>
       
     </item>
     
