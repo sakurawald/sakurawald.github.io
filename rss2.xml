@@ -15,8 +15,31 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 06 Apr 2024 20:36:16 GMT</pubDate>
+    <pubDate>Mon, 08 Apr 2024 07:05:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>good application set</title>
+      <link>https://sakurawald.github.io/posts/good-application-set/</link>
+      <guid>https://sakurawald.github.io/posts/good-application-set/</guid>
+      <pubDate>Mon, 08 Apr 2024 05:57:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Good-Application-Set&quot;&gt;&lt;a href=&quot;#Good-Application-Set&quot; class=&quot;headerlink&quot; title=&quot;Good Application Set&quot;&gt;&lt;/a&gt;Good Application</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/good-application-set/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>launch tor browser without tor network</title>
@@ -591,34 +614,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-relational-query-language/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Database] Advanced SQL</title>
-      <link>https://sakurawald.github.io/posts/database-advanced-sql/</link>
-      <guid>https://sakurawald.github.io/posts/database-advanced-sql/</guid>
-      <pubDate>Fri, 29 Apr 2022 12:35:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Advanced-SQL&quot;&gt;&lt;a href=&quot;#Advanced-SQL&quot; class=&quot;headerlink&quot; title=&quot;Advanced SQL&quot;&gt;&lt;/a&gt;Advanced SQL&lt;/h1&gt;
-$$
-&#92;boxed{@}
-% Color</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-advanced-sql/#disqus_thread</comments>
       
     </item>
     
