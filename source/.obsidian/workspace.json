@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/launch-tor-browser-without-tor-network.md",
+                "file": "_posts/good-application-set.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/launch-tor-browser-without-tor-network.md",
+                "file": "_posts/good-application-set.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/launch-tor-browser-without-tor-network.md",
+                "file": "_posts/good-application-set.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/launch-tor-browser-without-tor-network.md"
+                "file": "_posts/good-application-set.md"
               }
             }
           }
@@ -154,13 +154,16 @@
   },
   "active": "980bfe60947f638c",
   "lastOpenFiles": [
+    "_posts/jsp-servlet-jsp-short-hand.md",
+    "_posts/launch-tor-browser-without-tor-network.md",
+    "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+    "_posts/text-auto-highlighter-configuration.md",
+    "_posts/trick-to-fake-the-github-board.md",
+    "_posts/good-application-set.md",
     "_posts/play-on-android-emulator.md",
     "_posts/expression-evaluation.md",
-    "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
-    "_posts/launch-tor-browser-without-tor-network.md",
     "_posts/play-on-wordpress.md",
     "_posts/apple-magic-touch-pad-review.md",
-    "_posts/text-auto-highlighter-configuration.md",
     "_drafts/combinatorics-arrangement-and-combination.md",
     "_drafts/combinatorics-graph-basics-i.md",
     "_drafts/combinatorics-in-exclusion-principle-and-mobius-inversion.md",
@@ -177,9 +180,6 @@
     "_posts/algorithm-circle-permutation.md",
     "_posts/algorithm-oiling-car-and-optimal-merge.md",
     "_posts/database-design.md",
-    "_posts/database-advanced-sql.md",
-    "_posts/codesnippet-a-simple-judger-for-java.md",
-    "_posts/clean-unused-chunks-in-minecraft.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",
