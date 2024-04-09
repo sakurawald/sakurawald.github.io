@@ -2,58 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sakurawald&#39;s blog</title>
+    <title>pin refresh rate of an android phone</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
-<header>
-    <p>== post ==</p>
-</header>
 <main>
-    
-        <article>
-            <p>April 26, 2022
-                <a href="/./posts/algorithm-oiling-car-and-optimal-merge/">[Algorithm] Oiling Car &amp; Optimal Merge</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>April 18, 2022
-                <a href="/./posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem/">[Algorithm] Multiple-Knapsack Problem &amp; Pebble Merge Problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>April 17, 2022
-                <a href="/./posts/algorithm-circle-permutation/">[Branch-Bound] Circle Permutation</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>April 12, 2022
-                <a href="/./posts/algorithm-back-tracking-and-iddfs/">[Algorithm] Back-Tracking &amp; IDDFS</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>March 26, 2022
-                <a href="/./posts/algorithm-set-partition-problem/">[Algorithm] Set Partition Problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>March 25, 2022
-                <a href="/./posts/algorithm-majority-problem/">[Algorithm] Majority Problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>September 12, 2021
-                <a href="/./posts/expression-evaluation/">Expression Evaluation</a>
-            </p>
-        </article>
-    
+    <article>
+        <h1 id="Pin-refresh-rate-of-an-android-phone"><a href="#Pin-refresh-rate-of-an-android-phone" class="headerlink" title="Pin refresh rate of an android phone"></a>Pin refresh rate of an android phone</h1><h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ol>
+<li>Download the “SetEdit” app</li>
+<li>Insert the following options</li>
+</ol>
+<pre><code>&quot;min_refresh_rate&quot; = &quot;120.0&quot;
+&quot;peak_refresh_rate&quot; = &quot;120.0&quot;
+</code></pre><blockquote>
+<p>You can modify the options using “adb” without <code>SetEdit</code> apk</p>
+<p>The debug refresh rate still shows “60fps”, but the real refresh rate is 120 now.</p>
+</blockquote>
+
+    </article>
 </main>
 <footer>
     <hr>

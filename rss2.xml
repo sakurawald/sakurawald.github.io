@@ -15,8 +15,37 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 08 Apr 2024 07:05:15 GMT</pubDate>
+    <pubDate>Tue, 09 Apr 2024 11:23:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>pin refresh rate of an android phone</title>
+      <link>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</link>
+      <guid>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</guid>
+      <pubDate>Tue, 09 Apr 2024 10:19:12 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Pin-refresh-rate-of-an-android-phone&quot;&gt;&lt;a href=&quot;#Pin-refresh-rate-of-an-android-phone&quot; class=&quot;headerlink&quot; title=&quot;Pin refresh rate of</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/android/">#android</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emulator/">#emulator</category>
+      
+      <category domain="https://sakurawald.github.io/tags/root/">root</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>good application set</title>
@@ -345,13 +374,13 @@
       
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
+      <category domain="https://sakurawald.github.io/tags/root/">root</category>
+      
       <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
       <category domain="https://sakurawald.github.io/tags/pixel/">pixel</category>
       
       <category domain="https://sakurawald.github.io/tags/phone/">phone</category>
-      
-      <category domain="https://sakurawald.github.io/tags/root/">root</category>
       
       <category domain="https://sakurawald.github.io/tags/magisk/">magisk</category>
       
@@ -586,34 +615,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Database] Relational Query Language</title>
-      <link>https://sakurawald.github.io/posts/database-relational-query-language/</link>
-      <guid>https://sakurawald.github.io/posts/database-relational-query-language/</guid>
-      <pubDate>Sat, 30 Apr 2022 01:53:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>
-
-&lt;h1&gt;Formal RQL&lt;/h1&gt;
-&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-relational-query-language/#disqus_thread</comments>
       
     </item>
     
