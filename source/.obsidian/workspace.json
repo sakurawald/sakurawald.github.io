@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/good-application-set.md",
+                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/good-application-set.md",
+                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/good-application-set.md",
+                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/good-application-set.md"
+                "file": "_posts/pin-refresh-rate-of-an-android-phone.md"
               }
             }
           }
@@ -154,12 +154,12 @@
   },
   "active": "980bfe60947f638c",
   "lastOpenFiles": [
+    "_posts/good-application-set.md",
     "_posts/jsp-servlet-jsp-short-hand.md",
     "_posts/launch-tor-browser-without-tor-network.md",
     "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
     "_posts/text-auto-highlighter-configuration.md",
     "_posts/trick-to-fake-the-github-board.md",
-    "_posts/good-application-set.md",
     "_posts/play-on-android-emulator.md",
     "_posts/expression-evaluation.md",
     "_posts/play-on-wordpress.md",
