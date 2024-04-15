@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
+                "file": "_posts/good-application-set.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
+                "file": "_posts/good-application-set.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/pin-refresh-rate-of-an-android-phone.md",
+                "file": "_posts/good-application-set.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/pin-refresh-rate-of-an-android-phone.md"
+                "file": "_posts/good-application-set.md"
               }
             }
           }
@@ -154,15 +154,21 @@
   },
   "active": "980bfe60947f638c",
   "lastOpenFiles": [
+    "_posts/algorithm-multiple-knapsack-problem-and-pebble-merge-problem.md",
+    "_posts/pin-refresh-rate-of-an-android-phone.md",
+    "_posts/launch-tor-browser-without-tor-network.md",
+    "_posts/play-on-minecraft-server-configuration.md",
+    "_posts/play-on-wallpaper.md",
+    "_posts/play-on-wordpress.md",
+    "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
+    "_posts/trick-to-fake-the-github-board.md",
+    "_posts/text-auto-highlighter-configuration.md",
+    "_posts/guide-to-install-qubes-on-qemu.md",
+    "_posts/algorithm-back-tracking-and-iddfs.md",
     "_posts/good-application-set.md",
     "_posts/jsp-servlet-jsp-short-hand.md",
-    "_posts/launch-tor-browser-without-tor-network.md",
-    "_posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade.md",
-    "_posts/text-auto-highlighter-configuration.md",
-    "_posts/trick-to-fake-the-github-board.md",
     "_posts/play-on-android-emulator.md",
     "_posts/expression-evaluation.md",
-    "_posts/play-on-wordpress.md",
     "_posts/apple-magic-touch-pad-review.md",
     "_drafts/combinatorics-arrangement-and-combination.md",
     "_drafts/combinatorics-graph-basics-i.md",
@@ -174,12 +180,6 @@
     "_drafts/grapheneos-review.md",
     "_drafts/combinatorics-catalan-number.md",
     "_drafts/CodeSnippet I.md",
-    "_posts/algorithm-back-tracking-and-iddfs.md",
-    "_posts/play-on-kde.md",
-    "_posts/play-on-anbox.md",
-    "_posts/algorithm-circle-permutation.md",
-    "_posts/algorithm-oiling-car-and-optimal-merge.md",
-    "_posts/database-design.md",
     "_drafts/a4.png",
     "Pasted image 20230427065322.png",
     "_template",

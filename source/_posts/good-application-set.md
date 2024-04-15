@@ -26,10 +26,9 @@ tags:
 
 ## Viewer
 
-1. Gwenview
-2. Remote Viewer
-3. Spicy
-4. Wireshark
+1. Remote Viewer
+2. Spicy
+3. Wireshark
 
 ## Terminal
 
