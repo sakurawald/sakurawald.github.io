@@ -13,7 +13,7 @@
     "version": "7.0.0"
   },
   "dependencies": {
-    "hexo": "^7.0.0",
+    "hexo": "^7.2.0",
     "hexo-fs": "^4.1.1",
     "hexo-generator-feed": "^3.0.0",
     "hexo-generator-index": "^3.0.0",
