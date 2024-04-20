@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2024-04-15T14:15:33.870Z</updated>
+  <updated>2024-04-20T17:11:07.766Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>make persistent windows 11 usb sticker</title>
+    <link href="https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/"/>
+    <id>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</id>
+    <published>2024-04-20T16:00:32.000Z</published>
+    <updated>2024-04-20T17:11:07.766Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Make-persistent-windows-11-usb-sticker&quot;&gt;&lt;a href=&quot;#Make-persistent-windows-11-usb-sticker&quot; class=&quot;headerlink&quot; title=&quot;Make persistent</summary>
+        
+      
+    
+    
+    
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+    <category term="wtg" scheme="https://sakurawald.github.io/tags/wtg/"/>
+    
+    <category term="boot" scheme="https://sakurawald.github.io/tags/boot/"/>
+    
+    <category term="usb" scheme="https://sakurawald.github.io/tags/usb/"/>
+    
+  </entry>
+  
+  <entry>
     <title>pin refresh rate of an android phone</title>
     <link href="https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/"/>
     <id>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</id>
     <published>2024-04-09T10:19:12.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -48,7 +77,7 @@
     <link href="https://sakurawald.github.io/posts/good-application-set/"/>
     <id>https://sakurawald.github.io/posts/good-application-set/</id>
     <published>2024-04-08T05:57:18.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.762Z</updated>
     
     
       
@@ -69,7 +98,7 @@
     <link href="https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/"/>
     <id>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</id>
     <published>2024-04-06T19:28:32.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -90,7 +119,7 @@
     <link href="https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/"/>
     <id>https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/</id>
     <published>2024-03-13T19:08:14.000Z</published>
-    <updated>2024-04-15T14:15:33.874Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -117,7 +146,7 @@
     <link href="https://sakurawald.github.io/posts/apple-magic-touch-pad-review/"/>
     <id>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</id>
     <published>2024-03-05T02:55:04.000Z</published>
-    <updated>2024-04-15T14:15:33.866Z</updated>
+    <updated>2024-04-20T17:11:07.758Z</updated>
     
     
       
@@ -152,7 +181,7 @@
     <link href="https://sakurawald.github.io/posts/text-auto-highlighter-configuration/"/>
     <id>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</id>
     <published>2023-12-31T20:48:47.000Z</published>
-    <updated>2024-04-15T14:15:33.874Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -177,7 +206,7 @@
     <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
     <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
     <published>2023-12-07T06:22:03.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.762Z</updated>
     
     
       
@@ -212,7 +241,7 @@
     <link href="https://sakurawald.github.io/posts/trick-to-fake-the-github-board/"/>
     <id>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</id>
     <published>2023-11-26T13:16:53.000Z</published>
-    <updated>2024-04-15T14:15:33.874Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -237,7 +266,7 @@
     <link href="https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/"/>
     <id>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</id>
     <published>2023-11-26T13:14:19.000Z</published>
-    <updated>2024-04-15T14:15:33.866Z</updated>
+    <updated>2024-04-20T17:11:07.758Z</updated>
     
     
       
@@ -262,7 +291,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T20:05:28.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -285,7 +314,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T13:05:28.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -310,7 +339,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-wallpaper/"/>
     <id>https://sakurawald.github.io/posts/play-on-wallpaper/</id>
     <published>2023-04-15T00:51:57.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -333,7 +362,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-google-pixel/"/>
     <id>https://sakurawald.github.io/posts/play-on-google-pixel/</id>
     <published>2023-02-26T20:46:02.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -366,7 +395,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T21:10:35.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -393,7 +422,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T21:38:07.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -428,7 +457,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-07T23:35:54.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -475,7 +504,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-hexo/"/>
     <id>https://sakurawald.github.io/posts/play-on-hexo/</id>
     <published>2023-01-25T04:11:58.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -502,7 +531,7 @@
     <link href="https://sakurawald.github.io/posts/database-design/"/>
     <id>https://sakurawald.github.io/posts/database-design/</id>
     <published>2023-01-22T12:01:39.000Z</published>
-    <updated>2024-04-15T14:15:33.866Z</updated>
+    <updated>2024-04-20T17:11:07.762Z</updated>
     
     
       
@@ -528,7 +557,7 @@ $$
     <link href="https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/"/>
     <id>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/</id>
     <published>2022-06-13T02:00:00.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
+    <updated>2024-04-20T17:11:07.766Z</updated>
     
     
       
@@ -548,31 +577,6 @@ $$
     <category term="web" scheme="https://sakurawald.github.io/tags/web/"/>
     
     <category term="jsp" scheme="https://sakurawald.github.io/tags/jsp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>play on anbox</title>
-    <link href="https://sakurawald.github.io/posts/play-on-anbox/"/>
-    <id>https://sakurawald.github.io/posts/play-on-anbox/</id>
-    <published>2022-06-09T08:41:00.000Z</published>
-    <updated>2024-04-15T14:15:33.870Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Install-and-Launch-Anbox&quot;&gt;&lt;a href=&quot;#Install-and-Launch-Anbox&quot; class=&quot;headerlink&quot; title=&quot;Install and Launch Anbox&quot;&gt;&lt;/a&gt;Install and</summary>
-        
-      
-    
-    
-    
-    
-    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
-    
-    <category term="android" scheme="https://sakurawald.github.io/tags/android/"/>
     
   </entry>
   

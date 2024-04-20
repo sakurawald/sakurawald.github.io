@@ -15,8 +15,39 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 15 Apr 2024 14:15:33 GMT</pubDate>
+    <pubDate>Sat, 20 Apr 2024 17:11:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>make persistent windows 11 usb sticker</title>
+      <link>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</link>
+      <guid>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</guid>
+      <pubDate>Sat, 20 Apr 2024 16:00:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Make-persistent-windows-11-usb-sticker&quot;&gt;&lt;a href=&quot;#Make-persistent-windows-11-usb-sticker&quot; class=&quot;headerlink&quot; title=&quot;Make persistent</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/wtg/">wtg</category>
+      
+      <category domain="https://sakurawald.github.io/tags/boot/">boot</category>
+      
+      <category domain="https://sakurawald.github.io/tags/usb/">usb</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>pin refresh rate of an android phone</title>
@@ -588,33 +619,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/jsp-servlet-jsp-short-hand/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>play on anbox</title>
-      <link>https://sakurawald.github.io/posts/play-on-anbox/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-anbox/</guid>
-      <pubDate>Thu, 09 Jun 2022 08:41:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Install-and-Launch-Anbox&quot;&gt;&lt;a href=&quot;#Install-and-Launch-Anbox&quot; class=&quot;headerlink&quot; title=&quot;Install and Launch Anbox&quot;&gt;&lt;/a&gt;Install and</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
-      <category domain="https://sakurawald.github.io/tags/android/">android</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
       
     </item>
     
