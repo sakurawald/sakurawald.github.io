@@ -21,11 +21,11 @@ You may want to install the windows os inside your `usb sticker`, and boot it in
 
 Download `rufus (4.4.2103)` and run it.
 
-## Enable hdd support
+### Enable hdd support
 
 In `rufus`, press `alt + f` to enable `hdd list`
 
-## Burn windows installer into your sticker
+### Burn windows installer into your sticker
 
 For `UEFI` bios, you need to select `partition scheme` as `gpt`
 **and select `image option` as `windows to go`**
