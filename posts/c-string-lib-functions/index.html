@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>use c language standard library to solve problems!</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Use-c-language-standard-library-to-solve-problems"><a href="#Use-c-language-standard-library-to-solve-problems" class="headerlink" title="Use c language standard library to solve problems!"></a>Use c language standard library to solve problems!</h1><h2 id="用字符串函数来解题！"><a href="#用字符串函数来解题！" class="headerlink" title="用字符串函数来解题！"></a>用字符串函数来解题！</h2><h3 id="获取字符串长度-gt-strlen"><a href="#获取字符串长度-gt-strlen" class="headerlink" title="获取字符串长度 -&gt; strlen()"></a>获取字符串长度 -&gt; strlen()</h3><pre><code class="lang-c">// 获取指定字符串的长度（不包含&#39;\0&#39;字符）
+// str: 目标字符串
+size_t strlen(const char *str)
+</code></pre>
+<p>关键点：题目的单词要么是“click”要么是“double click”，因此没有必要真正去解析词语，只需要运用字符串的长度关系，直接计算出“click”出现次数即可。</p>
+<h6 id="SOJ1409-双击666-AC-c"><a href="#SOJ1409-双击666-AC-c" class="headerlink" title="SOJ1409 双击666 AC.c"></a>SOJ1409 双击666 AC.c</h6><pre><code class="lang-c">s[];main(n)&#123;gets(&amp;n);strchr(gets(s),&#39;d&#39;)?puts(&quot;666&quot;):printf(&quot;%d&quot;,strlen(s)/6+1);&#125;
+</code></pre>
+<p>实际上，这道题的“click”出现次数也可以不计算。</p>
+<pre><code class="lang-c">s[];main(n)&#123;gets(&amp;n);puts(strchr(gets(s),&#39;d&#39;)?&quot;666&quot;:&amp;n);&#125;
+</code></pre>
+<h3 id="比较字符串-gt-strcmp"><a href="#比较字符串-gt-strcmp" class="headerlink" title="比较字符串 -&gt; strcmp()"></a>比较字符串 -&gt; strcmp()</h3><pre><code class="lang-c">int strcmp(const char *str1, const char *str2)
+// str1: 要比较的字符串1
+// str2: 要比较的字符串2
+</code></pre>
+<p>该函数返回值为int, 分为3种情况.  </p>
+<ol>
+<li>字符串相等: 返回 0  </li>
+<li>字符串str1 &lt; 字符串str2: 返回负数  </li>
+<li>字符串str1 &gt; 字符串str2: 返回正数</li>
+</ol>
+<h3 id="连接字符串-gt-strcat"><a href="#连接字符串-gt-strcat" class="headerlink" title="连接字符串 -&gt; strcat()"></a>连接字符串 -&gt; strcat()</h3><pre><code class="lang-c">char *strcat(char *dest, const char *src)
+// dest: 目标字符串
+// src: 来源字符串
+</code></pre>
+<p>将src字符串 连接到 dest字符串的末尾(请保证dest字符串拥有足够的大小)</p>
+<p>strcat(A, B) = A + B</p>
+<h3 id="找出首个不满足字符集的下标-gt-strspn"><a href="#找出首个不满足字符集的下标-gt-strspn" class="headerlink" title="找出首个不满足字符集的下标 -&gt; strspn()"></a>找出首个不满足字符集的下标 -&gt; strspn()</h3><pre><code class="lang-c">size_t strspn(const char *str1, const char *str2)
+// str1: 被检索的字符串
+// str2: 用于检索的字符串 (可为单字符的字符串)
+</code></pre>
+<p>该函数用于在str1中找出 第一个不在str2中出现的字符的下标</p>
+<h6 id="SOJ1082-字符串-AC-c"><a href="#SOJ1082-字符串-AC-c" class="headerlink" title="SOJ1082 字符串 AC.c"></a>SOJ1082 字符串 AC.c</h6><pre><code class="lang-c">char s[];main(t)&#123;t=strspn(gets(s),&quot;#&quot;);for(printf(&quot;%s&quot;,s+t);t--;putchar(35));&#125;
+</code></pre>
+<h3 id="大小写转换-gt-strupr-amp-strlwr"><a href="#大小写转换-gt-strupr-amp-strlwr" class="headerlink" title="大小写转换 -&gt; strupr() &amp; strlwr()"></a>大小写转换 -&gt; strupr() &amp; strlwr()</h3><p>注意: strupr()和strlwr()并不是string.h的函数</p>
+<pre><code class="lang-c">char * strupr(const char * str)
+// str: 被转换的字符串
+
+char * strlwr(const char * str)
+// 被转换的字符串
+</code></pre>
+<h6 id="SOJ1279-转换为大写-AC-c"><a href="#SOJ1279-转换为大写-AC-c" class="headerlink" title="SOJ1279 转换为大写 AC.c"></a>SOJ1279 转换为大写 AC.c</h6><pre><code class="lang-c">main(n)&#123;puts(strupr(gets(&amp;n)));&#125;
+</code></pre>
+<h6 id="SOJ1290-转换为小写-AC-c"><a href="#SOJ1290-转换为小写-AC-c" class="headerlink" title="SOJ1290 转换为小写 AC.c"></a>SOJ1290 转换为小写 AC.c</h6><pre><code class="lang-c">main(n)&#123;puts(strlwr(gets(&amp;n)));&#125;
+</code></pre>
+<h3 id="反转字符串-gt-strrev"><a href="#反转字符串-gt-strrev" class="headerlink" title="反转字符串 -&gt; strrev()"></a>反转字符串 -&gt; strrev()</h3><pre><code class="lang-c">char * strrev(const char * str)
+// str: 待反转的字符串
+</code></pre>
+<p>注意: 该方法是原址性的, 如果需要保留原始字符串, 则应该事先用strcpy()复制一份原始字符串的副本.</p>
+<h6 id="SOJ1284-字符串正反连接-AC-c"><a href="#SOJ1284-字符串正反连接-AC-c" class="headerlink" title="SOJ1284 字符串正反连接 AC.c"></a>SOJ1284 字符串正反连接 AC.c</h6><pre><code class="lang-c">s[];S[];main()&#123;gets(s);printf(&quot;%s%s&quot;,s,strrev(strcpy(S,s)));&#125;
+</code></pre>
+<h6 id="SOJ1305-判断是否为对称字符串-AC-c"><a href="#SOJ1305-判断是否为对称字符串-AC-c" class="headerlink" title="SOJ1305 判断是否为对称字符串 AC.c"></a>SOJ1305 判断是否为对称字符串 AC.c</h6><pre><code class="lang-c">s1[];s2[];main()&#123;puts(strcmp(s1,strrev(strcpy(s2,gets(s1))))?&quot;No&quot;:&quot;Yes&quot;);&#125;
+</code></pre>
+<h6 id="SOJ1615-英语单词逆序-AC-c"><a href="#SOJ1615-英语单词逆序-AC-c" class="headerlink" title="SOJ1615 英语单词逆序 AC.c"></a>SOJ1615 英语单词逆序 AC.c</h6><pre><code class="lang-c">m[];main()&#123;for(;~scanf(&quot;%s&quot;,&amp;m);printf(&quot;%s &quot;,strrev(m)));&#125;
+</code></pre>
+<h3 id="找出指定字符的出现下标-gt-strchr"><a href="#找出指定字符的出现下标-gt-strchr" class="headerlink" title="找出指定字符的出现下标 -&gt; strchr()"></a>找出指定字符的出现下标 -&gt; strchr()</h3><pre><code class="lang-c">char *strchr(const char *str, int c)
+// str: 被检索的字符串
+// c: 要查找的指定字符 (输入char类型自动转为int)
+</code></pre>
+<p>注意: 该方法返回的是 首个符合的字符的指针(char*), 因此，如果需要算出该字符在原字符串中的下标, 应该运用指针算术来得到:<br>index = strchr(str, 指定字符) – str</p>
+<h6 id="SOJ1336-我已经不是三岁小孩了-AC-c"><a href="#SOJ1336-我已经不是三岁小孩了-AC-c" class="headerlink" title="SOJ1336 我已经不是三岁小孩了 AC.c"></a>SOJ1336 我已经不是三岁小孩了 AC.c</h6><pre><code class="lang-c">s[];main(N,M)&#123;gets(s);N=*(strchr(s,45)-1)%48;M=*(strchr(s,45)+1)%48;puts(4&gt;=N&amp;&amp;4&lt;=M?&quot;Yes&quot;:&quot;No&quot;);&#125;
+</code></pre>
+<h6 id="SOJ1604-英语姓名简写-AC-c"><a href="#SOJ1604-英语姓名简写-AC-c" class="headerlink" title="SOJ1604 英语姓名简写 AC.c"></a>SOJ1604 英语姓名简写 AC.c</h6><pre><code class="lang-c">m[];main()&#123;*strrchr(gets(m),46)=0;puts(m);&#125;
+</code></pre>
+<h3 id="连接部分字符串-gt-strncat"><a href="#连接部分字符串-gt-strncat" class="headerlink" title="连接部分字符串 -&gt; strncat()"></a>连接部分字符串 -&gt; strncat()</h3><pre><code class="lang-c">char *strncat(char *dest, const char *src, size_t n)
+// dest: 目标字符串
+// src: 来源字符串
+// n: 将来源字符串的前n个字符 追加到 目标字符串 中
+</code></pre>
+<h3 id="比较部分字符串-gt-strncmp"><a href="#比较部分字符串-gt-strncmp" class="headerlink" title="比较部分字符串 -&gt; strncmp()"></a>比较部分字符串 -&gt; strncmp()</h3><pre><code class="lang-c">int strncmp(const char *str1, const char *str2, size_t n)
+// str1: 字符串1
+// str2: 字符串2
+// n: 比较字符串1和字符串2的 前n个字符
+</code></pre>
+<h3 id="复制字符串-gt-strcpy"><a href="#复制字符串-gt-strcpy" class="headerlink" title="复制字符串 -&gt; strcpy()"></a>复制字符串 -&gt; strcpy()</h3><pre><code class="lang-c">char *strcpy(char *dest, const char *src)
+// dest: 目标字符串 (请保证有充足的内存空间)
+// src: 来源字符串
+</code></pre>
+<h3 id="复制部分字符串-gt-strncpy"><a href="#复制部分字符串-gt-strncpy" class="headerlink" title="复制部分字符串 -&gt; strncpy()"></a>复制部分字符串 -&gt; strncpy()</h3><pre><code class="lang-c">char *strncpy(char *dest, const char *src, size_t n)
+// dest: 目标字符串 (请保证有充足的内存空间)
+// src: 来源字符串
+// n: 复制src的前n个字符
+</code></pre>
+<h3 id="检索开头有几个字符不符合条件-gt-strnspn"><a href="#检索开头有几个字符不符合条件-gt-strnspn" class="headerlink" title="检索开头有几个字符不符合条件 -&gt; strnspn()"></a>检索开头有几个字符不符合条件 -&gt; strnspn()</h3><pre><code class="lang-c">size_t strcspn(const char *str1, const char *str2)
+// str1: 被检索的字符串
+// str2: 检索字符的列表
+</code></pre>
+<h3 id="检索第一个匹配指定字符列表的字符-gt-strpbrk"><a href="#检索第一个匹配指定字符列表的字符-gt-strpbrk" class="headerlink" title="检索第一个匹配指定字符列表的字符 -&gt; strpbrk()"></a>检索第一个匹配指定字符列表的字符 -&gt; strpbrk()</h3><pre><code class="lang-c">char *strpbrk(const char *str1, const char *str2)
+// str1: 被检索的字符串
+// str2: 检索字符的列表
+</code></pre>
+<p>注意: strpbrk() 与 strspn() 相反.</p>
+<h3 id="找出指定字符最后一次出现的位置-gt-strrchr"><a href="#找出指定字符最后一次出现的位置-gt-strrchr" class="headerlink" title="找出指定字符最后一次出现的位置 -&gt; strrchr()"></a>找出指定字符最后一次出现的位置 -&gt; strrchr()</h3><pre><code class="lang-c">char *strrchr(const char *str, int c)
+// str: 被检索的字符串
+// c: 指定字符
+</code></pre>
+<h3 id="查找指定子串首次出现位置-gt-strstr"><a href="#查找指定子串首次出现位置-gt-strstr" class="headerlink" title="查找指定子串首次出现位置 -&gt; strstr()"></a>查找指定子串首次出现位置 -&gt; strstr()</h3><pre><code class="lang-c">char *strstr(const char *haystack, const char *needle)
+// haystack: 被检索的字符串
+// needle: 指定子串
+</code></pre>
+<h3 id="分隔字符串-gt-strtok"><a href="#分隔字符串-gt-strtok" class="headerlink" title="分隔字符串 -&gt; strtok()"></a>分隔字符串 -&gt; strtok()</h3><pre><code class="lang-c">char *strtok(char *str, const char *delim)
+// str: 目标字符串
+// delim: 用于分割的字符串
+</code></pre>
+<p>注意: strtok()函数会破坏str的数据, 若需要保留数据, 请使用str的副本.<br>注意: strtok()函数只需要首次调用时传入str即可, 后续调用可传入NULL</p>
+<pre><code class="lang-c">void split(char * str, char * delim) &#123;
+    /* 首次调用strtok(): 初始化strtok()函数 且 获取第一个被切割的子串*/
+    char * token = strtok(str, delim);
+
+    /* 后续调用strtok(): 获取 其他被切割处理的子串 */
+    while (token != NULL) &#123;
+        printf(&quot;str = %s\n&quot;, str);
+        printf(&quot;delim = %s\n&quot;, delim);
+        printf(&quot;token = %s\n\n&quot;, token);
+
+        token = strtok(NULL, delim);
+    &#125;
+&#125;
+
+int main() &#123;
+    char str1[80] = &quot;First233Second233Third&quot;;
+    char str2[80] = &quot;233&quot;;
+
+    split(str1, str2);
+&#125;
+</code></pre>
+<pre><code class="lang-plain">/* Output:
+str = First
+delim = 233
+token = First
+
+str = First
+delim = 233
+token = Second
+
+str = First
+delim = 233
+token = Third
+*/
+</code></pre>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/greedy/">greedy</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/c/">c</a>
+    
+        <a href="/tags/library/">library</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/pixel/">pixel</a>
+    
+        <a href="/tags/phone/">phone</a>
+    
+        <a href="/tags/magisk/">magisk</a>
+    
+        <a href="/tags/blog/">blog</a>
+    
+        <a href="/tags/wordpress/">wordpress</a>
+    
+        <a href="/tags/hexo/">hexo</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+        <a href="/tags/wallpaper/">wallpaper</a>
+    
+        <a href="/tags/github/">github</a>
+    
+        <a href="/tags/shell/">shell</a>
+    
+        <a href="/tags/text/">text</a>
+    
+        <a href="/tags/read/">read</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2024 sakurawald</p>
+
+</footer>
+</body>
+</html>

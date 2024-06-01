@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[Algorithm] Set Partition Problem</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Set-Partition-Problem"><a href="#Set-Partition-Problem" class="headerlink" title="Set Partition Problem"></a>Set Partition Problem</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>n 个元素的集合{1,2, … , <em>n</em> }可以划分为若干个非空子集。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>由文件 input.txt 提供输入数据。文件的第 1 行是元素个数 n。 </p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>程序运行结束时，将计算出的不同的非空子集数输出到文件 output.txt 中。</p>
+<h2 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h2><p><strong>输入文件示例</strong> </p>
+<p>input.txt </p>
+<p>5 </p>
+<p><strong>输出文件示例</strong></p>
+<p>output.txt </p>
+<p>52</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Solution-1-Stirling"><a href="#Solution-1-Stirling" class="headerlink" title="Solution 1 (Stirling)"></a>Solution 1 (Stirling)</h3><h4 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h4><p><code>由n个元素组成的集合</code>的<code>划分非空子集方案数</code>可以被看作是：</p>
+<p><code>n个不同的小球（即n个不同的数字，或者理解为n个带不同颜色的小球）</code>放入<code>无限多个不可区分的箱子</code>的方案数。</p>
+<blockquote>
+<p>箱子是不可区分 (Indistinguishable) 的，指箱子本身不可区分。但是箱子的内容（即箱子里所放的小球）是可区分的。</p>
+</blockquote>
+<p>由于要求<code>不能有空集</code>（即我们可以简单地忽略掉<code>那些没有放入任何小球的箱子</code>）</p>
+<p>因此，如果我们有<code>n个不同的小球</code>，那么<code>非空集合的个数 m</code>应满足</p>
+<script type="math/tex; mode=display">
+1 \le m \le n</script><p>当$m = 0$时，这意味着<code>没有任何箱子中放有小球</code>，这不满足<code>我们要将小球划分到箱子中的要求</code>，故方案数为0</p>
+<p>当<script type="math/tex">m = 1</script>时，即<code>所有的n个小球</code>全部都放入<code>同一个箱子</code></p>
+<p>……</p>
+<p>当<script type="math/tex">m=n</script>时，即<code>所有的n个小球</code>都<code>独自占有1个箱子</code></p>
+<p>当<script type="math/tex">m \gt n</script>时，意味着<code>我们要让m个箱子都非空</code>，但是由于<code>我们所拥有的小球数量n &lt; m</code>，故根据<code>鸽巢原理</code>（即使我们让<code>n个箱子都各自只装入1个小球</code>，也仍然有<code>m-n个箱子中没有小球可以装入</code>），这是不可能的。所以这种情况下方案数也为0.</p>
+<hr>
+<p>假设<script type="math/tex">A_n</script>为<code>n个元素的集合</code>划分为<code>非空子集</code>的方案数。</p>
+<script type="math/tex; mode=display">S(n, m)$$为将`n个元素的集合`划分为`m个非空集合`的方案数。
+
+故</script><p>A<em>n = \sum</em>{k=1}^{n} {S(n, k)}</p>
+<script type="math/tex; mode=display">
+为了得到$$A_n$$的递推关系，我们尝试从`集合划分的最后一步` 来考虑。
+
+即：$$S_n$$的数值可以认为是，在$$S_{n-1}$$的情况上，我们`额外地获得了一个小球`后所形成的方案数。
+
+我们对于`这个新获得的小球`，有两种`选择`
+
+1. 让这个小球`独自占有1个新的箱子`
+2. 把这个小球`放入到已有的m-1个非空箱子中的任意一个`
+
+据此得出递推关系</script><p>S(n,m) = S(n-1, m-1) + m * S(n-1, m)</p>
+<p>$$</p>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><pre><code class="lang-java">    public static int S(int n, int m) &#123;
+        if (m == 0 || n &lt; m) return 0;
+        if (m == 1 || n == m) return 1;
+        return S(n - 1, m - 1) + m * S(n - 1, m);
+    &#125;
+
+    public static int A(int n) &#123;
+        int sum = 0;
+        for (int m = 1; m &lt;= n; m++) &#123;
+            sum += S(n, m);
+        &#125;
+        return sum;
+    &#125;
+</code></pre>
+<h4 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h4><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: BELL0.in &amp; BELL0.out
+Expected  Input: [5]
+Expected Output: [52]
+Your     Output: [52]
+Time Cost: 1.643300 ms (1643300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL1.in &amp; BELL1.out
+Expected  Input: [15]
+Expected Output: [1382958545]
+Your     Output: [1382958545]
+Time Cost: 1.033600 ms (1033600 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL2.in &amp; BELL2.out
+Expected  Input: [16]
+Expected Output: [1890207555]
+Your     Output: [1890207555]
+Time Cost: 0.819100 ms (819100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL3.in &amp; BELL3.out
+Expected  Input: [17]
+Expected Output: [1260491180]
+Your     Output: [1260491180]
+Time Cost: 0.877300 ms (877300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL4.in &amp; BELL4.out
+Expected  Input: [14]
+Expected Output: [190899322]
+Your     Output: [190899322]
+Time Cost: 0.726000 ms (726000 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL5.in &amp; BELL5.out
+Expected  Input: [13]
+Expected Output: [27644437]
+Your     Output: [27644437]
+Time Cost: 0.634700 ms (634700 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL6.in &amp; BELL6.out
+Expected  Input: [6]
+Expected Output: [203]
+Your     Output: [203]
+Time Cost: 0.676200 ms (676200 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL7.in &amp; BELL7.out
+Expected  Input: [7]
+Expected Output: [877]
+Your     Output: [877]
+Time Cost: 0.712700 ms (712700 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ √ √ √ √ √ √
+</code></pre>
+<h3 id="Solution-2-Simulation"><a href="#Solution-2-Simulation" class="headerlink" title="Solution 2 (Simulation)"></a>Solution 2 (Simulation)</h3><h4 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h4><p>这种方法通过观察<script type="math/tex">n=1,2,3 \dots</script>等<code>前几个比较简单的案例</code>，得到从<code>前一种案例</code>中<code>生成</code> <code>下一种案例的方法</code>。</p>
+<p>即该种方法<code>完全地模拟了实际的集合划分情况</code>，对<code>时间和空间</code>的消耗都比较大。</p>
+<blockquote>
+<p>可以使用<code>备忘录机制</code>，<code>滚动数组</code>，<code>更优的数据结构表示</code>等手段来进行优化。</p>
+</blockquote>
+<h4 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><pre><code class="lang-java">    public static ArrayList&lt;Integer&gt; M = new ArrayList&lt;&gt;(Arrays.asList(1, 1));
+
+    public static ArrayList&lt;Integer&gt; generateSimulateList(int n) &#123;
+
+        /* Initialize simulate list */
+        ArrayList&lt;Integer&gt; simulateList = new ArrayList&lt;&gt;(Arrays.asList(1));
+        if (n == 0) return simulateList;
+
+        /* Construct simulate list */
+        for (int k = 2; k &lt; n; k++) &#123;
+            ArrayList&lt;Integer&gt; tempList = new ArrayList&lt;&gt;();
+            int sum = 0;
+
+            for (int t : simulateList) &#123;
+                // add a (self + 1)
+                tempList.add(t + 1);
+
+                // add self amount of self
+                for (int i = 0; i &lt; t; i++) tempList.add(t);
+
+                // calc sum
+                sum += (t + 1) + (t * t);
+            &#125;
+
+            if (k == M.size()) &#123;
+                M.add(sum);
+            &#125;
+
+            simulateList = tempList;
+        &#125;
+
+        return simulateList;
+    &#125;
+
+    public static int solve(int n) &#123;
+
+        /* Generate M[] */
+        generateSimulateList(n);
+
+        /* Accumulate plans */
+        int sum = 0;
+        for (int k = 0; k &lt; n; k++) &#123;
+            sum += M.get(k);
+        &#125;
+        return sum;
+    &#125;
+</code></pre>
+<h4 id="Benchmark-1"><a href="#Benchmark-1" class="headerlink" title="Benchmark"></a>Benchmark</h4><pre><code class="lang-yaml">-----------------------------------------------------
+Current Case: BELL0.in &amp; BELL0.out
+Expected  Input: [5]
+Expected Output: [52]
+Your     Output: [52]
+Time Cost: 1.638300 ms (1638300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL1.in &amp; BELL1.out
+Expected  Input: [15]
+Expected Output: [1382958545]
+Your     Output: [1382958545]
+Time Cost: 5871.995300 ms (5871995300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL2.in &amp; BELL2.out
+Expected  Input: [16]
+Expected Output: [1890207555]
+Your     Output: []
+Skipped.
+-----------------------------------------------------
+Current Case: BELL3.in &amp; BELL3.out
+Expected  Input: [17]
+Expected Output: [1260491180]
+Your     Output: []
+Skipped.
+-----------------------------------------------------
+Current Case: BELL4.in &amp; BELL4.out
+Expected  Input: [14]
+Expected Output: [190899322]
+Your     Output: [190899322]
+Time Cost: 5377.599300 ms (5377599300 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL5.in &amp; BELL5.out
+Expected  Input: [13]
+Expected Output: [27644437]
+Your     Output: [27644437]
+Time Cost: 45.983500 ms (45983500 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL6.in &amp; BELL6.out
+Expected  Input: [6]
+Expected Output: [203]
+Your     Output: [203]
+Time Cost: 0.636100 ms (636100 ns)
+Accepted.
+-----------------------------------------------------
+Current Case: BELL7.in &amp; BELL7.out
+Expected  Input: [7]
+Expected Output: [877]
+Your     Output: [877]
+Time Cost: 0.658200 ms (658200 ns)
+Accepted.
+-----------------------------------------------------
+Result Statistics: √ √ → → √ √ √ √
+</code></pre>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/greedy/">greedy</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/c/">c</a>
+    
+        <a href="/tags/library/">library</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/pixel/">pixel</a>
+    
+        <a href="/tags/phone/">phone</a>
+    
+        <a href="/tags/magisk/">magisk</a>
+    
+        <a href="/tags/blog/">blog</a>
+    
+        <a href="/tags/wordpress/">wordpress</a>
+    
+        <a href="/tags/hexo/">hexo</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/jsp/">jsp</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+        <a href="/tags/wallpaper/">wallpaper</a>
+    
+        <a href="/tags/github/">github</a>
+    
+        <a href="/tags/shell/">shell</a>
+    
+        <a href="/tags/text/">text</a>
+    
+        <a href="/tags/read/">read</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2024 sakurawald</p>
+
+</footer>
+</body>
+</html>
