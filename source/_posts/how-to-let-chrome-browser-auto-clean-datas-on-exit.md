@@ -35,7 +35,7 @@ touch custom_policy.json
 }
 ```
 
-## Test the policy file
+### Test the policy file
 
 Open chrome browser and enter `chrome://policy`
 
