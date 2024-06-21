@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "e25a199113865066",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.6.3"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -152,7 +163,7 @@
       "templates:Insert template": false
     }
   },
-  "active": "980bfe60947f638c",
+  "active": "e25a199113865066",
   "lastOpenFiles": [
     "_posts/launch-tor-browser-without-tor-network.md",
     "_posts/make-persistent-windows-11-usb-sticker.md",

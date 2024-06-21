@@ -2,6 +2,11 @@
 title: how to let chrome browser auto clean datas on exit
 date: 2024-06-02 01:16:50
 tags:
+  - browser
+  - privacy
+  - chrome
+  - google
+  - web
 ---
 # How to let chrome browser auto clean datas on exit
 
