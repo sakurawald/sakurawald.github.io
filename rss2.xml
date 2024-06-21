@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 01 Jun 2024 21:18:04 GMT</pubDate>
+    <pubDate>Fri, 21 Jun 2024 02:38:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -35,6 +35,16 @@
       
       
       
+      
+      <category domain="https://sakurawald.github.io/tags/browser/">browser</category>
+      
+      <category domain="https://sakurawald.github.io/tags/privacy/">privacy</category>
+      
+      <category domain="https://sakurawald.github.io/tags/chrome/">chrome</category>
+      
+      <category domain="https://sakurawald.github.io/tags/google/">google</category>
+      
+      <category domain="https://sakurawald.github.io/tags/web/">web</category>
       
       
       <comments>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/#disqus_thread</comments>
