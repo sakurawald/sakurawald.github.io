@@ -22,7 +22,6 @@ tags:
 
 1. LibreOffice
 2. Acrobat Reader
-3. Obsidian
 
 ## Viewer
 
