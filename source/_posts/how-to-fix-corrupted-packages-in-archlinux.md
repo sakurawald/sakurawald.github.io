@@ -1,3 +1,10 @@
+---
+title: how to fix corrupted packages in archlinux
+date: 2024-07-12 00:22:17
+tags:
+  - linux
+---
+
 # How to fix corrupted packages in archlinux
 
 ## Problem
