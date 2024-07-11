@@ -3,6 +3,11 @@ pre {
     border: solid lightgrey 1px;
 }
 
+code:not(pre code) {
+  font-weight: bold;
+  font-style: italic;
+}
+
 img {
   max-width: 40%;
   height: auto;
