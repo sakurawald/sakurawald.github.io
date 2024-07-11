@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2024-07-11T16:00:00.122Z</updated>
+  <updated>2024-07-11T16:18:17.394Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -18,11 +18,19 @@
   
   <entry>
     <title></title>
-    <link href="https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/"/>
-    <id>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/</id>
-    <published>2024-07-11T16:00:00.122Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <link href="https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/"/>
+    <id>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</id>
+    <published>2024-07-11T16:18:17.394Z</published>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;How-to-fix-corrupted-packages-in-archlinux&quot;&gt;&lt;a href=&quot;#How-to-fix-corrupted-packages-in-archlinux&quot; class=&quot;headerlink&quot; title=&quot;How to</summary>
+        
+      
     
     
     
@@ -34,7 +42,7 @@
     <link href="https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/"/>
     <id>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</id>
     <published>2024-06-01T16:16:50.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -65,7 +73,7 @@
     <link href="https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/"/>
     <id>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</id>
     <published>2024-04-20T16:00:32.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -94,7 +102,7 @@
     <link href="https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/"/>
     <id>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</id>
     <published>2024-04-09T10:19:12.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -121,7 +129,7 @@
     <link href="https://sakurawald.github.io/posts/good-application-set/"/>
     <id>https://sakurawald.github.io/posts/good-application-set/</id>
     <published>2024-04-08T05:57:18.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -142,7 +150,7 @@
     <link href="https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/"/>
     <id>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</id>
     <published>2024-04-06T19:28:32.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -163,7 +171,7 @@
     <link href="https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/"/>
     <id>https://sakurawald.github.io/posts/rescue-system-corrupted-after-forced-shutdown-during-system-upgrade/</id>
     <published>2024-03-13T19:08:14.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -190,7 +198,7 @@
     <link href="https://sakurawald.github.io/posts/apple-magic-touch-pad-review/"/>
     <id>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</id>
     <published>2024-03-05T02:55:04.000Z</published>
-    <updated>2024-07-11T16:00:00.118Z</updated>
+    <updated>2024-07-11T16:18:17.390Z</updated>
     
     
       
@@ -225,7 +233,7 @@
     <link href="https://sakurawald.github.io/posts/text-auto-highlighter-configuration/"/>
     <id>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</id>
     <published>2023-12-31T20:48:47.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -250,7 +258,7 @@
     <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
     <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
     <published>2023-12-07T06:22:03.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -285,7 +293,7 @@
     <link href="https://sakurawald.github.io/posts/trick-to-fake-the-github-board/"/>
     <id>https://sakurawald.github.io/posts/trick-to-fake-the-github-board/</id>
     <published>2023-11-26T13:16:53.000Z</published>
-    <updated>2024-07-11T16:00:00.126Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -310,7 +318,7 @@
     <link href="https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/"/>
     <id>https://sakurawald.github.io/posts/clean-unused-chunks-in-minecraft/</id>
     <published>2023-11-26T13:14:19.000Z</published>
-    <updated>2024-07-11T16:00:00.118Z</updated>
+    <updated>2024-07-11T16:18:17.390Z</updated>
     
     
       
@@ -335,7 +343,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T20:05:28.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -358,7 +366,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T13:05:28.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -383,7 +391,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-wallpaper/"/>
     <id>https://sakurawald.github.io/posts/play-on-wallpaper/</id>
     <published>2023-04-15T00:51:57.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -406,7 +414,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-google-pixel/"/>
     <id>https://sakurawald.github.io/posts/play-on-google-pixel/</id>
     <published>2023-02-26T20:46:02.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -439,7 +447,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T21:10:35.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -466,7 +474,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T21:38:07.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -501,7 +509,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-07T23:35:54.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       
@@ -548,7 +556,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-hexo/"/>
     <id>https://sakurawald.github.io/posts/play-on-hexo/</id>
     <published>2023-01-25T04:11:58.000Z</published>
-    <updated>2024-07-11T16:00:00.122Z</updated>
+    <updated>2024-07-11T16:18:17.394Z</updated>
     
     
       

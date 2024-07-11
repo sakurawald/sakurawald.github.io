@@ -15,21 +15,29 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 11 Jul 2024 16:00:00 GMT</pubDate>
+    <pubDate>Thu, 11 Jul 2024 16:18:17 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/</link>
-      <guid>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/</guid>
-      <pubDate>Thu, 11 Jul 2024 16:00:00 GMT</pubDate>
+      <link>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</link>
+      <guid>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</guid>
+      <pubDate>Thu, 11 Jul 2024 16:18:17 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;How-to-fix-corrupted-packages-in-archlinux&quot;&gt;&lt;a href=&quot;#How-to-fix-corrupted-packages-in-archlinux&quot; class=&quot;headerlink&quot; title=&quot;How to</description>
+          
+        
       
       
       
       
       
       
-      <comments>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/#disqus_thread</comments>
+      <comments>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/#disqus_thread</comments>
       
     </item>
     
