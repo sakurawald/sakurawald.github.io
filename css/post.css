@@ -3,13 +3,6 @@ pre {
     border: solid lightgrey 1px;
 }
 
-code:not(pre code) {
-    background-color: #f4f4f4;
-    padding: 2px 4px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
 img {
   max-width: 40%;
   height: auto;
