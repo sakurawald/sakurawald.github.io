@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expression Evaluation</title>
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ol>
+<li>给定输入表达式字符串：包含 + - * / ^ ()</li>
+<li>表达式的运算使用整数运算, 小数部分向下取整.</li>
+</ol>
+<p>eg: <code>2*((11+3)*(2+3)^2)+2</code> = <code>702</code></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>表达式求值问题: 需要处理好 <code>操作数栈</code> 和 <code>操作符栈</code>, 其中 <code>操作数栈</code>只需要按照字符串的高位优先顺序逐个扫描入栈即可，而 <code>操作符栈</code> 需要正确处理 <code>操作符的优先级</code>，未来扫描到的 <code>操作符</code> 有可能对之前的 <code>操作符</code> 产生影响。（因此，递归解法思路是清晰的。）</p>
+<p>逆波兰表达式的递归解法: 利用 <code>隐含的函数调用栈</code> 来处理 <code>操作符优先级</code> ，将表达式的各个部分均视为大大小小的 <code>token</code> , 如 <code>(3+6/2)</code> 和 <code>100</code> 均可以视为1个 <code>token</code> .</p>
+<p>关于 <code>操作符的优先级</code> , 在处理 <code>4*3^2</code> 时, 我们仍按照 <code>字符串的高位优先</code> 规则来进行扫描。</p>
+<p>每一个 <code>token_value()函数调用栈</code> 包含 <code>1个 操作符或操作数</code></p>
+<p>在 <code>递归的自顶向下过程完成时</code> , 我们扫描读入了 <code>整个表达式</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/68747470733a2f2f692e6c6f6c692e6e65742f323032312f30392f31332f5448426846436d573441373178506e2e706e67" alt="image-20210913083454343"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/5d7BXZAumQFCx3p.png" alt="image-20210913083434355"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mLDihEPNRXAy7dc.png" alt="image-20210913083422195"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/eiVE6UL8csyO7Gh.png" alt="image-20210913083413587"></p>
+<p>紧接着, 在 <code>递归的自低向上过程中</code>, 我们会逐个计算 <code>表达式的各个部分</code>, 并且把 <code>表达式部分的计算结果</code> 重新代入 <code>表达式中</code><br>根据 <code>递归时隐含的函数调用栈 所对应的 运算符优先级</code>, 我们成功让 <code>操作数3</code> 正确地与 <code>操作数2</code> 进行 <code>^运算</code>,</p>
+<p>而不是错误地与 <code>操作数4</code> 进行 <code>*运算</code> (尽管我们先扫描到 <code>操作数4</code> 和 <code>运算符*</code>)</p>
+<p>接下来，只需要逐步地完成 <code>递归的自底向上过程</code>即可完成 <code>整个表达式的计算</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/iKPhAnIMXRBGa2o.png" alt="image-20210913084252456"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/mBJF6lLQ3O8t2Ta.png" alt="image-20210913084327047"><br><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/bGZhmOFCeKzBxNd.png" alt="image-20210913084349590"></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/9XWkBJefOLPhzM5.png" alt="image-20210913084412029"></p>
+<p>最终完成 <code>整个表达式的计算</code></p>
+<p><img src="https://raw.githubusercontent.com/SakuraWald/sakurawald.github.io/main/images/AJ58qBaHNheuPlc.png" alt="image-20210913084552868"></p>
+<h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><pre><code>#include &lt;iostream&gt;
+#include &lt;math.h&gt;
+using namespace std;
+
+typedef int number;
+number token_value(int priority) &#123;
+    number res;
+    if (priority == 0) &#123;
+        res = 0;
+        char c = cin.peek();
+        if (c == &#39;(&#39;) &#123;
+            cin.get(); // get (
+            res = token_value(3); // as a new expression
+            cin.get();  // get )
+        &#125; 
+        while (isdigit(c)) &#123; // read a num
+            res = (10 * res) + (c % 48); // Nice Try.
+            cin.get(); // get digit
+            c = cin.peek();
+        &#125;
+    &#125; else &#123;
+        res = token_value(priority - 1);
+        while (true) &#123;
+            char op = cin.peek();
+            if (priority == 1 &amp;&amp; op == &#39;^&#39;) &#123;
+                cin.get(); // get ^
+                number val = token_value(priority - 1);
+                res = round(pow(res, val));
+            &#125; else if (priority == 2 &amp;&amp; (op == &#39;*&#39; || op == &#39;/&#39;)) &#123;
+                cin.get(); // get * or /
+                number val = token_value(priority - 1);
+                op == &#39;*&#39; ? res *= val : res /= val;
+            &#125; else if (priority == 3 &amp;&amp; (op == &#39;+&#39; || op == &#39;-&#39;)) &#123;
+                cin.get(); // get + or -
+                number val = token_value(priority - 1);
+                op == &#39;+&#39; ? res += val : res -= val;
+            &#125; else break;
+       &#125;
+   &#125;
+    return res;
+&#125;
+
+int main() &#123;
+    cout &lt;&lt; token_value(3);
+    return 0;
+&#125;
+</code></pre><h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><pre><code>#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+map&lt;char, int&gt; priority_map&#123;&#123;'+', 1&#125;,
+                            &#123;'-', 1&#125;,
+                            &#123;'*', 2&#125;,
+                            &#123;'/', 2&#125;,
+                            &#123;'^', 3&#125;&#125;;
+typedef int number;
+stack&lt;number&gt; nums;
+stack&lt;char&gt; ops;
+
+void eval() &#123;
+  number num2 = nums.top(); nums.pop();
+  number num1 = nums.top(); nums.pop();
+  char op = ops.top(); ops.pop();
+
+  if (op == &#39;+&#39;) nums.push(num1 + num2);
+  if (op == &#39;-&#39;) nums.push(num1 - num2);
+  if (op == &#39;*&#39;) nums.push(num1 * num2);
+  if (op == &#39;/&#39;) nums.push(num1 / num2);
+  if (op == &#39;^&#39;) nums.push(round(pow(num1, num2)));
+&#125;
+
+int main() &#123;
+  /* Trans InOrderExpr to PostOrderExpr */
+  while (cin.peek() != &#39;\n&#39;) &#123;
+    // get digit.
+    if (isdigit(cin.peek())) &#123;
+      number num = 0;
+      while (isdigit(cin.peek())) &#123;
+        num = (num * 10) + cin.peek() % 48;
+        cin.get();
+      &#125;
+      nums.push(num);
+    &#125; else &#123;
+      // get operators.
+      if (cin.peek() == &#39;(&#39;) &#123;
+        ops.push(cin.peek()); // push (
+        cin.get(); // get (
+      &#125; else if (cin.peek() == &#39;)&#39;) &#123;
+        while (ops.top() != &#39;(&#39;) eval();
+        ops.pop(); // pop (
+        cin.get(); // get )
+      &#125; else &#123;
+        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();
+        ops.push(cin.peek());
+        cin.get(); // get operator
+      &#125;
+    &#125;
+  &#125;
+
+  /* Calc PostorderExpr */
+  while (!ops.empty()) eval();
+
+  /* Output */
+  cout &lt;&lt; nums.top();
+&#125;
+</code></pre>
+    </article>
+</main>
+<footer>
+    <hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/greedy/">greedy</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/c/">c</a>
+    
+        <a href="/tags/library/">library</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/pixel/">pixel</a>
+    
+        <a href="/tags/phone/">phone</a>
+    
+        <a href="/tags/magisk/">magisk</a>
+    
+        <a href="/tags/blog/">blog</a>
+    
+        <a href="/tags/wordpress/">wordpress</a>
+    
+        <a href="/tags/hexo/">hexo</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/jsp/">jsp</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/wallpaper/">wallpaper</a>
+    
+        <a href="/tags/text/">text</a>
+    
+        <a href="/tags/read/">read</a>
+    
+        <a href="/tags/github/">github</a>
+    
+        <a href="/tags/shell/">shell</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2024 sakurawald</p>
+
+</footer>
+</body>
+</html>

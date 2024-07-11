@@ -15,8 +15,23 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 11 Jul 2024 09:20:44 GMT</pubDate>
+    <pubDate>Thu, 11 Jul 2024 16:00:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title></title>
+      <link>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/</link>
+      <guid>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/</guid>
+      <pubDate>Thu, 11 Jul 2024 16:00:00 GMT</pubDate>
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-corrupted-packages-in-archlinux/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>how to let chrome browser auto clean datas on exit</title>
@@ -594,34 +609,6 @@
       
       
       <comments>https://sakurawald.github.io/posts/play-on-hexo/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>[Database] Design</title>
-      <link>https://sakurawald.github.io/posts/database-design/</link>
-      <guid>https://sakurawald.github.io/posts/database-design/</guid>
-      <pubDate>Sun, 22 Jan 2023 12:01:39 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Database-Design&quot;&gt;&lt;a href=&quot;#Database-Design&quot; class=&quot;headerlink&quot; title=&quot;Database Design&quot;&gt;&lt;/a&gt;Database Design&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-design/#disqus_thread</comments>
       
     </item>
     
