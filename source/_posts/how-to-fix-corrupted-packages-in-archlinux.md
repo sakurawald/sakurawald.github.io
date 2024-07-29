@@ -40,7 +40,7 @@ And all the corrupted packages are in `packages.txt`
 First, we need to update the keyring inside `living os` using `pacman -Sy archlinux-keyring` to resolve the outdated gpg keys.
 Then, you can use `pacman --root /mnt -S $(< packages.txt)` to re-install all the corrupted packages.
 
->> If you need to modify mirrorlist, then you should modify the mirrorlist in `living os`, and use `pacman -Syy` to update databse.
+> If you need to modify mirrorlist, then you should modify the mirrorlist in `living os`, and use `pacman -Syy` to update databse.
 
 ### Chroot into the host-os and do a fully-package upgrade again
 
