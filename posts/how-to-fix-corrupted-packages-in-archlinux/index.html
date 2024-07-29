@@ -32,9 +32,7 @@ grep -v &quot;error&quot; collect_packages.txt &gt; packages.txt
 </code></pre><p>And all the corrupted packages are in <code>packages.txt</code></p>
 <h3 id="Fix-the-pacman-inside-host-os"><a href="#Fix-the-pacman-inside-host-os" class="headerlink" title="Fix the pacman inside host-os"></a>Fix the <code>pacman</code> inside <code>host-os</code></h3><p>First, we need to update the keyring inside <code>living os</code> using <code>pacman -Sy archlinux-keyring</code> to resolve the outdated gpg keys.<br>Then, you can use <code>pacman --root /mnt -S $(&lt; packages.txt)</code> to re-install all the corrupted packages.</p>
 <blockquote>
-<blockquote>
 <p>If you need to modify mirrorlist, then you should modify the mirrorlist in <code>living os</code>, and use <code>pacman -Syy</code> to update databse.</p>
-</blockquote>
 </blockquote>
 <h3 id="Chroot-into-the-host-os-and-do-a-fully-package-upgrade-again"><a href="#Chroot-into-the-host-os-and-do-a-fully-package-upgrade-again" class="headerlink" title="Chroot into the host-os and do a fully-package upgrade again"></a>Chroot into the host-os and do a fully-package upgrade again</h3><p>You need to chroot into the host-os using <code>arch-chroot /mnt</code><br>And issue <code>pacman -Syu</code> to upgrade all packages.<br>If pacman says “there is nothing to do”, then it done.</p>
 <h3 id="Fix-the-bootloader"><a href="#Fix-the-bootloader" class="headerlink" title="Fix the bootloader"></a>Fix the bootloader</h3><p>To fix the bootloader</p>
@@ -56,8 +54,6 @@ pacman -S linux
 <p>See tags:
     
         <a href="/tags/algorithm/">algorithm</a>
-    
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/greedy/">greedy</a>
     
@@ -85,9 +81,11 @@ pacman -S linux
     
         <a href="/tags/note/">note</a>
     
-        <a href="/tags/database/">database</a>
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
     
         <a href="/tags/os/">os</a>
     
@@ -127,17 +125,17 @@ pacman -S linux
     
         <a href="/tags/android/">android</a>
     
-        <a href="/tags/pixel/">pixel</a>
-    
-        <a href="/tags/phone/">phone</a>
-    
-        <a href="/tags/magisk/">magisk</a>
-    
         <a href="/tags/emulator/">emulator</a>
     
         <a href="/tags/practice/">practice</a>
     
         <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/pixel/">pixel</a>
+    
+        <a href="/tags/phone/">phone</a>
+    
+        <a href="/tags/magisk/">magisk</a>
     
         <a href="/tags/blog/">blog</a>
     
@@ -177,19 +175,19 @@ pacman -S linux
     
         <a href="/tags/editor/">editor</a>
     
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
         <a href="/tags/wallpaper/">wallpaper</a>
-    
-        <a href="/tags/text/">text</a>
-    
-        <a href="/tags/read/">read</a>
     
         <a href="/tags/github/">github</a>
     
         <a href="/tags/shell/">shell</a>
     
-        <a href="/tags/stl/">stl</a>
+        <a href="/tags/text/">text</a>
     
-        <a href="/tags/cpp/">cpp</a>
+        <a href="/tags/read/">read</a>
     
 </p>
 
