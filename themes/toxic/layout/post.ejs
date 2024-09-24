@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= page.title %></title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    <%- css('css/post.css') %>
+</head>
+<body>
+<main>
+    <article>
+        <%- page.content %>
+    </article>
+</main>
+<footer>
+    <%- include footer.ejs %>
+</footer>
+</body>
+</html>

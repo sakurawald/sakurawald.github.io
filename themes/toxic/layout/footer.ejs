@@ -1,0 +1,12 @@
+<hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="<%- config.root %>">homepage</a>
+</p>
+<p>See tags:
+    <% site.tags.each(function(tag, path){ %>
+        <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+    <% }); %>
+</p>
+
+<p>Copyright &copy; 2020-<%= new Date().getFullYear() %> <%= config.author %></p>

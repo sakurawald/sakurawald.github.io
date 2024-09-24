@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= config.title %></title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+</head>
+<body>
+<header>
+    <p>== post ==</p>
+</header>
+<main>
+    <% page.posts.each(function(post){ %>
+        <article>
+            <p><%= post.date.format('MMMM DD, YYYY') %>
+                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+            </p>
+        </article>
+    <% }); %>
+</main>
+<footer>
+    <% include footer.ejs %>
+</footer>
+</body>
+</html>
