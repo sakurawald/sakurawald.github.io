@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>sakurawald&#39;s blog</title>
+    <link>https://sakurawald.github.io/</link>
+    
+    <image>
+      <url>https://sakurawald.github.io/favicon.ico</url>
+      <title>sakurawald&#39;s blog</title>
+      <link>https://sakurawald.github.io/</link>
+    </image>
+    
+    <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Tue, 24 Sep 2024 02:59:44 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>how to fix corrupted packages in archlinux</title>
+      <link>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</link>
+      <guid>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</guid>
+      <pubDate>Thu, 11 Jul 2024 15:22:17 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;How-to-fix-corrupted-packages-in-archlinux&quot;&gt;&lt;a href=&quot;#How-to-fix-corrupted-packages-in-archlinux&quot; class=&quot;headerlink&quot; title=&quot;How to</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>how to let chrome browser auto clean datas on exit</title>
+      <link>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</link>
+      <guid>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</guid>
+      <pubDate>Sat, 01 Jun 2024 16:16:50 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;&gt;&lt;a href=&quot;#How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/browser/">browser</category>
+      
+      <category domain="https://sakurawald.github.io/tags/privacy/">privacy</category>
+      
+      <category domain="https://sakurawald.github.io/tags/chrome/">chrome</category>
+      
+      <category domain="https://sakurawald.github.io/tags/google/">google</category>
+      
+      <category domain="https://sakurawald.github.io/tags/web/">web</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>make persistent windows 11 usb sticker</title>
+      <link>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</link>
+      <guid>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</guid>
+      <pubDate>Sat, 20 Apr 2024 16:00:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Make-persistent-windows-11-usb-sticker&quot;&gt;&lt;a href=&quot;#Make-persistent-windows-11-usb-sticker&quot; class=&quot;headerlink&quot; title=&quot;Make persistent</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/wtg/">wtg</category>
+      
+      <category domain="https://sakurawald.github.io/tags/boot/">boot</category>
+      
+      <category domain="https://sakurawald.github.io/tags/usb/">usb</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>pin refresh rate of an android phone</title>
+      <link>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</link>
+      <guid>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</guid>
+      <pubDate>Tue, 09 Apr 2024 10:19:12 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Pin-refresh-rate-of-an-android-phone&quot;&gt;&lt;a href=&quot;#Pin-refresh-rate-of-an-android-phone&quot; class=&quot;headerlink&quot; title=&quot;Pin refresh rate of</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/android/">#android</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emulator/">#emulator</category>
+      
+      <category domain="https://sakurawald.github.io/tags/root/">root</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>good application set</title>
+      <link>https://sakurawald.github.io/posts/good-application-set/</link>
+      <guid>https://sakurawald.github.io/posts/good-application-set/</guid>
+      <pubDate>Mon, 08 Apr 2024 05:57:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Good-Application-Set&quot;&gt;&lt;a href=&quot;#Good-Application-Set&quot; class=&quot;headerlink&quot; title=&quot;Good Application Set&quot;&gt;&lt;/a&gt;Good Application</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/good-application-set/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>launch tor browser without tor network</title>
+      <link>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</link>
+      <guid>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</guid>
+      <pubDate>Sat, 06 Apr 2024 19:28:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Launch-Tor-Browser-without-Tor-Network&quot;&gt;&lt;a href=&quot;#Launch-Tor-Browser-without-Tor-Network&quot; class=&quot;headerlink&quot; title=&quot;Launch Tor</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>rescue a corrupted system after forced shutdown during system upgrade</title>
+      <link>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</link>
+      <guid>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</guid>
+      <pubDate>Wed, 13 Mar 2024 19:08:14 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Rescue-the-system-from-forced-shutdown&quot;&gt;&lt;a href=&quot;#Rescue-the-system-from-forced-shutdown&quot; class=&quot;headerlink&quot; title=&quot;Rescue the</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>apple magic touch pad review</title>
+      <link>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</link>
+      <guid>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</guid>
+      <pubDate>Tue, 05 Mar 2024 02:55:04 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Apple-Magic-Touchpad-Review&quot;&gt;&lt;a href=&quot;#Apple-Magic-Touchpad-Review&quot; class=&quot;headerlink&quot; title=&quot;Apple Magic Touchpad</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/review/">review</category>
+      
+      <category domain="https://sakurawald.github.io/tags/apple/">apple</category>
+      
+      <category domain="https://sakurawald.github.io/tags/evil/">evil</category>
+      
+      <category domain="https://sakurawald.github.io/tags/touchpad/">touchpad</category>
+      
+      <category domain="https://sakurawald.github.io/tags/device/">device</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/productivity/">productivity</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>text auto highlighter configuration</title>
+      <link>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</link>
+      <guid>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</guid>
+      <pubDate>Sun, 31 Dec 2023 20:48:47 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Text-Highlighter-Configuration&quot;&gt;&lt;a href=&quot;#Text-Highlighter-Configuration&quot; class=&quot;headerlink&quot; title=&quot;Text Highlighter</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/text/">text</category>
+      
+      <category domain="https://sakurawald.github.io/tags/read/">read</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>guide to install qubes on qemu</title>
+      <link>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</link>
+      <guid>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</guid>
+      <pubDate>Thu, 07 Dec 2023 06:22:03 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Guide-to-install-qubes-on-qemu&quot;&gt;&lt;a href=&quot;#Guide-to-install-qubes-on-qemu&quot; class=&quot;headerlink&quot; title=&quot;Guide to install qubes on</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/security/">security</category>
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
+      <category domain="https://sakurawald.github.io/tags/qemu/">qemu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kvm/">kvm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on minecraft server configuration</title>
+      <link>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</guid>
+      <pubDate>Sun, 30 Apr 2023 20:05:28 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;A-Discussion-About-Minecraft-Server-Configurations&quot;&gt;&lt;a href=&quot;#A-Discussion-About-Minecraft-Server-Configurations&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/minecraft/">minecraft</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on kde</title>
+      <link>https://sakurawald.github.io/posts/play-on-kde/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-kde/</guid>
+      <pubDate>Wed, 26 Apr 2023 13:05:28 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;KDE使用偏好&quot;&gt;&lt;a href=&quot;#KDE使用偏好&quot; class=&quot;headerlink&quot; title=&quot;KDE使用偏好&quot;&gt;&lt;/a&gt;KDE使用偏好&lt;/h1&gt;&lt;h2 id=&quot;保持桌面的整潔&quot;&gt;&lt;a href=&quot;#保持桌面的整潔&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-kde/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on vim</title>
+      <link>https://sakurawald.github.io/posts/play-on-vim/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-vim/</guid>
+      <pubDate>Thu, 23 Feb 2023 21:10:35 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Vim-Cheat-Sheet&quot;&gt;&lt;a href=&quot;#Vim-Cheat-Sheet&quot; class=&quot;headerlink&quot; title=&quot;Vim Cheat-Sheet&quot;&gt;&lt;/a&gt;Vim Cheat-Sheet&lt;/h1&gt;&lt;h2 id=&quot;Gallery&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      <category domain="https://sakurawald.github.io/tags/vim/">vim</category>
+      
+      <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-vim/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on android emulator</title>
+      <link>https://sakurawald.github.io/posts/play-on-android-emulator/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-android-emulator/</guid>
+      <pubDate>Tue, 21 Feb 2023 21:38:07 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Android-solutions-for-linux&quot;&gt;&lt;a href=&quot;#Android-solutions-for-linux&quot; class=&quot;headerlink&quot; title=&quot;Android solutions for</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      <category domain="https://sakurawald.github.io/tags/android/">android</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
+      
+      <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
+      
+      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-android-emulator/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on stable-diffusion</title>
+      <link>https://sakurawald.github.io/posts/play-on-stable-diffusion/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-stable-diffusion/</guid>
+      <pubDate>Tue, 07 Feb 2023 23:35:54 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Play-on-Stable-Diffusion&quot;&gt;&lt;a href=&quot;#Play-on-Stable-Diffusion&quot; class=&quot;headerlink&quot; title=&quot;Play on Stable-Diffusion&quot;&gt;&lt;/a&gt;Play on</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
+      
+      <category domain="https://sakurawald.github.io/tags/ai/">ai</category>
+      
+      <category domain="https://sakurawald.github.io/tags/gpt/">gpt</category>
+      
+      <category domain="https://sakurawald.github.io/tags/diffusion/">diffusion</category>
+      
+      <category domain="https://sakurawald.github.io/tags/art/">art</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cg/">cg</category>
+      
+      <category domain="https://sakurawald.github.io/tags/novel-ai/">novel_ai</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cuda/">cuda</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
+      
+      <category domain="https://sakurawald.github.io/tags/python/">python</category>
+      
+      <category domain="https://sakurawald.github.io/tags/computation/">computation</category>
+      
+      <category domain="https://sakurawald.github.io/tags/anime/">anime</category>
+      
+      <category domain="https://sakurawald.github.io/tags/draw/">draw</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-stable-diffusion/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>database schema design</title>
+      <link>https://sakurawald.github.io/posts/database-schema-design/</link>
+      <guid>https://sakurawald.github.io/posts/database-schema-design/</guid>
+      <pubDate>Sun, 22 Jan 2023 12:01:39 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Database-Design&quot;&gt;&lt;a href=&quot;#Database-Design&quot; class=&quot;headerlink&quot; title=&quot;Database Design&quot;&gt;&lt;/a&gt;Database Design&lt;/h1&gt;
+$$
+&#92;boxed{@}
+%</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/database/">database</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/database-schema-design/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>play on anbox</title>
+      <link>https://sakurawald.github.io/posts/play-on-anbox/</link>
+      <guid>https://sakurawald.github.io/posts/play-on-anbox/</guid>
+      <pubDate>Thu, 09 Jun 2022 08:41:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Install-and-Launch-Anbox&quot;&gt;&lt;a href=&quot;#Install-and-Launch-Anbox&quot; class=&quot;headerlink&quot; title=&quot;Install and Launch Anbox&quot;&gt;&lt;/a&gt;Install and</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/android/">android</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>database relational query language</title>
+      <link>https://sakurawald.github.io/posts/database-relational-query-language/</link>
+      <guid>https://sakurawald.github.io/posts/database-relational-query-language/</guid>
+      <pubDate>Sat, 30 Apr 2022 01:53:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>
+
+&lt;h1&gt;Formal RQL&lt;/h1&gt;
+&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/database/">database</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/database-relational-query-language/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>database advanced sql</title>
+      <link>https://sakurawald.github.io/posts/database-advanced-sql/</link>
+      <guid>https://sakurawald.github.io/posts/database-advanced-sql/</guid>
+      <pubDate>Fri, 29 Apr 2022 12:35:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Advanced-SQL&quot;&gt;&lt;a href=&quot;#Advanced-SQL&quot; class=&quot;headerlink&quot; title=&quot;Advanced SQL&quot;&gt;&lt;/a&gt;Advanced SQL&lt;/h1&gt;
+$$
+&#92;boxed{@}
+% Color</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/database/">database</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/database-advanced-sql/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>database intermediate sql</title>
+      <link>https://sakurawald.github.io/posts/database-intermediate-sql/</link>
+      <guid>https://sakurawald.github.io/posts/database-intermediate-sql/</guid>
+      <pubDate>Fri, 29 Apr 2022 07:39:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Intermediate-SQL&quot;&gt;&lt;a href=&quot;#Intermediate-SQL&quot; class=&quot;headerlink&quot; title=&quot;Intermediate SQL&quot;&gt;&lt;/a&gt;Intermediate SQL&lt;/h1&gt;
+$$
+&#92;boxed{@}
+%</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/database/">database</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/database-intermediate-sql/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>database advanced sql</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Advanced-SQL"><a href="#Advanced-SQL" class="headerlink" title="Advanced SQL"></a>Advanced SQL</h1>
+$$
+\boxed{@}
+% Color %
+\newcommand\c[2]{\textcolor{#1}{#2}}
+\newcommand\r[1]{\textcolor{red}{#1}}
+\newcommand\g[1]{\textcolor{green}{#1}}
+\newcommand\b[1]{\textcolor{blue}{#1}}
+\newcommand\red[1]{\textcolor{red}{#1}}
+\newcommand\blue[1]{\textcolor{blue}{#1}}
+\newcommand\green[1]{\textcolor{green}{#1}}
+\newcommand\black[1]{\textcolor{black}{#1}}
+\newcommand\white[1]{\textcolor{white}{#1}}
+\newcommand\cyan[1]{\textcolor{cyan}{#1}}
+\newcommand\magenta[1]{\textcolor{magenta}{#1}}
+\newcommand\yellow[1]{\textcolor{yellow}{#1}}
+\newcommand\orange[1]{\textcolor{orange}{#1}}
+\newcommand\lime[1]{\textcolor{lime}{#1}}
+\newcommand\pink[1]{\textcolor{pink}{#1}}
+\newcommand\darkgray[1]{\textcolor{darkgray}{#1}}
+\newcommand\gray[1]{\textcolor{gray}{#1}}
+\newcommand\lightgray[1]{\textcolor{lightgray}{#1}}
+\newcommand\brown[1]{\textcolor{brown}{#1}}
+\newcommand\olive[1]{\textcolor{olive}{#1}}
+\newcommand\purple[1]{\textcolor{purple}{#1}}
+\newcommand\teal[1]{\textcolor{teal}{#1}}
+\newcommand\violet[1]{\textcolor{violet}{#1}}
+\newcommand\hotpink[1]{\textcolor{hotpink}{#1}}
+\newcommand\blueviolet[1]{\textcolor{blueviolet}{#1}}
+\newcommand\navyblue[1]{\textcolor{navyblue}{#1}}
+\newcommand\peach[1]{\textcolor{Peach}{#1}}
+\newcommand\orangeRed[1]{\textcolor{OrangeRed}{#1}}
+\newcommand\salmon[1]{\textcolor{Salmon}{#1}}
+\newcommand\skyblue[1]{\textcolor{SkyBlue}{#1}}
+\newcommand\springreen[1]{\textcolor{SpringGreen}{#1}}
+\newcommand\aqua[1]{\textcolor{aqua}{#1}}
+\newcommand\navy[1]{\textcolor{navy}{#1}}
+\newcommand\silver[1]{\textcolor{silver}{#1}}
+\newcommand\fuchsia[1]{\textcolor{fuchsia}{#1}}
+\newcommand\maroon[1]{\textcolor{maroon}{#1}}
+\definecolor{luo}{RGB}{102,204,255}
+\definecolor{miku}{RGB}{57,197,187} 
+\newcommand\luo[1]{\textcolor{luo}{#1}}
+\newcommand\miku[1]{\textcolor{miku}{#1}}
+
+% Typography %
+\newcommand\a[1]{\begin{aligned}#1\end{aligned}}
+\newcommand\t[1]{\text{#1}}
+\newcommand\tb[1]{\text{\textcolor{blue}{#1}}}
+\newcommand\lb[1]{\left\{\begin{aligned} #1 \end{aligned}\right.}
+\newcommand\lrb[1]{\lb{\rb{#1}}}
+\newcommand\rb[1]{\left.\begin{aligned} #1 \end{aligned}\right\}}
+\newcommand\env[2]{\begin{#1}#2\end{#1}}
+\newcommand\step[1]{\textbf{ (#1) }}
+
+% Misc %
+\newcommand\s[1]{\{#1\}}
+\newcommand\qed{\quad\square}
+\newcommand\define{\dot{=}}
+\newcommand\then{\implies}
+\newcommand\rounddown[1]{\lfloor{#1}\rfloor}
+\newcommand\roundup[1]{\lceil{#1}\rceil}
+\newcommand\graph[4]{#1 = (#2, #3) \quad |#2| = #4}
+\newcommand\G{G = (V, E) \quad |V| = n}
+\newcommand\so{\therefore}
+\newcommand\comment[1]{\quad\text{(#1)}}
+\newcommand\note[1]{\quad\text{(#1)}}
+\newcommand\bt[1]{\boxed{\text{#1}}}
+\newcommand\max[1]{\textbf{ max } \{#1\} }
+\newcommand\min[1]{\textbf{ min } \{#1\} }
+\newcommand\IF{\textbf{ IF }}
+\newcommand\if{\textbf{ if }}
+\newcommand\IS{\textbf{ IS }}
+\newcommand\is{\textbf{ is }}
+\newcommand\do{\textbf{ do }}
+\newcommand\dowhile{\textbf{ do while }}
+\newcommand\dountil{\textbf{ do until }}
+\newcommand\find{\textbf{ find }}
+\newcommand\until{\textbf{ until }}
+\newcommand\thereisa{\textbf{ There is a }}
+\newcommand\thereisan{\textbf{ There is an }}
+\newcommand\hasno{\textbf{ has no }}
+\newcommand\has{\textbf{ has }}
+\newcommand\but{\textbf{ but }}
+\newcommand\however{\textbf{ however }}
+\newcommand\AND{\textbf{ AND }}
+\newcommand\OR{\textbf{ OR }}
+\newcommand\NOT{\textbf{ NOT }}
+\newcommand\THEN{\textbf{ THEN }}
+\newcommand\IN{\textbf{ in }}
+\newcommand\NOTIN{\textbf{ NOT-IN }}
+\newcommand\assume{\textbf{ Assuming that: }}
+\newcommand\contradictory{\textbf{ Thus lead to contradiction }}
+\newcommand\proof{\textbf{Proof: }}
+\newcommand\st{\textbf{ such that }}
+\newcommand\hold{\text{ holds }}
+\newcommand\lhs{\text{ LHS }}
+\newcommand\rhs{\text{ RHS }}
+\newcommand\wlg{\text{ Without loss of generality }}
+\newcommand\nb{\text{ nota bene }}
+\newcommand\analogously{\text{ analogously }}
+\newcommand\viceversa{\textbf{ viceversa }}
+\newcommand\let{\textbf{ let }}
+\newcommand\as{\textbf{ as }}
+\newcommand\for{\textbf{ As for }}
+\newcommand\select{\textbf{ SELECT }}
+\newcommand\m[1]{\mathit{#1}}
+\newcommand\+[1]{\mathcal{#1}}
+\newcommand\warnning[1]{\colorbox{Blue}{\textcolor{Yellow}{#1}}}
+\newcommand\error[1]{\colorbox{Black}{\textcolor{White}{#1}}}
+$$
+
+
+<h2 id="Access-DB-From-PL"><a href="#Access-DB-From-PL" class="headerlink" title="Access DB From PL"></a>Access DB From PL</h2><p>通過 <code>編程語言 (Programming Language)</code>  <code>訪問</code> <code>數據庫</code> 的方式：</p>
+<ul>
+<li><code>動態SQL</code>：使用 <code>數據庫API</code> 來連接 <code>數據庫</code><ul>
+<li>JDBC</li>
+<li>ODBC</li>
+<li>ADO.NET</li>
+</ul>
+</li>
+<li><code>嵌入式SQL</code>：可以將 <code>SQL語句</code> 嵌入到 <code>宿主語言</code> 中，通過 <code>預處理器</code> 對 <code>嵌入宿主語言的SQL</code> 進行 <code>轉化</code>。</li>
+</ul>
+<hr>
+<p>這裏簡單地討論幾點 <code>JDBC</code> 的內容。</p>
+<ul>
+<li><p>主要涉及的對象：<code>Connection</code>，<code>Statement</code>，<code>ResultSet</code></p>
+</li>
+<li><p><code>JDBC</code> 並不是僅僅支持 <code>MySQL</code> 的，它可以 <code>指定</code> 用於 <code>建立數據庫連接</code> 的 <code>數據庫通信的API</code>：如 <code>jdbc:mysql</code>，<code>jdbc:oracle</code> 等來連接 <code>多種類型的數據庫</code></p>
+<blockquote>
+<p>更準確地說，<code>JDBC</code> 僅 <code>指定通信所用的API</code>，而不是 <code>指定通信所用的協議</code>。因為一個<code>JDBC驅動器</code> 可能同時支持 <code>多種數據庫通信協議</code></p>
+</blockquote>
+</li>
+<li><p><code>Statement</code> 並不是 <code>SQL語句對象</code>本身，但可以用 <code>Statement</code> 來 <code>執行語句</code></p>
+</li>
+<li>使用 <code>PreparedStatement</code> 而不是 <code>拼接字符串的方式</code> 來 <code>構造SQL語句</code>！</li>
+<li><code>數據庫</code> 返回的 <code>ResultSet</code> 不僅僅包含 <code>元組數據</code>，還包含許多 <code>元數據</code>。在需要時使用 <code>ResultSet#getMetaData</code> 獲得 <code>元數據</code>，而不是 <code>硬編碼</code> 它們！</li>
+<li>對 <code>Updatable Result Set</code> 的 <code>修改性操作</code> 會 <code>反映到數據庫</code></li>
+<li>如果需要將 <code>接下來的多條SQL語句作為事務</code>，而不是 <code>每條語句都被視為獨立的事務</code>，則請用 <code>Connection#setAutoCommit(false)</code></li>
+</ul>
+<h2 id="Function-and-Procedure"><a href="#Function-and-Procedure" class="headerlink" title="Function and Procedure"></a>Function and Procedure</h2><p><code>函數 (Function)</code> 和 <code>過程 (Procedure)</code> 允許 <code>業務邏輯</code> 作為 <code>存儲過程</code> 記錄在 <code>數據中</code>。</p>
+<p>這使得 <code>業務邏輯代碼</code> 是 <code>編程語言獨立</code> 和 <code>應用獨立</code> 的。</p>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ul>
+<li>一個簡單的 <code>函數</code> 的例子</li>
+</ul>
+<pre><code class="lang-sql">CREATE FUNCTION dept_count(dept_name varchar(20)) RETURNS integer
+BEGIN
+    DECLARE d_count integer
+    SELECT count(*) INTO d_count
+    FROM instructor
+    WHERE instructor.dept_name = dept_name
+    RETURN d_count
+END
+</code></pre>
+<ul>
+<li><code>帶參數的視圖 (Parameterized View)</code></li>
+</ul>
+<pre><code class="lang-sql">CREATE FUNCTION instructor_of(dept_name varchar(20)) RETURNS TABLE(ID varchar(5),
+                                                                  name varchar(20),
+                                                                  dept_name varchar(20),
+                                                                  salary numeric(8,2))
+RETURN TABLE(SELECT ID, name, dept_name, salary
+             FROM instructor
+             WHERE instructor.dept_name = instructor_of.dept_name
+            );
+</code></pre>
+<p>我們將 <code>這種函數</code> 視為 <code>廣義上的視圖</code>。</p>
+<h3 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h3><blockquote>
+<p>對於 <code>函數 (Function)</code> 和 <code>過程 (Procedure)</code> 如果做 <code>詳細區分</code>，則我們這樣定義：</p>
+<ul>
+<li>函數：帶有 <code>返回值</code></li>
+<li>過程：不帶有 <code>返回值</code></li>
+</ul>
+<p>從 <code>組成體系結構</code> 的角度看，<code>過程</code> 是比 <code>函數</code>  更加 <code>底層的概念</code></p>
+</blockquote>
+<pre><code class="lang-sql">CREATE PROCEDURE dept_count_proc(IN dept_name varchar(20), OUT d_count integer)
+BEGIN
+    SELECT count(*) INTO d_count
+    FROM instructor
+    WHERE instructor.dept_name = dept_count_proc.dept_name
+END
+</code></pre>
+<blockquote>
+<p><code>IN</code> 表示 <code>輸入參數</code>，而 <code>OUT 表示輸出參數</code>。</p>
+<p>這種形式的 <code>傳參方式</code> 在某些 <code>底層接口調用</code> 中常見。其中 <code>OUT</code> 經常傳遞的是 <code>指針類型</code>，以便 <code>調用者</code> 可以通過 <code>變量</code> 來 <code>接收</code> 到 <code>過程的結果</code> </p>
+</blockquote>
+<h3 id="Persistent-Storage-Module"><a href="#Persistent-Storage-Module" class="headerlink" title="Persistent Storage Module"></a>Persistent Storage Module</h3><p><code>持久存儲模塊 (Persistent Storage Module)</code> ：用於處理 <code>構造</code> </p>
+<p>這裏不詳細討論 <code>PSM</code> 的 <code>語法</code>，只給出一個 <code>大號的例子</code></p>
+<pre><code class="lang-sql">DECLARE out_of_classroom_seats CONDITION
+DECLARE EXIT HANDLER FOR out_of_classroom_seats
+BEGIN
+    sequence of statements
+END
+
+CREATE FUNCTION registerStudnet(
+    IN s_id varchar(5),
+    IN s_courseid varchar(8),
+    IN s_secid varchar(8),
+    IN s_semester varchar(6),
+    IN s_year numeric(4,0),
+    OUT errorMsg varchar(100)
+    RETURNS integer
+BEGIN
+    DECLARE currEnrol int;
+    SELECT count(*) INTO currEnrol
+    FROM takes
+    WHERE course_id = s_courseid AND sec_id = s_secid
+    AND semester = s_semester AND year = s_year;
+
+    DECLARE limit int;
+    SELECT capacity INTO limit
+    FROM capacity NATURAL JOIN section
+    WHERE course_id = s_courseid AND sec_id = s_secid
+    AND semester = s_semester AND year = s_year;
+
+    IF (currEnrol &lt; limit) 
+        BEGIN
+            INSERT INTO takes VALUES (s_id, s_courseid, s_secid, s_semester, s_year, null);
+            RETURN(0);
+        END
+    -- capacity overflow !
+    SET errorMsg = &#39;Enrollment limit reached for course&#39; || s_courseid || &#39;section&#39; || s_secid;
+    RETURN(-1);
+END    
+)
+</code></pre>
+<h3 id="External-Language-Procedure"><a href="#External-Language-Procedure" class="headerlink" title="External Language Procedure"></a>External Language Procedure</h3><p><code>數據庫</code> 可以將 <code>過程</code> 委托給 <code>外部語言程序</code> 來執行，像這樣的 <code>過程</code> 稱作 <code>外部語言過程</code></p>
+<pre><code class="lang-sql">CREATE PROCEDURE dept_count_proc(IN dept_name varchar(20), OUT count integer)
+LANGUAGE C
+EXTERNAL NAME &#39;/usr/avi/bin/dept_course_proc&#39;
+</code></pre>
+<blockquote>
+<p>如果為了 <code>性能</code> 而將 <code>任務</code> 委托給 <code>C</code> 這樣的語言，可能會導致 <code>安全問題</code>。</p>
+<p>而如果委托給 <code>Java</code>，<code>C#</code> 這樣的語言，通過 <code>進程間通信</code> 和 <code>沙盒執行</code> 則會導致 <code>效率低下</code>。</p>
+<p>此外，編寫能 <code>正確處理</code> <code>數據庫數據</code> 的 <code>外部例程</code> 的 <code>編碼量</code> 通常較多。</p>
+</blockquote>
+<h2 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h2><p><code>觸發器 (Trigger)</code>：用於在 <code>數據庫</code> 發生 <code>指定事件</code> 時，<code>自動</code> 被 <code>執行的語句</code></p>
+<hr>
+<pre><code class="lang-sql">CREATE TRIGGER credits_earned AFTER UPDATE OF takes ON(grade)
+    REFERENCING NEW ROW AS nrow
+    REFERENCING OLD ROW AS orow
+    FOR EACH ROW
+    WHEN nrow.grade &lt;&gt; &#39;F&#39; AND nrow.grade IS NOT NULL
+        AND (orow.grade = &#39;F&#39; OR orow.grade IS NULL)
+    BEGIN ATOMIC
+        UPDATE student
+        SET tot_cred = tot_cred + 
+            (SELECT credits
+            FROM course
+            WHERE course.course_id = nrow.course_id)
+        WHERE student.id = nrow.id;
+    END
+</code></pre>
+<blockquote>
+<p><code>觸發器類型</code>：</p>
+<ul>
+<li><code>語句級觸發器 (FOR EACH STATEMENT)</code>：對於 <code>引起修改的整個SQL語句</code> <code>僅執行1次</code> <code>觸發器</code></li>
+<li><code>行級觸發器 (FOR EACH ROW)</code>：對 <code>每個受影響的行</code> <code>都執行1次</code> <code>觸發器</code></li>
+</ul>
+<p><code>過渡變量 (Transition Variable)</code>：</p>
+<ul>
+<li><code>REFERENCING OLD ROW AS symbol</code>：存儲 <code>已經更新或刪除的行的舊值</code></li>
+<li><code>REFERENCING NEW ROW AS symbol</code>：可用於 <code>插入</code> 或 <code>刪除</code> 的 <code>行的引用</code></li>
+</ul>
+<p><code>觸發時機</code>：</p>
+<ul>
+<li><code>BEFORE</code>：用於 <code>避免非法更新</code>，<code>附加額外約束</code></li>
+<li><code>AFTER</code>：用於 <code>為某些修改做善後處理</code>，<code>維護某些修改性操作的合法性</code></li>
+</ul>
+</blockquote>
+<p>如果可以使用 <code>存儲過程</code>  的話，則盡量不要使用 <code>觸發器</code>。</p>
+<h2 id="Recursive-Query"><a href="#Recursive-Query" class="headerlink" title="Recursive Query"></a>Recursive Query</h2><p><code>遞歸查詢 (Recursive Query)</code> 的典型例子是尋找 <code>傳遞閉包 (Transitive Closure)</code> ，比如 <code>找出某個課程的所有前置課程</code>。</p>
+<hr>
+<p>尋找 <code>傳遞閉包</code></p>
+<h3 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h3><pre><code class="lang-sql">CREATE FUNCTION findAllPrereqs(cid varchar(8))
+RETURN TABLE(course_id varchar(8))
+BEGIN
+    -- define variables
+    CREATE TEMPORARY TABLE c_prereq(course_id varchar(8));
+    CREATE TEMPORARY TABLE new_c_prereq(course_id varchar(8));
+    CREATE TEMPORARY TABLE temp(course_id varchar(8));
+    -- init and continue
+    INSERT INTO new_c_prereq
+        SELECT prereq_id
+        FROM prereq
+        WHERE course_id = cid;
+    -- loop until not new course is added
+    REPEAT
+        INSERT INTO c_prereq
+            SELECT INTO temp
+            FROM new_c_prereq;
+        INSERT INTO temp
+            (SELECT prereq.course_id
+            FROM new_C_prereq, prereq
+            WHERE new_c_prereq.course_id = prereq.course_id)
+            EXCEPT
+            (SELECT course_id
+            FROM c_prereq);
+        DELETE FROM new_c_prereq;
+        INSERT INTO new_c_prereq
+            SELECT *
+            FROM temp;
+        DELETE FROM temp;
+    UNTIL NOT EXISTS (SELECT * FROM new_c_prereq)
+    END REPEAT
+    -- return the result table
+    RETURN TABLE c_prereq;
+END
+</code></pre>
+<h3 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h3><pre><code class="lang-sql">-- define recursive query
+WITH RECURSIVE rec_prereq(course_id, prereq_id) AS (SELECT course_id, prereq_id
+                                                   FROM prereq)
+                                                   UNION 
+                                                   (SELECT rec_prereq, course_id, prereq.prereq_id
+                                                   FROM prereq, rec_prereq
+                                                   WHERE prereq.course_id = rec_prereq.prereq_id)
+-- call recursive query
+SELECT *
+FROM rec_prereq;
+</code></pre>
+<blockquote>
+<p>上述的SQL中，首先通過 <code>基查詢</code> 找到 <code>每門課程的先修課程</code>，然後 <code>遞歸查詢</code> 在 <code>每次叠代過程</code> 中 <code>增加一層課程</code>，直到到達 <code>課程-先修課程的最大層次</code>。</p>
+<p>通過 <code>FROM子句</code> 對 <code>遞歸視圖 prc_prereq</code> 進行 <code>遞歸查詢</code>。</p>
+<p><code>WITH RECURSIVE</code> 用於聲明 <code>遞歸視圖</code>，它會使得 <code>遞歸</code> 在到達 <code>不動點</code> 時 <code>自動被終止</code></p>
+<p><code>SQL標準</code> 要求 <code>遞歸過程</code> 返回的 <code>結果</code> 是 <code>單調遞增的</code>，並且最終到達 <code>不動點 (Fixed Point)</code></p>
+<blockquote>
+<p>也就是說，每次 <code>遞歸過程</code> 返回的 <code>結果</code> 必須是 <code>之前的結果的超集</code></p>
+<p>只要 <code>遞歸過程是遞增的</code>，就可以使用 <code>叠代過程來定義遞歸過程</code>。</p>
+</blockquote>
+</blockquote>
+<p>任何的 <code>遞歸查詢 (Recursive Query)</code> = <code>基查詢 (Base Query)</code> UNION <code>遞歸查詢 (Recursive Query)</code></p>
+<h2 id="Advanced-Aggregate"><a href="#Advanced-Aggregate" class="headerlink" title="Advanced Aggregate"></a>Advanced Aggregate</h2><h3 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h3><h4 id="Sparse-Rank-amp-Dense-Rank"><a href="#Sparse-Rank-amp-Dense-Rank" class="headerlink" title="Sparse Rank &amp; Dense Rank"></a>Sparse Rank &amp; Dense Rank</h4><ul>
+<li><code>rank()</code></li>
+</ul>
+<pre><code class="lang-sql">-- SQL 1
+SELECT ID, rank() OVER (ORDER BY (GPA) DESC) AS s_rank
+FROM student_grades
+ORDER BY &#39;s_rank&#39;
+</code></pre>
+<blockquote>
+<p>單純的 <code>rank</code> 並不會對 <code>結果關系中的元組</code> <code>按rank進行排序</code>。</p>
+<p>故添加 <code>ORDER BY &#39;s_rank&#39;</code>  來對 <code>結果關系的元組</code> 進行 <code>排序</code></p>
+<p>其他類型的 <code>排序函數</code>：<code>percent_rank()</code>，<code>cume_dist()</code>，<code>row_number()</code></p>
+<p>關於 <code>空值</code> 的處理，可以設置策略：<code>NULL FIRST</code> 或 <code>NULL LAST</code></p>
+<pre><code class="lang-sql">SELECT ID, rank() OVER (ORDER BY (GPA) DESC NULL LAST) AS s_rank
+FROM student_grades
+ORDER BY &#39;s_rank&#39;
+</code></pre>
+</blockquote>
+<p>$SQL 1 = SQL 2$</p>
+<pre><code class="lang-sql">-- SQL 2
+SELECT ID, (1 + (SELECT count(*)
+                FROM student_grades B
+                WHERE B.GPA &gt; A.GPA)) AS s_rank
+FROM student_grades A
+ORDER BY s_rank
+</code></pre>
+<ul>
+<li><code>dense_rank()</code></li>
+</ul>
+<p><code>rank()</code> 產生的 <code>排名</code> 是 <code>間斷的</code>：如果 <code>分數最高的人</code> 有2人，則 <code>這兩個人的排名</code> 均為 <code>1</code>，但 <code>分數次高的人</code> 的 <code>排名</code> 則為 <code>3</code></p>
+<p>相反的，如果使用 <code>dense_rank()</code>，則產生 <code>不間斷</code> 的 <code>排名</code>：<code>分數最高的兩人</code> 排名均為 <code>1</code>，但 <code>分數次高的人</code> 的 <code>排名</code> 則為 <code>2</code></p>
+<pre><code class="lang-sql">-- SQL 3
+SELECT ID, dense_rank() OVER (ORDER BY (GPA) DESC) AS s_rank
+FROM student_grades
+ORDER BY &#39;s_rank&#39;
+</code></pre>
+<h4 id="Partition-before-Rank"><a href="#Partition-before-Rank" class="headerlink" title="Partition before Rank"></a>Partition before Rank</h4><pre><code class="lang-sql">-- SQL 4
+SELECT ID, dept_name, rank() OVER (PARTITION BY dept_name ORDER BY GPA DESC) AS DEPT_RANK
+FROM dept_grades
+ORDER BY dept_name, dept_rank;
+</code></pre>
+<blockquote>
+<p>當存在 <code>GROUP BY</code> 時， <code>PARTION</code> 在 <code>GROUP BY</code> 之後執行。</p>
+<p>可以認為，如果在 <code>聚集</code> 時沒有 <code>顯示地指定 PARTITION</code>，則認為 <code>將所有的集合</code> 分為 <code>唯一的一個分區</code></p>
+</blockquote>
+<h4 id="Grading"><a href="#Grading" class="headerlink" title="Grading"></a>Grading</h4><p> <code>ntile(n)</code> 按 <code>給定順序</code> 取得 <code>每個分區 (Partion) 中的元組</code>，然後將 <code>元組</code> 分成 <code>n個具有相同元組數目的桶</code></p>
+<pre><code class="lang-sql">SELECT ID, ntile(4) OVER (ORDER BY (GPA DESC)) AS quartile
+FROM student_grades;
+</code></pre>
+<p> 可用於構造 <code>百分比直方圖</code></p>
+<h3 id="Window-Query"><a href="#Window-Query" class="headerlink" title="Window Query"></a>Window Query</h3><p><code>窗口查詢</code>：可用於對 <code>一定範圍內的元組</code> 進行 <code>聚集</code></p>
+<blockquote>
+<p>不同於 <code>分區查詢</code> 中的 <code>1個元組</code> 只對 <code>1個分區 (Partion)</code> 有貢獻，<code>分窗查詢</code> 中的 <code>窗口 (Window)</code> 是可以 <code>重疊的</code>。</p>
+</blockquote>
+<pre><code class="lang-sql">SELECT year, avg(num_credits) OVER(ORDER BY year ROWS 3 PRECEDING) AS avg_total_credits
+FROM tot_credits;
+</code></pre>
+<blockquote>
+<p>n.b. 如果 <code>某個年份的元組</code> 具有 <code>多個</code>，則 <code>為某個年份到底選擇哪個元組</code> 將 <code>取決於具體實現</code>。</p>
+<p><code>窗口</code> 的大小界定參數：</p>
+<ul>
+<li><code>ROWS n PRECEDING/FOLLOWING</code></li>
+<li><code>ROWS UNBOUNDED PRECEDING/FOLLOWING</code></li>
+<li><code>ROWS BETWEEN a PRECEEDING AND b FOLLOWING</code></li>
+<li><code>RANGE BETWEEN a AND b</code></li>
+</ul>
+</blockquote>
+<h2 id="OLAP"><a href="#OLAP" class="headerlink" title="OLAP"></a>OLAP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p><code>聯機分析處理 (OLAP)</code> 是一個 <code>交互式系統</code>，允許 <code>分析人員</code> 查看 <code>多維數據</code> 的 <code>不同種類的匯總數據</code></p>
+<hr>
+<p>假如我們有 <code>模式</code> $sales(item_name, color, clothes_size, quantity)$</p>
+<p>可以對 <code>關系中的某些屬性</code>  <code>分組 (Group)</code>  為 <code>度量屬性</code> 和 <code>維屬性</code>：</p>
+<ul>
+<li><code>度量屬性 (Measure Attribute)</code>：對 <code>某個值</code> 進行 <code>度量</code>，並且可以對 <code>這個值</code> 進行 <code>聚集操作</code></li>
+<li><code>維屬性 (Dimension Attribute)</code>：<code>剩余的屬性</code> 稱為 <code>維屬性</code></li>
+</ul>
+<p>能夠 <code>模式化</code> 為 <code>度量屬性</code> 和 <code>維屬性</code> 的 <code>數據</code> 統稱為 <code>多維數據 (Multi-Dimensional Data)</code></p>
+<hr>
+<p><code>數據立方體 (Data Cube)</code>：可以用於描述 <code>n維數據</code>。</p>
+<blockquote>
+<p><code>交叉表 (Cross-Tabulation / Pivot Table)</code>：可以用於描述 <code>二維屬性</code>，是 <code>數據立方體</code> 的 <code>2維情形</code></p>
+<p>某些 <code>交叉表</code> 可能還含有 <code>匯總行 (Total Row)</code> 和 <code>匯總列 (Total Column)</code></p>
+</blockquote>
+<p><code>單元 (Cell)</code>：<code>n維的數據單元</code> 可用 <code>n維向量</code> 進行 <code>定位</code>，每個 <code>單元</code> 存儲 <code>1個值</code></p>
+<blockquote>
+<p> 當 <code>某個維度</code> 的 <code>取值</code> 為 <code>all</code> 時，則表示 <code>對該維度的數據進行聚集</code>，即 <code>對該維度進行壓縮</code>！</p>
+<p> 如 <code>clothes_size</code>  的 <code>all值</code> 是對 ：<code>small</code>，<code>medium</code> 和 <code>large</code> 進行 <code>聚集</code> 得到的。</p>
+</blockquote>
+<hr>
+<ul>
+<li>Select <code>attribute_list</code></li>
+</ul>
+<p><code>轉軸 (Pivot)</code>：改變 <code>交叉表</code> 中 <code>維</code> 的操作</p>
+<p><code>切片 (Slice) / 切塊 (Dicing)</code>：<code>固定</code> <code>某個維度</code>，<code>觀察</code> <code>其余的維度</code></p>
+<blockquote>
+<p>一般將 <code>切片</code> 用於 <code>固定1個維度</code>時，<code>切塊</code> 用於 <code>固定多個維度</code> 時。</p>
+</blockquote>
+<ul>
+<li>Change <code>observation granularity</code></li>
+</ul>
+<p><code>上卷 (RollUp)</code> ：即 <code>粒度變粗</code></p>
+<p><code>下鉆 (Drill Down)</code>：即 <code>粒度變細</code></p>
+<blockquote>
+<p><code>較粗粒度的數據</code> 可以由 <code>較細粒度的數據</code> 所產生，反之則不能。</p>
+<p>即 <code>高維數據</code> 可以產生 <code>低維數據</code>，反之不能。</p>
+</blockquote>
+<p>一個 <code>屬性</code> 可以有不同的 <code>粒度</code>，這些 <code>不同粒度</code> 組成 <code>層次結構</code>，如 <code>Datetime的層次結構</code>：</p>
+<pre><code class="lang-mermaid">graph TD;
+date_time(DateTime) --&gt; hour_of_day(Hour of Day)
+date_time --&gt; date(Date)
+date --&gt; day_of_week(Day of Week)
+date --&gt; month(Month)
+month --&gt; quarter(Quarter)
+quarter --&gt; year(Year)
+</code></pre>
+<blockquote>
+<p>當我們討論 <code>屬性的粒度</code> 時， 我們應當把 <code>粒度樹</code> <code>倒過來看</code>，這樣正好符合 <code>上卷</code> 和 <code>下鉆</code>。</p>
+<blockquote>
+<p>計算機的 <code>樹</code> 就是 <code>倒過來的自然界的樹</code>，而 <code>粒度樹</code> 是 <code>倒過來的樹</code>，也就正好符合 <code>自然界的樹</code>。</p>
+</blockquote>
+</blockquote>
+<h3 id="OLAP-in-SQL"><a href="#OLAP-in-SQL" class="headerlink" title="OLAP in SQL"></a>OLAP in SQL</h3><p> <code>模式</code> $sales(item_name, color, clothes_size, quantity)$</p>
+<ul>
+<li><code>pivot()</code></li>
+</ul>
+<pre><code class="lang-sql">SELECT *
+FROM sales
+pivot(
+    sum(quantity)
+    FOR color IN (&#39;dark&#39;, &#39;pastel&#39;, &#39;white&#39;)
+)
+</code></pre>
+<blockquote>
+<p><code>pivot中的for</code> 的 <code>語義</code> 是：<code>解包</code>  <code>指定屬性的指定值</code> ，將 <code>這些值</code> 作為 <code>新屬性</code> 插入。</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>item_name</th>
+<th>clothes_size</th>
+<th>dark</th>
+<th>pastel</th>
+<th>white</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skirt</td>
+<td>small</td>
+<td>2</td>
+<td>11</td>
+<td>2</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>cube()</code></li>
+</ul>
+<pre><code class="lang-sql">SELECT item_name, color, clothes_size, sum(quantity)
+FROM sales
+GROUP BY cube(item_name, color, clothes_size)
+</code></pre>
+<blockquote>
+<p>如果需要處理 <code>all值</code>，則可以使用 <code>decode()</code> 和 <code>grouping()</code>。</p>
+</blockquote>
+<p>該查詢返回的是一個 <code>關系</code> $ (item_name, color, clothes_size, quantity)$</p>
+<p>該關系表示1個 <code>3維的數據立方體</code></p>
+<ul>
+<li><code>rollup()</code></li>
+</ul>
+<pre><code class="lang-sql">SELECT item_name, color, clothes_size, sum(quantity)
+FROM sales
+GROUP BY rollup(item_name, color, clothes_size)
+</code></pre>
+<p>從 <code>返回的結果關系的模式</code> 來看，<code>rollup()</code> 和 <code>cube()</code> 返回的 <code>結果關系</code> 具有 <code>相同的模式</code>。</p>
+<p>實際上，<code>rollup()</code> 生成的是：1個 <code>0維立方體</code>，1個 <code>1維立方體</code>，1個 <code>2維立方體</code>， 1個 <code>3維立方體</code></p>
+<blockquote>
+<p>無論是用 <code>cube()</code> 還是 <code>rollup()</code>，我們都無法 <code>精準控製分組的產生</code>，即無法 <code>精準指定分組具有哪些屬性</code>。</p>
+<p>但我們可以通過 <code>HAVING子句</code> 來去除 <code>GROUP子句</code> 產生的 <code>我們不想要的分組</code></p>
+</blockquote>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/text/">text</a>
+    
+        <a href="/tags/read/">read</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2024 sakurawald</p>
+
+</footer>
+</body>
+</html>

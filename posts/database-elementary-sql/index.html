@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>database elementary sql</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Elementary-SQL"><a href="#Elementary-SQL" class="headerlink" title="Elementary SQL"></a>Elementary SQL</h1><h2 id="Primitive-Type"><a href="#Primitive-Type" class="headerlink" title="Primitive Type"></a>Primitive Type</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Primitive Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$char(n), character(n)$</td>
+<td><code>固定長度的字符串</code>，<code>固定長度</code> 為 n</td>
+</tr>
+<tr>
+<td>$varchar(n), character\ varying(n)$</td>
+<td><code>可變長度的字符串</code>，<code>最大長度</code> 為 n</td>
+</tr>
+<tr>
+<td>$int, integer$</td>
+<td><code>整數類型</code></td>
+</tr>
+<tr>
+<td>$smallint$</td>
+<td><code>小整數類型</code></td>
+</tr>
+<tr>
+<td>$numeric(p,d)$</td>
+<td><code>定點數類型</code>：$numeric(3,1) \to 44.5$</td>
+</tr>
+<tr>
+<td>$real, double\ precision$</td>
+<td><code>浮點數</code> 和 <code>雙精度浮點數</code></td>
+</tr>
+<tr>
+<td>$float(n)$</td>
+<td><code>精度至少為n位的浮點數</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><code>空值 (null)</code>：任何 <code>數據類型</code> 都可能包含 <code>空值</code>。<code>空值</code> 表達語義 <code>缺失的值</code>。</p>
+<p>對於使用 <code>char</code> 類型存放的 <code>字符串</code>，會自動執行 <code>末尾補空格</code> 策略。 </p>
+<p>但請註意，當我們使用 <code>char</code> 和 <code>varchar</code> 進行 <code>相等性測試</code>時，<code>行為</code> 將是 <code>未定義的</code>，某些實現可能會 <code>自動為varchar在末尾補空格</code>。</p>
+<p>出於這點考慮，建議 <code>永遠只使用varchar</code></p>
+</blockquote>
+<h2 id="Define-a-Database-Pattern"><a href="#Define-a-Database-Pattern" class="headerlink" title="Define a Database Pattern"></a>Define a Database Pattern</h2><h3 id="General-Form"><a href="#General-Form" class="headerlink" title="General Form"></a>General Form</h3><pre><code class="lang-sql">CREATE TABLE r
+(Attribute1 Domain1,
+ Attribute2 Domain2,
+ ...,
+ Attributen Domainn,
+ &lt;Integrity Constraint&gt;,
+ ...,
+ &lt;Integrity Constraint&gt;);
+</code></pre>
+<blockquote>
+<p><code>域 (Domain)</code> ：用於指定 <code>與域相關聯的屬性</code> 的 <code>數據類型</code> 以及 <code>約束</code></p>
+</blockquote>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><pre><code class="lang-sql">CREATE TABLE teaches(
+id varchar(5),
+course_id varchar(8),
+section_id varchar(8),
+semester varchar(6),
+year numeric(4,0),
+PRIMARY KEY (id, course_id, section_id, semester, year),
+FOREIGN KEY (course_id, section_id, semester, year) REFERENCES section,
+FOREIGN KEY (id) REFERENCES instructor    
+);
+</code></pre>
+<h2 id="Basic-DML"><a href="#Basic-DML" class="headerlink" title="Basic DML"></a>Basic DML</h2><h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><pre><code class="lang-sql">INSERT INTO instructor VALUES (10211, &#39;Smith&#39;, &#39;Biology&#39;, 66000);
+</code></pre>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><ul>
+<li>Delete a <code>Relationship</code></li>
+</ul>
+<pre><code class="lang-sql">DROP TABLE r;
+</code></pre>
+<ul>
+<li>Delete <code>Tuple</code></li>
+</ul>
+<pre><code class="lang-sql">DELETE FROM student;
+</code></pre>
+<blockquote>
+<p>可以使用 <code>DELETE FROM r</code>來刪除 <code>關系中的所有元組</code>，但 <code>保留關系的模式定義</code> </p>
+</blockquote>
+<h4 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h4><pre><code class="lang-sql">ALTER TABLE r ADD attribute domain;
+</code></pre>
+<pre><code class="lang-sql">ALTER TABLE r DROP attribute;
+</code></pre>
+<blockquote>
+<p>某些 <code>數據庫</code> 僅僅支持 <code>刪除整個關系</code> ，而不支持 <code>刪除關系中的某個屬性</code>。</p>
+</blockquote>
+<h2 id="Basic-Structure"><a href="#Basic-Structure" class="headerlink" title="Basic Structure"></a>Basic Structure</h2><p><code>SQL</code> 的 <code>基本查詢</code> 由 <code>SELECT</code>，<code>FROM</code>，<code>WHERE</code> 三大 <code>子句</code> 所構成。</p>
+<h3 id="Single-Relation-query"><a href="#Single-Relation-query" class="headerlink" title="Single-Relation query"></a>Single-Relation query</h3><pre><code class="lang-sql">SELECT name
+FROM instructor;
+</code></pre>
+<blockquote>
+<p><code>數學</code> 上的 <code>關系</code> 本質是 <code>集合</code>，不允許 <code>重復元素</code>。</p>
+<p>但 <code>維護元素的唯一性</code> 的 <code>代價</code> 非常大，在 <code>數據庫</code> 中則是 <code>允許關系中的元素發生重復</code> </p>
+<blockquote>
+<ul>
+<li><code>all</code>  和 <code>distinct</code></li>
+</ul>
+<p>對於 <code>SELECT</code> 來說，<code>去重選項</code> 默認為 <code>ALL</code> 即表示 <code>不去重</code>。</p>
+<pre><code class="lang-sql">SELECT ALL dept_name
+FROM instructor;
+</code></pre>
+<p>也可以手動指定為 <code>distinct</code> 表示需要進行 <code>去重</code></p>
+<pre><code class="lang-sql">SELECT DISTINCT dept_name
+FROM instructor;
+</code></pre>
+</blockquote>
+</blockquote>
+<p>使用 <code>WHERE子句</code> 可以從 <code>FROM子句的結果關系</code> 中 <code>篩選</code> 出 <code>使得謂詞為True的元組</code></p>
+<pre><code class="lang-sql">SELECT name
+FROM instructor
+WHERE deptname  &#39;Comp.Sci.&#39; AND salary &gt; 70000;
+</code></pre>
+<h3 id="Multi-Relation-query"><a href="#Multi-Relation-query" class="headerlink" title="Multi-Relation query"></a>Multi-Relation query</h3><h4 id="General-Form-1"><a href="#General-Form-1" class="headerlink" title="General Form"></a>General Form</h4><p><code>多表查詢</code> 的 <code>通用格式</code> </p>
+<pre><code class="lang-sql">SELECT attribute1, attribute2, ..., attributen
+FROM r1, r2, ..., rn
+WHERE P;
+</code></pre>
+<p>其中，每種 <code>子句</code> 的作用如下：</p>
+<ul>
+<li><code>SELECT子句</code>：從 <code>WHERE子句給出的元組</code> 中 <code>投影</code> 指定的 <code>屬性列表</code></li>
+<li><code>FROM子句</code>：給出 <code>作為數據輸入的</code> 的 <code>關系列表</code></li>
+<li><code>WHERE子句</code>：<code>過濾出</code> 使得 <code>謂詞</code> 為 <code>True</code> 的 <code>FROM子句中的元組</code> </li>
+</ul>
+<blockquote>
+<p><code>數據庫</code> 執行 <code>查詢</code> 的 <code>順序</code> 與 <code>書寫順序</code> 不太一樣：$FROM \to WHERE \to SELECT$</p>
+<p>可以將 <code>SELECT子句</code> 看作是一種 <code>語言學方面的結構提前</code>，這種 <code>形式提前</code> 有利於我們 <code>快速地了解輸出的結構是什麽</code></p>
+<p><code>WHERE子句</code> 的 <code>默認值</code> 為 <code>WHERE true</code></p>
+<p><code>FROM子句</code> 會為 <code>關系列表</code> 中的 <code>所有關系</code> 都進行 <code>笛卡爾積運算</code>，通常會產生一個 <code>非常巨大的結果關系</code></p>
+<blockquote>
+<p>實際上，大部分情況下並不會真的 <code>生成</code> <code>關系列表中所有關系的笛卡爾積</code>。</p>
+<p>因為 <code>查詢優化器</code> 會 <code>事先過濾</code>掉 <code>大部分不可能滿足WHERE子句的元組</code>，使得 <code>FROM子句</code> 輸出的 <code>結果關系</code> 規模 <code>大幅度減小</code> </p>
+</blockquote>
+<p>對於 <code>FROM instructor, department</code> 來說，就是對 <code>instructor關系</code> 和 <code>department關系</code> 進行 <code>笛卡爾積</code> 作為 <code>結果關系</code></p>
+</blockquote>
+<h4 id="Match-Condition-Specified-by-Where-Clause"><a href="#Match-Condition-Specified-by-Where-Clause" class="headerlink" title="Match Condition Specified by Where Clause"></a>Match Condition Specified by Where Clause</h4><p>通過 <code>Where子句</code> 指定 <code>匹配條件</code></p>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID;
+</code></pre>
+<blockquote>
+<p>當 <code>屬性名</code> 僅出現在 <code>FROM子句所指定的關系</code> 的 <code>一個關系</code> 中時，可以省略掉 <code>屬性名的全限定前綴</code>。</p>
+<p>當然，<code>總是為屬性名寫上關系名前綴</code> 是沒有錯的。 </p>
+<p> n.b. 上述的 <code>匹配條件</code> 並不會查詢出 <code>沒有教授任何課程的教師</code>。</p>
+<p> 如果期望顯示出這些教師，則應當使用 <code>外連接</code></p>
+</blockquote>
+<h4 id="Match-Condition-Specified-by-Natural-Join"><a href="#Match-Condition-Specified-by-Natural-Join" class="headerlink" title="Match Condition Specified by Natural Join"></a>Match Condition Specified by Natural Join</h4><h5 id="Natural-Join-Compare-all-the-common-attributes"><a href="#Natural-Join-Compare-all-the-common-attributes" class="headerlink" title="Natural Join: Compare all the common attributes"></a>Natural Join: Compare all the common attributes</h5><p><code>自然連接 (Natural Join)</code>：將輸入的 <code>2個關系</code> 中 <code>共有屬性 (Common Condition) 的值</code> <code>均相等</code> <code>的元組</code> 作為 <code>輸出結果</code></p>
+<p>下列 <code>查詢</code> 的 <code>等價形式</code></p>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches. ID
+</code></pre>
+<pre><code class="lang-sql">SELECT name, course_id
+FROM instructor NATURAL JOIN teaches
+</code></pre>
+<blockquote>
+<p>實際上，可以將 <code>NATURAL JOIN語句</code> 看作是一種形式的 <code>宏展開 (Macro Expansion)</code>。</p>
+<p>先查找 <code>兩個關系的共有屬性</code>，然後 <code>改寫</code> 成 <code>WHERE子句</code> 形式的 <code>謂詞</code>：</p>
+<pre><code class="lang-sql">WHERE S.common_attribute_1 = T.common_attribute_1
+AND S.common_attribute_2 = T.common_attribute_2
+...
+AND S.common_attribute_n = T.common_attribute_n
+</code></pre>
+</blockquote>
+<h5 id="Natural-Join-Specify-specific-common-attributes"><a href="#Natural-Join-Specify-specific-common-attributes" class="headerlink" title="Natural Join: Specify specific common attributes"></a>Natural Join: Specify specific common attributes</h5><p>首先，考慮下面這個 <code>查詢</code></p>
+<pre><code class="lang-sql">-- Query 1
+SELECT name, title
+FROM instructor NATURAL JOIN teaches, course
+WHERE teaches.course_id = course.course_id;
+</code></pre>
+<blockquote>
+<p>n.b. <code>teaches.course_id</code> 追根溯源來自 <code>teaches</code>，我們是無法直接 <code>引用</code> <code>自然連接的結果關系</code> 的，但可以 <code>直接引用</code> <code>參與自然連接的屬性</code>，因為 <code>自然連接的結果關系</code> 中的 <code>屬性</code> 正來自這些 <code>單個關系的屬性</code>。</p>
+</blockquote>
+<p>但是，該查詢  <code>並不等價於</code> 下列這個 <code>查詢</code></p>
+<pre><code class="lang-sql">-- Query 2
+SELECT name, title
+FROM instructor NATURAL JOIN teaches NATURAL JOIN course
+</code></pre>
+<blockquote>
+<p><code>instructor關系</code>，<code>teaches關系</code>，<code>course關系</code> 均有 <code>dept_name屬性</code>。</p>
+<p>對於 <code>Query 1</code> ：則只需要考慮 <code>這兩個關系的</code> <code>dept_name屬性</code> 的 <code>相等</code>，而 <code>course關系的dept_name屬性</code> 可以與他們不同。也就是說，該查詢會顯示出 <code>教師所講授的課程</code> 不是 <code>教師所在系的課程</code></p>
+<p>對於 <code>Query 2</code>：該查詢 <code>只顯示</code> <code>教師所教的課程</code> <code>就是該教師所在系的課程</code></p>
+</blockquote>
+<p>出現該問題的原因在於，在將 <code>instructor NATURAL JOIN teaches</code> 和 <code>course</code>進行 <code>自然連接</code> 時，<code>course</code> 中存在 <code>我們不希望使用的共同屬性</code> 即 <code>dept_name</code></p>
+<blockquote>
+<p><code>course關系</code> 共有2個 <code>共同屬性</code>：<code>course_id</code>，<code>dept_name</code></p>
+</blockquote>
+<p>對此，我們可以通過 <code>帶指定屬性列表的自然連接 (Natural Join with Specific Arrtibute List)</code> 來改寫 <code>Query 2</code> </p>
+<pre><code class="lang-sql">-- Query 3
+SELECT name, title
+FROM (instructor NATURAL JOIN teaches) JOIN course USING (course_id)
+</code></pre>
+<p>這樣，<code>Query 3</code> 等價於 <code>Query 1</code>。</p>
+<blockquote>
+<p>n.b. 同樣的道理，可以再將 <code>NATURAL JOIN</code> 視為 <code>JOIN relation USING attribute_list</code> 的 <code>宏展開</code>。</p>
+<p>默認情況下，<code>relation_1 NATURAL JOIN relation_2</code>  可以展開為 <code>relation_1 JOIN relation_2 USING (common_attribute_list)</code> </p>
+</blockquote>
+<h2 id="Basic-Operation"><a href="#Basic-Operation" class="headerlink" title="Basic Operation"></a>Basic Operation</h2><h3 id="Rename-Operation"><a href="#Rename-Operation" class="headerlink" title="Rename Operation"></a>Rename Operation</h3><p><code>更名運算 (Rename Operation)</code> 用於為 <code>實體</code> 指定 <code>標識符</code>。</p>
+<p>它主要有以下幾種作用：</p>
+<ul>
+<li><p>修改 <code>輸出關系</code>中的 <code>長屬性名</code> 修改為 <code>短屬性名</code></p>
+<pre><code class="lang-sql">SELECT instructor_name AS inst_name
+FROM instructor
+</code></pre>
+</li>
+<li><p>為 <code>運算中間結果</code> 指定 <code>標識符</code>，以便 <code>後續對它的引用</code></p>
+</li>
+<li><p>用於 <code>區分</code> <code>涉及自身關系的笛卡爾積運算</code></p>
+<pre><code class="lang-sql">SELECT DISTINCT T.name
+FROM instructor AS T, instructor AS S
+WHERE T.salary &gt; S.salary AND S.dept_name = &#39;Biology&#39;
+</code></pre>
+<blockquote>
+<p>n.b. 可以將 <code>T</code> 和 <code>S</code> 看作是 <code>instructor關系</code> 的 <code>2份拷貝</code></p>
+<blockquote>
+<p>實際上，並不會真的拷貝2份關系。<code>T</code> 和 <code>S</code> 只不過是對 <code>instructor</code> 的 <code>引用</code> 而已。</p>
+</blockquote>
+<p>像 <code>T</code> 和 <code>S</code> 這樣 <code>用於重命名關系的標識符</code> 被稱為 <code>相關名稱 (Correlation Name)</code>，或 <code>表別名 (Table Alias)</code> 或 <code>相關變量 (Correlation Variable)</code> 或 <code>元組變量 (Tuple Variable)</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="String-Operation"><a href="#String-Operation" class="headerlink" title="String Operation"></a>String Operation</h3><h4 id="Pattern-Matching"><a href="#Pattern-Matching" class="headerlink" title="Pattern Matching"></a>Pattern Matching</h4><pre><code class="lang-sql">SELECT dept_name
+FROM department
+WHERE building LIKE &#39;%Watson%&#39;;
+</code></pre>
+<p>通過使用 <code>LIKE操作符</code>可以實現 <code>模式匹配 (Pattern Matching)</code>，使用如下 <code>字符</code> 來 <code>定義模式</code>：</p>
+<ul>
+<li><code>百分號 (%)</code>：匹配 <code>任意子串</code></li>
+<li><code>下劃線 (_)</code>：匹配 <code>任意一個字符</code></li>
+</ul>
+<blockquote>
+<p>n.b. 盡管 <code>SQL標準</code> 中要求 <code>字符串的相等運算</code> 是 <code>大小寫敏感的</code>。</p>
+<p>但 <code>某些數據庫</code>，如 <code>MySQL</code> 和 <code>SQL Server</code> 卻在 <code>匹配字符串</code> 時 <code>不區分大小寫</code>！</p>
+<p>關於 <code>字符串相等性測試</code> 的具體詳情，應當查閱 <code>Manual</code> </p>
+</blockquote>
+<h4 id="Escape-Character"><a href="#Escape-Character" class="headerlink" title="Escape Character"></a>Escape Character</h4><pre><code class="lang-sql">LIKE &#39;ab\%cd%&#39; ESCAPE &#39;\&#39;
+</code></pre>
+<p>使用 <code>ESCAPE關鍵字</code> 定義 <code>轉義字符</code> 為 <code>\</code></p>
+<h3 id="Order-Operation"><a href="#Order-Operation" class="headerlink" title="Order Operation"></a>Order Operation</h3><pre><code class="lang-sql">SELECT *
+FROM instructor
+WHERE dept_name = &#39;Physics&#39;
+ORDER BY salary DESC, name ASC;
+</code></pre>
+<blockquote>
+<p><code>ORDER BY子句</code> 的 <code>默認值</code> 為 <code>asc</code>，而 <code>desc</code> 需要手動指定。</p>
+</blockquote>
+<h4 id="Between-Operation"><a href="#Between-Operation" class="headerlink" title="Between Operation"></a>Between Operation</h4><pre><code class="lang-sql">-- Query 1
+SELECT name
+FROM instructor
+WHERE salary BETWEEN 9000 AND 10000;
+</code></pre>
+<pre><code class="lang-sql">-- Query 2
+SELECT name
+FROM instructor
+WHERE salary &gt;= 9000 AND salary &lt;= 10000;
+</code></pre>
+<p><code>Query 1</code> 等價於 <code>Query 2</code></p>
+<blockquote>
+<p>n.b. 可以將 <code>Between運算符</code> 和 <code>Not Between運算符</code>  視為 <code>基於不等式比較運算符寫法</code> 的 <code>宏展開</code>。</p>
+<p>但使用 <code>Between</code> 和 <code>Not Between</code> 使得 <code>查詢</code> 更加 <code>清晰</code>，而且更不容易 <code>錯寫</code> </p>
+</blockquote>
+<h4 id="Multi-Dimensional-Tuple"><a href="#Multi-Dimensional-Tuple" class="headerlink" title="Multi-Dimensional Tuple"></a>Multi-Dimensional Tuple</h4><p>考慮下列 <code>包含多個AND的相等性測試語句</code></p>
+<pre><code class="lang-sql">-- Query 1
+SELECT name, course_id
+FROM instructor, teaches
+WHERE instructor.ID = teaches.ID AND dept_name = &#39;Biology&#39;
+</code></pre>
+<p>以及</p>
+<pre><code class="lang-sql">-- Query 2
+SELECT name, course_id
+FROM instructor, teaches
+WHERE (instructor.ID, dept_name) = (teaches.ID, &#39;Biology&#39;)
+</code></pre>
+<p><code>Query 1</code> 等價於 <code>Query 2</code></p>
+<blockquote>
+<p>作為一種更為 <code>抽象</code> 的考慮。我們可以認為 <code>常規所書寫的相等語句</code> 本質上就屬於 <code>1維元組</code>。</p>
+<p>而如果需要同時測試 <code>多個屬性的某種比較關系</code>，可以使用 <code>向量/元組</code>。</p>
+<p>上述僅僅是 <code>測試</code> <code>相等關系</code>。同理，也可以用於 <code>測試</code> <code>偏序關系</code>。</p>
+<blockquote>
+<pre><code class="lang-sql">(x1, y1) &lt; (x2, y2)
+</code></pre>
+</blockquote>
+</blockquote>
+<h3 id="Set-Operation"><a href="#Set-Operation" class="headerlink" title="Set Operation"></a>Set Operation</h3><p><code>SQL標準</code> 中所定義的 <code>集合運算</code> 都是基於 <code>數學的集合論語義</code> 的：<code>所有的集合運算</code> 會 <code>自動去重</code></p>
+<blockquote>
+<p>實際上，<code>SQL</code> 的 <code>集合運算</code> 有 <code>兩套版本</code></p>
+<ul>
+<li><code>自動去重的默認的distinct版本</code>：<code>intersect (distinct)</code>，<code>union (distinct)</code> ，<code>except (distinct)</code></li>
+<li><code>不帶去重的all版本</code> ： <code>intersect all</code>，<code>union all</code>，<code>except all</code></li>
+</ul>
+</blockquote>
+<h4 id="Intersect-Operation"><a href="#Intersect-Operation" class="headerlink" title="Intersect Operation"></a>Intersect Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+ WHERE semester=&#39;Fall&#39; AND year = 2009
+) INTERSECT
+(SELECT course_id
+FROM section
+WHERE semester=&#39;Spring&#39; AND year = 2010
+)
+</code></pre>
+<h4 id="Union-Operation"><a href="#Union-Operation" class="headerlink" title="Union Operation"></a>Union Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+ WHERE semester = &#39;Fall&#39; AND year = 2009
+) UNION
+(SELECT course_id
+FROM section
+WHERE semester = &#39;Spring&#39; AND year = 2010
+)
+</code></pre>
+<h4 id="Except-Operation"><a href="#Except-Operation" class="headerlink" title="Except Operation"></a>Except Operation</h4><pre><code class="lang-sql">(SELECT course_id
+ FROM section
+WHERE semester = &#39;Fall&#39; AND year = 2009
+) EXCEPT
+(SELECT course_id
+FROM section
+WHERE semester = &#39;Spring&#39; AND year = 2010   
+)
+</code></pre>
+<h2 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h2><h3 id="The-type-of-operation-involved"><a href="#The-type-of-operation-involved" class="headerlink" title="The type of operation involved"></a>The type of operation involved</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>The type of operation involved</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>算術表達式</code></td>
+<td>任何 <code>算術表達式</code> 的 <code>輸入為空</code>，則 <code>輸出為空</code></td>
+</tr>
+<tr>
+<td><code>邏輯表達式</code></td>
+<td>任何 <code>涉及空值的邏輯表達式</code> 的 <code>輸出為未知 (unknown)</code><br />n.b. <code>unknown</code> 並不是 <code>null</code>或 <code>not null</code>，也不是 <code>true</code> 和 <code>false</code>。<br /><code>unknown</code> 是 <code>區別於true和false的第三種邏輯值</code><br /><br /><code>基本邏輯運算</code> 對於 <code>unknown</code> 定義了 <code>特殊規則</code><br /><code>fasle AND unknown = false</code>，<code>true OR unknown = true</code>，<code>NOT unkown = unknown</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>n.b. <code>SQL標準</code> 定義的 <code>邏輯值</code> 有3種：<code>true</code>，<code>false</code>，<code>unknown</code>。</p>
+<p>註意 <code>while子句</code> 的 <code>語義</code> 為：<code>過濾出</code> <code>使得謂詞為true的哪些元組</code> </p>
+<p>n.b. <code>未知 (unknown)</code> 也不是 <code>空 (null)</code>。</p>
+<p><code>unknown</code>不可以用 <code>is null</code> 或 <code>is not null</code> 來測試。</p>
+<p>某些 <code>具體實現</code> 提供了 <code>is unknown</code> 來進行測試。</p>
+</blockquote>
+<h3 id="Equality-Test"><a href="#Equality-Test" class="headerlink" title="Equality Test"></a>Equality Test</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Equality Test</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>元組的相等性測試</code></td>
+<td>在測試 <code>兩個元組的屬性值</code> 是否相等時，如果 <code>屬性值</code> 均為 <code>null</code>，則 <code>屬性值視為相同</code><br />n.b. 如果 <code>只想保留這樣的相同元組的一份拷貝</code>，可以使用 <code>SELECT DISTINCT</code></td>
+</tr>
+<tr>
+<td><code>謂詞的相等性測試</code></td>
+<td>在測試 <code>謂詞 null = null</code> 時，將返回 <code>unknown</code>，而不是 <code>true</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>n.b. 可以認為，<code>元組的相等性測試</code> 實際上執行的是 <code>另一套特殊規則</code>：它為 <code>null = null</code> 返回 <code>true</code></p>
+<p>而 <code>謂詞的相等性測試</code> 則：為 <code>null = null</code> 返回 <code>unknown</code></p>
+</blockquote>
+<h2 id="Aggregate-Function"><a href="#Aggregate-Function" class="headerlink" title="Aggregate Function"></a>Aggregate Function</h2><p><code>聚集函數 (Aggregate Function)</code>：以 <code>值的集合</code> 作為輸入，返回 <code>單個值</code> 。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Intrinsic Aggregate Function</th>
+<th>Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$avg()$</td>
+<td></td>
+</tr>
+<tr>
+<td>$min()$</td>
+<td></td>
+</tr>
+<tr>
+<td>$max()$</td>
+<td></td>
+</tr>
+<tr>
+<td>$sum()$</td>
+<td>忽略 <code>null</code></td>
+</tr>
+<tr>
+<td>$count()$</td>
+<td>為 <code>null</code> 返回 <code>0</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Basic-Aggregate"><a href="#Basic-Aggregate" class="headerlink" title="Basic Aggregate"></a>Basic Aggregate</h3><pre><code class="lang-sql">SELECT avg(salary)
+FROM instructor
+WHERE dept_name = &#39;Comp.Sci.&#39;;
+</code></pre>
+<hr>
+<p>計算 <code>某個關系中的元組個數</code></p>
+<pre><code class="lang-sql">SELECT count(*)
+FROM course;
+</code></pre>
+<hr>
+<p>若需要在 <code>聚集操作</code> <code>之前</code> 進行 <code>去重</code>，則可以使用 <code>distinct關鍵字</code></p>
+<pre><code class="lang-sql">SELECT count(DISTINCT ID) 
+FROM teaches
+WHERE semester = &#39;Spring&#39; AND year = &#39;2010&#39;;
+</code></pre>
+<blockquote>
+<p>n.b. 可以認為，對於 <code>內置的5個聚集函數</code> 而言，默認的 <code>去重選項</code> 是 <code>all</code></p>
+<p>n.b. <code>SQL標準</code> 並不允許為 <code>count(*)</code> 使用 <code>distinct</code>。但卻可以為 <code>min</code> 和 <code>max</code> 使用 <code>distinct</code>。盡管這些 <code>distinct</code> 並不會改變 <code>運算結果</code> ！</p>
+</blockquote>
+<h3 id="Grouped-Aggregate"><a href="#Grouped-Aggregate" class="headerlink" title="Grouped Aggregate"></a>Grouped Aggregate</h3><p><code>分組聚集 (Grouped Aggregate)</code> ：可以先對 <code>某個關系中的元組</code> 進行 <code>分組</code>，然後再 <code>分別地</code> 對 <code>每個分組</code> 進行 <code>聚集操作</code>。</p>
+<pre><code class="lang-sql">SELECT dept_name, avg(salary) AS avg_salary
+FROM instructor
+GROUP BY dept_name;
+</code></pre>
+<blockquote>
+<p>可以認為，默認情況下 <code>省略</code> <code>GROUP BY子句</code> 意味著：將 <code>整個關系的所有元組</code> 分為 <code>唯一的一組</code>。</p>
+</blockquote>
+<hr>
+<p>考慮一個 <code>錯誤的查詢例子</code></p>
+<pre><code class="lang-sql">-- This is a wrong query example
+SELECT dept_name, ID, avg(salary)
+FROM instructor
+GROUP BY dept_name;
+</code></pre>
+<p>該 <code>查詢</code> 的問題在於，我們使用 <code>dept_name屬性</code> 將 <code>instructor關系的元組</code> 按 <code>系</code> 進行 <code>分組</code>，之後的 <code>avg(salary)</code> 計算的是 <code>某個系的所有教師的平均工資</code>。</p>
+<p>而 <code>ID屬性</code> 的問題在於，對於 <code>某個系</code> 來說， <code>該系中有許多的教師</code>，如果確實需要 <code>輸出ID</code>，那麽究竟要輸出 <code>該系的所有教師中的哪一個教師的ID</code>？</p>
+<p>綜上，我們對於 <code>GROUP BY</code> 有一個規則：出現在 <code>SELECT子句</code> 中，但沒有被 <code>聚集</code> 的 <code>屬性</code>。必須出現在 <code>GROUP BY</code> 中。</p>
+<h3 id="Grouped-Aggregate-with-Having-Clause"><a href="#Grouped-Aggregate-with-Having-Clause" class="headerlink" title="Grouped Aggregate with Having Clause"></a>Grouped Aggregate with Having Clause</h3><pre><code class="lang-sql">SELECT dept_name, avg(salary) as avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg(salary) &gt; 42000;
+</code></pre>
+<p><code>HAVING 子句</code> 在 <code>Grouped Aggregate輸出結果</code> <code>之後</code> 才進行 <code>過濾</code>。</p>
+<blockquote>
+<p>換句話說，<code>HAVING</code> 必須在 <code>GROUP BY</code> 的 <code>分組形成後</code> 才能 <code>執行</code></p>
+</blockquote>
+<p>同理，對 <code>HAVING</code> 也有類似 <code>GROUP BY</code> 的規則 ：出現在 <code>HAVING子句</code>中，但沒有被 <code>聚集</code> 的 <code>屬性</code>。必須出現在 <code>GROUP BY</code>中。</p>
+<blockquote>
+<p>可以將 <code>HAVING子句</code> 和 <code>WHERE子句</code> 作類比。</p>
+<ul>
+<li><p><code>WHERE</code> ：針對 <code>元組</code></p>
+</li>
+<li><p><code>HAVING</code>：針對 <code>分組</code></p>
+</li>
+</ul>
+<p>現在，我們可以這樣看待 <code>標準的SELECT-FROM-WHERE查詢</code>為：將 <code>某個關系的分組</code> 分為 <code>唯一的一組</code>，且 <code>分組過濾條件</code> 為 <code>HAVING true</code></p>
+</blockquote>
+<h2 id="Nested-Subquery"><a href="#Nested-Subquery" class="headerlink" title="Nested Subquery"></a>Nested Subquery</h2><p>我們知道 <code>SELECT-FROM-WHERE</code> 返回類型為 <code>關系</code>，而 <code>FROM子句</code> 的輸入類型也為 <code>關系</code>，那麽 <code>嵌套子查詢 (Nested Subquery)</code> 應當是合理的。</p>
+<ul>
+<li><code>in</code> 和 <code>not in</code></li>
+</ul>
+<pre><code class="lang-sql">SELECT DISTINCT course_id
+FROM section
+WHERE semester = &#39;Fall&#39; AND year = 2009 
+AND course_id IN (SELECT course_id
+                  FROM section
+                  WHERE semester = &#39;Spring&#39; AND year = 2010;
+);
+</code></pre>
+<ul>
+<li><code>all</code> 和 <code>any/some</code></li>
+</ul>
+<pre><code class="lang-sql">-- Query 1
+SELECT DISTINCT T.name
+FROM instructor AS T, instructor AS S
+WHERE T.salary &gt; S.salary AND S.dept_name = &#39;Biology&#39;;
+</code></pre>
+<blockquote>
+<p>n.b. 這種實現方式中，必須要加 <code>DISTINCT</code>：因為 <code>FROM子句</code> 輸出的 <code>結果關系</code> 為 <code>2個關系的笛卡爾積</code>，此時 <code>結果關系</code> 中 <code>滿足WHERE條件的元組</code> 會 <code>重復</code></p>
+</blockquote>
+<p>等價於</p>
+<pre><code class="lang-sql">-- Query 2
+SELECT name
+FROM instructor
+WHERE salary &gt; some(SELECT salary
+                   FROM instructor
+                   WHERE dept_name = &#39;Biology&#39;
+                   );
+</code></pre>
+<blockquote>
+<p>n.b. 兩條關於 <code>全稱量詞和特稱量詞</code> 的 <code>等價性規則</code>：</p>
+<ul>
+<li><code>= some</code> 等價於 <code>in</code>，但 <code>&lt;&gt; some</code> 不等價於 <code>not in</code></li>
+<li><code>&lt;&gt;all</code> 等價於 <code>not in</code>，但 <code>= all</code> 不等價於 <code>in</code></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><code>exists</code></p>
+<p><code>exists</code>：若 <code>作為exists參數的子查詢</code> 產生的 <code>結果關系</code> 是 <code>非空的</code>時，則返回 <code>true</code></p>
+<pre><code class="lang-sql">SELECT course_id
+FROM section AS S
+WHERE semester = &#39;Fall&#39; AND year = 2009
+AND EXISTS(SELECT *
+          FROM section AS T
+          WHERE semester = &#39;Spring&#39; AND year = 2010
+          AND S.course_id = T.course_id;
+);
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>n.b. 該例子中，還有一個需要註意的地方：我們在 <code>子查詢</code> 中 <code>引用</code> 了 <code>子查詢外部的標識符</code> <code>S.course_id</code>。</p>
+<p>我們稱 <code>這樣的子查詢</code> 為 <code>相關子查詢 (Correlated Subquery)</code>：使用了 <code>來自外層查詢的相關名稱</code> 的 <code>子查詢</code></p>
+<blockquote>
+<p>關於 <code>子查詢</code> 中對 <code>標識符</code> 的 <code>引用規則</code>，可以類比於 <code>PL中的變量作用域規則</code></p>
+</blockquote>
+</blockquote>
+<hr>
+<p><code>not exists</code> 可以用於 <code>測試</code> <code>子查詢的結果集</code> 中 <code>是否不存在元組</code>。</p>
+<p>我們可以利用這個 <code>特性</code> 來模擬 <code>集合的包含關系</code></p>
+<pre><code class="lang-sql">-- use not exists to represent subset relationship
+SELECT S.ID, S.name
+FROM student AS S
+WHERE NOT EXISTS(
+    (SELECT course_id
+     FROM course
+     WHERE dept_name = &#39;Biology&#39;
+    ) 
+    EXCEPT
+    (SELECT T.course_id
+     FROM takes AS T
+     WHERE S.ID = T.ID
+    )
+);
+</code></pre>
+<ul>
+<li><code>unique</code></li>
+</ul>
+<p><code>unique</code>：若 <code>作為unique參數的子查詢</code> 產生的 <code>結果關系</code> 中 <code>不存在重復元組</code>，則返回 <code>true</code>。它為 <code>空集</code> 返回 <code>true</code>。</p>
+<pre><code class="lang-sql">SELECT T.course_id
+FROM course AS T
+WHERE UNIQUE(SELECT R.course_id
+            FROM section AS R
+             WHERE T.course_id = R.course_id
+             AND R.year = 2009
+            )
+</code></pre>
+<blockquote>
+<p>實際上，可以利用 <code>count()</code> 將 <code>exists</code> ，<code>not exists</code> ，<code>unique</code> 和 <code>not unique</code> 進行 <code>宏展開</code></p>
+<pre><code class="lang-sql">SELECT T.course_id
+FROM course AS T
+WHERE 1 &gt;= (SELECT count(R.course_id)
+         FROM section AS R
+         WHERE T.course_id = R.course_id
+         AND R.year = 2009
+        )
+</code></pre>
+<p>解釋：<code>WHERE子句</code> 將對 <code>T關系中的每個元組</code> 進行 <code>測試</code>，判斷 <code>嵌套子查詢</code> 中 <code>與該元組相等的元組的個數</code> 是否 <code>小於等於1</code></p>
+<blockquote>
+<p>該例子中，通過 <code>course_id</code> 作為 <code>主鍵</code> 來判斷 <code>兩個元組是否相等</code>。</p>
+<p>而 <code>AND R.year = 2009</code> 僅僅是 <code>附加的過濾條件</code></p>
+</blockquote>
+<p>n.b. <code>unique</code> 判斷 <code>元組是否重復</code> 是基於 <code>元組的相等性測試</code> 的。故如果 <code>兩個元組中的某個元組的某個屬性</code> 為 <code>null</code>，則 <code>這兩個元組</code> <code>不相等</code>。</p>
+<p>換句話說，使用 <code>unique</code> 判斷 <code>某些屬性為空的元組</code> 是否 <code>重復</code> 是錯誤的：</p>
+<p>在這種情況下，盡管 <code>某個元組確確實實有多個副本</code>，但 <code>該元組有一個屬性為空</code>，則 <code>元組的相等性測試</code> 將永遠為 <code>false</code>，進而使得 <code>unique</code> 永遠返回 <code>true</code></p>
+</blockquote>
+<ul>
+<li><code>FROM子查詢</code></li>
+</ul>
+<p>可以利用 <code>FROM子查詢</code> 來 <code>去除</code>  <code>HAVING子句</code></p>
+<pre><code class="lang-sql">-- Query 1
+SELECT dept_name, avg(salary) as avg_salary
+FROM instructor
+GROUP BY dept_name
+HAVING avg(salary) &gt; 42000;
+</code></pre>
+<p>等價於</p>
+<pre><code class="lang-sql">-- Query 2
+SELECT dept_name, avg_salary
+FROM (SELECT dept_name, avg(salary)
+     FROM instructor
+     GROUP BY dept_name) AS dept_avg(dept_name, avg_salary)
+WHERE avg_salary &gt; 42000;
+</code></pre>
+<p>該 <code>轉化</code> 的思想在於：<code>HAVING子句</code> 實際上的 <code>執行時機</code> 是在 <code>GROUP BY產生結果關系之後</code>，再對 <code>結果關系(也就是一些分組)</code> 進行 <code>過濾</code>。</p>
+<p>因此，我們可以 <code>先獲得作為結果關系的這些分組</code>，然後再 <code>對這些分組進行過濾</code>。</p>
+<ul>
+<li><code>WITH子句</code></li>
+</ul>
+<p><code>WITH子句</code>：用於定義 <code>僅對包含with子句的查詢可見</code> 的 <code>臨時關系</code></p>
+<pre><code class="lang-sql">WITH dept_total(dept_name, value) AS (SELECT dept_name, sum(salary)
+                                     FROM instructor
+                                     GROUP BY dept_name),
+    dept_total_avg(value) AS (SELECT avg(salary)
+                             FROM dept_total)
+SELECT dept_name
+FROM dept_total, dept_total_avg
+WHERE dept_total.value &gt;= dept_total_avg.value;
+</code></pre>
+<blockquote>
+<p>n.b. 使用 <code>WITH子句</code> 可以 <code>非常有效地</code> 去除 <code>嵌套子查詢</code>。</p>
+<p>如果可能，<code>應當盡量使用WITH子句來消除嵌套子查詢</code></p>
+</blockquote>
+<ul>
+<li><code>標量子查詢 (Scalar Subquery)</code></li>
+</ul>
+<p><code>SQL</code> 會 <code>自動地</code> 將 <code>僅含有單屬性單元組的關系</code>  <code>解包</code>為 <code>單個值</code>。</p>
+<pre><code class="lang-sql">SELECT name
+FROM instructor
+WHERE salary &lt; (SELECT avg(salary)
+               FROM instructor)
+</code></pre>
+<blockquote>
+<p> n.b. 從 <code>本質</code> 上來說， <code>標量子查詢</code> 返回的 <code>數據類型</code> 是確確實實的 <code>關系</code>。</p>
+<p> 只不過，在 <code>SQL</code> 實現中可以自動地 <code>對這種類型的關系</code> 進行 <code>拆包</code>。這類似於 <code>Java</code> 中的 <code>Auto Boxed/Unboxed</code></p>
+<p> <code>SQL編譯器</code> 並無法 <code>檢測</code> <code>標量子查詢</code> 是否真的符合要求。</p>
+<p> 如果在 <code>運行時</code> 發現 <code>需要輸入單個值的地方</code> 所使用的 <code>標量子查詢</code> 包含 <code>多個值</code>，則會導致 <code>運行時錯誤</code></p>
+</blockquote>
+<h3 id="Modifying-Operation"><a href="#Modifying-Operation" class="headerlink" title="Modifying Operation"></a>Modifying Operation</h3><h3 id="Delete-1"><a href="#Delete-1" class="headerlink" title="Delete"></a>Delete</h3><p>考慮該例子的 <code>語句執行順序</code></p>
+<pre><code class="lang-sql">-- This is a wrong example
+DELETE FROM instructor
+WHERE salary &lt; (SELECT avg(salary)
+               FROM instructor)
+</code></pre>
+<p>請註意，<code>我們所編寫的SQL語句</code> 應當 <code>滿足</code> ：在該語句進行 <code>修改性操作</code> 之前，必須先 <code>測試所有的元組</code>，將 <code>符合測試條件的元組</code> 加入到 <code>待刪除列表</code>，之後再 <code>一次性地</code> 執行 <code>修改性操作</code>。</p>
+<p>註意：這裏所說的 <code>修改性操作</code> 不僅僅是指 <code>Delete</code>，包括 <code>Insert</code> 和 <code>Alter</code> 都有 <code>類似的問題</code></p>
+<blockquote>
+<p>該問題類似於 <code>ArrayList的並發修改問題</code>，當我們對 <code>正在遍歷中的列表</code> 進行 <code>修改性操作</code> 時，必須保證 <code>最終的效果</code> 不依賴於 <code>修改性操作所執行的順序</code></p>
+<p>給出 <code>MySQL 8.0</code> 以上版本將 <code>拒絕執行該語句</code> 並且 <code>返回錯誤</code></p>
+<p>1093 - You can’t specify target table ‘instructor’ for update in FROM clause</p>
+</blockquote>
+<h3 id="Insert-1"><a href="#Insert-1" class="headerlink" title="Insert"></a>Insert</h3><p>常用的插入操作</p>
+<pre><code class="lang-sql">INSERT INTO course(course_id, title, dept_name, credits)
+VALUES (&#39;CS-437&#39;, &#39;Database Systems&#39;, &#39;Comp. SCi.&#39;, 4);
+</code></pre>
+<pre><code class="lang-sql">INSERT INTO instructor
+SELECT ID, name, dept_name, 18000
+FROM student
+WHERE dept_name = &#39;Music&#39; AND total_cred &gt; 144;
+</code></pre>
+<hr>
+<pre><code class="lang-sql">-- This is a wrong example
+INSERT INTO student
+SELECT *
+FROM student
+</code></pre>
+<p>該語句 <code>可能會導致無限遞歸插入</code>，這取決於 <code>數據庫的具體實現</code>。</p>
+<blockquote>
+<p>經過實際測試，<code>MySQL 8.0</code> 以上可以 <code>正常地執行該語句</code>，並且 <code>查詢會終止</code>。</p>
+<p>它的 <code>語義</code> 為：將 <code>表中的所有元組</code> 按照 <code>順序</code> <code>克隆一份插入到表的末尾</code></p>
+</blockquote>
+<h3 id="Alter-1"><a href="#Alter-1" class="headerlink" title="Alter"></a>Alter</h3><p>當 <code>update語句</code> 之間 <code>受語句執行順序</code> 所 <code>影響</code> 時，可以使用 <code>case結構</code></p>
+<pre><code class="lang-sql">-- SQL 1
+UPDATE instructor
+SET salary = salary * 1.03
+WHERE salary &gt; 100000
+</code></pre>
+<pre><code class="lang-sql">-- SQL 2
+UPDATE instructor
+SET salary = salary * 1.05
+WHERE salary &lt;= 100000
+</code></pre>
+<p>為了 <code>正確地表達語義</code>，我們可以使用 <code>case</code> 結構來 <code>正確表述執行順序之間相互影響的語句</code></p>
+<pre><code class="lang-sql">UPDATE instructor
+SET salary = CASE
+             WHEN salary &lt;= 100000 THEN salary * 1.05
+             ELSE salary * 1.03
+             END
+</code></pre>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p><b><i>WARNING: This page is built with github, which is controlled by Microsoft, and the integrity of the page is not guaranteed.</i></b></p>
+<p>Please send your comments to email sakurawald@gmail.com</p>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/oj/">oj</a>
+    
+        <a href="/tags/code/">code</a>
+    
+        <a href="/tags/database/">database</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/ai/">ai</a>
+    
+        <a href="/tags/gpt/">gpt</a>
+    
+        <a href="/tags/diffusion/">diffusion</a>
+    
+        <a href="/tags/art/">art</a>
+    
+        <a href="/tags/cg/">cg</a>
+    
+        <a href="/tags/novel-ai/">novel_ai</a>
+    
+        <a href="/tags/cuda/">cuda</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/python/">python</a>
+    
+        <a href="/tags/computation/">computation</a>
+    
+        <a href="/tags/anime/">anime</a>
+    
+        <a href="/tags/draw/">draw</a>
+    
+        <a href="/tags/vim/">vim</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/stl/">stl</a>
+    
+        <a href="/tags/cpp/">cpp</a>
+    
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
+        <a href="/tags/text/">text</a>
+    
+        <a href="/tags/read/">read</a>
+    
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2024 sakurawald</p>
+
+</footer>
+</body>
+</html>
