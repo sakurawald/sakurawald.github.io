@@ -15,8 +15,37 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 24 Sep 2024 03:01:04 GMT</pubDate>
+    <pubDate>Wed, 25 Sep 2024 06:44:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fix the cpu frequency throttle after bad charging</title>
+      <link>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</link>
+      <guid>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</guid>
+      <pubDate>Wed, 25 Sep 2024 05:35:21 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Observation&quot;&gt;&lt;a href=&quot;#Observation&quot; class=&quot;headerlink&quot; title=&quot;Observation&quot;&gt;&lt;/a&gt;Observation&lt;/h1&gt;&lt;p&gt;My cpu frequency is locked to</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cpu/">cpu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>how to fix corrupted packages in archlinux</title>
@@ -200,9 +229,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
       
@@ -293,6 +322,8 @@
       
       
       
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       <category domain="https://sakurawald.github.io/tags/security/">security</category>
@@ -302,8 +333,6 @@
       <category domain="https://sakurawald.github.io/tags/qemu/">qemu</category>
       
       <category domain="https://sakurawald.github.io/tags/kvm/">kvm</category>
-      
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/note/">note</category>
       
@@ -411,9 +440,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
       
       <category domain="https://sakurawald.github.io/tags/note/">note</category>
       
@@ -587,34 +616,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-advanced-sql/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>database intermediate sql</title>
-      <link>https://sakurawald.github.io/posts/database-intermediate-sql/</link>
-      <guid>https://sakurawald.github.io/posts/database-intermediate-sql/</guid>
-      <pubDate>Fri, 29 Apr 2022 07:39:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Intermediate-SQL&quot;&gt;&lt;a href=&quot;#Intermediate-SQL&quot; class=&quot;headerlink&quot; title=&quot;Intermediate SQL&quot;&gt;&lt;/a&gt;Intermediate SQL&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-intermediate-sql/#disqus_thread</comments>
       
     </item>
     

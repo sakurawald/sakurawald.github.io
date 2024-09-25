@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2024-09-24T03:01:04.609Z</updated>
+  <updated>2024-09-25T06:44:14.069Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>fix the cpu frequency throttle after bad charging</title>
+    <link href="https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/"/>
+    <id>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</id>
+    <published>2024-09-25T05:35:21.000Z</published>
+    <updated>2024-09-25T06:44:14.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Observation&quot;&gt;&lt;a href=&quot;#Observation&quot; class=&quot;headerlink&quot; title=&quot;Observation&quot;&gt;&lt;/a&gt;Observation&lt;/h1&gt;&lt;p&gt;My cpu frequency is locked to</summary>
+        
+      
+    
+    
+    
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="cpu" scheme="https://sakurawald.github.io/tags/cpu/"/>
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>how to fix corrupted packages in archlinux</title>
     <link href="https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/"/>
     <id>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</id>
     <published>2024-07-11T15:22:17.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -44,7 +71,7 @@
     <link href="https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/"/>
     <id>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</id>
     <published>2024-06-01T16:16:50.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -75,7 +102,7 @@
     <link href="https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/"/>
     <id>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</id>
     <published>2024-04-20T16:00:32.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -104,7 +131,7 @@
     <link href="https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/"/>
     <id>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</id>
     <published>2024-04-09T10:19:12.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -131,7 +158,7 @@
     <link href="https://sakurawald.github.io/posts/good-application-set/"/>
     <id>https://sakurawald.github.io/posts/good-application-set/</id>
     <published>2024-04-08T05:57:18.000Z</published>
-    <updated>2024-09-24T03:01:04.608Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -152,7 +179,7 @@
     <link href="https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/"/>
     <id>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</id>
     <published>2024-04-06T19:28:32.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -173,7 +200,7 @@
     <link href="https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/"/>
     <id>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</id>
     <published>2024-03-13T19:08:14.000Z</published>
-    <updated>2024-09-24T03:01:04.610Z</updated>
+    <updated>2024-09-25T06:44:14.071Z</updated>
     
     
       
@@ -187,9 +214,9 @@
     
     
     
-    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
-    
     <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
     
     <category term="solution" scheme="https://sakurawald.github.io/tags/solution/"/>
     
@@ -200,7 +227,7 @@
     <link href="https://sakurawald.github.io/posts/apple-magic-touch-pad-review/"/>
     <id>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</id>
     <published>2024-03-05T02:55:04.000Z</published>
-    <updated>2024-09-24T03:01:04.605Z</updated>
+    <updated>2024-09-25T06:44:14.065Z</updated>
     
     
       
@@ -235,7 +262,7 @@
     <link href="https://sakurawald.github.io/posts/text-auto-highlighter-configuration/"/>
     <id>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</id>
     <published>2023-12-31T20:48:47.000Z</published>
-    <updated>2024-09-24T03:01:04.612Z</updated>
+    <updated>2024-09-25T06:44:14.073Z</updated>
     
     
       
@@ -260,7 +287,7 @@
     <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
     <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
     <published>2023-12-07T06:22:03.000Z</published>
-    <updated>2024-09-24T03:01:04.608Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -274,6 +301,8 @@
     
     
     
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
     <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
     
     <category term="security" scheme="https://sakurawald.github.io/tags/security/"/>
@@ -284,8 +313,6 @@
     
     <category term="kvm" scheme="https://sakurawald.github.io/tags/kvm/"/>
     
-    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
-    
     <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
     
   </entry>
@@ -295,7 +322,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T20:05:28.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.070Z</updated>
     
     
       
@@ -318,7 +345,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T13:05:28.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.070Z</updated>
     
     
       
@@ -343,7 +370,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T21:10:35.000Z</published>
-    <updated>2024-09-24T03:01:04.610Z</updated>
+    <updated>2024-09-25T06:44:14.071Z</updated>
     
     
       
@@ -370,7 +397,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T21:38:07.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.070Z</updated>
     
     
       
@@ -384,9 +411,9 @@
     
     
     
-    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
-    
     <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
     
     <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
     
@@ -405,7 +432,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-07T23:35:54.000Z</published>
-    <updated>2024-09-24T03:01:04.610Z</updated>
+    <updated>2024-09-25T06:44:14.070Z</updated>
     
     
       
@@ -452,7 +479,7 @@
     <link href="https://sakurawald.github.io/posts/database-schema-design/"/>
     <id>https://sakurawald.github.io/posts/database-schema-design/</id>
     <published>2023-01-22T12:01:39.000Z</published>
-    <updated>2024-09-24T03:01:04.608Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -478,7 +505,7 @@ $$
     <link href="https://sakurawald.github.io/posts/play-on-anbox/"/>
     <id>https://sakurawald.github.io/posts/play-on-anbox/</id>
     <published>2022-06-09T08:41:00.000Z</published>
-    <updated>2024-09-24T03:01:04.609Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -503,7 +530,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-relational-query-language/"/>
     <id>https://sakurawald.github.io/posts/database-relational-query-language/</id>
     <published>2022-04-30T01:53:00.000Z</published>
-    <updated>2024-09-24T03:01:04.608Z</updated>
+    <updated>2024-09-25T06:44:14.069Z</updated>
     
     
       
@@ -529,7 +556,7 @@ $$
     <link href="https://sakurawald.github.io/posts/database-advanced-sql/"/>
     <id>https://sakurawald.github.io/posts/database-advanced-sql/</id>
     <published>2022-04-29T12:35:00.000Z</published>
-    <updated>2024-09-24T03:01:04.605Z</updated>
+    <updated>2024-09-25T06:44:14.065Z</updated>
     
     
       
@@ -540,32 +567,6 @@ $$
 $$
 &#92;boxed{@}
 % Color</summary>
-        
-      
-    
-    
-    
-    
-    <category term="database" scheme="https://sakurawald.github.io/tags/database/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>database intermediate sql</title>
-    <link href="https://sakurawald.github.io/posts/database-intermediate-sql/"/>
-    <id>https://sakurawald.github.io/posts/database-intermediate-sql/</id>
-    <published>2022-04-29T07:39:00.000Z</published>
-    <updated>2024-09-24T03:01:04.605Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Intermediate-SQL&quot;&gt;&lt;a href=&quot;#Intermediate-SQL&quot; class=&quot;headerlink&quot; title=&quot;Intermediate SQL&quot;&gt;&lt;/a&gt;Intermediate SQL&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</summary>
         
       
     
