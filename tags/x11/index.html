@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>make persistent windows 11 usb sticker</title>
+    <title>sakurawald&#39;s blog</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
-    
-<link rel="stylesheet" href="/css/post.css">
-
 <meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
+<header>
+    <p>== post ==</p>
+</header>
 <main>
-    <article>
-        <h1 id="Make-persistent-windows-11-usb-sticker"><a href="#Make-persistent-windows-11-usb-sticker" class="headerlink" title="Make persistent windows 11 usb sticker"></a>Make persistent windows 11 usb sticker</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Sometimes, you just don’t want to run windows as a <code>guest os</code> in your linux <code>host os</code>.<br>And you don’t want to install windows inside your <code>internal disk</code>.<br>You may want to install the windows os inside your <code>usb sticker</code>, and boot it in any other hardware to use the hardware. (mostly the gpu hardware)</p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Download-rufus"><a href="#Download-rufus" class="headerlink" title="Download rufus"></a>Download rufus</h3><p>Download <code>rufus (4.4.2103)</code> and run it.</p>
-<h3 id="Enable-hdd-support"><a href="#Enable-hdd-support" class="headerlink" title="Enable hdd support"></a>Enable hdd support</h3><p>In <code>rufus</code>, press <code>alt + f</code> to enable <code>hdd list</code></p>
-<h3 id="Burn-windows-installer-into-your-sticker"><a href="#Burn-windows-installer-into-your-sticker" class="headerlink" title="Burn windows installer into your sticker"></a>Burn windows installer into your sticker</h3><p>For <code>UEFI</code> bios, you need to select <code>partition scheme</code> as <code>gpt</code><br><strong>and select <code>image option</code> as <code>windows to go</code></strong></p>
-<blockquote>
-<p>If you just use <code>dd</code> command, then you are making a sticker for <code>windows installer sticker</code> purpose.<br>You need to select <code>windows to go</code> so that <code>refus</code> will create the <code>gpt partition</code> and <code>extract all windows files from windows iso</code>, then you just made a sticker for <code>windows to go (a persistent windows inside your sticker</code><br>In other words, <code>rufus</code> will detect the <code>iso file</code> as <code>windows installer iso</code> and then emulates the <code>windows install process</code> in your host os</p>
-</blockquote>
-
-    </article>
+    
+        <article>
+            <p>October 23, 2024
+                <a href="/./posts/favorite-krunner-plugins/">favorite krunner plugins</a>
+            </p>
+        </article>
+    
 </main>
 <footer>
     <hr>

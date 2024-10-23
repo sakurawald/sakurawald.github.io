@@ -15,8 +15,39 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 25 Sep 2024 06:46:17 GMT</pubDate>
+    <pubDate>Wed, 23 Oct 2024 03:16:24 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>favorite krunner plugins</title>
+      <link>https://sakurawald.github.io/posts/favorite-krunner-plugins/</link>
+      <guid>https://sakurawald.github.io/posts/favorite-krunner-plugins/</guid>
+      <pubDate>Wed, 23 Oct 2024 00:54:09 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;My-favorite-krunner-plugins&quot;&gt;&lt;a href=&quot;#My-favorite-krunner-plugins&quot; class=&quot;headerlink&quot; title=&quot;My favorite krunner plugins&quot;&gt;&lt;/a&gt;My</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
+      
+      <category domain="https://sakurawald.github.io/tags/dekstop/">dekstop</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/favorite-krunner-plugins/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>fix the cpu frequency throttle after bad charging</title>
@@ -38,9 +69,9 @@
       
       <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
-      <category domain="https://sakurawald.github.io/tags/cpu/">cpu</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cpu/">cpu</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/#disqus_thread</comments>
@@ -384,9 +415,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-kde/#disqus_thread</comments>
@@ -588,34 +619,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-relational-query-language/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>database advanced sql</title>
-      <link>https://sakurawald.github.io/posts/database-advanced-sql/</link>
-      <guid>https://sakurawald.github.io/posts/database-advanced-sql/</guid>
-      <pubDate>Fri, 29 Apr 2022 12:35:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Advanced-SQL&quot;&gt;&lt;a href=&quot;#Advanced-SQL&quot; class=&quot;headerlink&quot; title=&quot;Advanced SQL&quot;&gt;&lt;/a&gt;Advanced SQL&lt;/h1&gt;
-$$
-&#92;boxed{@}
-% Color</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-advanced-sql/#disqus_thread</comments>
       
     </item>
     
