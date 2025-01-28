@@ -14,5 +14,4 @@ tags:
 - calculator: in hand math evaluation.
 - dictionary: quick query for single word.
 - terminate applications: kill that one.
-- system settings: none
 - unit converter: none

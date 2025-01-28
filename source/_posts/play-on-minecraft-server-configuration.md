@@ -1,6 +1,6 @@
 ---
 title: "play on minecraft server configuration"
-date: 2023-05-01 05:04:88
+date: 2023-05-01 05:04:00
 tags: 
  - minecraft
 ---

@@ -1,6 +1,6 @@
 ---
 title: "play on kde"
-date: 2023-04-26 22:04:88
+date: 2023-04-26 22:04:00
 tags: 
  - kde
  - os
