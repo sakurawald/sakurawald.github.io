@@ -26,10 +26,10 @@ Picking Emacs for the following reasons:
 4. Has gradle project support, and it can integrate with lombok via adding a vmargs for jdtls server.
 
 The weakness: 
-1. Emacs is single-threaded, the async IO performance is poor. This is noticable while sending a lsp completion request. (Can be solved by `lsp-bridge` package)
-2. Emacs is usable for pure Java development environment, for a specific framework project, like Minecraft Mod Development, still lacking the framework-supporting package. It's usable, but not sweet like Jetbrains Idea. (You have to bear the manual in mind, and face the compiler directly.)
-3. Some sweet features is missing, like grep a text over all 3rd jar files in building environment. The workaround is to download a copy of sources of your 3rd files. (Or using something like `lsp-treemacs` to list symbols in workspace, and dig more in the lsp protocol.)
-4. Better indexing for symbols in 3rd libraries. The de-compiler failed to de-compile some class files, causing the goto-reference failed. (Can be solved by not using the default `fernflower` decompiler.)
+1. Emacs is single-threaded, the async IO performance is poor. This is noticable while sending a lsp completion request. (Solution: use `lsp-bridge` package.)
+2. Emacs is usable for pure Java development environment, for a specific framework project, like Minecraft Mod Development, still lacking the framework-supporting package. It's usable, but not sweet like Jetbrains Idea. (Solution: write it yourself man!)
+3. Some sweet features is missing, like grep a text over all 3rd jar files in building environment. The workaround is to download a copy of sources of your 3rd files. (Solution: use `lsp-treemacs` pakcage and write the other functions based on lsp protocol.)
+4. Better indexing for symbols in 3rd libraries. The de-compiler failed to de-compile some class files, causing the goto-reference failed. (Solution: use `cfr` de-compiler instead of the default `fernflower` compiler.)
 
 ## Conclusion
 Emacs wins for context-switching, text editing experience. 
