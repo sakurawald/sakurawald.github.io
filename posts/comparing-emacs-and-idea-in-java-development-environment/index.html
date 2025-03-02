@@ -2,29 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sakurawald&#39;s blog</title>
+    <title>comparing-emacs-and-idea-in-java-development-environment</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
-<header>
-    <p>== post ==</p>
-</header>
 <main>
-    
-        <article>
-            <p>September 25, 2024
-                <a href="/./posts/fix-the-cpu-frequency-throttle-after-bad-charging/">fix the cpu frequency throttle after bad charging</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>March 05, 2024
-                <a href="/./posts/apple-magic-touch-pad-review/">apple magic touch pad review</a>
-            </p>
-        </article>
-    
+    <article>
+        <h1 id="Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment"><a href="#Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment" class="headerlink" title="Comparing the Emacs and Jetbrains Idea in Java Development environment."></a>Comparing the Emacs and Jetbrains Idea in Java Development environment.</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>The Emacs is a general purpose editor for all editing tasks, including Java. We configure the Emacs using <code>lsp-java</code> package with <code>jdtls server</code>.<br>The Jetbrains Idea is a feature-rich IDE for Java language.</p>
+<h2 id="Why-Emacs"><a href="#Why-Emacs" class="headerlink" title="Why Emacs?"></a>Why Emacs?</h2><p>Picking Emacs for the following reasons:</p>
+<ol>
+<li>Fully keyboard-driven development workflow. You can do window-switcting, buffer-swapping, cursor-jumping, mark-setting easily without a mouse.</li>
+<li>Emacs has the best vi emulator named evil-mode, which is better than IdeaVim plugin in Jetbrains platform, and alternatives in vscode.</li>
+<li>Fully customizable editor, the keymap in Emacs is easier and powerful, and it’s also easy to compose a new command based on existing commands.</li>
+<li>Has gradle project support, and it can integrate with lombok via adding a vmargs for jdtls server.</li>
+</ol>
+<p>The weakness: </p>
+<ol>
+<li>Emacs is single-threaded, the async IO performance is poor. This is noticable while sending a lsp completion request.</li>
+<li>Emacs is usable for pure Java development environment, for a specific framework project, like Minecraft Mod Development, still lacking the framework-supporting package. It’s usable, but not sweet like Jetbrains Idea.</li>
+<li>Some sweet features is missing, like grep a text over all 3rd jar files in building environment. The workaround is to download a copy of sources of your 3rd files.</li>
+<li>Better indexing for symbols in 3rd libraries. The de-compiler failed to de-compile some class files, causing the goto-reference failed.</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Emacs wins for context-switching, text editing experience.<br>Jetbrain Idea wins for async IO, better xref, rich framework-specific extension support.</p>
+
+    </article>
 </main>
 <footer>
     <hr>

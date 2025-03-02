@@ -15,8 +15,43 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 28 Jan 2025 00:36:03 GMT</pubDate>
+    <pubDate>Sun, 02 Mar 2025 06:10:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>comparing-emacs-and-idea-in-java-development-environment</title>
+      <link>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</link>
+      <guid>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</guid>
+      <pubDate>Sun, 02 Mar 2025 04:38:42 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/review/">review</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emacs/">emacs</category>
+      
+      <category domain="https://sakurawald.github.io/tags/ide/">ide</category>
+      
+      <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/tools/">tools</category>
+      
+      <category domain="https://sakurawald.github.io/tags/java/">java</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>favorite krunner plugins</title>
@@ -442,11 +477,11 @@
       
       
       
+      <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
+      
       <category domain="https://sakurawald.github.io/tags/note/">note</category>
       
       <category domain="https://sakurawald.github.io/tags/vim/">vim</category>
-      
-      <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-vim/#disqus_thread</comments>
@@ -591,34 +626,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>database relational query language</title>
-      <link>https://sakurawald.github.io/posts/database-relational-query-language/</link>
-      <guid>https://sakurawald.github.io/posts/database-relational-query-language/</guid>
-      <pubDate>Sat, 30 Apr 2022 01:53:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>
-
-&lt;h1&gt;Formal RQL&lt;/h1&gt;
-&lt;div contenteditable=&quot;true&quot; spellcheck=&quot;false&quot; class=&quot;mathjax-block md-end-block md-math-block md-rawblock&quot;</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-relational-query-language/#disqus_thread</comments>
       
     </item>
     
