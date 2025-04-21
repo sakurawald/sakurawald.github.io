@@ -30,7 +30,6 @@ The weakness:
 2. Emacs is usable for pure Java development environment, for a specific framework project, like Minecraft Mod Development, still lacking the framework-supporting package. It's usable, but not sweet like Jetbrains Idea. (Solution: write it yourself man!)
 3. Some sweet features is missing, like grep a text over all 3rd jar files in building environment. The workaround is to download a copy of sources of your 3rd files. (Solution: use `lsp-treemacs` pakcage and write the other functions based on lsp protocol.)
 4. Better indexing for symbols in 3rd libraries. The de-compiler failed to de-compile some class files, causing the goto-reference failed. (Solution: use `cfr` de-compiler instead of the default `fernflower`.)
-5. Bad for 
 
 ## Conclusion
 Emacs wins for context-switching, text editing experience. 
