@@ -15,8 +15,32 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 02 Mar 2025 15:37:30 GMT</pubDate>
+    <pubDate>Wed, 30 Apr 2025 13:44:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title></title>
+      <link>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</link>
+      <guid>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</guid>
+      <pubDate>Wed, 30 Apr 2025 13:44:05 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;hr&gt;
+&lt;p&gt;title: fix-sddm-black-screen-issue&lt;br&gt;date: 2025-04-30 20:35:31&lt;br&gt;tags:</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>comparing-emacs-and-idea-in-java-development-environment</title>
@@ -599,33 +623,6 @@ $$
       
       
       <comments>https://sakurawald.github.io/posts/database-schema-design/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>play on anbox</title>
-      <link>https://sakurawald.github.io/posts/play-on-anbox/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-anbox/</guid>
-      <pubDate>Thu, 09 Jun 2022 08:41:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Install-and-Launch-Anbox&quot;&gt;&lt;a href=&quot;#Install-and-Launch-Anbox&quot; class=&quot;headerlink&quot; title=&quot;Install and Launch Anbox&quot;&gt;&lt;/a&gt;Install and</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
-      <category domain="https://sakurawald.github.io/tags/android/">android</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-anbox/#disqus_thread</comments>
       
     </item>
     
