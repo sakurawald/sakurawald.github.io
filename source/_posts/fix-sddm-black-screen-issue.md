@@ -1,5 +1,5 @@
 ---
-title: fix-sddm-black-screen-issue
+title: "Fix sddm black screen issue"
 date: 2025-04-30 20:35:31
 tags: 
  - os
