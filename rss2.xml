@@ -15,27 +15,34 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 30 Apr 2025 13:47:47 GMT</pubDate>
+    <pubDate>Sun, 04 May 2025 02:54:53 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title></title>
+      <title>Fix sddm black screen issue</title>
       <link>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</link>
       <guid>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</guid>
-      <pubDate>Wed, 30 Apr 2025 13:47:47 GMT</pubDate>
+      <pubDate>Wed, 30 Apr 2025 11:35:31 GMT</pubDate>
       
         
         
           
           
-      <description>&lt;hr&gt;
-&lt;p&gt;title: “Fix sddm black screen issue”&lt;br&gt;date: 2025-04-30 20:35:31&lt;br&gt;tags:</description>
+      <description>&lt;h1 id=&quot;Fix-sddm-black-screen-issue&quot;&gt;&lt;a href=&quot;#Fix-sddm-black-screen-issue&quot; class=&quot;headerlink&quot; title=&quot;Fix sddm black screen issue&quot;&gt;&lt;/a&gt;Fix</description>
           
         
       
       
       
       
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>

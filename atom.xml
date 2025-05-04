@@ -6,7 +6,7 @@
   <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
   
   <link href="https://sakurawald.github.io/"/>
-  <updated>2025-04-30T13:47:47.179Z</updated>
+  <updated>2025-05-04T02:54:53.596Z</updated>
   <id>https://sakurawald.github.io/</id>
   
   <author>
@@ -17,24 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>Fix sddm black screen issue</title>
     <link href="https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/"/>
     <id>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</id>
-    <published>2025-04-30T13:47:47.179Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <published>2025-04-30T11:35:31.000Z</published>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;hr&gt;
-&lt;p&gt;title: “Fix sddm black screen issue”&lt;br&gt;date: 2025-04-30 20:35:31&lt;br&gt;tags:</summary>
+    <summary type="html">&lt;h1 id=&quot;Fix-sddm-black-screen-issue&quot;&gt;&lt;a href=&quot;#Fix-sddm-black-screen-issue&quot; class=&quot;headerlink&quot; title=&quot;Fix sddm black screen issue&quot;&gt;&lt;/a&gt;Fix</summary>
         
       
     
     
     
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+    <category term="laptop" scheme="https://sakurawald.github.io/tags/laptop/"/>
     
   </entry>
   
@@ -43,7 +50,7 @@
     <link href="https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/"/>
     <id>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</id>
     <published>2025-03-02T04:38:42.000Z</published>
-    <updated>2025-04-30T13:47:47.176Z</updated>
+    <updated>2025-05-04T02:54:53.592Z</updated>
     
     
       
@@ -76,7 +83,7 @@
     <link href="https://sakurawald.github.io/posts/favorite-krunner-plugins/"/>
     <id>https://sakurawald.github.io/posts/favorite-krunner-plugins/</id>
     <published>2024-10-23T00:54:09.000Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -105,7 +112,7 @@
     <link href="https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/"/>
     <id>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</id>
     <published>2024-09-25T05:35:21.000Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -132,7 +139,7 @@
     <link href="https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/"/>
     <id>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</id>
     <published>2024-07-11T15:22:17.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -155,7 +162,7 @@
     <link href="https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/"/>
     <id>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</id>
     <published>2024-06-01T16:16:50.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -186,7 +193,7 @@
     <link href="https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/"/>
     <id>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</id>
     <published>2024-04-20T16:00:32.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -215,7 +222,7 @@
     <link href="https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/"/>
     <id>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</id>
     <published>2024-04-09T10:19:12.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -242,7 +249,7 @@
     <link href="https://sakurawald.github.io/posts/good-application-set/"/>
     <id>https://sakurawald.github.io/posts/good-application-set/</id>
     <published>2024-04-08T05:57:18.000Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -263,7 +270,7 @@
     <link href="https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/"/>
     <id>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</id>
     <published>2024-04-06T19:28:32.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -284,7 +291,7 @@
     <link href="https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/"/>
     <id>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</id>
     <published>2024-03-13T19:08:14.000Z</published>
-    <updated>2025-04-30T13:47:47.181Z</updated>
+    <updated>2025-05-04T02:54:53.598Z</updated>
     
     
       
@@ -311,7 +318,7 @@
     <link href="https://sakurawald.github.io/posts/apple-magic-touch-pad-review/"/>
     <id>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</id>
     <published>2024-03-05T02:55:04.000Z</published>
-    <updated>2025-04-30T13:47:47.175Z</updated>
+    <updated>2025-05-04T02:54:53.592Z</updated>
     
     
       
@@ -346,7 +353,7 @@
     <link href="https://sakurawald.github.io/posts/text-auto-highlighter-configuration/"/>
     <id>https://sakurawald.github.io/posts/text-auto-highlighter-configuration/</id>
     <published>2023-12-31T20:48:47.000Z</published>
-    <updated>2025-04-30T13:47:47.183Z</updated>
+    <updated>2025-05-04T02:54:53.600Z</updated>
     
     
       
@@ -371,7 +378,7 @@
     <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
     <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
     <published>2023-12-07T06:22:03.000Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       
@@ -406,7 +413,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/"/>
     <id>https://sakurawald.github.io/posts/play-on-minecraft-server-configuration/</id>
     <published>2023-04-30T20:04:00.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.597Z</updated>
     
     
       
@@ -429,7 +436,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-kde/"/>
     <id>https://sakurawald.github.io/posts/play-on-kde/</id>
     <published>2023-04-26T13:04:00.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.597Z</updated>
     
     
       
@@ -454,7 +461,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-vim/"/>
     <id>https://sakurawald.github.io/posts/play-on-vim/</id>
     <published>2023-02-23T21:10:35.000Z</published>
-    <updated>2025-04-30T13:47:47.181Z</updated>
+    <updated>2025-05-04T02:54:53.598Z</updated>
     
     
       
@@ -481,7 +488,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-android-emulator/"/>
     <id>https://sakurawald.github.io/posts/play-on-android-emulator/</id>
     <published>2023-02-21T21:38:07.000Z</published>
-    <updated>2025-04-30T13:47:47.180Z</updated>
+    <updated>2025-05-04T02:54:53.597Z</updated>
     
     
       
@@ -516,7 +523,7 @@
     <link href="https://sakurawald.github.io/posts/play-on-stable-diffusion/"/>
     <id>https://sakurawald.github.io/posts/play-on-stable-diffusion/</id>
     <published>2023-02-07T23:35:54.000Z</published>
-    <updated>2025-04-30T13:47:47.181Z</updated>
+    <updated>2025-05-04T02:54:53.597Z</updated>
     
     
       
@@ -563,7 +570,7 @@
     <link href="https://sakurawald.github.io/posts/database-schema-design/"/>
     <id>https://sakurawald.github.io/posts/database-schema-design/</id>
     <published>2023-01-22T12:01:39.000Z</published>
-    <updated>2025-04-30T13:47:47.179Z</updated>
+    <updated>2025-05-04T02:54:53.596Z</updated>
     
     
       

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Fix sddm black screen issue</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
     
 <link rel="stylesheet" href="/css/post.css">
@@ -13,16 +13,7 @@
 <body>
 <main>
     <article>
-        <hr>
-<p>title: “Fix sddm black screen issue”<br>date: 2025-04-30 20:35:31<br>tags: </p>
-<ul>
-<li>os</li>
-<li>hardware</li>
-<li>linux</li>
-<li>laptop</li>
-</ul>
-<hr>
-<h1 id="Fix-sddm-black-screen-issue"><a href="#Fix-sddm-black-screen-issue" class="headerlink" title="Fix sddm black screen issue"></a>Fix sddm black screen issue</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>After packages update, use <code>poweroff</code> to shutdown the machine normally.<br>Change the memory stickers and disk stickers of the machine, and reboot the machine.<br>The <code>sddm</code> screen is black.</p>
+        <h1 id="Fix-sddm-black-screen-issue"><a href="#Fix-sddm-black-screen-issue" class="headerlink" title="Fix sddm black screen issue"></a>Fix sddm black screen issue</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>After packages update, use <code>poweroff</code> to shutdown the machine normally.<br>Change the memory stickers and disk stickers of the machine, and reboot the machine.<br>The <code>sddm</code> screen is black.</p>
 <h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>When power on, my laptop boots into the operating system, and running <code>/usr/lib/Xorg</code> in <code>tty2</code>.<br>The screen is black, with an underline on left-top, not blinking.<br>I can switch to <code>tty1</code> and <code>tty3</code> using <code>ctrl + alt + f1/f3</code>.<br>I can login into <code>tty3</code> as <code>root</code> user, and issue commands.<br>In <code>tty3</code>, I can see only <code>/usr/bin/Xorg</code> and <code>/usr/bin/sddm-greater</code> is running.<br>Using <code>journalctl -b | grep sddm</code>, the <code>sddm-greater</code> says it fails it fails to authticate with <code>pam</code>. (Though this is not the real reason, the failure of <code>graphics</code> cause the faillure of <code>pam</code>)<br>The network and bluetooth works in <code>tty3</code>.</p>
 <h2 id="Attempts"><a href="#Attempts" class="headerlink" title="Attempts"></a>Attempts</h2><ul>
 <li>Try to update the packages using <code>pacman -Syu</code>.</li>
@@ -81,9 +72,11 @@
     
         <a href="/tags/dekstop/">dekstop</a>
     
-        <a href="/tags/cpu/">cpu</a>
-    
         <a href="/tags/os/">os</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/cpu/">cpu</a>
     
         <a href="/tags/security/">security</a>
     
@@ -111,13 +104,13 @@
     
         <a href="/tags/usb/">usb</a>
     
-        <a href="/tags/android/">android</a>
-    
         <a href="/tags/android/">#android</a>
     
         <a href="/tags/emulator/">#emulator</a>
     
         <a href="/tags/root/">root</a>
+    
+        <a href="/tags/android/">android</a>
     
         <a href="/tags/emulator/">emulator</a>
     
@@ -157,11 +150,11 @@
     
         <a href="/tags/cpp/">cpp</a>
     
+        <a href="/tags/dynamic-programming/">dynamic_programming</a>
+    
         <a href="/tags/text/">text</a>
     
         <a href="/tags/read/">read</a>
-    
-        <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
         <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
