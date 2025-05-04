@@ -6,9 +6,9 @@ tags:
  - hardware
  - linux
  - laptop
- ---
+---
  
-# Fix sddm black screen issue
+ # Fix sddm black screen issue
 
 ## Background
 After packages update, use `poweroff` to shutdown the machine normally.
