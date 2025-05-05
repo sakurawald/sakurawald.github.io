@@ -17,7 +17,357 @@
 <h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>I am using KDE desktop environment, the <code>fn + f5/f6</code> key means <code>XF86MonBrightnessUp</code> and <code>XF86MonBrightnessDown</code>.<br>When <code>XF86MonBrightness&#123;Up/Down&#125;</code> keys is received by the linux os, the KDE pops up a tip says the brightness of <code>Built-in Screen</code> is changed.<br>However, the physical brightness of my monitor changed nothing.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The <code>xbacklight</code> says the value is only <code>48%</code>, I have to use <code>xbacklight = 100</code> to set the brightness to its max.</p>
 <p>Edit <code>/etc/default/grub</code> to add <code>acpi_backlight=native</code> as <code>kernel parameter</code>.<br>Run <code>grub-mkconfig -o /boot/grub/grub.cfg</code> to re-generate a new grub configuration.<br>Run <code>lsmod | grep asus</code> to check if <code>asus_nb_wmi</code> is loaded.<br>Reboot the laptop, and now <code>XF86MonBrightness&#123;Up/Down&#125;</code> should work.</p>
-
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p>Though the problem is solved, there is still errors inside boot logs using <code>sudo journalctl -b --no-pager | grep -Ei &quot;acpi&quot;</code>:</p>
+<pre><code>May 05 15:12:01 archlinux kernel: Command line: BOOT_IMAGE=/vmlinuz-linux root=UUID=c6778907-ae2c-4dce-b5a9-4925a2885dda rw loglevel=3 nvidia_drm.modeset=1 ibt=off intel_iommu=on iommu=pt acpi_backlight=native
+May 05 15:12:01 archlinux kernel: BIOS-e820: [mem 0x00000000431a6000-0x00000000432c2fff] ACPI data
+May 05 15:12:01 archlinux kernel: BIOS-e820: [mem 0x00000000432c3000-0x00000000434aafff] ACPI NVS
+May 05 15:12:01 archlinux kernel: reserve setup_data: [mem 0x00000000431a6000-0x00000000432c2fff] ACPI data
+May 05 15:12:01 archlinux kernel: reserve setup_data: [mem 0x00000000432c3000-0x00000000434aafff] ACPI NVS
+May 05 15:12:01 archlinux kernel: efi: ACPI=0x432c2000 ACPI 2.0=0x432c2014 TPMFinalLog=0x43376000 SMBIOS=0x4435c000 SMBIOS 3.0=0x4435b000 MEMATTR=0x3581a018 ESRT=0x35a95e98 INITRD=0x310e4998 RNG=0x431df018 TPMEventLog=0x431d6018 
+May 05 15:12:01 archlinux kernel: ACPI: Early table checksum verification disabled
+May 05 15:12:01 archlinux kernel: ACPI: RSDP 0x00000000432C2014 000024 (v02 _ASUS_)
+May 05 15:12:01 archlinux kernel: ACPI: XSDT 0x00000000432C1728 00012C (v01 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: FACP 0x00000000432BC000 000114 (v06 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: DSDT 0x0000000043228000 093D29 (v02 _ASUS_ Notebook 01072009 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: FACS 0x00000000434AA000 000040
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000432BD000 003060 (v02 DptfTb DptfTabl 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: FIDT 0x0000000043227000 00009C (v01 _ASUS_ Notebook 01072009 AMI  00010013)
+May 05 15:12:01 archlinux kernel: ACPI: MSDM 0x0000000043226000 000055 (v03 _ASUS_ Notebook 01072009 ASUS 00000001)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043223000 002D03 (v02 INTEL  DTbtSsdt 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043222000 00038C (v02 PmaxDv Pmax_Dev 00000001 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x000000004321C000 005D34 (v02 CpuRef CpuSsdt  00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043219000 002C01 (v02 SaSsdt SaSsdt   00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043215000 0034E2 (v02 INTEL  IgfxSsdt 00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: HPET 0x0000000043214000 000038 (v01 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: APIC 0x0000000043213000 0001DC (v05 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: MCFG 0x0000000043212000 00003C (v01 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043208000 0095FA (v02 _ASUS_ RplSBTbt 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043206000 001F55 (v02 _ASUS_ Ther_Rvp 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: NHLT 0x0000000043205000 0002F1 (v00 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: LPIT 0x0000000043204000 0000CC (v01 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x0000000043200000 002A83 (v02 _ASUS_ PtidDevc 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431F8000 0076F8 (v02 _ASUS_ TbtTypeC 00000000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: DBGP 0x00000000431F7000 000034 (v01 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: DBG2 0x00000000431F6000 000054 (v00 _ASUS_ Notebook 01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431F4000 00111C (v02 _ASUS_ UsbCTabl 00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: DMAR 0x00000000431F3000 000088 (v01 INTEL  EDK2     00000002      01000013)
+May 05 15:12:01 archlinux kernel: ACPI: FPDT 0x00000000431F2000 000044 (v01 _ASUS_ A M I    01072009 AMI  01000013)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431F0000 0015D0 (v02 INTEL  xh_rplsb 00000000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431EC000 0039DA (v02 SocGpe SocGpe   00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431E8000 0039DA (v02 SocCmn SocCmn   00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: BGRT 0x00000000431E7000 000038 (v01 _ASUS_ Notebook 01072009 AMI  00010013)
+May 05 15:12:01 archlinux kernel: ACPI: UEFI 0x0000000043356000 00063A (v01 INTEL  RstVmdE  00000000 INTL 00000000)
+May 05 15:12:01 archlinux kernel: ACPI: UEFI 0x0000000043355000 00005C (v01 INTEL  RstVmdV  00000000 INTL 00000000)
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0x00000000431E2000 004719 (v01 OemNv2 OemNv2T  00001000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: PHAT 0x00000000431E1000 00064D (v01 _ASUS_ Notebook 00000005 MSFT 0100000D)
+May 05 15:12:01 archlinux kernel: ACPI: TPM2 0x00000000431E0000 00004C (v04 _ASUS_ Notebook 00000001 AMI  00000000)
+May 05 15:12:01 archlinux kernel: ACPI: WSMT 0x0000000043203000 000028 (v01 _ASUS_ Notebook 01072009 AMI  00010013)
+May 05 15:12:01 archlinux kernel: ACPI: Reserving FACP table memory at [mem 0x432bc000-0x432bc113]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving DSDT table memory at [mem 0x43228000-0x432bbd28]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving FACS table memory at [mem 0x434aa000-0x434aa03f]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x432bd000-0x432c005f]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving FIDT table memory at [mem 0x43227000-0x4322709b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving MSDM table memory at [mem 0x43226000-0x43226054]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43223000-0x43225d02]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43222000-0x4322238b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x4321c000-0x43221d33]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43219000-0x4321bc00]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43215000-0x432184e1]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving HPET table memory at [mem 0x43214000-0x43214037]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving APIC table memory at [mem 0x43213000-0x432131db]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving MCFG table memory at [mem 0x43212000-0x4321203b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43208000-0x432115f9]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43206000-0x43207f54]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving NHLT table memory at [mem 0x43205000-0x432052f0]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving LPIT table memory at [mem 0x43204000-0x432040cb]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x43200000-0x43202a82]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431f8000-0x431ff6f7]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving DBGP table memory at [mem 0x431f7000-0x431f7033]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving DBG2 table memory at [mem 0x431f6000-0x431f6053]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431f4000-0x431f511b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving DMAR table memory at [mem 0x431f3000-0x431f3087]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving FPDT table memory at [mem 0x431f2000-0x431f2043]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431f0000-0x431f15cf]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431ec000-0x431ef9d9]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431e8000-0x431eb9d9]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving BGRT table memory at [mem 0x431e7000-0x431e7037]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving UEFI table memory at [mem 0x43356000-0x43356639]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving UEFI table memory at [mem 0x43355000-0x4335505b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving SSDT table memory at [mem 0x431e2000-0x431e6718]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving PHAT table memory at [mem 0x431e1000-0x431e164c]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving TPM2 table memory at [mem 0x431e0000-0x431e004b]
+May 05 15:12:01 archlinux kernel: ACPI: Reserving WSMT table memory at [mem 0x43203000-0x43203027]
+May 05 15:12:01 archlinux kernel: ACPI: PM-Timer IO Port: 0x1808
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x02] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x03] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x04] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x05] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x06] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x07] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x08] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x09] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0a] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0b] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0c] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0d] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0e] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x0f] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x10] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x11] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x12] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x13] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x14] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x15] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x16] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x17] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: LAPIC_NMI (acpi_id[0x00] high edge lint[0x1])
+May 05 15:12:01 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+May 05 15:12:01 archlinux kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+May 05 15:12:01 archlinux kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+May 05 15:12:01 archlinux kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+May 05 15:12:01 archlinux kernel: Kernel command line: BOOT_IMAGE=/vmlinuz-linux root=UUID=c6778907-ae2c-4dce-b5a9-4925a2885dda rw loglevel=3 nvidia_drm.modeset=1 ibt=off intel_iommu=on iommu=pt acpi_backlight=native
+May 05 15:12:01 archlinux kernel: ACPI: Core revision 20240827
+May 05 15:12:01 archlinux kernel: ACPI: PM: Registering ACPI NVS region [mem 0x432c3000-0x434aafff] (1998848 bytes)
+May 05 15:12:01 archlinux kernel: ACPI FADT declares the system doesn&#39;t support PCIe ASPM, so disable it
+May 05 15:12:01 archlinux kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+May 05 15:12:01 archlinux kernel: ACPI: Added _OSI(Module Device)
+May 05 15:12:01 archlinux kernel: ACPI: Added _OSI(Processor Device)
+May 05 15:12:01 archlinux kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
+May 05 15:12:01 archlinux kernel: ACPI: Added _OSI(Processor Aggregator Device)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PC00.I2C1.TPL1], AE_NOT_FOUND (20240827/dswload2-162)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Scope (0x0010)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PC00.I2C3.TPL1], AE_NOT_FOUND (20240827/dswload2-162)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Scope (0x0010)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS01._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS01._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS02._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS02._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS03._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS03._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS04._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS04._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS05._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS05._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS06._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS06._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS07._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS07._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS08._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS08._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS09._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS09._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS10._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS10._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS11._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS11._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS12._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS12._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS13._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS13._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS14._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.HS14._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS01._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS01._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS02._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS02._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS03._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS03._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS04._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS04._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS05._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS05._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS06._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS06._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS07._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS07._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS08._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS08._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS09._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS09._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS10._UPC], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI BIOS Error (bug): Failure creating named object [\_SB.PC00.XHCI.RHUB.SS10._PLD], AE_ALREADY_EXISTS (20240827/dswload2-326)
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20240827/psobject-220)
+May 05 15:12:01 archlinux kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+May 05 15:12:01 archlinux kernel: ACPI: 16 ACPI AML tables successfully acquired and loaded
+May 05 15:12:01 archlinux kernel: ACPI Error: AE_NOT_FOUND, While resolving a named reference package element - \_SB_.PC00.LPCB.SEN2 (20240827/dspkginit-438)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8702AE8000 000394 (v02 PmRef  Cpu0Cst  00003001 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8702AE4800 00053F (v02 PmRef  Cpu0Ist  00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B87033E2600 0001AB (v02 PmRef  Cpu0Psd  00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8702AE4000 0004B5 (v02 PmRef  Cpu0Hwp  00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8702ACE000 001BAF (v02 PmRef  ApIst    00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8703814000 001038 (v02 PmRef  ApHwp    00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8703816000 001349 (v02 PmRef  ApPsd    00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Dynamic OEM Table Load:
+May 05 15:12:01 archlinux kernel: ACPI: SSDT 0xFFFF8B8702AD3000 000FBB (v02 PmRef  ApCst    00003000 INTL 20200717)
+May 05 15:12:01 archlinux kernel: ACPI: Interpreter enabled
+May 05 15:12:01 archlinux kernel: ACPI: PM: (supports S0 S3 S4 S5)
+May 05 15:12:01 archlinux kernel: ACPI: Using IOAPIC for interrupt routing
+May 05 15:12:01 archlinux kernel: PCI: Using host bridge windows from ACPI; if necessary, use &quot;pci=nocrs&quot; and report a bug
+May 05 15:12:01 archlinux kernel: ACPI: Enabled 10 GPEs in block 00 to 7F
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.PEG1.PXP_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.RP13.PXP_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.RP02.PXP_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.RP21.PXP_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.RP25.PXP_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.XHCI.RHUB.HS14.BTRT: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.XHCI.RHUB.HS14.DBTR: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.PAUD: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.I2C0.PXTC: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.I2C0.PTPL: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.I2C1.PXTC: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.I2C3.PXTC: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_SB_.PC00.CNVW.WRST: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_TZ_.FN00: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_TZ_.FN01: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_TZ_.FN02: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_TZ_.FN03: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \_TZ_.FN04: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \PIN_: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \SPR4: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \SPR5: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: \SPR6: New power resource
+May 05 15:12:01 archlinux kernel: ACPI: PCI Root Bridge [PC00] (domain 0000 [bus 00-e0])
+May 05 15:12:01 archlinux kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+May 05 15:12:01 archlinux kernel: acpi PNP0A08:00: _OSC: OS now controls [PCIeHotplug SHPCHotplug PME AER PCIeCapability LTR DPC]
+May 05 15:12:01 archlinux kernel: acpi PNP0A08:00: FADT indicates ASPM is unsupported, using BIOS configuration
+May 05 15:12:01 archlinux kernel: acpiphp: Slot [1] registered
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 1
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 0
+May 05 15:12:01 archlinux kernel: ACPI: bus type USB registered
+May 05 15:12:01 archlinux kernel: PCI: Using ACPI for IRQ routing
+May 05 15:12:01 archlinux kernel: pnp: PnP ACPI init
+May 05 15:12:01 archlinux kernel: pnp: PnP ACPI: found 6 devices
+May 05 15:12:01 archlinux kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+May 05 15:12:01 archlinux kernel: ACPI: AC: AC Adapter [ADP0] (on-line)
+May 05 15:12:01 archlinux kernel: ACPI: button: Lid Switch [LID0]
+May 05 15:12:01 archlinux kernel: ACPI: button: Sleep Button [SLPB]
+May 05 15:12:01 archlinux kernel: ACPI: button: Power Button [PWRB]
+May 05 15:12:01 archlinux kernel: ACPI: thermal: Thermal Zone [TZ00] (28 C)
+May 05 15:12:01 archlinux kernel: ACPI: battery: Slot [BAT0] (battery present)
+May 05 15:12:01 archlinux kernel: hpet_acpi_add: no address or irqs in _CRS
+May 05 15:12:01 archlinux kernel: ACPI: bus type drm_connector registered
+May 05 15:12:01 archlinux kernel: ACPI: video: [Firmware Bug]: ACPI(PEGP) defines _DOD but not _DOS
+May 05 15:12:01 archlinux kernel: ACPI: video: Video Device [PEGP] (multi-head: yes  rom: yes  post: no)
+May 05 15:12:01 archlinux kernel: ACPI: video: Video Device [GFX0] (multi-head: yes  rom: no  post: no)
+May 05 15:12:01 archlinux kernel: acpi_call: loading out-of-tree module taints kernel.
+May 05 15:12:01 archlinux kernel: acpi_call: module verification failed: signature and/or required key missing - tainting kernel
+May 05 15:12:01 archlinux systemd-modules-load[543]: Inserted module &#39;acpi_call&#39;
+May 05 15:12:01 archlinux kernel: ACPI: bus type thunderbolt registered
+May 05 15:12:02 archlinux kernel: ACPI: battery: new hook: ASUS Battery Extension
+May 05 15:12:05 archlinux asusd[1113]: [INFO  rog_platform::power] Power: Checking &quot;/sys/devices/pci0000:00/0000:00:1f.0/ACPI0003:00/power_supply/ADP0&quot;
+May 05 15:12:13 archlinux kernel: platform CSC3551:00: deferred probe pending: Serial bus multi instantiate pseudo device driver: failed to allocate SPI device CSC3551:00 from
+ACPI
+</code></pre>
     </article>
 </main>
 <footer>
@@ -60,21 +410,21 @@
     
         <a href="/tags/algorithm/">algorithm</a>
     
-        <a href="/tags/kde/">kde</a>
+        <a href="/tags/os/">os</a>
     
         <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/kde/">kde</a>
     
         <a href="/tags/x11/">x11</a>
     
         <a href="/tags/dekstop/">dekstop</a>
     
-        <a href="/tags/laptop/">laptop</a>
-    
         <a href="/tags/monitor/">monitor</a>
     
         <a href="/tags/keyboard/">keyboard</a>
-    
-        <a href="/tags/os/">os</a>
     
         <a href="/tags/cpu/">cpu</a>
     
@@ -118,6 +468,8 @@
     
         <a href="/tags/solution/">solution</a>
     
+        <a href="/tags/minecraft/">minecraft</a>
+    
         <a href="/tags/ai/">ai</a>
     
         <a href="/tags/gpt/">gpt</a>
@@ -148,15 +500,13 @@
     
         <a href="/tags/cpp/">cpp</a>
     
-        <a href="/tags/text/">text</a>
-    
-        <a href="/tags/read/">read</a>
+        <a href="/tags/branch-and-bound/">branch_and_bound</a>
     
         <a href="/tags/dynamic-programming/">dynamic_programming</a>
     
-        <a href="/tags/branch-and-bound/">branch_and_bound</a>
+        <a href="/tags/text/">text</a>
     
-        <a href="/tags/minecraft/">minecraft</a>
+        <a href="/tags/read/">read</a>
     
 </p>
 

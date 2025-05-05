@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 05 May 2025 07:14:37 GMT</pubDate>
+    <pubDate>Mon, 05 May 2025 07:20:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -71,11 +71,11 @@
       
       <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
-      
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>
@@ -135,9 +135,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
       
       <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
       
@@ -359,9 +359,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
       
@@ -452,9 +452,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/security/">security</category>
       
@@ -514,9 +514,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
-      
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-kde/#disqus_thread</comments>
