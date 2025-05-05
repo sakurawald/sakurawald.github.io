@@ -21,4 +21,9 @@ When `XF86MonBrightness{Up/Down}` keys is received by the linux os, the KDE pops
 However, the physical brightness of my monitor changed nothing.
 
 ## Solution
-The `xbacklight` says the value is only `42%`, I have to use `xbacklight = 100` to set the brightness to its max.
+The `xbacklight` says the value is only `48%`, I have to use `xbacklight = 100` to set the brightness to its max.
+
+Edit `/etc/default/grub` to add `acpi_backlight=native` as `kernel parameter`.
+Run `grub-mkconfig -o /boot/grub/grub.cfg` to re-generate a new grub configuration.
+Run `lsmod | grep asus ` to check if `asus_nb_wmi` is loaded.
+Reboot the laptop, and now `XF86MonBrightness{Up/Down}` should work.
