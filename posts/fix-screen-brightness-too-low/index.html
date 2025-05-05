@@ -2,23 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sakurawald&#39;s blog</title>
+    <title>fix-screen-brightness-too-low</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
-<header>
-    <p>== post ==</p>
-</header>
 <main>
-    
-        <article>
-            <p>April 18, 2022
-                <a href="/./posts/solve-multiple-knapsack-problem-and-pebble-merge-problem/">solve multiple-knapsack problem &amp; pebble merge problem</a>
-            </p>
-        </article>
-    
+    <article>
+        <h1 id="Fix-screen-brightness-too-low"><a href="#Fix-screen-brightness-too-low" class="headerlink" title="Fix screen brightness too low"></a>Fix screen brightness too low</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>My built-in monitor in laptop has a 400 nits max brightness, but it still looks very dark.</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>I am using KDE desktop environment, the <code>fn + f5/f6</code> key means <code>XF86MonBrightnessUp</code> and <code>XF86MonBrightnessDown</code>.<br>When <code>XF86MonBrightness&#123;Up/Down&#125;</code> keys is received by the linux os, the KDE pops up a tip says the brightness of <code>Built-in Screen</code> is changed.<br>However, the physical brightness of my monitor changed nothing.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The <code>xbacklight</code> says the value is only <code>42%</code>, I have to use <code>xbacklight = 100</code> to set the brightness to its max.</p>
+
+    </article>
 </main>
 <footer>
     <hr>

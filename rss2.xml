@@ -15,8 +15,41 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 04 May 2025 02:54:53 GMT</pubDate>
+    <pubDate>Mon, 05 May 2025 06:35:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fix-screen-brightness-too-low</title>
+      <link>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</link>
+      <guid>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</guid>
+      <pubDate>Mon, 05 May 2025 05:29:43 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-screen-brightness-too-low&quot;&gt;&lt;a href=&quot;#Fix-screen-brightness-too-low&quot; class=&quot;headerlink&quot; title=&quot;Fix screen brightness too</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/keyboard/">keyboard</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Fix sddm black screen issue</title>
@@ -40,9 +73,9 @@
       
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>
@@ -602,34 +635,6 @@
       
       
       <comments>https://sakurawald.github.io/posts/play-on-stable-diffusion/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>database schema design</title>
-      <link>https://sakurawald.github.io/posts/database-schema-design/</link>
-      <guid>https://sakurawald.github.io/posts/database-schema-design/</guid>
-      <pubDate>Sun, 22 Jan 2023 12:01:39 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Database-Design&quot;&gt;&lt;a href=&quot;#Database-Design&quot; class=&quot;headerlink&quot; title=&quot;Database Design&quot;&gt;&lt;/a&gt;Database Design&lt;/h1&gt;
-$$
-&#92;boxed{@}
-%</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/database/">database</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/database-schema-design/#disqus_thread</comments>
       
     </item>
     
