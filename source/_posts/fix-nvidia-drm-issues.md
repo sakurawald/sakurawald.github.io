@@ -29,6 +29,6 @@ If I connect my laptop to an external monitor, strange things happens:
 - In `Tray Panel`, the `Plasma Renderer` says `Software rendering in use`.
 
 ## Solution
-Add `nvidia_drm.fbdev=1` into your kernel parameters.
+Add `nvidia_drm.fbdev=1` into your kernel parameters, to let `KWin` runs with `hardware rendering` mode.
 
 
