@@ -15,8 +15,47 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 05 May 2025 07:20:20 GMT</pubDate>
+    <pubDate>Wed, 07 May 2025 14:07:47 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fix-nvidia-drm-issues</title>
+      <link>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</link>
+      <guid>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</guid>
+      <pubDate>Wed, 07 May 2025 12:48:59 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-nvidia-drm-issues&quot;&gt;&lt;a href=&quot;#Fix-nvidia-drm-issues&quot; class=&quot;headerlink&quot; title=&quot;Fix nvidia drm issues&quot;&gt;&lt;/a&gt;Fix nvidia drm</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/drm/">drm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>fix-screen-brightness-too-low</title>
@@ -40,9 +79,9 @@
       
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
-      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
-      
       <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
       
       <category domain="https://sakurawald.github.io/tags/keyboard/">keyboard</category>
       
@@ -71,11 +110,11 @@
       
       <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>
@@ -135,9 +174,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
       <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
       <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
       
@@ -359,9 +398,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
       
@@ -452,9 +491,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       <category domain="https://sakurawald.github.io/tags/security/">security</category>
       
@@ -514,9 +553,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/os/">os</category>
-      
       <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
       
       
       <comments>https://sakurawald.github.io/posts/play-on-kde/#disqus_thread</comments>
@@ -586,55 +625,6 @@
       
       
       <comments>https://sakurawald.github.io/posts/play-on-android-emulator/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>play on stable-diffusion</title>
-      <link>https://sakurawald.github.io/posts/play-on-stable-diffusion/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-stable-diffusion/</guid>
-      <pubDate>Tue, 07 Feb 2023 23:35:54 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Play-on-Stable-Diffusion&quot;&gt;&lt;a href=&quot;#Play-on-Stable-Diffusion&quot; class=&quot;headerlink&quot; title=&quot;Play on Stable-Diffusion&quot;&gt;&lt;/a&gt;Play on</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
-      
-      <category domain="https://sakurawald.github.io/tags/ai/">ai</category>
-      
-      <category domain="https://sakurawald.github.io/tags/gpt/">gpt</category>
-      
-      <category domain="https://sakurawald.github.io/tags/diffusion/">diffusion</category>
-      
-      <category domain="https://sakurawald.github.io/tags/art/">art</category>
-      
-      <category domain="https://sakurawald.github.io/tags/cg/">cg</category>
-      
-      <category domain="https://sakurawald.github.io/tags/novel-ai/">novel_ai</category>
-      
-      <category domain="https://sakurawald.github.io/tags/cuda/">cuda</category>
-      
-      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
-      
-      <category domain="https://sakurawald.github.io/tags/python/">python</category>
-      
-      <category domain="https://sakurawald.github.io/tags/computation/">computation</category>
-      
-      <category domain="https://sakurawald.github.io/tags/anime/">anime</category>
-      
-      <category domain="https://sakurawald.github.io/tags/draw/">draw</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-stable-diffusion/#disqus_thread</comments>
       
     </item>
     

@@ -2,53 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sakurawald&#39;s blog</title>
+    <title>fix-nvidia-drm-issues</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
 <meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
-<header>
-    <p>== post ==</p>
-</header>
 <main>
-    
-        <article>
-            <p>April 18, 2022
-                <a href="/./posts/solve-multiple-knapsack-problem-and-pebble-merge-problem/">solve multiple-knapsack problem &amp; pebble merge problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>April 17, 2022
-                <a href="/./posts/solve-circle-permutation-problem/">solve circle permutation problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>April 12, 2022
-                <a href="/./posts/solve-back-tracking-and-iddfs/">solve back-tracking &amp; IDDFS</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>March 26, 2022
-                <a href="/./posts/solve-set-partition-problem/">solve set partition problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>March 25, 2022
-                <a href="/./posts/solve-majority-problem/">solve majority problem</a>
-            </p>
-        </article>
-    
-        <article>
-            <p>September 12, 2021
-                <a href="/./posts/expression-evaluation/">expression evulation</a>
-            </p>
-        </article>
-    
+    <article>
+        <h1 id="Fix-nvidia-drm-issues"><a href="#Fix-nvidia-drm-issues" class="headerlink" title="Fix nvidia drm issues"></a>Fix nvidia drm issues</h1><h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>I have two external monitors, the first one is a 2.5k Samsung monitor, and athe second one is a Asus monitor.</p>
+<p>If I use the built-in monitor in laptop, everything works perfect.<br>If I connect my laptop to an external monitor, strange things happens:</p>
+<ul>
+<li>In KDE, if the <code>global scale</code> is <code>100%</code>, then qt widgets renders normally.</li>
+<li>In KDE, if the <code>global scale</code> is <code>150%</code> or <code>200%</code>, then qt widgets renders corruptly until a re-paint.</li>
+<li>For both Samsung monitor and Asus monitor, the external monitor screen becomes black, only with a movable mouse cursor. (The desktop environment is running normally, but renders black with only a mouse cursor)</li>
+<li>For both Samsung monitor and Asus monitor, awake from a sleep makes the external screen becomes black.</li>
+<li>For both Samsung monitor and Asus monitor, there is a possibility to <code>reboot</code> into black screen in external monitor (The desktop environment is running normally, but renders black with only a mouse cursor).</li>
+<li>Only for the Asus monitor, move the windows will cause a compisition flickers on top-left of the moved window, and you can see the things below the moved window.</li>
+<li>In <code>Tray Panel</code>, the <code>Plasma Renderer</code> says <code>Software rendering in use</code>.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Add <code>nvidia_drm.fbdev=1</code> into your kernel parameters.</p>
+
+    </article>
 </main>
 <footer>
     <hr>
