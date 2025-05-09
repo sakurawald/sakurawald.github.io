@@ -15,8 +15,47 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 07 May 2025 14:08:54 GMT</pubDate>
+    <pubDate>Fri, 09 May 2025 13:26:11 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fix-window-tearing-in-high-monitor-refresh-rate</title>
+      <link>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/</link>
+      <guid>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/</guid>
+      <pubDate>Fri, 09 May 2025 12:18:55 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-window-tearing-in-high-monitor-refresh-rate&quot;&gt;&lt;a href=&quot;#Fix-window-tearing-in-high-monitor-refresh-rate&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hadrware/">hadrware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/gpu/">gpu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/driver/">driver</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>fix-nvidia-drm-issues</title>
@@ -588,43 +627,6 @@
       
       
       <comments>https://sakurawald.github.io/posts/play-on-vim/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>play on android emulator</title>
-      <link>https://sakurawald.github.io/posts/play-on-android-emulator/</link>
-      <guid>https://sakurawald.github.io/posts/play-on-android-emulator/</guid>
-      <pubDate>Tue, 21 Feb 2023 21:38:07 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Android-solutions-for-linux&quot;&gt;&lt;a href=&quot;#Android-solutions-for-linux&quot; class=&quot;headerlink&quot; title=&quot;Android solutions for</description>
-          
-        
-      
-      
-      
-      
-      
-      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
-      
-      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
-      
-      <category domain="https://sakurawald.github.io/tags/note/">note</category>
-      
-      <category domain="https://sakurawald.github.io/tags/android/">android</category>
-      
-      <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
-      
-      <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
-      
-      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
-      
-      
-      <comments>https://sakurawald.github.io/posts/play-on-android-emulator/#disqus_thread</comments>
       
     </item>
     
