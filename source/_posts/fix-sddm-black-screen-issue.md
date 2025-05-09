@@ -32,3 +32,4 @@ The network and bluetooth works in `tty3`.
 
 ## Solution
 Boot into `bios` and toggle the `graphics settings` to only use `discrete GPU`. (It looks like there is some bugs in ASUS hardware. In hybrid mode, the GPU switch is controlled by the power and the phase of booting.)
+Don't use `nvidia-settings` to generate the Xorg configuration file, just delete the `/etc/X11/xorg.conf` file.
