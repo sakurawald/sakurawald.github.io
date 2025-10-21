@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -20,52 +11,7 @@
   </url>
   
   <url>
-    <loc>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://sakurawald.github.io/posts/tweak-kde-preferences/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -146,6 +92,24 @@
   </url>
   
   <url>
+    <loc>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sakurawald.github.io/posts/android-emulator-methods-in-linux/</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -156,6 +120,42 @@
   
   <url>
     <loc>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/expression-evaluation/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</loc>
     
     <lastmod>2025-10-21</lastmod>
     

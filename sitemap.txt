@@ -1,11 +1,5 @@
-https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/
 https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/
-https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/
 https://sakurawald.github.io/posts/tweak-kde-preferences/
-https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/
-https://sakurawald.github.io/posts/expression-evaluation/
-https://sakurawald.github.io/posts/fix-nvidia-drm-issues/
-https://sakurawald.github.io/posts/fix-screen-brightness-too-low/
 https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/
 https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/
 https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/
@@ -14,8 +8,14 @@ https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/
 https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/
 https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/
 https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/
+https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/
+https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/
 https://sakurawald.github.io/posts/android-emulator-methods-in-linux/
 https://sakurawald.github.io/posts/apple-magic-touch-pad-review/
+https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/
+https://sakurawald.github.io/posts/expression-evaluation/
+https://sakurawald.github.io/posts/fix-nvidia-drm-issues/
+https://sakurawald.github.io/posts/fix-screen-brightness-too-low/
 https://sakurawald.github.io/
 https://sakurawald.github.io/tags/android/
 https://sakurawald.github.io/tags/emulator/
