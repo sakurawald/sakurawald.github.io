@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>guide to install qubes on qemu</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Guide-to-install-qubes-on-qemu"><a href="#Guide-to-install-qubes-on-qemu" class="headerlink" title="Guide to install qubes on qemu"></a>Guide to install qubes on qemu</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>This post is a guide for someone who want to install qubes (the reasonable security os in the world) on their virtual machine. Our targets are:</p>
+<ol>
+<li>Use qemu (a virtual machine emulator) to emulate a virtual machine (which contains all the emulated hardware and firmware, e.g. cpu, memory, disk, nic, video card and bios)</li>
+<li>Let the qubes installer believe it runs in a bare-metal machine (Include feature-pass like VT-d and IOMMU)</li>
+<li>Setup the guest of (qubes os) and run virtual machines inside the guest os. (Nested Virtialization)</li>
+</ol>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Create-an-qemu-instance-for-qubes-os"><a href="#Create-an-qemu-instance-for-qubes-os" class="headerlink" title="Create an qemu instance for qubes os"></a>Create an qemu instance for qubes os</h3><p>First, we need an empty disk for our guest os. </p>
+<pre><code class="lang-sh">qemu-img create -f qeubes.raw 128G
+</code></pre>
+<p>Second, we need to start our qemu-instance</p>
+<pre><code class="lang-sh">#!/usr/bin/env bash
+
+qemu-system-x86_64 \
+  -machine q35,accel=kvm,kernel-irqchip=split,igd-passthru=on \
+  -device intel-iommu,intremap=on \
+  -netdev user,id=net0 \
+  -device e1000,netdev=net0 \
+  -cpu host -smp 12 \
+  -m 32G \
+  -cdrom /media/mozart/images/Qubes-R4.1.2-x86_64.iso \
+  -boot menu=on \
+  -drive file=/media/mozart/qemu/qubes/qubes.raw,format=raw \
+  -vga qxl \
+  -spice port=5900,addr=127.0.0.1,disable-ticketing=on,image-compression=off,playback-compression=off
+</code></pre>
+<blockquote>
+<p>While using spice video protocol, there will no any output in the console.<br>If you get nothing output, then it means you start the qemu instance successfully.</p>
+<p>WARNING: the parameter <code>igd-passthru=on</code> seems useless, you can remove this parameter</p>
+</blockquote>
+<p>Run the shell script and then open your favorite viewer which supports <code>spice</code> video protocol.</p>
+<p>Here are some FOSS viewers that works in linux platform: spicy, virt-viewer, tigervnc and realvnc</p>
+<blockquote>
+<p>I highly recommend <code>spicy</code> viewer, which supports <code>spice</code> protocol so that you can copy and paste files conveniently, and this viewer supports better in mouse control.<br>In some guest os, the viewer can’t detect the real cursor inside the guest os, so these viewer will create a virtual cursor (looks like a black dot). So here comes the problems: the position between virtual cursor and real cursor will de-sync. Once the de-sync happens, you will find that you can’t move to the edges of the host os (Because the viewer thinks the virtual cursor is going to escape the viewer, so these viewer will release the mouse focus, which means you can’t move your real cursor to the edges inside guest of)</p>
+<p>Use <code>virt-viewer</code> for vnc connection.</p>
+<p>If using <code>spice</code>, it’s possible there may be some input latency randomly (e.g. right click the desktop). (It seems like some irq takes most of cpu-time, and the whole guest os stuck.) Also, even you install <code>spice-vdagentd</code> and <code>spice-server</code> in the guest os will not solve this performance issue. Try: some other solutions to tweak spice parameters<br>However, <code>vnc</code> works like a charm.</p>
+<p>compression is disabled for localhost only connection, so that the input/output latency can be greatly reduced.</p>
+</blockquote>
+<h3 id="Run-the-qubes-installer"><a href="#Run-the-qubes-installer" class="headerlink" title="Run the qubes installer"></a>Run the qubes installer</h3><p> Qubes Installer will check if the machine enables <code>VT-x</code> and <code>IOMMU</code> feature, so here we need to pass these 2 features from host os to the guest os. (If you succeed, then the installer will not reminder you this tip).</p>
+<p> Because the feature is passed from your host os, so your need to enable these features in your bios. (I mean, the bios in the host os)</p>
+<p>In the installer, we accept the <code>default settings</code> the installer recommended and we setup a default user account.</p>
+<p>NOTICE: once the installer finish its work, it will login the desktop and auto start <code>sys-net</code> VM.<br>However, it’s very possible you failed to start <code>sys-net</code> VM and get the error message </p>
+<pre><code class="lang-plain">[Dom0] Error
+[&#39;/usr/bin/qvm-start&#39;, &#39;sys-firewall&#39;] failed:
+stdout: &quot;&quot;
+stderr: &quot;Start failed: internal error: Unable to reset PCI device 0000:00:02.0&quot;: no FLR, PM reset or bus reset available, see /var/log/libvirt/libxl/libxl-driver.log for details
+</code></pre>
+<p>At this time, qubes has finish all the configuration, so you can just ignore this error message and reboot to login the desktop.</p>
+<h3 id="Run-the-VM-inside-qubes"><a href="#Run-the-VM-inside-qubes" class="headerlink" title="Run the VM inside qubes"></a>Run the VM inside qubes</h3><p>If you pass VT-d and IOMMU features successfully from host os into the guest os (the qubes os), then you can run VM inside qubes easily.</p>
+<p>For <code>sys-net</code> VM, if you assign the <code>NIC device</code> for the VM, then you need to do these 2 things to let the VM started.</p>
+<h4 id="Disable-the-PCI-reset-strict-in-sys-net-VM"><a href="#Disable-the-PCI-reset-strict-in-sys-net-VM" class="headerlink" title="Disable the PCI-reset-strict in sys-net VM"></a>Disable the PCI-reset-strict in <code>sys-net</code> VM</h4><pre><code class="lang-sh">qvm-pci ls sys-net
+qvm-pci detach sys-net [BACKEND:DEVICE_ID]
+qvm-pci attach --persistent sys-net [BACKEND:DEVICE_ID] -o no-strict-reset=true
+</code></pre>
+<blockquote>
+<p>The <code>device_id</code> is the <code>NIC device</code> assigned to <code>sys-net</code> VM</p>
+</blockquote>
+<h4 id="Set-the-virtualization-mode-of-sys-net-VM-to-PV"><a href="#Set-the-virtualization-mode-of-sys-net-VM-to-PV" class="headerlink" title="Set the virtualization-mode of sys-net VM to PV"></a>Set the virtualization-mode of <code>sys-net</code> VM to <code>PV</code></h4><p>Change the virtualization-mode of <code>sys-net</code> VM from <code>HVM</code> to <code>PV</code>, so that the VM can start successfully. (This is the way to solve the error of NIC)</p>
+<pre><code class="lang-sh">qvm-prefs sys-net virt_mode pv
+</code></pre>
+<p>Now, you can launch <code>firefox</code> and it should work.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://wiki.qemu.org/Features/VT-d">https://wiki.qemu.org/Features/VT-d</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.xenproject.org/wiki/Xen_PCI_Passthrough">https://wiki.xenproject.org/wiki/Xen_PCI_Passthrough</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF">https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.qubes-os.org/doc/pci-troubleshooting/">https://www.qubes-os.org/doc/pci-troubleshooting/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.qubes-os.org/doc/how-to-use-pci-devices/#additional-attach-options">https://www.qubes-os.org/doc/how-to-use-pci-devices/#additional-attach-options</a></li>
+<li><a target="_blank" rel="noopener" href="https://forum.qubes-os.org/t/sys-net-not-starting-because-it-is-unable-to-reset-pci-device/15056">https://forum.qubes-os.org/t/sys-net-not-starting-because-it-is-unable-to-reset-pci-device/15056</a></li>
+<li><a target="_blank" rel="noopener" href="https://forum.qubes-os.org/t/configure-strict-reset-for-pci-devices/13568">https://forum.qubes-os.org/t/configure-strict-reset-for-pci-devices/13568</a></li>
+<li><a target="_blank" rel="noopener" href="https://forum.qubes-os.org/t/installing-qubes-unable-to-reset-pci-device/14943">https://forum.qubes-os.org/t/installing-qubes-unable-to-reset-pci-device/14943</a></li>
+</ol>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

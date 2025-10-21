@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fix-screen-brightness-too-low</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Fix-screen-brightness-too-low"><a href="#Fix-screen-brightness-too-low" class="headerlink" title="Fix screen brightness too low"></a>Fix screen brightness too low</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>My built-in monitor in laptop has a 400 nits max brightness, but it still looks very dark.</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>I am using KDE desktop environment, the <code>fn + f5/f6</code> key means <code>XF86MonBrightnessUp</code> and <code>XF86MonBrightnessDown</code>.<br>When <code>XF86MonBrightness&#123;Up/Down&#125;</code> keys is received by the linux os, the KDE pops up a tip says the brightness of <code>Built-in Screen</code> is changed.<br>However, the physical brightness of my monitor changed nothing.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>The <code>xbacklight</code> says the value is only <code>48%</code>, I have to use <code>xbacklight = 100</code> to set the brightness to its max.</p>
+<p>Edit <code>/etc/default/grub</code> to add <code>acpi_backlight=native</code> as <code>kernel parameter</code>.<br>Run <code>grub-mkconfig -o /boot/grub/grub.cfg</code> to re-generate a new grub configuration.<br>Run <code>lsmod | grep asus</code> to check if <code>asus_nb_wmi</code> is loaded.<br>Reboot the laptop, and now <code>XF86MonBrightness&#123;Up/Down&#125;</code> should work.</p>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

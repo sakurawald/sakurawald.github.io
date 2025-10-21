@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>how to let chrome browser auto clean datas on exit</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="How-to-let-chrome-browser-auto-clean-datas-on-exit"><a href="#How-to-let-chrome-browser-auto-clean-datas-on-exit" class="headerlink" title="How to let chrome browser auto clean datas on exit"></a>How to let chrome browser auto clean datas on exit</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>As we all know, the world’s biggest ad provider <code>google</code> refuse to provide an easy way to auto clean browser history. We can still set our <code>custom policy</code> to enable the <code>hidden feature</code> in <code>chrome browser</code></p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Create-our-custom-policy-file"><a href="#Create-our-custom-policy-file" class="headerlink" title="Create our custom policy file"></a>Create our custom policy file</h3><pre><code>mkdir /etc/opt/chrome/policies/managed
+cd /etc/opt/chrome/policies/managed
+touch custom_policy.json
+</code></pre><h3 id="Edit-the-policy-file"><a href="#Edit-the-policy-file" class="headerlink" title="Edit the policy file"></a>Edit the policy file</h3><pre><code>&#123;
+&quot;ClearBrowsingDataOnExitList&quot;: [
+ &quot;browsing_history&quot;,
+ &quot;download_history&quot;,
+ &quot;cookies_and_other_site_data&quot;,
+ &quot;cached_images_and_files&quot;,
+ &quot;password_signin&quot;,
+ &quot;autofill&quot;,
+ &quot;site_settings&quot;,
+ &quot;hosted_app_data&quot;
+]
+&#125;
+</code></pre><h3 id="Test-the-policy-file"><a href="#Test-the-policy-file" class="headerlink" title="Test the policy file"></a>Test the policy file</h3><p>Open chrome browser and enter <code>chrome://policy</code></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.chromium.org/administrators/linux-quick-start/">https://www.chromium.org/administrators/linux-quick-start/</a></li>
+</ol>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

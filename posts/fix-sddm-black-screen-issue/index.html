@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fix sddm black screen issue</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Fix-sddm-black-screen-issue"><a href="#Fix-sddm-black-screen-issue" class="headerlink" title="Fix sddm black screen issue"></a>Fix sddm black screen issue</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>After packages update, use <code>poweroff</code> to shutdown the machine normally.<br>Change the memory stickers and disk stickers of the machine, and reboot the machine.<br>The <code>sddm</code> screen is black.</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>When power on, my laptop boots into the operating system, and running <code>/usr/lib/Xorg</code> in <code>tty2</code>.<br>The screen is black, with an underline on left-top, not blinking.<br>I can switch to <code>tty1</code> and <code>tty3</code> using <code>ctrl + alt + f1/f3</code>.<br>I can login into <code>tty3</code> as <code>root</code> user, and issue commands.<br>In <code>tty3</code>, I can see only <code>/usr/bin/Xorg</code> and <code>/usr/bin/sddm-greater</code> is running.<br>Using <code>journalctl -b | grep sddm</code>, the <code>sddm-greater</code> says it fails it fails to authticate with <code>pam</code>. (Though this is not the real reason, the failure of <code>graphics</code> cause the faillure of <code>pam</code>)<br>The network and bluetooth works in <code>tty3</code>.</p>
+<h2 id="Attempts"><a href="#Attempts" class="headerlink" title="Attempts"></a>Attempts</h2><ul>
+<li>Try to update the packages using <code>pacman -Syu</code>.</li>
+<li>Try to re-install <code>pam</code>, <code>pambase</code> and <code>sddm</code>.</li>
+<li>Try to modify the nvidia parameters for kernel.</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Boot into <code>bios</code> and toggle the <code>graphics settings</code> to only use <code>discrete GPU</code>. (It looks like there is some bugs in ASUS hardware. In hybrid mode, the GPU switch is controlled by the power and the phase of booting.)<br>Don’t use <code>nvidia-settings</code> to generate the Xorg configuration file, just delete the <code>/etc/X11/xorg.conf</code> file.</p>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

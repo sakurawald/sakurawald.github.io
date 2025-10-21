@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comparing-emacs-and-idea-in-java-development-environment</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment"><a href="#Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment" class="headerlink" title="Comparing the Emacs and Jetbrains Idea in Java Development environment."></a>Comparing the Emacs and Jetbrains Idea in Java Development environment.</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>The Emacs is a general purpose editor for all editing tasks, including Java. We configure the Emacs using <code>lsp-java</code> package with <code>jdtls server</code>.<br>The Jetbrains Idea is a feature-rich IDE for Java language.</p>
+<h2 id="Why-Emacs"><a href="#Why-Emacs" class="headerlink" title="Why Emacs?"></a>Why Emacs?</h2><p>Picking Emacs for the following reasons:</p>
+<ol>
+<li>Fully keyboard-driven development workflow. You can do window-switcting, buffer-swapping, cursor-jumping, mark-setting easily without a mouse.</li>
+<li>Emacs has the best vi emulator named evil-mode, which is better than IdeaVim plugin in Jetbrains platform, and alternatives in vscode.</li>
+<li>Fully customizable editor, the keymap in Emacs is easier and powerful, and it’s also easy to compose a new command based on existing commands.</li>
+<li>Has gradle project support, and it can integrate with lombok via adding a vmargs for jdtls server.</li>
+</ol>
+<p>The weakness: </p>
+<ol>
+<li>Emacs is single-threaded, the async IO performance is poor. This is noticable while sending a lsp completion request. (Solution: use <code>lsp-bridge</code> package.)</li>
+<li>Emacs is usable for pure Java development environment, for a specific framework project, like Minecraft Mod Development, still lacking the framework-supporting package. It’s usable, but not sweet like Jetbrains Idea. (Solution: write it yourself man!)</li>
+<li>Some sweet features is missing, like grep a text over all 3rd jar files in building environment. The workaround is to download a copy of sources of your 3rd files. (Solution: use <code>lsp-treemacs</code> pakcage and write the other functions based on lsp protocol.)</li>
+<li>Better indexing for symbols in 3rd libraries. The de-compiler failed to de-compile some class files, causing the goto-reference failed. (Solution: use <code>cfr</code> de-compiler instead of the default <code>fernflower</code>.)</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Emacs wins for context-switching, text editing experience.<br>Jetbrain Idea wins for async IO, better xref, rich framework-specific extension support.</p>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

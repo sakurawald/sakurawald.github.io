@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>expression evulation</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ol>
+<li>Given a string, including: + - * / ^ () and numbers.</li>
+<li>Evaluate this string.</li>
+</ol>
+<p>eg: <code>2*((11+3)*(2+3)^2)+2</code> = <code>702</code></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>Expression evaluation problem: Operand stack and operator stack need to be handled properly. Operand stack only needs to be scanned and stacked one by one according to the high-order priority of the string, while operator stack needs to correctly handle the priority of operators. Operators scanned in the future may affect previous operators. (Therefore, the idea of ​​recursive solution is clear.)</p>
+<p>Recursive solution of reverse Polish notation: Use the implicit function call stack to handle operator priority, and treat each part of the expression as a token of different sizes, such as (3+6/2) and 100 can be regarded as 1 token.</p>
+<p>Regarding the priority of operators, when processing 4*3^2, we still scan according to the high-order priority rule of the string.</p>
+<p>Each token_value() function call stack contains 1 operator or operand</p>
+<p>When the recursive top-down process is completed, we scan and read the entire expression</p>
+<p>Next, in the recursive bottom-up process, we will calculate each part of the expression one by one, and replace the calculation results of the expression part into the expression</p>
+<p>According to the operator priority corresponding to the implicit function call stack during recursion, we successfully make operand 3 correctly perform ^ operation with operand 2,</p>
+<p>Instead of incorrectly performing <em> operation with operand 4 (although we scanned operand 4 and operator </em> first)</p>
+<p>Next, we only need to complete the recursive bottom-up process step by step to complete the calculation of the entire expression</p>
+<p>Finally complete the calculation of the entire expression</p>
+<h2 id="Solution-Recursive"><a href="#Solution-Recursive" class="headerlink" title="Solution: Recursive"></a>Solution: Recursive</h2><pre><code>#include &lt;iostream&gt;
+#include &lt;math.h&gt;
+using namespace std;
+
+typedef int number;
+number token_value(int priority) &#123;
+    number res;
+    if (priority == 0) &#123;
+        res = 0;
+        char c = cin.peek();
+        if (c == &#39;(&#39;) &#123;
+            cin.get(); // get (
+            res = token_value(3); // as a new expression
+            cin.get();  // get )
+        &#125; 
+        while (isdigit(c)) &#123; // read a num
+            res = (10 * res) + (c % 48); // Nice Try.
+            cin.get(); // get digit
+            c = cin.peek();
+        &#125;
+    &#125; else &#123;
+        res = token_value(priority - 1);
+        while (true) &#123;
+            char op = cin.peek();
+            if (priority == 1 &amp;&amp; op == &#39;^&#39;) &#123;
+                cin.get(); // get ^
+                number val = token_value(priority - 1);
+                res = round(pow(res, val));
+            &#125; else if (priority == 2 &amp;&amp; (op == &#39;*&#39; || op == &#39;/&#39;)) &#123;
+                cin.get(); // get * or /
+                number val = token_value(priority - 1);
+                op == &#39;*&#39; ? res *= val : res /= val;
+            &#125; else if (priority == 3 &amp;&amp; (op == &#39;+&#39; || op == &#39;-&#39;)) &#123;
+                cin.get(); // get + or -
+                number val = token_value(priority - 1);
+                op == &#39;+&#39; ? res += val : res -= val;
+            &#125; else break;
+       &#125;
+   &#125;
+    return res;
+&#125;
+
+int main() &#123;
+    cout &lt;&lt; token_value(3);
+    return 0;
+&#125;
+</code></pre><h2 id="Solution-Iterative"><a href="#Solution-Iterative" class="headerlink" title="Solution: Iterative"></a>Solution: Iterative</h2><pre><code>#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+map&lt;char, int&gt; priority_map&#123;&#123;'+', 1&#125;,
+                            &#123;'-', 1&#125;,
+                            &#123;'*', 2&#125;,
+                            &#123;'/', 2&#125;,
+                            &#123;'^', 3&#125;&#125;;
+typedef int number;
+stack&lt;number&gt; nums;
+stack&lt;char&gt; ops;
+
+void eval() &#123;
+  number num2 = nums.top(); nums.pop();
+  number num1 = nums.top(); nums.pop();
+  char op = ops.top(); ops.pop();
+
+  if (op == &#39;+&#39;) nums.push(num1 + num2);
+  if (op == &#39;-&#39;) nums.push(num1 - num2);
+  if (op == &#39;*&#39;) nums.push(num1 * num2);
+  if (op == &#39;/&#39;) nums.push(num1 / num2);
+  if (op == &#39;^&#39;) nums.push(round(pow(num1, num2)));
+&#125;
+
+int main() &#123;
+  /* Trans InOrderExpr to PostOrderExpr */
+  while (cin.peek() != &#39;\n&#39;) &#123;
+    // get digit.
+    if (isdigit(cin.peek())) &#123;
+      number num = 0;
+      while (isdigit(cin.peek())) &#123;
+        num = (num * 10) + cin.peek() % 48;
+        cin.get();
+      &#125;
+      nums.push(num);
+    &#125; else &#123;
+      // get operators.
+      if (cin.peek() == &#39;(&#39;) &#123;
+        ops.push(cin.peek()); // push (
+        cin.get(); // get (
+      &#125; else if (cin.peek() == &#39;)&#39;) &#123;
+        while (ops.top() != &#39;(&#39;) eval();
+        ops.pop(); // pop (
+        cin.get(); // get )
+      &#125; else &#123;
+        while (!ops.empty() &amp;&amp; priority_map[ops.top()] &gt;= priority_map[cin.peek()]) eval();
+        ops.push(cin.peek());
+        cin.get(); // get operator
+      &#125;
+    &#125;
+  &#125;
+
+  /* Calc PostorderExpr */
+  while (!ops.empty()) eval();
+
+  /* Output */
+  cout &lt;&lt; nums.top();
+&#125;
+</code></pre>
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

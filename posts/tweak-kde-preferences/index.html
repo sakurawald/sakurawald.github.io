@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tweak KDE preferences</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="KDE使用偏好"><a href="#KDE使用偏好" class="headerlink" title="KDE使用偏好"></a>KDE使用偏好</h1><h2 id="保持桌面的整潔"><a href="#保持桌面的整潔" class="headerlink" title="保持桌面的整潔"></a>保持桌面的整潔</h2><blockquote>
+<p> 比起 <code>模糊搜索</code> 而言, 在 <code>雜亂的桌面</code> 上尋找 <code>某個圖標</code>, 是 <code>低效</code> 且 <code>不優雅</code> 的</p>
+</blockquote>
+<p>良好的 <code>桌面</code> 應當保持 <code>0 圖標</code> , 在桌面上放置一個或多個常用的圖標並不能提高工作效率, 相反地還會影響桌面的美觀. 一個 <code>app launcher</code> 即可取代 <code>所有被放置在桌面上的圖標</code></p>
+<h2 id="將k-runner作爲調色板"><a href="#將k-runner作爲調色板" class="headerlink" title="將k-runner作爲調色板"></a>將k-runner作爲調色板</h2><h3 id="作爲-“搜索引擎”"><a href="#作爲-“搜索引擎”" class="headerlink" title="作爲 “搜索引擎”"></a>作爲 “搜索引擎”</h3><blockquote>
+<p>如果任何 <code>文件</code> 都可以通過 <code>模糊搜索</code> 在瞬間取得, 那麼花費時間來精心整理文件, 則是徒勞的.</p>
+<p>請注意, 該圖中的 <code>左上角</code> 並沒有 <code>app launcher</code>. 這是因爲 <code>k-runner</code> 可以完全替代它, 並且做得更好.</p>
+<p><code>app launcher</code> 至少有以下幾個缺點:</p>
+<ol>
+<li>喚起的速度過慢</li>
+<li>索引的速度過慢</li>
+<li>容易因按到 “meta鍵” 而誤觸</li>
+</ol>
+<p>而通過 <code>alt + space</code> 觸發的 <code>k-runner</code> 則沒有這些缺陷.</p>
+<blockquote>
+<p>其實對於 <code>window switcher</code>, 也可以使用 <code>meta + 1/2/../9</code></p>
+<p>對於這種 <code>高頻度且瑣碎的</code> 任務, 最好有個 <code>brain sensor</code> 或者 <code>eyes tracker</code> …</p>
+</blockquote>
+<p>儘管 <code>app launcher</code> 很常見, 但我要說的是, 存在並不一定合理. 移除 <code>app launcher</code> 也並不會導致整個系統的崩潰.</p>
+<blockquote>
+<p>注: 此處並<strong>不</strong>引用黑格爾的原話 <code>“Alles, was ist, ist vernünftig”</code> 的翻譯, 此句的含義依據現代的通俗解釋, 而非哲學領域的釋義.</p>
+</blockquote>
+</blockquote>
+<p>相比於 <code>windows</code> 上的 <code>everything</code> 和 <code>listray</code> 來說, 在 <code>linux</code> 上則可以選擇 <code>k-runner</code> 作爲一種替代.</p>
+<p>這個東西本質上是一個 <code>search engine</code>, 你可以通過配置各種 <code>plugin</code> 來添加一種新的 <code>search source</code> ,</p>
+<p>以便: <code>搜索某個文件</code>, <code>搜索某個當前正運行的window</code>, <code>搜索某個已安裝的application</code>, <code>搜索某個virtual-desktop</code></p>
+<blockquote>
+<p>啓用 <code>fs index</code> 即可讓 <code>k-runner</code> 擁有在 <code>瞬間</code> 完成 <code>搜索某個文件</code> 的能力.</p>
+<h3 id="作爲”解釋器”"><a href="#作爲”解釋器”" class="headerlink" title="作爲”解釋器”"></a>作爲”解釋器”</h3></blockquote>
+<p>也可以使用k-runner來執行一些 <code>簡單的命令</code>.</p>
+<h2 id="讓-tray-icons-保持簡潔"><a href="#讓-tray-icons-保持簡潔" class="headerlink" title="讓 tray icons 保持簡潔"></a>讓 <code>tray icons</code> 保持簡潔</h2><p>默認的 <code>tray icons</code> 包含非常多 <code>不常用的tray icon</code>, 所以我們需要根據 <code>自己的使用偏好</code>. </p>
+<p>只將 <code>常用的tray icons</code> 顯示出來.</p>
+<p>對於某些 <code>重要但不常用的tray icon</code>, 可以設置顯示策略爲 <code>當相關時顯示</code></p>
+<h2 id="善用-Do-not-disturb-模式"><a href="#善用-Do-not-disturb-模式" class="headerlink" title="善用 Do not disturb 模式"></a>善用 <code>Do not disturb</code> 模式</h2><p>設置 <code>快捷鍵</code> 以便通過 <code>meta + n</code> 來切換 <code>do not disturb mode</code> .</p>
+<p>當需要免打擾環境時, 可以快速切入.</p>
+<h2 id="選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色"><a href="#選擇使用-multi-activity-和-multi-vitrual-desktop-來區分-角色" class="headerlink" title="選擇使用 multi-activity 和 multi-vitrual-desktop 來區分 角色"></a>選擇使用 <code>multi-activity</code> 和 <code>multi-vitrual-desktop</code> 來區分 <code>角色</code></h2><blockquote>
+<p>在某些 <code>工作場景</code> 下, 我們往往需要扮演 <code>多角色</code>.</p>
+<p>比如, 我們可能需要: 同時扮演 <code>前端工程師</code> 和 <code>後端工程師</code>, 同時扮演 <code>軟件開發工程師</code> 和 <code>軟件測試員</code></p>
+<p>此時需要運行 <code>一組不同的application</code>, 如果將 <code>所有的application</code> 都放在 <code>同一個virtual-desktop</code> 或者 <code>同一個activity</code>, 然後通過 <code>alt+tab</code> 來切換的話, 則有以下這些缺點:</p>
+<ol>
+<li>繁瑣, 你無法精準切換你想要的application (如果通過 <code>k-runner</code> 來切斷可能會好些)</li>
+<li>你會因爲切換application而 <code>打亂</code> 窗口之間的 <code>layout</code>. (這可能會迫使你使用鼠標來重新對此進行調整)</li>
+</ol>
+<p>此時, 通過切換 <code>virtual-desktop</code> 或 <code>activity</code> , 就如同 <code>你使用2塊不同的顯示屏</code> 一樣.</p>
+</blockquote>
+<p>使用 <code>meta+tab</code> 即可 <code>切換到下一個activity</code>, 這裏建議只設置 <code>2個activity</code>, 避免切換時的繁瑣. </p>
+<p><code>virtual-desktop</code> 和 <code>activity</code> 是兩種不同 <code>粒度</code> 的用於解決 <code>多角色問題</code> 的解決方案, 可以根據自己的需求選擇.</p>
+<h2 id="設置更動聽的-窗口移動特效"><a href="#設置更動聽的-窗口移動特效" class="headerlink" title="設置更動聽的 窗口移動特效"></a>設置更動聽的 <code>窗口移動特效</code></h2><p>通過啓用 <code>translucency</code> 和 <code>wobbly windows</code>, 使得: </p>
+<ol>
+<li><code>window</code> 在 <code>移動時</code> 自動 <code>透明化</code> , 以便觀察 <code>底部的windows</code></li>
+<li>讓 <code>window</code> 在移動時像 <code>果凍</code> 一樣</li>
+</ol>
+<h2 id="設置更方便的-window-actions"><a href="#設置更方便的-window-actions" class="headerlink" title="設置更方便的 window actions"></a>設置更方便的 <code>window actions</code></h2><p>將 <code>meta + 鼠標輸入</code> 設置爲一系列的 <code>window指令</code>, 如:</p>
+<ol>
+<li><code>meta</code> + <code>mouse scroll</code> = 窗口最大化/最小化</li>
+<li><code>meta</code> + <code>mouse left click</code> = 移動窗口 (這樣就可以在 <code>window的內部</code> 直接 <code>發送移動指令</code> , 而不必拖着狹小的 <code>title bar</code>  來<code>發送移動指令</code>)</li>
+<li><code>meta</code> + <code>mouse right click</code> = 調整窗口大小 (如果通過 <code>窗口邊緣</code>來調整大小的話, 則對 <code>鼠標的精準操作</code> 有很高要求. )x</li>
+<li>…</li>
+</ol>
+<p>理論上講, 任何需要 <code>高精準度的鼠標操作</code> 都應該有 <code>替代方案</code>. </p>
+<p>點擊一個 <code>面積更大的區域</code> 總是比 <code>更小的區域</code> 更方便.</p>
+<h2 id="使用-window-rule-進行-自動化佈局"><a href="#使用-window-rule-進行-自動化佈局" class="headerlink" title="使用 window rule 進行 自動化佈局"></a>使用 <code>window rule</code> 進行 <code>自動化佈局</code></h2><p>在某些 <code>工作場景</code> 下, 可能需要進行 <code>長時間保持某個窗口佈局方式</code>, 比如: 一邊開啓 <code>IDE</code>, 一邊開啓 <code>browser</code> 查閱文檔. 此時可以通過設置 <code>window rule</code> 來自動完成這種 <code>窗口佈局</code>.</p>
+<h2 id="對-input-method-進行微調至合適"><a href="#對-input-method-進行微調至合適" class="headerlink" title="對 input method 進行微調至合適"></a>對 <code>input method</code> 進行微調至合適</h2><p>此處建議使用 <code>開源的input method</code> , 如果你還有點關注 <code>你的privacy</code> 的話.</p>
+<blockquote>
+<p>開源方案建議: <code>rime</code> , <code>fcitx-chinese-addons</code></p>
+</blockquote>
+<p>配置 <code>im group</code> 和 <code>im layout</code> , 以及 <code>切換快捷鍵</code> , 使得 <code>切換im</code> 不會與 <code>某些全屏應用</code> 發生衝突.</p>
+<h2 id="取消-不可信證書"><a href="#取消-不可信證書" class="headerlink" title="取消 不可信證書"></a>取消 <code>不可信證書</code></h2><p>爲了避免 <code>MITM attack</code>, 並不是所有的 <code>CA證書</code> 都值得你信任.</p>
+<h2 id="電源管理"><a href="#電源管理" class="headerlink" title="電源管理"></a>電源管理</h2><p>設置 <code>閒置時</code>  自動熄屏</p>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>啓用 <code>firewall</code> 對 <code>traffic</code> 進行控制.</p>
+<h2 id="在設備開機後自動部署工作環境"><a href="#在設備開機後自動部署工作環境" class="headerlink" title="在設備開機後自動部署工作環境"></a>在設備開機後自動部署工作環境</h2><p>如果你經常 <code>關機</code> 的話…</p>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

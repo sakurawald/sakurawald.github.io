@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>sakurawald&#39;s blog</title>
+  <icon>https://sakurawald.github.io/favicon.ico</icon>
+  
+  <link href="https://sakurawald.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://sakurawald.github.io/"/>
+  <updated>2025-10-21T02:48:20.641Z</updated>
+  <id>https://sakurawald.github.io/</id>
+  
+  <author>
+    <name>sakurawald</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fix-window-tearing-in-high-monitor-refresh-rate</title>
+    <link href="https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/"/>
+    <id>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/</id>
+    <published>2025-05-09T12:18:55.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Fix-window-tearing-in-high-monitor-refresh-rate&quot;&gt;&lt;a href=&quot;#Fix-window-tearing-in-high-monitor-refresh-rate&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="monitor" scheme="https://sakurawald.github.io/tags/monitor/"/>
+    
+    <category term="laptop" scheme="https://sakurawald.github.io/tags/laptop/"/>
+    
+    <category term="nvidia" scheme="https://sakurawald.github.io/tags/nvidia/"/>
+    
+    <category term="kde" scheme="https://sakurawald.github.io/tags/kde/"/>
+    
+    <category term="hadrware" scheme="https://sakurawald.github.io/tags/hadrware/"/>
+    
+    <category term="gpu" scheme="https://sakurawald.github.io/tags/gpu/"/>
+    
+    <category term="driver" scheme="https://sakurawald.github.io/tags/driver/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>fix-nvidia-drm-issues</title>
+    <link href="https://sakurawald.github.io/posts/fix-nvidia-drm-issues/"/>
+    <id>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</id>
+    <published>2025-05-07T12:48:59.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Fix-nvidia-drm-issues&quot;&gt;&lt;a href=&quot;#Fix-nvidia-drm-issues&quot; class=&quot;headerlink&quot; title=&quot;Fix nvidia drm issues&quot;&gt;&lt;/a&gt;Fix nvidia drm</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="monitor" scheme="https://sakurawald.github.io/tags/monitor/"/>
+    
+    <category term="laptop" scheme="https://sakurawald.github.io/tags/laptop/"/>
+    
+    <category term="drm" scheme="https://sakurawald.github.io/tags/drm/"/>
+    
+    <category term="nvidia" scheme="https://sakurawald.github.io/tags/nvidia/"/>
+    
+    <category term="x11" scheme="https://sakurawald.github.io/tags/x11/"/>
+    
+    <category term="kde" scheme="https://sakurawald.github.io/tags/kde/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>fix-screen-brightness-too-low</title>
+    <link href="https://sakurawald.github.io/posts/fix-screen-brightness-too-low/"/>
+    <id>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</id>
+    <published>2025-05-05T05:29:43.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Fix-screen-brightness-too-low&quot;&gt;&lt;a href=&quot;#Fix-screen-brightness-too-low&quot; class=&quot;headerlink&quot; title=&quot;Fix screen brightness too</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="monitor" scheme="https://sakurawald.github.io/tags/monitor/"/>
+    
+    <category term="laptop" scheme="https://sakurawald.github.io/tags/laptop/"/>
+    
+    <category term="keyboard" scheme="https://sakurawald.github.io/tags/keyboard/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fix sddm black screen issue</title>
+    <link href="https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/"/>
+    <id>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</id>
+    <published>2025-04-30T11:35:31.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Fix-sddm-black-screen-issue&quot;&gt;&lt;a href=&quot;#Fix-sddm-black-screen-issue&quot; class=&quot;headerlink&quot; title=&quot;Fix sddm black screen issue&quot;&gt;&lt;/a&gt;Fix</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="laptop" scheme="https://sakurawald.github.io/tags/laptop/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>comparing-emacs-and-idea-in-java-development-environment</title>
+    <link href="https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/"/>
+    <id>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</id>
+    <published>2025-03-02T04:38:42.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="review" scheme="https://sakurawald.github.io/tags/review/"/>
+    
+    <category term="emacs" scheme="https://sakurawald.github.io/tags/emacs/"/>
+    
+    <category term="ide" scheme="https://sakurawald.github.io/tags/ide/"/>
+    
+    <category term="editor" scheme="https://sakurawald.github.io/tags/editor/"/>
+    
+    <category term="tools" scheme="https://sakurawald.github.io/tags/tools/"/>
+    
+    <category term="java" scheme="https://sakurawald.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>fix the cpu frequency throttle after bad charging</title>
+    <link href="https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/"/>
+    <id>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</id>
+    <published>2024-09-25T05:35:21.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Fix-the-cpu-frequency-throttle-after-bad-charging&quot;&gt;&lt;a href=&quot;#Fix-the-cpu-frequency-throttle-after-bad-charging&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="cpu" scheme="https://sakurawald.github.io/tags/cpu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>how to fix corrupted packages in archlinux</title>
+    <link href="https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/"/>
+    <id>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</id>
+    <published>2024-07-11T15:22:17.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;How-to-fix-corrupted-packages-in-archlinux&quot;&gt;&lt;a href=&quot;#How-to-fix-corrupted-packages-in-archlinux&quot; class=&quot;headerlink&quot; title=&quot;How to</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>how to let chrome browser auto clean datas on exit</title>
+    <link href="https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/"/>
+    <id>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</id>
+    <published>2024-06-01T16:16:50.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;&gt;&lt;a href=&quot;#How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="browser" scheme="https://sakurawald.github.io/tags/browser/"/>
+    
+    <category term="privacy" scheme="https://sakurawald.github.io/tags/privacy/"/>
+    
+    <category term="chrome" scheme="https://sakurawald.github.io/tags/chrome/"/>
+    
+    <category term="google" scheme="https://sakurawald.github.io/tags/google/"/>
+    
+    <category term="web" scheme="https://sakurawald.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>make persistent windows 11 usb sticker</title>
+    <link href="https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/"/>
+    <id>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</id>
+    <published>2024-04-20T16:00:32.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Make-persistent-windows-11-usb-sticker&quot;&gt;&lt;a href=&quot;#Make-persistent-windows-11-usb-sticker&quot; class=&quot;headerlink&quot; title=&quot;Make persistent</summary>
+        
+      
+    
+    
+    
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+    <category term="wtg" scheme="https://sakurawald.github.io/tags/wtg/"/>
+    
+    <category term="boot" scheme="https://sakurawald.github.io/tags/boot/"/>
+    
+    <category term="usb" scheme="https://sakurawald.github.io/tags/usb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pin refresh rate of an android phone</title>
+    <link href="https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/"/>
+    <id>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</id>
+    <published>2024-04-09T10:19:12.000Z</published>
+    <updated>2025-10-21T02:48:20.642Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Pin-refresh-rate-of-an-android-phone&quot;&gt;&lt;a href=&quot;#Pin-refresh-rate-of-an-android-phone&quot; class=&quot;headerlink&quot; title=&quot;Pin refresh rate of</summary>
+        
+      
+    
+    
+    
+    
+    <category term="#android" scheme="https://sakurawald.github.io/tags/android/"/>
+    
+    <category term="#emulator" scheme="https://sakurawald.github.io/tags/emulator/"/>
+    
+    <category term="root" scheme="https://sakurawald.github.io/tags/root/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>launch tor browser without tor network</title>
+    <link href="https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/"/>
+    <id>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</id>
+    <published>2024-04-06T19:28:32.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Launch-Tor-Browser-without-Tor-Network&quot;&gt;&lt;a href=&quot;#Launch-Tor-Browser-without-Tor-Network&quot; class=&quot;headerlink&quot; title=&quot;Launch Tor</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>rescue a corrupted system after forced shutdown during system upgrade</title>
+    <link href="https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/"/>
+    <id>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</id>
+    <published>2024-03-13T19:08:14.000Z</published>
+    <updated>2025-10-21T02:48:20.642Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Rescue-the-system-from-forced-shutdown&quot;&gt;&lt;a href=&quot;#Rescue-the-system-from-forced-shutdown&quot; class=&quot;headerlink&quot; title=&quot;Rescue the</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="solution" scheme="https://sakurawald.github.io/tags/solution/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>apple magic touch pad review</title>
+    <link href="https://sakurawald.github.io/posts/apple-magic-touch-pad-review/"/>
+    <id>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</id>
+    <published>2024-03-05T02:55:04.000Z</published>
+    <updated>2025-10-21T02:48:20.640Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Apple-Magic-Touchpad-Review&quot;&gt;&lt;a href=&quot;#Apple-Magic-Touchpad-Review&quot; class=&quot;headerlink&quot; title=&quot;Apple Magic Touchpad</summary>
+        
+      
+    
+    
+    
+    
+    <category term="review" scheme="https://sakurawald.github.io/tags/review/"/>
+    
+    <category term="apple" scheme="https://sakurawald.github.io/tags/apple/"/>
+    
+    <category term="evil" scheme="https://sakurawald.github.io/tags/evil/"/>
+    
+    <category term="touchpad" scheme="https://sakurawald.github.io/tags/touchpad/"/>
+    
+    <category term="device" scheme="https://sakurawald.github.io/tags/device/"/>
+    
+    <category term="hardware" scheme="https://sakurawald.github.io/tags/hardware/"/>
+    
+    <category term="productivity" scheme="https://sakurawald.github.io/tags/productivity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>guide to install qubes on qemu</title>
+    <link href="https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/"/>
+    <id>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</id>
+    <published>2023-12-07T06:22:03.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Guide-to-install-qubes-on-qemu&quot;&gt;&lt;a href=&quot;#Guide-to-install-qubes-on-qemu&quot; class=&quot;headerlink&quot; title=&quot;Guide to install qubes on</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
+    
+    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+    <category term="security" scheme="https://sakurawald.github.io/tags/security/"/>
+    
+    <category term="qemu" scheme="https://sakurawald.github.io/tags/qemu/"/>
+    
+    <category term="kvm" scheme="https://sakurawald.github.io/tags/kvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>optimize minecraft server configuration</title>
+    <link href="https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/"/>
+    <id>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/</id>
+    <published>2023-04-30T20:04:00.000Z</published>
+    <updated>2025-10-21T02:48:20.642Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;A-Discussion-About-Minecraft-Server-Configurations&quot;&gt;&lt;a href=&quot;#A-Discussion-About-Minecraft-Server-Configurations&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="minecraft" scheme="https://sakurawald.github.io/tags/minecraft/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tweak KDE preferences</title>
+    <link href="https://sakurawald.github.io/posts/tweak-kde-preferences/"/>
+    <id>https://sakurawald.github.io/posts/tweak-kde-preferences/</id>
+    <published>2023-04-26T13:04:00.000Z</published>
+    <updated>2025-10-21T02:48:20.642Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;KDE使用偏好&quot;&gt;&lt;a href=&quot;#KDE使用偏好&quot; class=&quot;headerlink&quot; title=&quot;KDE使用偏好&quot;&gt;&lt;/a&gt;KDE使用偏好&lt;/h1&gt;&lt;h2 id=&quot;保持桌面的整潔&quot;&gt;&lt;a href=&quot;#保持桌面的整潔&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="kde" scheme="https://sakurawald.github.io/tags/kde/"/>
+    
+    <category term="os" scheme="https://sakurawald.github.io/tags/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android emulator methods in linux</title>
+    <link href="https://sakurawald.github.io/posts/android-emulator-methods-in-linux/"/>
+    <id>https://sakurawald.github.io/posts/android-emulator-methods-in-linux/</id>
+    <published>2023-02-21T21:38:07.000Z</published>
+    <updated>2025-10-21T02:48:20.640Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Android-solutions-for-linux&quot;&gt;&lt;a href=&quot;#Android-solutions-for-linux&quot; class=&quot;headerlink&quot; title=&quot;Android solutions for</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://sakurawald.github.io/tags/android/"/>
+    
+    <category term="emulator" scheme="https://sakurawald.github.io/tags/emulator/"/>
+    
+    <category term="linux" scheme="https://sakurawald.github.io/tags/linux/"/>
+    
+    <category term="note" scheme="https://sakurawald.github.io/tags/note/"/>
+    
+    <category term="practice" scheme="https://sakurawald.github.io/tags/practice/"/>
+    
+    <category term="solution" scheme="https://sakurawald.github.io/tags/solution/"/>
+    
+    <category term="virtualize" scheme="https://sakurawald.github.io/tags/virtualize/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>expression evulation</title>
+    <link href="https://sakurawald.github.io/posts/expression-evaluation/"/>
+    <id>https://sakurawald.github.io/posts/expression-evaluation/</id>
+    <published>2021-09-12T23:53:00.000Z</published>
+    <updated>2025-10-21T02:48:20.641Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Expression-Evaluation&quot;&gt;&lt;a href=&quot;#Expression-Evaluation&quot; class=&quot;headerlink&quot; title=&quot;Expression Evaluation&quot;&gt;&lt;/a&gt;Expression</summary>
+        
+      
+    
+    
+    
+    
+    <category term="algorithm" scheme="https://sakurawald.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+</feed>

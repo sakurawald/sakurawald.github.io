@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>sakurawald&#39;s blog</title>
+    <link>https://sakurawald.github.io/</link>
+    
+    <image>
+      <url>https://sakurawald.github.io/favicon.ico</url>
+      <title>sakurawald&#39;s blog</title>
+      <link>https://sakurawald.github.io/</link>
+    </image>
+    
+    <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Tue, 21 Oct 2025 02:48:20 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fix-window-tearing-in-high-monitor-refresh-rate</title>
+      <link>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/</link>
+      <guid>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/</guid>
+      <pubDate>Fri, 09 May 2025 12:18:55 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-window-tearing-in-high-monitor-refresh-rate&quot;&gt;&lt;a href=&quot;#Fix-window-tearing-in-high-monitor-refresh-rate&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hadrware/">hadrware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/gpu/">gpu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/driver/">driver</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>fix-nvidia-drm-issues</title>
+      <link>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</link>
+      <guid>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/</guid>
+      <pubDate>Wed, 07 May 2025 12:48:59 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-nvidia-drm-issues&quot;&gt;&lt;a href=&quot;#Fix-nvidia-drm-issues&quot; class=&quot;headerlink&quot; title=&quot;Fix nvidia drm issues&quot;&gt;&lt;/a&gt;Fix nvidia drm</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/drm/">drm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
+      
+      <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>fix-screen-brightness-too-low</title>
+      <link>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</link>
+      <guid>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/</guid>
+      <pubDate>Mon, 05 May 2025 05:29:43 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-screen-brightness-too-low&quot;&gt;&lt;a href=&quot;#Fix-screen-brightness-too-low&quot; class=&quot;headerlink&quot; title=&quot;Fix screen brightness too</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/keyboard/">keyboard</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-screen-brightness-too-low/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Fix sddm black screen issue</title>
+      <link>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</link>
+      <guid>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/</guid>
+      <pubDate>Wed, 30 Apr 2025 11:35:31 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-sddm-black-screen-issue&quot;&gt;&lt;a href=&quot;#Fix-sddm-black-screen-issue&quot; class=&quot;headerlink&quot; title=&quot;Fix sddm black screen issue&quot;&gt;&lt;/a&gt;Fix</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-sddm-black-screen-issue/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>comparing-emacs-and-idea-in-java-development-environment</title>
+      <link>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</link>
+      <guid>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/</guid>
+      <pubDate>Sun, 02 Mar 2025 04:38:42 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Comparing-the-Emacs-and-Jetbrains-Idea-in-Java-Development-environment&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/review/">review</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emacs/">emacs</category>
+      
+      <category domain="https://sakurawald.github.io/tags/ide/">ide</category>
+      
+      <category domain="https://sakurawald.github.io/tags/editor/">editor</category>
+      
+      <category domain="https://sakurawald.github.io/tags/tools/">tools</category>
+      
+      <category domain="https://sakurawald.github.io/tags/java/">java</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/comparing-emacs-and-idea-in-java-development-environment/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>fix the cpu frequency throttle after bad charging</title>
+      <link>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</link>
+      <guid>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/</guid>
+      <pubDate>Wed, 25 Sep 2024 05:35:21 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Fix-the-cpu-frequency-throttle-after-bad-charging&quot;&gt;&lt;a href=&quot;#Fix-the-cpu-frequency-throttle-after-bad-charging&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/cpu/">cpu</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/fix-the-cpu-frequency-throttle-after-bad-charging/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>how to fix corrupted packages in archlinux</title>
+      <link>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</link>
+      <guid>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/</guid>
+      <pubDate>Thu, 11 Jul 2024 15:22:17 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;How-to-fix-corrupted-packages-in-archlinux&quot;&gt;&lt;a href=&quot;#How-to-fix-corrupted-packages-in-archlinux&quot; class=&quot;headerlink&quot; title=&quot;How to</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/how-to-fix-corrupted-packages-in-archlinux/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>how to let chrome browser auto clean datas on exit</title>
+      <link>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</link>
+      <guid>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/</guid>
+      <pubDate>Sat, 01 Jun 2024 16:16:50 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;&gt;&lt;a href=&quot;#How-to-let-chrome-browser-auto-clean-datas-on-exit&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/browser/">browser</category>
+      
+      <category domain="https://sakurawald.github.io/tags/privacy/">privacy</category>
+      
+      <category domain="https://sakurawald.github.io/tags/chrome/">chrome</category>
+      
+      <category domain="https://sakurawald.github.io/tags/google/">google</category>
+      
+      <category domain="https://sakurawald.github.io/tags/web/">web</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/how-to-let-chrome-browser-auto-clean-datas-on-exit/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>make persistent windows 11 usb sticker</title>
+      <link>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</link>
+      <guid>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/</guid>
+      <pubDate>Sat, 20 Apr 2024 16:00:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Make-persistent-windows-11-usb-sticker&quot;&gt;&lt;a href=&quot;#Make-persistent-windows-11-usb-sticker&quot; class=&quot;headerlink&quot; title=&quot;Make persistent</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/wtg/">wtg</category>
+      
+      <category domain="https://sakurawald.github.io/tags/boot/">boot</category>
+      
+      <category domain="https://sakurawald.github.io/tags/usb/">usb</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/make-persistent-windows-11-usb-sticker/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>pin refresh rate of an android phone</title>
+      <link>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</link>
+      <guid>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/</guid>
+      <pubDate>Tue, 09 Apr 2024 10:19:12 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Pin-refresh-rate-of-an-android-phone&quot;&gt;&lt;a href=&quot;#Pin-refresh-rate-of-an-android-phone&quot; class=&quot;headerlink&quot; title=&quot;Pin refresh rate of</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/android/">#android</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emulator/">#emulator</category>
+      
+      <category domain="https://sakurawald.github.io/tags/root/">root</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/pin-refresh-rate-of-an-android-phone/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>launch tor browser without tor network</title>
+      <link>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</link>
+      <guid>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/</guid>
+      <pubDate>Sat, 06 Apr 2024 19:28:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Launch-Tor-Browser-without-Tor-Network&quot;&gt;&lt;a href=&quot;#Launch-Tor-Browser-without-Tor-Network&quot; class=&quot;headerlink&quot; title=&quot;Launch Tor</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://sakurawald.github.io/posts/launch-tor-browser-without-tor-network/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>rescue a corrupted system after forced shutdown during system upgrade</title>
+      <link>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</link>
+      <guid>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/</guid>
+      <pubDate>Wed, 13 Mar 2024 19:08:14 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Rescue-the-system-from-forced-shutdown&quot;&gt;&lt;a href=&quot;#Rescue-the-system-from-forced-shutdown&quot; class=&quot;headerlink&quot; title=&quot;Rescue the</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/rescue-a-corrupted-syste-after-forced-shutdown-during-system-upgrade/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>apple magic touch pad review</title>
+      <link>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</link>
+      <guid>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/</guid>
+      <pubDate>Tue, 05 Mar 2024 02:55:04 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Apple-Magic-Touchpad-Review&quot;&gt;&lt;a href=&quot;#Apple-Magic-Touchpad-Review&quot; class=&quot;headerlink&quot; title=&quot;Apple Magic Touchpad</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/review/">review</category>
+      
+      <category domain="https://sakurawald.github.io/tags/apple/">apple</category>
+      
+      <category domain="https://sakurawald.github.io/tags/evil/">evil</category>
+      
+      <category domain="https://sakurawald.github.io/tags/touchpad/">touchpad</category>
+      
+      <category domain="https://sakurawald.github.io/tags/device/">device</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/productivity/">productivity</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/apple-magic-touch-pad-review/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>guide to install qubes on qemu</title>
+      <link>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</link>
+      <guid>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/</guid>
+      <pubDate>Thu, 07 Dec 2023 06:22:03 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Guide-to-install-qubes-on-qemu&quot;&gt;&lt;a href=&quot;#Guide-to-install-qubes-on-qemu&quot; class=&quot;headerlink&quot; title=&quot;Guide to install qubes on</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/security/">security</category>
+      
+      <category domain="https://sakurawald.github.io/tags/qemu/">qemu</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kvm/">kvm</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/guide-to-install-qubes-on-qemu/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>optimize minecraft server configuration</title>
+      <link>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/</link>
+      <guid>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/</guid>
+      <pubDate>Sun, 30 Apr 2023 20:04:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;A-Discussion-About-Minecraft-Server-Configurations&quot;&gt;&lt;a href=&quot;#A-Discussion-About-Minecraft-Server-Configurations&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/minecraft/">minecraft</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/optimize-minecraft-server-configuration/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>tweak KDE preferences</title>
+      <link>https://sakurawald.github.io/posts/tweak-kde-preferences/</link>
+      <guid>https://sakurawald.github.io/posts/tweak-kde-preferences/</guid>
+      <pubDate>Wed, 26 Apr 2023 13:04:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;KDE使用偏好&quot;&gt;&lt;a href=&quot;#KDE使用偏好&quot; class=&quot;headerlink&quot; title=&quot;KDE使用偏好&quot;&gt;&lt;/a&gt;KDE使用偏好&lt;/h1&gt;&lt;h2 id=&quot;保持桌面的整潔&quot;&gt;&lt;a href=&quot;#保持桌面的整潔&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/tweak-kde-preferences/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>android emulator methods in linux</title>
+      <link>https://sakurawald.github.io/posts/android-emulator-methods-in-linux/</link>
+      <guid>https://sakurawald.github.io/posts/android-emulator-methods-in-linux/</guid>
+      <pubDate>Tue, 21 Feb 2023 21:38:07 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Android-solutions-for-linux&quot;&gt;&lt;a href=&quot;#Android-solutions-for-linux&quot; class=&quot;headerlink&quot; title=&quot;Android solutions for</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/android/">android</category>
+      
+      <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
+      
+      <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/note/">note</category>
+      
+      <category domain="https://sakurawald.github.io/tags/practice/">practice</category>
+      
+      <category domain="https://sakurawald.github.io/tags/solution/">solution</category>
+      
+      <category domain="https://sakurawald.github.io/tags/virtualize/">virtualize</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/android-emulator-methods-in-linux/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>expression evulation</title>
+      <link>https://sakurawald.github.io/posts/expression-evaluation/</link>
+      <guid>https://sakurawald.github.io/posts/expression-evaluation/</guid>
+      <pubDate>Sun, 12 Sep 2021 23:53:00 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Expression-Evaluation&quot;&gt;&lt;a href=&quot;#Expression-Evaluation&quot; class=&quot;headerlink&quot; title=&quot;Expression Evaluation&quot;&gt;&lt;/a&gt;Expression</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://sakurawald.github.io/tags/algorithm/">algorithm</category>
+      
+      
+      <comments>https://sakurawald.github.io/posts/expression-evaluation/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

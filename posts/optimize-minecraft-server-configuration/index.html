@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>optimize minecraft server configuration</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="A-Discussion-About-Minecraft-Server-Configurations"><a href="#A-Discussion-About-Minecraft-Server-Configurations" class="headerlink" title="A Discussion About Minecraft Server Configurations"></a>A Discussion About Minecraft Server Configurations</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>這篇文章將討論如何對一個 <code>Minecraft服務端</code> 進行 <code>基本配置</code>，<code>優化配置</code> 以及一些進階的內容。</p>
+<p>我們將討論如何在 <code>減少對VANILLA做出改變</code> 的情況下，對 <code>服務端核心</code> 進行性能優化。</p>
+<p>這篇文章會從最基本的配置開始，並且逐漸介紹一些比較重要的 <code>配置項</code>。</p>
+<p>當然，我們可能會略過一些無關影響的項目。</p>
+<h2 id="How-to-choose-the-best-server-core"><a href="#How-to-choose-the-best-server-core" class="headerlink" title="How to choose the best server-core ?"></a>How to choose the best server-core ?</h2><p>如何選擇 <code>服務端核心</code> 取決於你的需求。</p>
+<p>由於這篇文章主要側重於針對 <code>插件服</code> 的優化討論，所以我們不會過多地討論 <code>模組服</code> 的優化問題。</p>
+<blockquote>
+<p>對於 <code>模組服</code> 而言，更應當考慮的是 <code>兼容性問題</code> 和 <code>安全性問題</code>。</p>
+<p>對於安裝有多個 <code>模組</code> 的 <code>模組服</code> 而言，首要的任務是解決上述兩個問題，然後再考慮解決 <code>影響較大的性能問題</code>。</p>
+<blockquote>
+<p>目前來說，模組服可以選擇兩種主流的核心：</p>
+<ul>
+<li><p>基於Forge + Bukkit 的核心：這類核心將同時支持 <code>Bukkit</code> 和 <code>Forge</code> 的 <code>API</code>，但或多或少存在不同的兼容問題，</p>
+<p>本質上來說，由於兩套事件系統是相對獨立的，如何較好地來處理EventBus一直是比較頭疼的問題。</p>
+<blockquote>
+<p>如果你希望有較好的兼容性，可以嘗試 <code>CatServer</code></p>
+<p>如果你希望保持最新版本的更近，可以嘗試 <code>Mohist</code></p>
+<blockquote>
+<p>盡管 <code>Mohist</code> 的開發團隊盡力地保持版本跟進，並且他們宣稱擁有 <code>99%的Bukkit插件兼容性</code>，但事實並不是這樣的。</p>
+<p>Mohist經常會出現莫名其妙的 <code>NPE異常</code>，並且對於部分 <code>流行插件</code> 仍具有兼容問題。</p>
+<p>一些已經停止維護的核心，如MCPC，KCauldron等，以及他們的接力者將不被提及。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>基於 Forge/Fabric 的核心：如果你選擇了這類核心，那麽將免去了 <code>插件</code> 的那些麻煩事情。</p>
+<p>你可能將無法安裝插件，但你或許根本不需要他們。</p>
+<blockquote>
+<p>使用 <code>Mixin技術</code> 的  <code>Sponge</code> 比較激進，但是如果它符合你的需求，可以做一個嘗試。</p>
+<p>此外， <code>Fabric</code> 搭配 <code>優化類模組</code> 也是不錯的選擇。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>對於 <code>插件服</code> 而言，我們將首先排除掉 <code>Vanilla</code> ，這是 <code>Mojang</code> 所提供的默認服務端 ，盡管它可以保證原汁原味的特性，但由於極其糟糕的性能表現，以及不支持 <code>Bukkit API</code>，將不符合大部分的需求。</p>
+<p>其次考慮 <code>CraftBukkit</code>，最大的特色是加入了 <code>Bukkit API</code> 的支持，這構成了 <code>插件服</code> 的基礎。</p>
+<p>但如果你打算使用 <code>CraftBukkit</code>，請不妨考慮下 <code>Spigot</code>，後者擁有 <code>更好的性能</code>，並且對 <code>特性的改變</code> 與前者相差甚微。</p>
+<p>接下來，我們會講本篇文章的主角：<code>Paper</code> 是一個註重於 <code>性能</code> 與 <code>安全</code> 的 <code>下一代服務端</code>，在保持 <code>較多特性</code> 不被改變的情況下，提供了 <code>極大的性能優化</code>。</p>
+<p>並且，你根本不需要擔心 <code>Bukkit API</code> 的兼容性問題，甚至相反地，<code>主流的插件</code> 會主動選擇使用提供了更多功能的 <code>Paper API</code>，而這一切都是 <code>向下兼容的</code></p>
+<blockquote>
+<p><code>插件開發者</code> 應該盡量選擇使用 <code>Paper API</code>，而不是 <code>Spigot API</code>。以便免費地獲得 <code>性能提升</code>，同時不丟失 <code>兼容性</code>。</p>
+</blockquote>
+<p>進一步地，<code>Purpur</code> 是一個 <code>基於Paper的服務端</code>，它提供 <code>更進一步的性能優化</code>，以及 <code>更高自由度的配置項</code>。</p>
+<p>本文會著重討論 <code>Paper/Purpur</code> 核心。</p>
+<blockquote>
+<p>如果 <code>Paper</code> 已經完全足夠滿足你的需求，那麽你可以選擇就使用它。但 <code>Purpur</code> 仍然有許多有用的 <code>特性開關</code>，以及 <code>性能優化</code></p>
+</blockquote>
+<p>我知道有許多 <code>基於Paper/Purpur的服務端</code>，但 <code>Paper/Purpur</code> 已經提供了足夠多的 <code>保守的性能優化</code>，以及一些 <code>激進的性能優化</code>。</p>
+<p>在這個前提下，選擇 <code>其他更進一步的優化端</code>，將很難獲得 <code>顯著的性能提升</code>，並且將引入更多的 <code>不穩定性</code>。</p>
+<h2 id="How-to-config-the-server-core"><a href="#How-to-config-the-server-core" class="headerlink" title="How to config the server-core ?"></a>How to config the server-core ?</h2><p>這個章節將占據大部分的內容，而且也是 <code>最重要</code> 的，或許也是 <code>最難的</code>。</p>
+<p>重新強調一遍，本篇文章基於的原則是：<strong>最小化對VANILLA的改變的同時，盡可能地獲得優化配置。</strong></p>
+<blockquote>
+<p><code>優化配置</code> 是糟糕的方案，他們本應該在 <code>代碼</code> 中完成優化，那樣才會是最有效的。</p>
+</blockquote>
+<p>我們會循序漸進地討論每個配置項。</p>
+<h3 id="server-properties"><a href="#server-properties" class="headerlink" title="server.properties"></a>server.properties</h3><pre><code class="lang-properties">#Minecraft server properties
+enable-jmx-monitoring=false
+# 請關閉基於明文傳輸的RCON協議，如果堅持使用，你的密碼將可能被嗅探，並導致潛在的安全問題。
+rcon.port=25575
+level-seed=
+gamemode=survival
+enable-command-block=false
+# 是否啟用&quot;狀態查詢協議&quot;，這將決定Server List的Status是否會正常顯示。
+enable-query=false
+generator-settings=&#123;&#125;
+# 如果你希望將不當言論當成有效證據並提交給Mojang的話，請啟用該項。
+enforce-secure-profile=false
+level-name=world
+motd=A Minecraft Server
+query.port=11565
+pvp=true
+generate-structures=true
+max-chained-neighbor-updates=1000000
+difficulty=hard
+network-compression-threshold=256
+max-tick-time=60000
+require-resource-pack=false
+use-native-transport=true
+max-players=20
+online-mode=false
+enable-status=true
+allow-flight=true
+broadcast-rcon-to-ops=true
+# 盡管修改該項可以極大地影響性能，但同時也將極大地損壞特性。請不要碰這項。
+view-distance=10
+server-ip=
+resource-pack-prompt=
+allow-nether=true
+server-port=25565
+enable-rcon=false
+sync-chunk-writes=true
+op-permission-level=4
+server-name=Unknown Server
+prevent-proxy-connections=false
+# 對於較高版本的Client，當Cursor懸浮在Status欄時，可以查詢到在線玩家。該項對帶寬有極小影響。
+hide-online-players=true
+resource-pack=
+entity-broadcast-range-percentage=100
+# 見view-distance
+simulation-distance=10
+rcon.password=
+player-idle-timeout=0
+debug=false
+force-gamemode=false
+# 不要指望通過設置該值來避免流量攻擊，當你需要用到該值時，已經為時過晚。
+rate-limit=0
+hardcore=false
+white-list=false
+broadcast-console-to-ops=true
+spawn-npcs=true
+previews-chat=false
+spawn-animals=true
+function-permission-level=3
+level-type=minecraft\:normal
+text-filtering-config=
+spawn-monsters=true
+enforce-whitelist=false
+spawn-protection=0
+resource-pack-sha1=
+max-world-size=29999984
+</code></pre>
+<p>對於 <code>server.properties</code> 而言，你應當只期望在這裏完成 <code>最基本的設置</code>，通過修改這個 <code>配置文件</code> 不會讓你獲得 <code>期望的性能提升</code>。（不要碰 <code>view-distance</code> 和 <code>simulation-distance</code> ，如果你在乎 <code>特性</code> 的話）</p>
+<h3 id="bukkit-yml"><a href="#bukkit-yml" class="headerlink" title="bukkit.yml"></a>bukkit.yml</h3><pre><code class="lang-yaml">settings:
+  allow-end: true
+  warn-on-overload: true
+  permissions-file: permissions.yml
+  update-folder: update
+  plugin-profiling: false
+  # 對於相同IP來說，兩次連接之間必須等待的間隔：該項可以一定程度防禦流量攻擊。
+  connection-throttle: 4000
+  query-plugins: false
+  deprecated-verbose: default
+  shutdown-message: Server closed.
+  minimum-api: none
+  use-map-color-cache: true
+# 如果你遭遇了實體過多的情況，可以選擇減少spawn-limits中的數值。
+# 一般來說，減少ambient和water-ambient數值不會有什麽影響，但是盡量不要減少monsters
+spawn-limits:
+  monsters: 70
+  animals: 10
+  water-animals: 5
+  water-ambient: 20
+  water-underground-creature: 5
+  axolotls: 5
+  ambient: 15
+chunk-gc:
+  period-in-ticks: 600
+ticks-per:
+  animal-spawns: 400
+  # 請註意，該項會對性能造成較大的影響。該項的默認值是一個非常瘋狂的數值。它會按每秒20次的頻率不斷計算可生成怪物的區域。
+  # 可以比較安全地提升該項數值，因為大部分的計算量實際上是無效的，對特性的改變極小。
+  monster-spawns: 1
+  water-spawns: 20
+  water-ambient-spawns: 20
+  water-underground-creature-spawns: &#39;20&#39;
+  axolotl-spawns: 20
+  ambient-spawns: 400
+  # 可以選擇禁用Bukkit的自動保存，因為Paper提供了一個更加高效且穩定的存儲算法。
+  autosave: 0
+aliases: now-in-commands.yml
+</code></pre>
+<h3 id="spigot-yml"><a href="#spigot-yml" class="headerlink" title="spigot.yml"></a>spigot.yml</h3><pre><code class="lang-yaml"># This is the main configuration file for Spigot.
+# As you can see, there&#39;s tons to configure. Some options may impact gameplay, so use
+# with caution, and make sure you know what each option does before configuring.
+# For a reference for any variable inside this file, check out the Spigot wiki at
+# http://www.spigotmc.org/wiki/spigot-configuration/
+#
+# If you need help with the configuration or have any questions related to Spigot,
+# join us at the Discord or drop by our forums and leave a post.
+#
+# Discord: https://www.spigotmc.org/go/discord
+# Forums: http://www.spigotmc.org/
+
+settings:
+  debug: false
+  sample-count: 0
+  # 核心在未響應狀態下，等待多久執行重啟。對於較差的CPU或者網絡狀態，建議設置該值為60到180s以避免陷入&quot;不正常的循環重啟&quot;之中
+  # 一個註定失敗的網絡請求通常會耗費1-2分鐘時間。（一般來說，開發者們總是假設網絡請求不會失敗，並且也很少為失敗情況編寫有效的處理代碼。）
+  timeout-time: 180
+  restart-on-crash: true
+  restart-script: ./start.sh
+  bungeecord: false
+  player-shuffle: 0
+  user-cache-size: 1000
+  save-user-cache-on-stop-only: false
+  # 請務必禁用Spigot提供的AC功能，因為他們總是造成false-positive，以及影響遊玩體驗的setback
+  moved-wrongly-threshold: &#39;2048&#39;
+  moved-too-quickly-multiplier: &#39;2048&#39;
+  netty-threads: 4
+  attribute:
+    maxHealth:
+      max: 2048
+    movementSpeed:
+      max: 2048
+    attackDamage:
+      max: 2048
+  log-villager-deaths: true
+  log-named-deaths: true
+messages:
+  whitelist: message
+  unknown-command: message
+  server-full: message
+  outdated-client: message
+  outdated-server: message
+  restart: message
+advancements:
+  disable-saving: false
+  disabled:
+  - minecraft:story/disabled
+commands:
+  spam-exclusions:
+  - /skill
+  silent-commandblock-console: false
+  replace-commands:
+  - setblock
+  - summon
+  - testforblock
+  - tellraw
+  log: true
+  tab-complete: 0
+  send-namespaced: true
+players:
+  disable-saving: false
+world-settings:
+  default:
+    seed-ancientcity: 20083232
+    seed-buriedtreasure: 10387320
+    seed-mineshaft: default
+    verbose: false
+    below-zero-generation-in-existing-chunks: true
+    end-portal-sound-radius: 0
+    merge-radius:
+      item: 2.5
+      exp: 3
+    # 如果你安裝了任何清道夫插件，那麽你應該回來好好看看這個配置項。
+    item-despawn-rate: 6000
+    view-distance: default
+    simulation-distance: default
+    thunder-chance: 100000
+    enable-zombie-pigmen-portal-spawns: true
+    wither-spawn-sound-radius: 0
+    hanging-tick-frequency: 100
+    arrow-despawn-rate: 1200
+    trident-despawn-rate: 1200
+    zombie-aggressive-towards-villager: true
+    nerf-spawner-mobs: false
+    mob-spawn-range: 8
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 100
+      mushroom-modifier: 100
+      pumpkin-modifier: 100
+      sapling-modifier: 100
+      beetroot-modifier: 100
+      carrot-modifier: 100
+      potato-modifier: 100
+      wheat-modifier: 100
+      netherwart-modifier: 100
+      vine-modifier: 100
+      cocoa-modifier: 100
+      bamboo-modifier: 100
+      sweetberry-modifier: 100
+      kelp-modifier: 100
+      twistingvines-modifier: 100
+      weepingvines-modifier: 100
+      cavevines-modifier: 100
+      glowberry-modifier: 100
+    # activation-range會極大地影響性能，但仍然不建議修改該值。否則與生物特性相關的結構將會失效。
+    entity-activation-range:
+      animals: 32
+      monsters: 32
+      raiders: 48
+      misc: 16
+      water: 16
+      villagers: 32
+      flying-monsters: 32
+      wake-up-inactive:
+        animals-max-per-tick: 4
+        animals-every: 1200
+        animals-for: 100
+        monsters-max-per-tick: 8
+        monsters-every: 400
+        monsters-for: 100
+        villagers-max-per-tick: 4
+        villagers-every: 600
+        villagers-for: 100
+        flying-monsters-max-per-tick: 8
+        flying-monsters-every: 200
+        flying-monsters-for: 100
+      villagers-work-immunity-after: 100
+      villagers-work-immunity-for: 20
+      villagers-active-for-panic: true
+      tick-inactive-villagers: true
+      ignore-spectators: false
+    entity-tracking-range:
+      players: 48
+      animals: 48
+      monsters: 48
+      misc: 32
+      other: 64
+    # 盡管hopper是性能代價最大的tile entity，但仍然不建議修改hopper的屬性，因為Paper針對hopper使用了優化算法。
+    ticks-per:
+      hopper-transfer: 8
+      hopper-check: 1
+    hopper-amount: 1
+    hopper-can-load-chunks: false
+    dragon-death-sound-radius: 0
+    # 如果你希望使用anti-xray功能，請記得在地圖被生成之前修改structure-seed
+    seed-village: 10387312
+    seed-desert: 14357617
+    seed-igloo: 14357618
+    seed-jungle: 14357619
+    seed-swamp: 14357620
+    seed-monument: 10387313
+    seed-shipwreck: 165745295
+    seed-ocean: 14357621
+    seed-outpost: 165745296
+    seed-endcity: 10387313
+    seed-slime: 987234911
+    seed-nether: 30084232
+    seed-mansion: 10387319
+    seed-fossil: 14357921
+    seed-portal: 34222645
+    seed-stronghold: default
+    hunger:
+      jump-walk-exhaustion: 0.05
+      jump-sprint-exhaustion: 0.2
+      combat-exhaustion: 0.1
+      regen-exhaustion: 6
+      swim-multiplier: 0.01
+      sprint-multiplier: 0.1
+      other-multiplier: 0
+    # 這項數值限製了每刻TNT的計算量上限，TNT的計算並不會造成laggy，除非該項被設置地足夠大。
+    max-tnt-per-tick: 1000
+    # 為了在TPS不足20.0時保證hopper等tile entity以及普通entity的正確運算，可以將max-tick-time設置地足夠長。
+    max-tick-time:
+      tile: 1000
+      entity: 1000
+  worldeditregentempworld:
+    verbose: false
+  faweregentempworld:
+    verbose: false
+config-version: 12
+stats:
+  disable-saving: false
+  forced-stats: &#123;&#125;
+</code></pre>
+<h3 id="paper-global-yml"><a href="#paper-global-yml" class="headerlink" title="paper-global.yml"></a>paper-global.yml</h3><pre><code class="lang-yaml"># This is the global configuration file for Paper.
+# As you can see, there&#39;s a lot to configure. Some options may impact gameplay, so use
+# with caution, and make sure you know what each option does before configuring.
+# 
+# If you need help with the configuration or have any questions related to Paper,
+# join us in our Discord or check the docs page.
+# 
+# The world configuration options have been moved inside
+# their respective world folder. The files are named paper-world.yml
+# 
+# Docs: https://docs.papermc.io/
+# Discord: https://discord.gg/papermc
+# Website: https://papermc.io/
+
+_version: 28
+async-chunks:
+  threads: -1
+chunk-loading:
+  autoconfig-send-distance: true
+  enable-frustum-priority: false
+  global-max-chunk-load-rate: -1.0
+  global-max-chunk-send-rate: -1.0
+  global-max-concurrent-loads: 500.0
+  max-concurrent-sends: 2
+  min-load-radius: 2
+  player-max-chunk-load-rate: -1.0
+  player-max-concurrent-loads: 20.0
+  target-player-chunk-send-rate: 100.0
+chunk-system:
+  gen-parallelism: default
+  io-threads: -1
+  worker-threads: -1
+collisions:
+  enable-player-collisions: true
+  send-full-pos-for-hard-colliding-entities: true
+commands:
+  fix-target-selector-tag-completion: true
+  suggest-player-names-when-null-tab-completions: true
+  time-command-affects-all-worlds: false
+console:
+  enable-brigadier-completions: true
+  enable-brigadier-highlighting: true
+  has-all-permissions: false
+item-validation:
+  book:
+    author: 8192
+    page: 16384
+    title: 8192
+  book-size:
+    page-max: 2560
+    total-multiplier: 0.98
+  display-name: 8192
+  lore-line: 8192
+  resolve-selectors-in-books: false
+logging:
+  deobfuscate-stacktraces: true
+  log-player-ip-addresses: true
+  use-rgb-for-named-text-colors: true
+messages:
+  kick:
+    authentication-servers-down: message
+    connection-throttle: message
+    flying-player: message
+    flying-vehicle: message
+  no-permission: message
+  use-display-name-in-quit-message: false
+misc:
+  chat-threads:
+    chat-executor-core-size: -1
+    chat-executor-max-size: -1
+  fix-entity-position-desync: true
+  lag-compensate-block-breaking: true
+  load-permissions-yml-before-plugins: true
+  max-joins-per-tick: 3
+  region-file-cache-size: 256
+  strict-advancement-dimension-check: false
+  use-alternative-luck-formula: false
+  use-dimension-type-for-custom-spawners: false
+packet-limiter:
+  all-packets:
+    action: KICK
+    interval: 7.0
+    max-packet-rate: 5000.0
+  kick-message: &lt;red&gt;&lt;lang:disconnect.exceeded_packet_rate&gt;
+  overrides:
+    ServerboundPlaceRecipePacket:
+      action: DROP
+      interval: 4.0
+      max-packet-rate: 5.0
+# 請註意，不同於bukkit.yml中的autosave，Paper中的playerdata和chunks數據是分開保存的。
+player-auto-save:
+  max-per-tick: -1
+  rate: 6000
+proxies:
+  bungee-cord:
+    online-mode: true
+  proxy-protocol: false
+  velocity:
+    enabled: false
+    online-mode: false
+    secret: &#39;&#39;
+scoreboards:
+  save-empty-scoreboard-teams: false
+  track-plugin-scoreboards: false
+spam-limiter:
+  incoming-packet-threshold: 300
+  recipe-spam-increment: 1
+  recipe-spam-limit: 20
+  tab-spam-increment: 1
+  tab-spam-limit: 500
+timings:
+  enabled: false
+  hidden-config-entries:
+  - database
+  - proxies.velocity.secret
+  history-interval: 300
+  history-length: 3600
+  really-enabled: false
+  server-name: Unknown Server
+  server-name-privacy: false
+  url: https://timings.aikar.co/
+  verbose: true
+# 根據你的需求設置
+unsupported-settings:
+  allow-grindstone-overstacking: false
+  allow-headless-pistons: true
+  allow-permanent-block-break-exploits: true
+  allow-piston-duplication: true
+  perform-username-validation: true
+watchdog:
+  early-warning-delay: 180000
+  early-warning-every: 5000
+</code></pre>
+<h3 id="paper-world-defaults-yml"><a href="#paper-world-defaults-yml" class="headerlink" title="paper-world-defaults.yml"></a>paper-world-defaults.yml</h3><pre><code class="lang-yaml"># This is the world defaults configuration file for Paper.
+# As you can see, there&#39;s a lot to configure. Some options may impact gameplay, so use
+# with caution, and make sure you know what each option does before configuring.
+# 
+# If you need help with the configuration or have any questions related to Paper,
+# join us in our Discord or check the docs page.
+# 
+# Configuration options here apply to all worlds, unless you specify overrides inside
+# the world-specific config file inside each world folder.
+# 
+# Docs: https://docs.papermc.io/
+# Discord: https://discord.gg/papermc
+# Website: https://papermc.io/
+
+_version: 29
+anticheat:
+  # 如果你需要反礦透功能，請務必選擇Paper的anti-xray，沒有任何插件可以優於Paper的anti-xary
+  anti-xray:
+    enabled: false
+    # mode 2對帶寬和內存影響非常大，但效果也最強力。（盡管仍然可以被bypass）
+    # mode 1可以較為有效地降低作弊玩家的優勢。
+    engine-mode: 2
+    hidden-blocks:
+    - chest
+    - coal_ore
+    - deepslate_coal_ore
+    - copper_ore
+    - deepslate_copper_ore
+    - raw_copper_block
+    - diamond_ore
+    - deepslate_diamond_ore
+    - emerald_ore
+    - deepslate_emerald_ore
+    - gold_ore
+    - deepslate_gold_ore
+    - iron_ore
+    - deepslate_iron_ore
+    - raw_iron_block
+    - lapis_ore
+    - deepslate_lapis_ore
+    - redstone_ore
+    - deepslate_redstone_ore
+    lava-obscures: false
+    max-block-height: 64
+    replacement-blocks:
+    - stone
+    - oak_planks
+    - deepslate
+    update-radius: 2
+    use-permission: false
+  obfuscation:
+    items:
+      hide-durability: false
+      hide-itemmeta: false
+chunks:
+  # 如果你禁用了bukkit.yml的autosave，那麽請務必記得啟用Paper的auto-save-interval （該項僅保存chunks）
+  auto-save-interval: &#39;6000&#39;
+  # 該項用於設置區塊卸載的緩沖區，如果經常發生往復傳送，則設置該項為10-20s可以避免相同區塊被反復地卸載和加載。
+  delay-chunk-unloads-by: 0s
+  entity-per-chunk-save-limit:
+    arrow: -1
+    ender_pearl: -1
+    experience_orb: -1
+    fireball: -1
+    small_fireball: -1
+    snowball: -1
+  fixed-chunk-inhabited-time: -1
+  max-auto-save-chunks-per-tick: 24
+  prevent-moving-into-unloaded-chunks: false
+collisions:
+  allow-player-cramming-damage: false
+  allow-vehicle-collisions: true
+  fix-climbing-bypassing-cramming-rule: false
+  max-entity-collisions: 8
+  only-players-collide: false
+entities:
+  armor-stands:
+    do-collision-entity-lookups: true
+    tick: true
+  behavior:
+    baby-zombie-movement-modifier: 0.5
+    disable-chest-cat-detection: false
+    disable-creeper-lingering-effect: false
+    disable-player-crits: false
+    door-breaking-difficulty:
+      husk:
+      - HARD
+      vindicator:
+      - NORMAL
+      - HARD
+      zombie:
+      - HARD
+      zombie_villager:
+      - HARD
+      zombified_piglin:
+      - HARD
+    ender-dragons-death-always-places-dragon-egg: false
+    experience-merge-max-value: -1
+    mobs-can-always-pick-up-loot:
+      skeletons: false
+      zombies: false
+    nerf-pigmen-from-nether-portals: false
+    parrots-are-unaffected-by-player-movement: false
+    phantoms-do-not-spawn-on-creative-players: true
+    phantoms-only-attack-insomniacs: true
+    piglins-guard-chests: true
+    pillager-patrols:
+      disable: false
+      spawn-chance: 0.2
+      spawn-delay:
+        per-player: false
+        ticks: 12000
+      start:
+        day: 5
+        per-player: false
+    should-remove-dragon: false
+    spawner-nerfed-mobs-should-jump: false
+    zombie-villager-infection-chance: -1.0
+    zombies-target-turtle-eggs: true
+  entities-target-with-follow-range: false
+  mob-effects:
+    immune-to-wither-effect:
+      wither: true
+      wither-skeleton: true
+    spiders-immune-to-poison-effect: true
+    undead-immune-to-certain-effects: true
+  spawning:
+    all-chunks-are-slime-chunks: false
+    # 為不同的item設置不同的despawn-rate，這裏可能需要進行設置。
+    # 保持默認配置也是可以接受的，因為item一般不造成服務端卡頓。
+    alt-item-despawn-rate:
+      enabled: true
+      items:
+        cobblestone: 300
+    count-all-mobs-for-spawning: false
+    creative-arrow-despawn-rate: default
+    despawn-ranges:
+      ambient:
+        hard: 128
+        soft: 32
+      axolotls:
+        hard: 128
+        soft: 32
+      creature:
+        hard: 128
+        soft: 32
+      misc:
+        hard: 128
+        soft: 32
+      monster:
+        hard: 128
+        soft: 32
+      underground_water_creature:
+        hard: 128
+        soft: 32
+      water_ambient:
+        hard: 64
+        soft: 32
+      water_creature:
+        hard: 128
+        soft: 32
+    disable-mob-spawner-spawn-egg-transformation: true
+    duplicate-uuid:
+      mode: SAFE_REGEN
+      safe-regen-delete-range: 32
+    filter-nbt-data-from-spawn-eggs-and-related: true
+    iron-golems-can-spawn-in-air: false
+    monster-spawn-max-light-level: -1
+    non-player-arrow-despawn-rate: default
+    per-player-mob-spawns: true
+    scan-for-legacy-ender-dragon: true
+    skeleton-horse-thunder-spawn-chance: default
+    slime-spawn-height:
+      slime-chunk:
+        maximum: 40.0
+      surface-biome:
+        maximum: 70.0
+        minimum: 50.0
+    spawn-limits:
+      ambient: -1
+      axolotls: -1
+      creature: -1
+      monster: -1
+      underground_water_creature: -1
+      water_ambient: -1
+      water_creature: -1
+    wandering-trader:
+      spawn-chance-failure-increment: 25
+      spawn-chance-max: 75
+      spawn-chance-min: 25
+      spawn-day-length: 24000
+      spawn-minute-length: 1200
+    wateranimal-spawn-height:
+      maximum: default
+      minimum: default
+environment:
+  disable-explosion-knockback: false
+  disable-ice-and-snow: false
+  disable-teleportation-suffocation-check: false
+  disable-thunder: false
+  fire-tick-delay: 30
+  frosted-ice:
+    delay:
+      max: 40
+      min: 20
+    enabled: true
+  generate-flat-bedrock: false
+  nether-ceiling-void-damage-height: disabled
+  optimize-explosions: true
+  portal-create-radius: 16
+  portal-search-radius: 128
+  portal-search-vanilla-dimension-scaling: true
+  treasure-maps:
+    enabled: true
+    find-already-discovered:
+      loot-tables: default
+      villager-trade: false
+  water-over-lava-flow-speed: 5
+# 如果你願意付出使用anti-xary的mode2的代價，那麽最好也為&quot;結構生成&quot;啟用隨機種子
+# 否則，Github上的SeedCrackerX將可以在取得一定特征值後，輕松地完成對seed的暴力破解。
+feature-seeds:
+  generate-random-seeds-for-all: false
+fishing-time-range:
+  maximum: 600
+  minimum: 100
+fixes:
+  disable-unloaded-chunk-enderpearl-exploit: true
+  falling-block-height-nerf: disabled
+  fix-curing-zombie-villager-discount-exploit: false
+  fix-items-merging-through-walls: false
+  prevent-tnt-from-moving-in-water: false
+  split-overstacked-loot: true
+  tnt-entity-height-nerf: disabled
+hopper:
+  cooldown-when-full: true
+  disable-move-event: false
+  ignore-occluding-blocks: false
+lootables:
+  auto-replenish: false
+  max-refills: -1
+  refresh-max: 2d
+  refresh-min: 12h
+  reset-seed-on-fill: true
+  restrict-player-reloot: true
+maps:
+  item-frame-cursor-limit: 128
+  item-frame-cursor-update-interval: 10
+max-growth-height:
+  bamboo:
+    max: 16
+    min: 11
+  cactus: 3
+  reeds: 3
+misc:
+  disable-end-credits: false
+  disable-relative-projectile-velocity: false
+  disable-sprint-interruption-on-attack: false
+  light-queue-size: 20
+  max-leash-distance: 10.0
+  # 盡管有些高性能的紅石實現算法，但他們往往只支持一些特定的版本，並且也不是完美復現特性。
+  # 對於上述所提到的服務端核心，該項均使用的是VANILLA實現算法。
+  redstone-implementation: VANILLA
+  shield-blocking-delay: 5
+  show-sign-click-command-failure-msgs-to-player: false
+  update-pathfinding-on-block-update: false
+scoreboards:
+  allow-non-player-entities-on-scoreboards: false
+  use-vanilla-world-scoreboard-name-coloring: false
+spawn:
+  allow-using-signs-inside-spawn-protection: false
+  keep-spawn-loaded: true
+  keep-spawn-loaded-range: 10
+tick-rates:
+  # 對於entity計算量過大的情況下，通常可以修改該項來進行優化。
+  # 這裏不會公布一份萬能的配置，但你可以通過閱讀timings或者sparks報告來填寫這些數值。
+  # 對於pillager和zombified_piglin的行為限製略有不同。
+  behavior: &#123;&#125;
+  container-update: 1
+  grass-spread: 1
+  mob-spawner: 1
+  # 見behavior
+  # 如果villager和zombie的計算量過大，則應當著重查看該項。
+  sensor: &#123;&#125;
+unsupported-settings:
+  fix-invulnerable-end-crystal-exploit: true
+</code></pre>
+<h3 id="pufferfish-yml"><a href="#pufferfish-yml" class="headerlink" title="pufferfish.yml"></a>pufferfish.yml</h3><pre><code class="lang-yaml"># Pufferfish Configuration
+# Check out Pufferfish Host for maximum performance server hosting: https://pufferfish.host
+# Join our Discord for support: https://discord.gg/reZw4vQV9H
+# Download new builds at https://ci.pufferfish.host/job/Pufferfish
+info:
+  version: &#39;1.0&#39;
+# These values define a entity&#39;s maximum lifespan. If an
+# entity is in this list and it has survived for longer than
+# that number of ticks, then it will be removed. Setting a value to
+# -1 disables this feature.
+entity_timeouts:
+  SNOWBALL: -1
+  LLAMA_SPIT: -1
+sentry-dsn: &#39;&#39;
+enable-books: true
+enable-suffocation-optimization: true
+# 這一項並不意味著mob-spawning是fully-async的，仍然是parted-async，但開啟這項基本不造成特性改變。
+enable-async-mob-spawning: true
+# Optimizes projectile settings
+projectile:
+  max-loads-per-tick: 10
+  max-loads-per-projectile: 10
+# Optimizes entity brains when
+# they&#39;re far away from the player
+# 對於實體過多的情況，使用DAB來控製brain-tick是有效的方案，但是請註意通過blacklist過濾掉不適宜的實體。
+# 修改該數值會造成較為明顯的特性改變。
+dab:
+  enabled: false
+  start-distance: 12
+  max-tick-freq: 20
+  activation-dist-mod: 8
+  blacklisted-entities: []
+inactive-goal-selector-throttle: false
+# Settings for things that don&#39;t belong elsewhere
+misc:
+  disable-method-profiler: true
+  disable-out-of-order-chat: false
+</code></pre>
+<h3 id="purpur-yml"><a href="#purpur-yml" class="headerlink" title="purpur.yml"></a>purpur.yml</h3><pre><code class="lang-yaml"># This is the main configuration file for Purpur.
+# As you can see, there&#39;s tons to configure. Some options may impact gameplay, so use
+# with caution, and make sure you know what each option does before configuring.
+#
+# If you need help with the configuration or have any questions related to Purpur,
+# join us in our Discord guild.
+#
+# Website: https://purpurmc.org 
+# Docs: https://purpurmc.org/docs 
+
+verbose: false
+settings:
+  block-fall-multipliers:
+    minecraft:black_bed:
+      distance: 0.5
+    minecraft:yellow_bed:
+      distance: 0.5
+    minecraft:lime_bed:
+      distance: 0.5
+    minecraft:brown_bed:
+      distance: 0.5
+    minecraft:light_gray_bed:
+      distance: 0.5
+    minecraft:magenta_bed:
+      distance: 0.5
+    minecraft:purple_bed:
+      distance: 0.5
+    minecraft:light_blue_bed:
+      distance: 0.5
+    minecraft:pink_bed:
+      distance: 0.5
+    minecraft:red_bed:
+      distance: 0.5
+    minecraft:hay_block:
+      damage: 0.2
+    minecraft:white_bed:
+      distance: 0.5
+    minecraft:gray_bed:
+      distance: 0.5
+    minecraft:cyan_bed:
+      distance: 0.5
+    minecraft:blue_bed:
+      distance: 0.5
+    minecraft:green_bed:
+      distance: 0.5
+    minecraft:orange_bed:
+      distance: 0.5
+  fix-projectile-looting-transfer: false
+  blast-resistance-overrides: &#123;&#125;
+  messages:
+    cannot-ride-mob: &lt;red&gt;You cannot mount that mob
+    afk-broadcast-away: &lt;yellow&gt;&lt;italic&gt;%s is now AFK
+    afk-broadcast-back: &lt;yellow&gt;&lt;italic&gt;%s is no longer AFK
+    afk-tab-list-prefix: &#39;[AFK] &#39;
+    afk-tab-list-suffix: &#39;&#39;
+    credits-command-output: &lt;green&gt;%s has been shown the end credits
+    demo-command-output: &lt;green&gt;%s has been shown the demo screen
+    ping-command-output: &lt;green&gt;%s&#39;s ping is %sms
+    ram-command-output: &#39;&lt;green&gt;Ram Usage: &lt;used&gt;/&lt;xmx&gt; (&lt;percent&gt;)&#39;
+    rambar-command-output: &lt;green&gt;Rambar toggled &lt;onoff&gt; for &lt;target&gt;
+    tpsbar-command-output: &lt;green&gt;Tpsbar toggled &lt;onoff&gt; for &lt;target&gt;
+    dont-run-with-scissors: &lt;red&gt;&lt;italic&gt;Don&#39;t run with scissors!
+    uptime-command-output: &lt;green&gt;Server uptime is &lt;uptime&gt;
+    unverified-username: default
+    sleep-skipping-night: default
+    sleeping-players-percent: default
+    death-message:
+      run-with-scissors: &lt;player&gt; slipped and fell on their shears
+      stonecutter: &lt;player&gt; has sawed themself in half
+  broadcasts:
+    advancement:
+      only-broadcast-to-affected-player: false
+    death:
+      only-broadcast-to-affected-player: false
+  # 與anti-xray搭配使用
+  seed:
+    structure:
+      buried_treasure: -1
+      mineshaft: -1
+  # 該項用於規定laggy的判定閾值，與villager的動態tick-brain搭配使用。
+  lagging-threshold: 16.0
+  command:
+    rambar:
+      title: &lt;gray&gt;Ram&lt;yellow&gt;:&lt;/yellow&gt; &lt;used&gt;/&lt;xmx&gt; (&lt;percent&gt;)
+      overlay: NOTCHED_20
+      progress-color:
+        good: GREEN
+        medium: YELLOW
+        low: RED
+      text-color:
+        good: &lt;gradient:#55ff55:#00aa00&gt;&lt;text&gt;&lt;/gradient&gt;
+        medium: &lt;gradient:#ffff55:#ffaa00&gt;&lt;text&gt;&lt;/gradient&gt;
+        low: &lt;gradient:#ff5555:#aa0000&gt;&lt;text&gt;&lt;/gradient&gt;
+      tick-interval: 20
+    tpsbar:
+      title: &lt;gray&gt;TPS&lt;yellow&gt;:&lt;/yellow&gt; &lt;tps&gt; MSPT&lt;yellow&gt;:&lt;/yellow&gt; &lt;mspt&gt; Ping&lt;yellow&gt;:&lt;/yellow&gt;
+        &lt;ping&gt;ms
+      overlay: NOTCHED_20
+      fill-mode: MSPT
+      progress-color:
+        good: GREEN
+        medium: YELLOW
+        low: RED
+      text-color:
+        good: &lt;gradient:#55ff55:#00aa00&gt;&lt;text&gt;&lt;/gradient&gt;
+        medium: &lt;gradient:#ffff55:#ffaa00&gt;&lt;text&gt;&lt;/gradient&gt;
+        low: &lt;gradient:#ff5555:#aa0000&gt;&lt;text&gt;&lt;/gradient&gt;
+      tick-interval: 20
+    compass:
+      title: &#39;S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈  ·  ◈  ·  ◈  ·  NW  ·  ◈  ·  ◈  ·  ◈  ·  N  ·  ◈  ·  ◈  ·  ◈  ·  NE  ·  ◈  ·  ◈  ·  ◈  ·  E  ·  ◈  ·  ◈  ·  ◈  ·  SE  ·  ◈  ·  ◈  ·  ◈  ·  S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈  ·  ◈  ·  ◈  ·  NW  ·  ◈  ·  ◈  ·  ◈  ·  N  ·  ◈  ·  ◈  ·  ◈  ·  NE  ·  ◈  ·  ◈  ·  ◈  ·  E  ·  ◈  ·  ◈  ·  ◈  ·  SE  ·  ◈  ·  ◈  ·  ◈  ·  &#39;
+      overlay: PROGRESS
+      progress-color: BLUE
+      percent: 1.0
+      tick-interval: 5
+    gamemode:
+      requires-specific-permission: false
+    fill:
+      max-area: 32768
+    hide-hidden-players-from-entity-selector: false
+    uptime:
+      format: &lt;days&gt;&lt;hours&gt;&lt;minutes&gt;&lt;seconds&gt;
+      day: &#39;%02d day, &#39;
+      days: &#39;%02d days, &#39;
+      hour: &#39;%02d hour, &#39;
+      hours: &#39;%02d hours, &#39;
+      minute: &#39;%02d minute, and &#39;
+      minutes: &#39;%02d minutes, and &#39;
+      second: &#39;%02d second&#39;
+      seconds: &#39;%02d seconds&#39;
+  blocks:
+    barrel:
+      rows: 3
+    ender_chest:
+      six-rows: false
+      use-permissions-for-rows: false
+    crying_obsidian:
+      valid-for-portal-frame: false
+    beehive:
+      max-bees-inside: 3
+    anvil:
+      cumulative-cost: true
+    lightning_rod:
+      range: 128
+    grindstone:
+      ignored-enchants:
+      - minecraft:binding_curse
+      - minecraft:vanishing_curse
+      remove-attributes: false
+      remove-name-and-lore: false
+    cave_vines:
+      max-growth-age: 25
+    kelp:
+      max-growth-age: 25
+    twisting_vines:
+      max-growth-age: 25
+    weeping_vines:
+      max-growth-age: 25
+    disable-mushroom-updates: false
+    disable-note-block-updates: false
+    disable-chorus-plant-updates: false
+  enchantment:
+    allow-transparent-blocks-in-enchantment-box: false
+    allow-infinity-and-mending-together: false
+    allow-infinity-on-crossbow: false
+    allow-looting-on-shears: false
+    anvil:
+      allow-unsafe-enchants: false
+      allow-inapplicable-enchants: false
+      allow-incompatible-enchants: false
+      allow-higher-enchants-levels: false
+    allow-unsafe-enchant-command: false
+    clamp-levels: true
+  entity:
+    enderman:
+      short-height: false
+  allow-water-placement-in-the-end: true
+  logger:
+    suppress-library-loader: false
+    suppress-init-legacy-material-errors: false
+    suppress-ignored-advancement-warnings: false
+    suppress-unrecognized-recipe-errors: false
+    suppress-setblock-in-far-chunk-errors: false
+    suppress-sent-expired-chat: false
+  network:
+    upnp-port-forwarding: false
+    max-joins-per-second: true
+    kick-for-out-of-order-chat: false
+  username-valid-characters: ^[a-zA-Z0-9_.]*$
+  food-properties: &#123;&#125;
+  use-alternate-keepalive: true
+  # 動態地調整tps，可以顯著提高tps的觀測數值，基本沒有副作用。
+  tps-catchup: true
+  server-mod-name: Purpur
+  disable-give-dropping: true
+config-version: 30
+world-settings:
+  default:
+    blocks:
+      grindstone:
+        allow-oversized-stacking: false
+      observer:
+        disable-clock: false
+      anvil:
+        use-mini-message: false
+        allow-colors: false
+        iron-ingots-used-for-repair: 0
+        obsidian-used-for-damage: 0
+      azalea:
+        growth-chance: 0.0
+      beacon:
+        effect-range:
+          level-1: 20
+          level-2: 30
+          level-3: 40
+          level-4: 50
+      bed:
+        explode: true
+        explode-on-villager-sleep: false
+        explosion-power: 5.0
+        explosion-fire: true
+        explosion-effect: DESTROY
+      big_dripleaf:
+        tilt-delay:
+          FULL: 100
+          UNSTABLE: 10
+          PARTIAL: 10
+      budding_amethyst:
+        silk-touch: false
+      cactus:
+        breaks-from-solid-neighbors: true
+      campfire:
+        lit-when-placed: true
+      chest:
+        open-with-solid-block-on-top: false
+      composter:
+        sneak-to-bulk-process: false
+      coral:
+        die-outside-water: true
+      dispenser:
+        apply-cursed-to-armor-slots: true
+        place-anvils: false
+      door:
+        requires-redstone: []
+      dragon_egg:
+        teleport: true
+      end-crystal:
+        baseless:
+          explode: true
+          explosion-power: 6.0
+          explosion-fire: false
+          explosion-effect: DESTROY
+        base:
+          explode: true
+          explosion-power: 6.0
+          explosion-fire: false
+          explosion-effect: DESTROY
+      farmland:
+        bypass-mob-griefing: false
+        gets-moist-from-below: false
+        use-alpha-farmland: false
+        disable-trampling: false
+        only-players-trample: false
+        feather-fall-distance-affects-trampling: false
+        trample-height: -1.0
+      flowering_azalea:
+        growth-chance: 0.0
+      furnace:
+        use-lava-from-underneath: false
+      end_portal:
+        safe-teleporting: false
+      packed_ice:
+        allow-mob-spawns: true
+      blue_ice:
+        allow-mob-spawns: true
+        allow-snow-formation: true
+      lava:
+        infinite-source: false
+        infinite-required-sources: 2
+        speed:
+          nether: 10
+          not-nether: 30
+      conduit:
+        effect-distance: 16
+        mob-damage:
+          distance: 8.0
+          damage-amount: 4.0
+        valid-ring-blocks:
+        - minecraft:prismarine
+        - minecraft:prismarine_bricks
+        - minecraft:sea_lantern
+        - minecraft:dark_prismarine
+      cauldron:
+        fill-chances:
+          rain: 0.05000000074505806
+          powder-snow: 0.10000000149011612
+          dripstone-water: 0.17578125
+          dripstone-lava: 0.05859375
+      piston:
+        block-push-limit: 12
+      magma-block:
+        damage-when-sneaking: false
+        damage-with-frost-walker: false
+      powder_snow:
+        bypass-mob-griefing: false
+      powered-rail:
+        activation-range: 8
+      respawn_anchor:
+        explode: true
+        explosion-power: 5.0
+        explosion-fire: true
+        explosion-effect: DESTROY
+      sand:
+        fix-duping: false
+      sculk_shrieker:
+        can-summon-default: false
+      shulker_box:
+        allow-oversized-stacks: false
+      sign:
+        right-click-edit: false
+        allow-colors: false
+      slab:
+        break-individual-slabs-when-sneaking: false
+      spawner:
+        deactivate-by-redstone: false
+        fix-mc-238526: false
+      sponge:
+        absorption:
+          area: 64
+          radius: 6
+        absorbs-lava: false
+      stonecutter:
+        damage: 0.0
+      turtle_egg:
+        break-from-exp-orbs: true
+        break-from-items: true
+        break-from-minecarts: true
+        bypass-mob-griefing: false
+        random-tick-crack-chance: 500
+        feather-fall-distance-affects-trampling: false
+      water:
+        infinite-source: true
+        infinite-required-sources: 2
+      enchantment-table:
+        lapis-persists: false
+    tools:
+      axe:
+        strippables:
+          minecraft:dark_oak_wood:
+            into: minecraft:stripped_dark_oak_wood
+            drops: &#123;&#125;
+          minecraft:warped_stem:
+            into: minecraft:stripped_warped_stem
+            drops: &#123;&#125;
+          minecraft:mangrove_log:
+            into: minecraft:stripped_mangrove_log
+            drops: &#123;&#125;
+          minecraft:birch_log:
+            into: minecraft:stripped_birch_log
+            drops: &#123;&#125;
+          minecraft:warped_hyphae:
+            into: minecraft:stripped_warped_hyphae
+            drops: &#123;&#125;
+          minecraft:acacia_log:
+            into: minecraft:stripped_acacia_log
+            drops: &#123;&#125;
+          minecraft:jungle_wood:
+            into: minecraft:stripped_jungle_wood
+            drops: &#123;&#125;
+          minecraft:dark_oak_log:
+            into: minecraft:stripped_dark_oak_log
+            drops: &#123;&#125;
+          minecraft:jungle_log:
+            into: minecraft:stripped_jungle_log
+            drops: &#123;&#125;
+          minecraft:crimson_stem:
+            into: minecraft:stripped_crimson_stem
+            drops: &#123;&#125;
+          minecraft:acacia_wood:
+            into: minecraft:stripped_acacia_wood
+            drops: &#123;&#125;
+          minecraft:crimson_hyphae:
+            into: minecraft:stripped_crimson_hyphae
+            drops: &#123;&#125;
+          minecraft:oak_wood:
+            into: minecraft:stripped_oak_wood
+            drops: &#123;&#125;
+          minecraft:birch_wood:
+            into: minecraft:stripped_birch_wood
+            drops: &#123;&#125;
+          minecraft:spruce_wood:
+            into: minecraft:stripped_spruce_wood
+            drops: &#123;&#125;
+          minecraft:spruce_log:
+            into: minecraft:stripped_spruce_log
+            drops: &#123;&#125;
+          minecraft:oak_log:
+            into: minecraft:stripped_oak_log
+            drops: &#123;&#125;
+          minecraft:mangrove_wood:
+            into: minecraft:stripped_mangrove_wood
+            drops: &#123;&#125;
+        waxables:
+          minecraft:waxed_weathered_cut_copper_stairs:
+            into: minecraft:weathered_cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:waxed_oxidized_cut_copper_stairs:
+            into: minecraft:oxidized_cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:waxed_exposed_cut_copper:
+            into: minecraft:exposed_cut_copper
+            drops: &#123;&#125;
+          minecraft:waxed_cut_copper:
+            into: minecraft:cut_copper
+            drops: &#123;&#125;
+          minecraft:waxed_cut_copper_stairs:
+            into: minecraft:cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:waxed_exposed_copper:
+            into: minecraft:exposed_copper
+            drops: &#123;&#125;
+          minecraft:waxed_weathered_cut_copper_slab:
+            into: minecraft:weathered_cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:waxed_oxidized_cut_copper_slab:
+            into: minecraft:oxidized_cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:waxed_exposed_cut_copper_stairs:
+            into: minecraft:exposed_cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:waxed_weathered_cut_copper:
+            into: minecraft:weathered_cut_copper
+            drops: &#123;&#125;
+          minecraft:waxed_oxidized_cut_copper:
+            into: minecraft:oxidized_cut_copper
+            drops: &#123;&#125;
+          minecraft:waxed_weathered_copper:
+            into: minecraft:weathered_copper
+            drops: &#123;&#125;
+          minecraft:waxed_oxidized_copper:
+            into: minecraft:oxidized_copper
+            drops: &#123;&#125;
+          minecraft:waxed_copper_block:
+            into: minecraft:copper_block
+            drops: &#123;&#125;
+          minecraft:waxed_cut_copper_slab:
+            into: minecraft:cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:waxed_exposed_cut_copper_slab:
+            into: minecraft:exposed_cut_copper_slab
+            drops: &#123;&#125;
+        weatherables:
+          minecraft:weathered_cut_copper_slab:
+            into: minecraft:exposed_cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:oxidized_cut_copper_slab:
+            into: minecraft:weathered_cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:weathered_cut_copper:
+            into: minecraft:exposed_cut_copper
+            drops: &#123;&#125;
+          minecraft:exposed_cut_copper_slab:
+            into: minecraft:cut_copper_slab
+            drops: &#123;&#125;
+          minecraft:oxidized_cut_copper_stairs:
+            into: minecraft:weathered_cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:oxidized_copper:
+            into: minecraft:weathered_copper
+            drops: &#123;&#125;
+          minecraft:exposed_cut_copper_stairs:
+            into: minecraft:cut_copper_stairs
+            drops: &#123;&#125;
+          minecraft:weathered_copper:
+            into: minecraft:exposed_copper
+            drops: &#123;&#125;
+          minecraft:exposed_cut_copper:
+            into: minecraft:cut_copper
+            drops: &#123;&#125;
+          minecraft:oxidized_cut_copper:
+            into: minecraft:weathered_cut_copper
+            drops: &#123;&#125;
+          minecraft:exposed_copper:
+            into: minecraft:copper_block
+            drops: &#123;&#125;
+          minecraft:weathered_cut_copper_stairs:
+            into: minecraft:exposed_cut_copper_stairs
+            drops: &#123;&#125;
+      hoe:
+        tillables:
+          minecraft:coarse_dirt:
+            into: minecraft:dirt
+            drops: &#123;&#125;
+            condition: air_above
+          minecraft:dirt_path:
+            into: minecraft:farmland
+            drops: &#123;&#125;
+            condition: air_above
+          minecraft:rooted_dirt:
+            into: minecraft:dirt
+            drops:
+              minecraft:hanging_roots: 1.0
+            condition: always
+          minecraft:dirt:
+            into: minecraft:farmland
+            drops: &#123;&#125;
+            condition: air_above
+          minecraft:grass_block:
+            into: minecraft:farmland
+            drops: &#123;&#125;
+            condition: air_above
+        replant-crops: false
+        replant-nether-warts: false
+    mobs:
+      tropical_fish:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 3.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      turtle:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 30.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      vex:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 14.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      villager:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        brain-ticks: 300
+        use-brain-ticks-only-when-lagging: true
+        follow-emerald-blocks: false
+        can-be-leashed: false
+        can-breed: true
+        breeding-delay-ticks: 6000
+        clerics-farm-warts: false
+        cleric-wart-farmers-throw-warts-at-villagers: true
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        allow-trading: true
+        always-drop-exp: false
+        minimum-demand: 0
+        lobotomize:
+          enabled: false
+          check-interval: 100
+        display-trade-item: true
+        spawn-iron-golem:
+          radius: 0
+          limit: 0
+      vindicator:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 24.0
+        johnny:
+          spawn-chance: 0.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      wandering_trader:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        follow-emerald-blocks: false
+        can-be-leashed: false
+        takes-damage-from-water: false
+        allow-trading: true
+        always-drop-exp: false
+      warden:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+      witch:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 26.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      wither:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 300.0
+        health-regen-amount: 1.0
+        health-regen-delay: 20
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        can-ride-vehicles: false
+        explosion-radius: 1.0
+        play-spawn-sound: true
+        always-drop-exp: false
+      wither_skeleton:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      wolf:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 8.0
+        default-collar-color: RED
+        milk-cures-rabid-wolves: true
+        spawn-rabid-chance: 0.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      zoglin:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 40.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      zombie:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+          spawn_reinforcements: 0.1
+        jockey:
+          only-babies: true
+          chance: 0.05
+          try-existing-chickens: true
+        aggressive-towards-villager-when-lagging: true
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+        head-visibility-percent: 0.5
+      zombie_horse:
+        ridable-in-water: false
+        can-swim: false
+        attributes:
+          max_health:
+            min: 15.0
+            max: 15.0
+          jump_strength:
+            min: 0.4
+            max: 1.0
+          movement_speed:
+            min: 0.2
+            max: 0.2
+        spawn-chance: 0.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      zombie_villager:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+          spawn_reinforcements: 0.1
+        jockey:
+          only-babies: true
+          chance: 0.05
+          try-existing-chickens: true
+        takes-damage-from-water: false
+        curing_time:
+          min: 3600
+          max: 6000
+        cure:
+          enabled: true
+        always-drop-exp: false
+      zombified_piglin:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+          spawn_reinforcements: 0.0
+        jockey:
+          only-babies: true
+          chance: 0.05
+          try-existing-chickens: true
+        count-as-player-kill-when-angry: true
+        takes-damage-from-water: false
+        always-drop-exp: false
+      hoglin:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 40.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      horse:
+        ridable-in-water: false
+        attributes:
+          max_health:
+            min: 15.0
+            max: 30.0
+          jump_strength:
+            min: 0.4
+            max: 1.0
+          movement_speed:
+            min: 0.1125
+            max: 0.3375
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        stand-with-rider: true
+        stand-when-hurt: true
+        always-drop-exp: false
+      husk:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+          spawn_reinforcements: 0.1
+        jockey:
+          only-babies: true
+          chance: 0.05
+          try-existing-chickens: true
+        takes-damage-from-water: false
+        always-drop-exp: false
+      illusioner:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        movement-speed: 0.5
+        follow-range: 18.0
+        attributes:
+          max_health: 32.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      iron_golem:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        can-swim: false
+        attributes:
+          max_health: 100.0
+        takes-damage-from-water: false
+        poppy-calms-anger: false
+        healing-calms-anger: false
+        always-drop-exp: false
+      llama:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health:
+            min: 15.0
+            max: 30.0
+          jump_strength:
+            min: 0.5
+            max: 0.5
+          movement_speed:
+            min: 0.175
+            max: 0.175
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        join-caravans: true
+        always-drop-exp: false
+      magma_cube:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: size * size
+          attack_damage: size
+        takes-damage-from-water: false
+        always-drop-exp: false
+      mooshroom:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      mule:
+        ridable-in-water: false
+        attributes:
+          max_health:
+            min: 15.0
+            max: 30.0
+          jump_strength:
+            min: 0.5
+            max: 0.5
+          movement_speed:
+            min: 0.175
+            max: 0.175
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      ocelot:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      panda:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      parrot:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 6.0
+        takes-damage-from-water: false
+        can-breed: false
+        always-drop-exp: false
+      phantom:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        flames:
+          damage: 1.0
+          fire-time: 8
+        allow-griefing: false
+        attributes:
+          max_health: &#39;20.0&#39;
+          attack_damage: 6 + size
+        attacked-by-crystal-range: 0.0
+        attacked-by-crystal-damage: 1.0
+        orbit-crystal-radius: 0.0
+        spawn:
+          delay:
+            min: 1200
+            max: 2400
+          min-sky-darkness: 5
+          only-above-sea-level: true
+          only-with-visible-sky: true
+          local-difficulty-chance: 3.0
+          min-time-since-slept: 72000
+          overhead:
+            min: 20
+            max: 35
+            radius: 10
+          per-attempt:
+            min: 1
+            max: -1
+        burn-in-light: 0
+        burn-in-daylight: true
+        ignore-players-with-torch: false
+        flames-on-swoop: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+        size:
+          min: 0
+          max: 0
+      pig:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        give-saddle-back: false
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      piglin:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 16.0
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        portal-spawn-modifier: 2000
+        always-drop-exp: false
+      piglin_brute:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 50.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      pillager:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 24.0
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      polar_bear:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 30.0
+        breedable-item: &#39;&#39;
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      pufferfish:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 3.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      rabbit:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 3.0
+        spawn-toast-chance: 0.0
+        spawn-killer-rabbit-chance: 0.0
+        breeding-delay-ticks: 6000
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      ravager:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 100.0
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        griefable-blocks:
+        - minecraft:oak_leaves
+        - minecraft:spruce_leaves
+        - minecraft:birch_leaves
+        - minecraft:jungle_leaves
+        - minecraft:acacia_leaves
+        - minecraft:dark_oak_leaves
+        - minecraft:beetroots
+        - minecraft:carrots
+        - minecraft:potatoes
+        - minecraft:wheat
+        always-drop-exp: false
+      salmon:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 3.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      sheep:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 8.0
+        breeding-delay-ticks: 6000
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+        jeb-shear-random-color: false
+      shulker:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 30.0
+        takes-damage-from-water: false
+        spawn-from-bullet:
+          base-chance: 1.0
+          require-open-lid: true
+          nearby-range: 8.0
+          nearby-equation: (nearby - 1) / 5.0
+          random-color: false
+        change-color-with-dye: false
+        always-drop-exp: false
+      silverfish:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 8.0
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      skeleton:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+        head-visibility-percent: 0.5
+        feed-wither-roses: 0
+        bow-accuracy: 14 - difficulty * 4
+      skeleton_horse:
+        ridable-in-water: true
+        can-swim: false
+        attributes:
+          max_health:
+            min: 15.0
+            max: 15.0
+          jump_strength:
+            min: 0.4
+            max: 1.0
+          movement_speed:
+            min: 0.2
+            max: 0.2
+        takes-damage-from-water: false
+        always-drop-exp: false
+      slime:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: size * size
+          attack_damage: size
+        takes-damage-from-water: false
+        always-drop-exp: false
+      snow_golem:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        leave-trail-when-ridden: false
+        attributes:
+          max_health: 4.0
+        drop-pumpkin-when-sheared: true
+        pumpkin-can-be-added-back: false
+        min-shoot-interval-ticks: 20
+        max-shoot-interval-ticks: 20
+        snow-ball-modifier: 10.0
+        attack-distance: 1.25
+        bypass-mob-griefing: false
+        takes-damage-from-water: true
+        always-drop-exp: false
+      squid:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        immune-to-EAR: true
+        water-offset-check: 0.0
+        can-fly: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      spider:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 16.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+        can-climb-world-border: true
+      stray:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      strider:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        breeding-delay-ticks: 6000
+        give-saddle-back: false
+        takes-damage-from-water: true
+        always-drop-exp: false
+      tadpole:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+      trader_llama:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health:
+            min: 15.0
+            max: 30.0
+          jump_strength:
+            min: 0.5
+            max: 0.5
+          movement_speed:
+            min: 0.175
+            max: 0.175
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      allay:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        respect-nbt: []
+      axolotl:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 14.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      bat:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 6.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      bee:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 10.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        can-work-at-night: false
+        can-work-in-rain: false
+        always-drop-exp: false
+        dies-after-sting: true
+      blaze:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 20.0
+        takes-damage-from-water: true
+        always-drop-exp: false
+      cat:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        spawn-delay: 1200
+        scan-range-for-other-cats:
+          swamp-hut: 16
+          village: 48
+        breeding-delay-ticks: 6000
+        default-collar-color: RED
+        takes-damage-from-water: false
+        always-drop-exp: false
+      cave_spider:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 12.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      chicken:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 4.0
+        retaliate: false
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      cod:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 3.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      cow:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        feed-mushrooms-for-mooshroom: 0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        naturally-aggressive-to-players:
+          chance: 0.0
+          damage: 2.0
+        always-drop-exp: false
+      creeper:
+        encircle-target: false
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+        naturally-charged-chance: 0.0
+        allow-griefing: true
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        explode-when-killed: false
+        health-impacts-explosion: false
+        always-drop-exp: false
+        head-visibility-percent: 0.5
+      dolphin:
+        ridable: false
+        controllable: true
+        spit:
+          cooldown: 20
+          speed: 1.0
+          damage: 2.0
+        attributes:
+          max_health: 10.0
+        disable-treasure-searching: false
+        takes-damage-from-water: false
+        naturally-aggressive-to-players-chance: 0.0
+        always-drop-exp: false
+      donkey:
+        ridable-in-water: false
+        attributes:
+          max_health:
+            min: 15.0
+            max: 30.0
+          jump_strength:
+            min: 0.5
+            max: 0.5
+          movement_speed:
+            min: 0.175
+            max: 0.175
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      drowned:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 20.0
+          spawn_reinforcements: 0.1
+        jockey:
+          only-babies: true
+          chance: 0.05
+          try-existing-chickens: true
+        takes-damage-from-water: false
+        can-break-doors: false
+        always-drop-exp: false
+      elder_guardian:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 80.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      ender_dragon:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 200.0
+        always-drop-full-exp: false
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        can-ride-vehicles: false
+      enderman:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 40.0
+        allow-griefing: true
+        can-despawn-with-held-block: false
+        bypass-mob-griefing: false
+        takes-damage-from-water: true
+        aggressive-towards-endermites: true
+        aggressive-towards-endermites-only-spawned-by-player-thrown-ender-pearls: false
+        ignore-players-wearing-dragon-head: false
+        disable-player-stare-aggression: false
+        ignore-projectiles: false
+        always-drop-exp: false
+      endermite:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 8.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      evoker:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 24.0
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      fox:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        tulips-change-type: false
+        breeding-delay-ticks: 6000
+        bypass-mob-griefing: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      frog:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-jump-height: 0.6499999761581421
+        breeding-delay-ticks: 6000
+      ghast:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        ridable-max-y: 320.0
+        attributes:
+          max_health: 10.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+      giant:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        movement-speed: 0.5
+        attack-damage: 50.0
+        attributes:
+          max_health: 100.0
+        step-height: 2.0
+        jump-height: 1.0
+        have-ai: false
+        have-hostile-ai: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      glow_squid:
+        rainglow-mode: rainbow
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        can-fly: false
+        takes-damage-from-water: false
+        always-drop-exp: false
+      goat:
+        ridable: false
+        ridable-in-water: false
+        controllable: true
+        attributes:
+          max_health: 10.0
+        breeding-delay-ticks: 6000
+        takes-damage-from-water: false
+        always-drop-exp: false
+      guardian:
+        ridable: false
+        controllable: true
+        attributes:
+          max_health: 30.0
+        takes-damage-from-water: false
+        always-drop-exp: false
+    hunger:
+      starvation-damage: 1.0
+    ridable-settings:
+      babies-are-ridable: true
+      untamed-tamables-are-ridable: true
+      use-night-vision: false
+    settings:
+      entity:
+        shared-random: true
+    gameplay-mechanics:
+      milk-clears-beneficial-effects: true
+      mob-effects:
+        health-regen-amount: 1.0
+        minimal-health-poison-amount: 1.0
+        poison-degeneration-amount: 1.0
+        wither-degeneration-amount: 1.0
+        hunger-exhaustion-amount: 0.004999999888241291
+        saturation-regen-amount: 1.0
+      mob-spawning:
+        village-cats: default
+        raid-patrols: default
+        phantoms: default
+        wandering-traders: default
+        village-sieges: default
+        ignore-creative-players: false
+      player:
+        burp-delay: 10
+        netherite-fire-resistance:
+          duration: 0
+          amplifier: 0
+          ambient: false
+          show-particles: false
+          show-icon: true
+        idle-timeout:
+          kick-if-idle: false
+          tick-nearby-entities: true
+          count-as-sleeping: false
+          update-tab-list: false
+          mobs-target: true
+        spawn-invulnerable-ticks: 60
+        invulnerable-while-accepting-resource-pack: false
+        exp-dropped-on-death:
+          equation: expLevel * 7
+          maximum: 100
+        teleport-if-outside-border: false
+        totem-of-undying-works-in-inventory: false
+        fix-stuck-in-portal: false
+        one-punch-in-creative: false
+        sleep-ignore-nearby-mobs: false
+        can-skip-night: true
+        critical-damage-multiplier: 1.5
+        burp-when-full: false
+        armor-click-equip:
+          allow-hot-swapping: false
+          creative-makes-copy: true
+        ridable-in-water: false
+        curse-of-binding:
+          remove-with-weakness: false
+        shift-right-click-repairs-mending-points: 0
+        exp-pickup-delay-ticks: 2
+        allow-void-trading: true
+      projectile-offset:
+        bow: 1.0
+        crossbow: 1.0
+        egg: 1.0
+        ender-pearl: 1.0
+        throwable-potion: 1.0
+        trident: 1.0
+        snowball: 1.0
+      projectile-damage:
+        snowball: -1
+      shovel-turns-block-to-grass-path:
+      - minecraft:coarse_dirt
+      - minecraft:dirt
+      - minecraft:grass_block
+      - minecraft:mycelium
+      - minecraft:podzol
+      - minecraft:rooted_dirt
+      silk-touch:
+        enabled: false
+        spawner-name: &lt;reset&gt;&lt;white&gt;Spawner
+        minimal-level: 1
+        spawner-lore:
+        - Spawns a &lt;mob&gt;
+        tools:
+        - minecraft:iron_pickaxe
+        - minecraft:golden_pickaxe
+        - minecraft:diamond_pickaxe
+        - minecraft:netherite_pickaxe
+      armorstand:
+        step-height: 0.0
+        set-name-visible-when-placing-with-custom-name: false
+        fix-nametags: false
+        can-movement-tick: true
+        can-move-in-water: true
+        can-move-in-water-over-fence: true
+        place-with-arms-visible: false
+      arrow:
+        movement-resets-despawn-counter: true
+      use-better-mending: false
+      always-tame-in-creative: false
+      boat:
+        eject-players-on-land: false
+        do-fall-damage: true
+      disable-drops-on-cramming-death: false
+      entities-can-use-portals: true
+      entities-pick-up-loot-bypass-mob-griefing: false
+      fireballs-bypass-mob-griefing: false
+      impose-teleport-restrictions-on-gateways: false
+      milk-cures-bad-omen: true
+      note-block-ignore-above: false
+      persistent-tileentity-display-names-and-lore: false
+      persistent-droppable-entity-display-names: false
+      projectiles-bypass-mob-griefing: false
+      tick-fluids: true
+      entity-blindness-multiplier: 1.0
+      trident-loyalty-void-return-height: 0.0
+      void-damage-height: -64.0
+      void-damage-dealt: 4.0
+      raid-cooldown-seconds: 0
+      animal-breeding-cooldown-seconds: 0
+      mobs-ignore-rails: false
+      rain-stops-after-sleep: true
+      thunder-stops-after-sleep: true
+      mob-last-hurt-by-player-time: 100
+      daylight-cycle-ticks:
+        daytime: 12000
+        nighttime: 12000
+      drowning:
+        air-ticks: 300
+        ticks-per-damage: 20
+        damage-from-drowning: 2.0
+      elytra:
+        damage-per-second: 1
+        damage-multiplied-by-speed: 0.0
+        ignore-unbreaking: false
+        damage-per-boost:
+          firework: 0
+          trident: 0
+        kinetic-damage: true
+      infinity-bow:
+        works-without-arrows: false
+        normal-arrows: true
+        spectral-arrows: false
+        tipped-arrows: false
+      item:
+        immune:
+          cactus: []
+          explosion: []
+          fire: []
+          lightning: []
+        shears:
+          damage-if-sprinting: false
+          sprinting-damage: 1.0
+        ender-pearl:
+          damage: 5.0
+          cooldown: 20
+          creative-cooldown: 20
+          endermite-spawn-chance: 0.05000000074505806
+        glow_berries:
+          eat-glow-duration: 0
+        shulker_box:
+          drop-contents-when-destroyed: true
+        compass:
+          holding-shows-bossbar: false
+        snowball:
+          extinguish:
+            fire: false
+            candles: false
+            campfires: false
+      halloween:
+        force: false
+        head-chance: 0.25
+      entity-lifespan: 0
+      entity-left-handed-chance: 0.05000000074505806
+      minecart:
+        max-speed: 0.4
+        place-anywhere: false
+        powered-rail:
+          boost-modifier: 0.06
+        controllable:
+          enabled: false
+          step-height: 1.0
+          hop-boost: 0.5
+          fall-damage: true
+          base-speed: 0.1
+          block-speed:
+            grass_block: 0.3
+            stone: 0.5
+  # 添加這項僅僅是為了修復Mojang不願修復的內容缺陷：避免enderman的指數爆炸增長。
+  # 該項有可能影響遊玩體驗，也可能沒有影響。
+  world_the_end:
+    mobs:
+      enderman:
+        can-despawn-with-held-block: true
+</code></pre>
+<h2 id="How-to-analyse-profile-reports"><a href="#How-to-analyse-profile-reports" class="headerlink" title="How to analyse profile reports ?"></a>How to analyse profile reports ?</h2><p>如果你在 <code>服務端核心</code> 處於 <code>laggy</code> 狀態的時候進行 <code>采樣</code>，那麽結論往往是：<code>tick entity</code> 和 <code>tick chunk</code> 將占據最多的 <code>計算量</code>。</p>
+<p>對於 <code>tick chunk</code> 而言，你能做的事情其實很有限。</p>
+<blockquote>
+<p>可以通過修改 <code>tick-per</code> 中的 <code>monter-spawn</code> 來大幅度減少 <code>tick chunk</code> 的 <code>計算量</code>。</p>
+<p>但這麽做取決於你的需求。</p>
+</blockquote>
+<p>對於 <code>tick entity</code> 而言，你需要根據 <code>報告</code> 所指出的 <code>異常指標</code> ，對 <code>behavior</code> 和 <code>sensor</code> 進行調整。</p>
+<blockquote>
+<p>這裏列出幾個需要特別註意的實體：<code>villager</code>， <code>zombified_piglin</code>， <code>illager</code></p>
+<blockquote>
+<p>對於 <code>villager</code> 而言，可以通過修改 <code>acquirepoi</code> 來顯著地減少計算量，但這會導致 <code>尋路算法</code> 的執行頻率降低。</p>
+<p>而 <code>validatenearbypoi</code> 會影響對 <code>工作方塊</code> 的 <code>識別速度</code>。</p>
+<p>如果此時有多個 <code>劫掠塔</code> 在運行，則可以發現 <code>victorystroll</code> 的計算量顯著上升。</p>
+<p>如果你希望 <code>runone</code> 的平均值降低，則可以修改 <code>dab</code> 或者 <code>lagging-threshold</code>，但是這將會影響 <code>villager</code> 的 <code>全部的</code> <code>behavior</code> 和 <code>sensor</code>。</p>
+<p>一般不建議這麽做。</p>
+<blockquote>
+<p>請註意，<code>某個entity的gravity計算</code> 是包括在 <code>該entity的AI計算</code> 之中的。</p>
+<p><code>entity</code> 有自己 <code>內置的tick</code> 來進行 <code>AI計算</code>，它不受 <code>外部的tick</code> 影響。</p>
+</blockquote>
+<p>對於 <code>zombified_piglin</code> 而言，主要是2個原因導致 <code>計算量</code> 偏高。</p>
+<ul>
+<li>聯動仇恨</li>
+<li>高刷怪效率</li>
+</ul>
+<p>即使 <code>zombified_piglin</code> 被 <code>高效率地處置</code>，仍然會 <code>持續占據</code> 這部分 <code>計算量</code>。</p>
+<blockquote>
+<p>Paper早已修復了由於 <code>player</code> 跨越 <code>dimension</code> 使得 <code>zombified_pigin</code> 因為 <code>raytrace</code> 錯誤計算而導致的 <code>追蹤射線沿途的大量區塊被錯誤地加載</code> 造成的卡頓問題。</p>
+<p>對於 <code>bee</code> 來說，曾經也存在類似的問題，但目前已經被修復。</p>
+</blockquote>
+<p>對於 <code>illeger</code> 來說，情況和 <code>zombified_piglin</code> 類似。</p>
+<p>區別在於 <code>單座劫掠塔</code> 一般比 <code>單座豬人塔</code> 的 <code>刷怪效率更低</code>，而且 <code>刷怪效率</code> 呈現 <code>鋸齒形波動</code>。</p>
+<blockquote>
+<p>如果你只看到了 <code>pillager</code> 偏高，那麽原因可能是其在野外環境的 <code>自然生成</code> 占用 <code>計算量</code>，該BUG可以通過升級版本修復。</p>
+</blockquote>
+</blockquote>
+<p>關於 <code>性能采樣器</code>，這裏使用 <code>Timings v2</code> 進行性能分析（這是Paper所提供的）。</p>
+<p>如果你使用的是Purpur，那麽非常建議你使用 <code>Spark</code> 進行分析，它比 <code>Timings v2</code> 更加優秀。</p>
+<ul>
+<li>更美觀的UI</li>
+<li>更易讀的報表</li>
+<li>更好的性能</li>
+<li>更細的采樣粒度</li>
+</ul>
+<p><code>Plugins</code> 不應當占據過多的 <code>計算量</code>。如果某個 <code>Plugin</code> 占據了太多計算量，那麽你應該考慮棄用它，或者選擇一個替代品。</p>
+<p>並不是所有的開發者都會在編寫代碼的時候，時刻關註高性能。</p>
+<p><code>Player實體</code> 並不真正地占用 <code>計算量</code>，他們甚至不如 <code>Villager實體</code> 占用的 <code>計算量</code> 高。</p>
+<p><code>Entity</code> 占用計算量的真實原因是，他們需要為 <code>AI計算</code> 付出 <code>高額的代價</code> （往往的 <code>尋路算法</code>，也包括部分敏感的 <code>傳感器 (Sensor)</code>）。</p>
+<p>單個 <code>Entity</code> 越聰明，則占用的 <code>計算量</code> 越大。（毫無疑問，<code>Villager</code> 是最聰明的實體，此外，<code>Zombie 族</code> 實體由於存在 <code>與Villager的威脅關聯</code>，所以其 AI計算也會比其他實體更高）</p>
+<p><code>Tile Entity</code> 占用的 <code>計算量</code> 遠少於 <code>Entity</code>。</p>
+<p>盡管 Paper 針對 <code>hopper</code> 有優化算法，但是由於 <code>hopper</code> 的數量一般較多，在報告結果中，<code>hopper</code> 仍然可能是 <code>計算量</code> 最高的 <code>Tile Entity</code>。</p>
+<p><code>Chest</code> ，<code>Furnace</code> 和 <code>Sign</code> 對 <code>計算量</code> 的占用極小，但是他們的渲染可能會導致客戶端卡頓。</p>
+<p><code>Observer</code> 以及 <code>單純的時鐘電路</code> 並不占用多少 <code>計算量</code>，一般取決於這個結構的 <code>輸出端</code> 在做什麽。</p>
+<p>但 <code>Piston</code> ，特別是 <code>Sticky Piston</code> 則非常占用 <code>計算量</code>。</p>
+<blockquote>
+<p>這是因為他們每次的 <code>激活</code> 與 <code>失活</code> 均會造成 <code>方塊更新</code>，同時會產生 <code>Moving-Piston</code> 這個 <code>Tile Entity</code></p>
+</blockquote>
+<p>通過使用擁有更高睿頻和IPC的CPU雖然對提升性能有所幫助，但性價比極低。</p>
+<p><code>Vanilla</code> 從一開始就沒有考慮過 <code>多線程任務</code>，並且也不是針對 <code>multi-player games</code> （個位數以上的玩家）設計的。 </p>
+<p>後續的核心很難在維持 <code>Vanilla</code> 的同時，實現 <code>多線程任務</code>。</p>
+<p>大部分情況下，<code>CPU的利用率</code> 僅僅維持在 <code>5-15%</code> 之間。</p>
+<p>這裏提供一個有效且相對可以接受的軟件解決思路：</p>
+<p>根據 <code>上下文</code> 來選擇性地限製 <code>實體</code> 的 <code>行為</code> 和 <code>傳感器</code>。</p>
+<blockquote>
+<p>目前已經有一些 <code>插件方案</code> 使用這個思路，盡管他們使用的 <code>具體策略</code> 不同。</p>
+<p>對性能的優化較為顯著甚至明顯，但對 <code>vanilla</code> 的破壞較少。</p>
+<blockquote>
+<p>比較有知名度的 <code>anti-villager</code> 沒有考慮上下文和控製粒度，但實際上 <code>villager</code> 的控製粒度可以更細。</p>
+<p>而 <code>farm-limiter</code> 雖然很早就使用該思路，但是對 <code>上下文</code> 的判定選項不夠精準。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="How-to-choose-plugins"><a href="#How-to-choose-plugins" class="headerlink" title="How to choose plugins ?"></a>How to choose plugins ?</h2><p>這個章節不太應該屬於本文，這裏選擇僅討論一小部分的 <code>Anti-Cheat</code> 。</p>
+<p>對於 <code>plugin</code> 選擇，一般考慮：</p>
+<ul>
+<li>功能足夠簡單，但滿足需求</li>
+<li>可配置度高</li>
+<li>沒有造成卡頓的Events</li>
+</ul>
+<blockquote>
+<p>這兩個原則大部分情況是對的：</p>
+<ul>
+<li>服務端核心可以做的事情，不要用插件。</li>
+<li>1個插件可以做的事情，不要用2個插件去完成。</li>
+</ul>
+<p>難以遵守這兩個原則的主要原因是：維護者自己根本不清楚 <code>core</code> 和 <code>plugin</code> 到底有什麽職責。</p>
+</blockquote>
+<h3 id="Anti-Cheat-Review"><a href="#Anti-Cheat-Review" class="headerlink" title="Anti-Cheat Review"></a>Anti-Cheat Review</h3><blockquote>
+<p><code>bypass</code> 是不可避免的，這是協議的缺陷。</p>
+</blockquote>
+<ul>
+<li>NCP：開源，最好搭配其他AC使用，適合魔改。</li>
+<li>Vulcan：較高的可配置性，適合Survival，默認不啟用setback。（已經有full-bypass了）</li>
+<li>Matrix：開箱即用，配置比Vulcan簡單，Movement和Timer沒什麽問題，Premium版新增對Scaffold的額外檢測，但KillAura檢測存在缺陷。</li>
+<li>Spartan：不推薦，<code>FP</code> 和 <code>FN</code> 指標都不好看。 </li>
+<li>GrimAC：值得嘗試，開源，對Reach，Movement，Timer的檢測精度較高，但Scaffold檢測存在缺陷。</li>
+<li>Intave：看需求，可能不適合Survival，目前存在較多的致命FP尚未解決。但是對於Mini-Game是合適的。</li>
+</ul>
+
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>

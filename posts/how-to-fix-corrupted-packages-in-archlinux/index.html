@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>how to fix corrupted packages in archlinux</title>
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
+</head>
+<body>
+<main>
+    <article>
+        <h1 id="How-to-fix-corrupted-packages-in-archlinux"><a href="#How-to-fix-corrupted-packages-in-archlinux" class="headerlink" title="How to fix corrupted packages in archlinux"></a>How to fix corrupted packages in archlinux</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>If you machine is force shutdown during the process of <code>pacman -Syu</code>, it’s possible the packages are in partial update state.<br>To fix this problem, we need to do:</p>
+<ol>
+<li>Find out how bad it is. (How many packages are corrupted)</li>
+<li>Re-install these corrupted packages.</li>
+</ol>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Setup-the-living-os"><a href="#Setup-the-living-os" class="headerlink" title="Setup the living-os"></a>Setup the living-os</h3><p>Insert your living-os sticker (You can make this sticker folloing the arch wiki).</p>
+<p>Step:</p>
+<ul>
+<li>Mount the <code>root partition</code> of your <code>host os</code> into <code>/mnt</code></li>
+<li>Connect to the Internet using <code>iwctl</code>.</li>
+</ul>
+<h3 id="Check-the-corrupted-package-list"><a href="#Check-the-corrupted-package-list" class="headerlink" title="Check the corrupted package list"></a>Check the corrupted package list</h3><p>Let’s say your <code>pacman</code> in the <code>host os</code> is corrupted, so that you need to use the <code>pacman</code> inside <code>living os</code>.<br>The command looks like <code>pacman --root /mnt ...</code>.</p>
+<p>To get the corrupted packages list in the host-os, issue</p>
+<pre><code>sudo LC_ALL=C pacman --root /mnt -Qkk &gt;&gt; list_packages.txt 2&gt;&amp;1
+awk &#39;/mtree/ &#123;print&#125;&#39; ./list_packages.txt &gt; filter_packages.txt
+awk -F &#39;:&#39; &#39;&#123;print $1&#125;&#39; ./filter_packages.txt &gt; collect_packages.txt
+grep -v &quot;error&quot; collect_packages.txt &gt; packages.txt
+</code></pre><p>And all the corrupted packages are in <code>packages.txt</code></p>
+<h3 id="Fix-the-pacman-inside-host-os"><a href="#Fix-the-pacman-inside-host-os" class="headerlink" title="Fix the pacman inside host-os"></a>Fix the <code>pacman</code> inside <code>host-os</code></h3><p>First, we need to update the keyring inside <code>living os</code> using <code>pacman -Sy archlinux-keyring</code> to resolve the outdated gpg keys.<br>Then, you can use <code>pacman --root /mnt -S $(&lt; packages.txt)</code> to re-install all the corrupted packages.</p>
+<blockquote>
+<p>If you need to modify mirrorlist, then you should modify the mirrorlist in <code>living os</code>, and use <code>pacman -Syy</code> to update databse.</p>
+</blockquote>
+<h3 id="Chroot-into-the-host-os-and-do-a-fully-package-upgrade-again"><a href="#Chroot-into-the-host-os-and-do-a-fully-package-upgrade-again" class="headerlink" title="Chroot into the host-os and do a fully-package upgrade again"></a>Chroot into the host-os and do a fully-package upgrade again</h3><p>You need to chroot into the host-os using <code>arch-chroot /mnt</code><br>And issue <code>pacman -Syu</code> to upgrade all packages.<br>If pacman says “there is nothing to do”, then it done.</p>
+<h3 id="Fix-the-bootloader"><a href="#Fix-the-bootloader" class="headerlink" title="Fix the bootloader"></a>Fix the bootloader</h3><p>To fix the bootloader</p>
+<pre><code>mount /dev/&lt;root_partition&gt; /mnt
+mount /dev/&lt;EFI_system_partition&gt; /mnt/boot
+arch-chroot /mnt
+grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+pacman -S linux
+</code></pre>
+    </article>
+</main>
+<footer>
+    <hr>
+<p>See links: <a href="/">homepage</a>
+</p>
+<p>See tags:
+    
+        <a href="/tags/android/">android</a>
+    
+        <a href="/tags/emulator/">emulator</a>
+    
+        <a href="/tags/linux/">linux</a>
+    
+        <a href="/tags/note/">note</a>
+    
+        <a href="/tags/practice/">practice</a>
+    
+        <a href="/tags/solution/">solution</a>
+    
+        <a href="/tags/virtualize/">virtualize</a>
+    
+        <a href="/tags/review/">review</a>
+    
+        <a href="/tags/apple/">apple</a>
+    
+        <a href="/tags/evil/">evil</a>
+    
+        <a href="/tags/touchpad/">touchpad</a>
+    
+        <a href="/tags/device/">device</a>
+    
+        <a href="/tags/hardware/">hardware</a>
+    
+        <a href="/tags/productivity/">productivity</a>
+    
+        <a href="/tags/emacs/">emacs</a>
+    
+        <a href="/tags/ide/">ide</a>
+    
+        <a href="/tags/editor/">editor</a>
+    
+        <a href="/tags/tools/">tools</a>
+    
+        <a href="/tags/java/">java</a>
+    
+        <a href="/tags/algorithm/">algorithm</a>
+    
+        <a href="/tags/monitor/">monitor</a>
+    
+        <a href="/tags/laptop/">laptop</a>
+    
+        <a href="/tags/drm/">drm</a>
+    
+        <a href="/tags/nvidia/">nvidia</a>
+    
+        <a href="/tags/x11/">x11</a>
+    
+        <a href="/tags/kde/">kde</a>
+    
+        <a href="/tags/keyboard/">keyboard</a>
+    
+        <a href="/tags/os/">os</a>
+    
+        <a href="/tags/cpu/">cpu</a>
+    
+        <a href="/tags/hadrware/">hadrware</a>
+    
+        <a href="/tags/gpu/">gpu</a>
+    
+        <a href="/tags/driver/">driver</a>
+    
+        <a href="/tags/security/">security</a>
+    
+        <a href="/tags/qemu/">qemu</a>
+    
+        <a href="/tags/kvm/">kvm</a>
+    
+        <a href="/tags/browser/">browser</a>
+    
+        <a href="/tags/privacy/">privacy</a>
+    
+        <a href="/tags/chrome/">chrome</a>
+    
+        <a href="/tags/google/">google</a>
+    
+        <a href="/tags/web/">web</a>
+    
+        <a href="/tags/wtg/">wtg</a>
+    
+        <a href="/tags/boot/">boot</a>
+    
+        <a href="/tags/usb/">usb</a>
+    
+        <a href="/tags/android/">#android</a>
+    
+        <a href="/tags/emulator/">#emulator</a>
+    
+        <a href="/tags/root/">root</a>
+    
+        <a href="/tags/minecraft/">minecraft</a>
+    
+</p>
+
+<p>Copyright &copy; 2020-2025 sakurawald</p>
+
+</footer>
+</body>
+</html>
