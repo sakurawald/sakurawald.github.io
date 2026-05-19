@@ -1,0 +1,96 @@
+# site
+title: sakurawald's blog
+subtitle: ''
+description: ''
+keywords:
+author: sakurawald
+language: en
+timezone: Japan
+
+# url
+url: https://sakurawald.github.io
+permalink: ./posts/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+
+# writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+
+# render
+skip_render:
+syntax_highlighter:
+  
+# home page
+index_generator:
+  path: ''
+  per_page: 0
+  order_by: -date
+
+# tag
+tag_map:
+
+# metadata elements
+meta_generator: true
+
+# date / time
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# theme
+theme: toxic
+
+# deploy
+deploy:
+  type: git
+  repo: git@github.com:sakurawald/sakurawald.github.io.git
+  branch: master
+
+# feed
+feed:
+  enable: true
+  type: 
+    - atom
+    - rss2
+  path: 
+    - atom.xml
+    - rss2.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: favicon.ico
+  autodiscovery: true
+  template:
+
+# sitemap
+sitemap:
+  path: 
+    - sitemap.xml
+    - sitemap.txt
+  template: ./sitemap_template.xml
+  template_txt: ./sitemap_template.txt
+  rel: false
+  tags: true
+  categories: false
+  
