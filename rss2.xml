@@ -7,7 +7,7 @@
     <link>https://sakurawald.github.io/</link>
     
     <image>
-      <url>https://sakurawald.github.io/favicon.ico</url>
+      <url>https://sakurawald.github.io/favicon.svg</url>
       <title>sakurawald&#39;s blog</title>
       <link>https://sakurawald.github.io/</link>
     </image>
@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 19 May 2026 03:25:20 GMT</pubDate>
+    <pubDate>Tue, 19 May 2026 03:40:59 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -38,19 +38,19 @@
       
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
-      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
-      
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
       
-      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
-      
-      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
       
       <category domain="https://sakurawald.github.io/tags/hadrware/">hadrware</category>
+      
+      <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
       
       <category domain="https://sakurawald.github.io/tags/gpu/">gpu</category>
       
       <category domain="https://sakurawald.github.io/tags/driver/">driver</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-window-tearing-in-high-monitor-refresh-rate/#disqus_thread</comments>
@@ -75,21 +75,21 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
-      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
       
-      <category domain="https://sakurawald.github.io/tags/drm/">drm</category>
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
       
       <category domain="https://sakurawald.github.io/tags/nvidia/">nvidia</category>
       
-      <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
-      
       <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
+      
+      <category domain="https://sakurawald.github.io/tags/drm/">drm</category>
+      
+      <category domain="https://sakurawald.github.io/tags/x11/">x11</category>
       
       
       <comments>https://sakurawald.github.io/posts/fix-nvidia-drm-issues/#disqus_thread</comments>
@@ -114,13 +114,13 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
       
-      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
+      
+      <category domain="https://sakurawald.github.io/tags/monitor/">monitor</category>
       
       <category domain="https://sakurawald.github.io/tags/keyboard/">keyboard</category>
       
@@ -147,9 +147,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
       <category domain="https://sakurawald.github.io/tags/laptop/">laptop</category>
       
@@ -213,9 +213,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
-      
       <category domain="https://sakurawald.github.io/tags/linux/">linux</category>
+      
+      <category domain="https://sakurawald.github.io/tags/hardware/">hardware</category>
       
       <category domain="https://sakurawald.github.io/tags/cpu/">cpu</category>
       
@@ -511,9 +511,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
-      
       <category domain="https://sakurawald.github.io/tags/os/">os</category>
+      
+      <category domain="https://sakurawald.github.io/tags/kde/">kde</category>
       
       
       <comments>https://sakurawald.github.io/posts/tweak-kde-preferences/#disqus_thread</comments>
