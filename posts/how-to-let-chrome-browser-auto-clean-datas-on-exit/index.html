@@ -7,7 +7,7 @@
     
 <link rel="stylesheet" href="/css/post.css">
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
@@ -17,7 +17,7 @@
 <h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Create-our-custom-policy-file"><a href="#Create-our-custom-policy-file" class="headerlink" title="Create our custom policy file"></a>Create our custom policy file</h3><pre><code>mkdir /etc/opt/chrome/policies/managed
 cd /etc/opt/chrome/policies/managed
 touch custom_policy.json
-</code></pre><h3 id="Edit-the-policy-file"><a href="#Edit-the-policy-file" class="headerlink" title="Edit the policy file"></a>Edit the policy file</h3><pre><code>&#123;
+</code></pre><h3 id="Edit-the-policy-file"><a href="#Edit-the-policy-file" class="headerlink" title="Edit the policy file"></a>Edit the policy file</h3><pre><code>{
 &quot;ClearBrowsingDataOnExitList&quot;: [
  &quot;browsing_history&quot;,
  &quot;download_history&quot;,
@@ -28,7 +28,7 @@ touch custom_policy.json
  &quot;site_settings&quot;,
  &quot;hosted_app_data&quot;
 ]
-&#125;
+}
 </code></pre><h3 id="Test-the-policy-file"><a href="#Test-the-policy-file" class="headerlink" title="Test the policy file"></a>Test the policy file</h3><p>Open chrome browser and enter <code>chrome://policy</code></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.chromium.org/administrators/linux-quick-start/">https://www.chromium.org/administrators/linux-quick-start/</a></li>
@@ -122,23 +122,19 @@ touch custom_policy.json
     
         <a href="/tags/web/">web</a>
     
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/root/">root</a>
+    
         <a href="/tags/wtg/">wtg</a>
     
         <a href="/tags/boot/">boot</a>
     
         <a href="/tags/usb/">usb</a>
     
-        <a href="/tags/android/">#android</a>
-    
-        <a href="/tags/emulator/">#emulator</a>
-    
-        <a href="/tags/root/">root</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
 </p>
 
-<p>Copyright &copy; 2020-2025 sakurawald</p>
+<p>Copyright &copy; 2020-2026 sakurawald</p>
 
 </footer>
 </body>

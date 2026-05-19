@@ -7,7 +7,7 @@
     
 <link rel="stylesheet" href="/css/post.css">
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="sakurawald's blog" type="application/atom+xml">
 <link rel="alternate" href="/rss2.xml" title="sakurawald's blog" type="application/rss+xml">
 </head>
 <body>
@@ -35,7 +35,7 @@ sudo LC_ALL=C pacman -Qkk &gt;&gt; &lt;memory-stick-mount-point&gt;/&lt;file.txt
 
 7. We will filter the previous file with &#39;awk&#39; to find the lines that contain &#39;mtree&#39;, that is, those that contain the defective packages, and we will redirect it to another file on the pendrive that will later serve as reference for reinstalling the packages that fail, viewing it on any other computer/tablet/mobile into which we will plug the memory stick.
 
-awk &#39;/mtree/ &#123;print&#125;&#39; &lt;file.txt-from-step-6&gt; &gt; &lt;file.txt&gt;
+awk &#39;/mtree/ {print}&#39; &lt;file.txt-from-step-6&gt; &gt; &lt;file.txt&gt;
 
 8. We will unmount the memory stick and unplug it from the computer to plug it into another computer/tablet/mobile to view/control the packages to be reinstalled.
 9. For each package to be reinstalled we will execute the following two commands:
@@ -151,23 +151,19 @@ Last edited by JosepF (2024-03-09 14:41:27)
     
         <a href="/tags/web/">web</a>
     
+        <a href="/tags/minecraft/">minecraft</a>
+    
+        <a href="/tags/root/">root</a>
+    
         <a href="/tags/wtg/">wtg</a>
     
         <a href="/tags/boot/">boot</a>
     
         <a href="/tags/usb/">usb</a>
     
-        <a href="/tags/android/">#android</a>
-    
-        <a href="/tags/emulator/">#emulator</a>
-    
-        <a href="/tags/root/">root</a>
-    
-        <a href="/tags/minecraft/">minecraft</a>
-    
 </p>
 
-<p>Copyright &copy; 2020-2025 sakurawald</p>
+<p>Copyright &copy; 2020-2026 sakurawald</p>
 
 </footer>
 </body>

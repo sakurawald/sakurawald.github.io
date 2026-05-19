@@ -15,7 +15,7 @@
     <atom:link href="https://sakurawald.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 21 Oct 2025 03:47:26 GMT</pubDate>
+    <pubDate>Tue, 19 May 2026 03:12:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -331,9 +331,9 @@
       
       
       
-      <category domain="https://sakurawald.github.io/tags/android/">#android</category>
+      <category domain="https://sakurawald.github.io/tags/android/">android</category>
       
-      <category domain="https://sakurawald.github.io/tags/emulator/">#emulator</category>
+      <category domain="https://sakurawald.github.io/tags/emulator/">emulator</category>
       
       <category domain="https://sakurawald.github.io/tags/root/">root</category>
       
